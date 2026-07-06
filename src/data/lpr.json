@@ -1,0 +1,43 @@
+{
+  "monthly": [
+    { "month": "ม.ค.", "traffic": 120, "gunshot": 8, "parking": 80, "flood": 25, "crowd": 15, "other": 12 },
+    { "month": "ก.พ.", "traffic": 140, "gunshot": 10, "parking": 90, "flood": 30, "crowd": 18, "other": 15 },
+    { "month": "มี.ค.", "traffic": 160, "gunshot": 9, "parking": 100, "flood": 35, "crowd": 20, "other": 18 },
+    { "month": "เม.ย.", "traffic": 180, "gunshot": 12, "parking": 95, "flood": 28, "crowd": 22, "other": 17 },
+    { "month": "พ.ค.", "traffic": 210, "gunshot": 15, "parking": 110, "flood": 32, "crowd": 25, "other": 21 },
+    { "month": "มิ.ย.", "traffic": 190, "gunshot": 11, "parking": 105, "flood": 27, "crowd": 21, "other": 16 }
+  ],
+  "roads": [
+    { "road": "ถนนสุขุมวิท (บางแสน)", "count": 45230, "trend": 3.2 },
+    { "road": "ถนนพัทยาใต้", "count": 38450, "trend": -1.5 },
+    { "road": "ถนนศรีราชา", "count": 32110, "trend": 2.1 },
+    { "road": "ถนนสัตหีบ", "count": 28930, "trend": 0.8 },
+    { "road": "ถนนบ้านบึง-นาเกลือ", "count": 26780, "trend": 4.3 },
+    { "road": "ถนนพัทยาเหนือ", "count": 24560, "trend": -0.5 },
+    { "road": "ถนนแหลมฉบัง", "count": 21340, "trend": 6.7 },
+    { "road": "ถนนชลบุรี-พัทยา", "count": 19870, "trend": 1.2 },
+    { "road": "ถนนอ่างศิลา", "count": 17230, "trend": -2.1 },
+    { "road": "ถนนพนัสนิคม", "count": 15640, "trend": 0.3 }
+  ],
+  "daily": [
+    { "date": "2026-06-22", "count": 1247 },
+    { "date": "2026-06-21", "count": 1389 },
+    { "date": "2026-06-20", "count": 1156 },
+    { "date": "2026-06-19", "count": 1423 },
+    { "date": "2026-06-18", "count": 1301 },
+    { "date": "2026-06-17", "count": 987 },
+    { "date": "2026-06-16", "count": 823 }
+  ],
+  "entries": [
+    { "id": "LPR-001", "plate": "กข 1234", "road": "ถนนสุขุมวิท (บางแสน)", "cameraId": "CAM-002", "timestamp": "22/06/2569 09:38 น.", "confidence": 98.5, "direction": "ขาเข้า", "type": "รถยนต์" },
+    { "id": "LPR-002", "plate": "ชบ 5678", "road": "ถนนพัทยาใต้", "cameraId": "CAM-013", "timestamp": "22/06/2569 09:37 น.", "confidence": 97.2, "direction": "ขาออก", "type": "รถยนต์" },
+    { "id": "LPR-003", "plate": "บง 9012", "road": "ถนนศรีราชา", "cameraId": "CAM-008", "timestamp": "22/06/2569 09:36 น.", "confidence": 99.1, "direction": "ขาเข้า", "type": "รถกระบะ" },
+    { "id": "LPR-004", "plate": "พย 3456", "road": "ถนนสุขุมวิท (บางแสน)", "cameraId": "CAM-002", "timestamp": "22/06/2569 09:35 น.", "confidence": 96.8, "direction": "ขาออก", "type": "รถยนต์" },
+    { "id": "LPR-005", "plate": "ขก 7890", "road": "ถนนแหลมฉบัง", "cameraId": "CAM-014", "timestamp": "22/06/2569 09:34 น.", "confidence": 98.9, "direction": "ขาเข้า", "type": "รถบรรทุก" },
+    { "id": "LPR-006", "plate": "นย 2345", "road": "ถนนพัทยาเหนือ", "cameraId": "CAM-005", "timestamp": "22/06/2569 09:33 น.", "confidence": 95.4, "direction": "ขาออก", "type": "รถจักรยานยนต์" },
+    { "id": "LPR-007", "plate": "สบ 6789", "road": "ถนนสัตหีบ", "cameraId": "CAM-011", "timestamp": "22/06/2569 09:32 น.", "confidence": 97.8, "direction": "ขาเข้า", "type": "รถยนต์" },
+    { "id": "LPR-008", "plate": "กร 0123", "road": "ถนนชลบุรี-พัทยา", "cameraId": "CAM-001", "timestamp": "22/06/2569 09:30 น.", "confidence": 99.3, "direction": "ขาเข้า", "type": "รถกระบะ" },
+    { "id": "LPR-009", "plate": "ชบ 4567", "road": "ถนนอ่างศิลา", "cameraId": "CAM-004", "timestamp": "22/06/2569 09:29 น.", "confidence": 94.6, "direction": "ขาออก", "type": "รถยนต์" },
+    { "id": "LPR-010", "plate": "พน 8901", "road": "ถนนพนัสนิคม", "cameraId": "CAM-015", "timestamp": "22/06/2569 09:28 น.", "confidence": 98.1, "direction": "ขาเข้า", "type": "รถบรรทุก" }
+  ]
+}

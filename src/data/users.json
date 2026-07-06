@@ -1,0 +1,12 @@
+[
+  { "id": "1", "name": "สมศักดิ์ ผู้ดูแล", "username": "admin", "password": "admin1234", "role": "admin", "email": "admin@chonburi.go.th", "isActive": true },
+  { "id": "2", "name": "วิภา ควบคุม", "username": "operator", "password": "oper1234", "role": "operator", "email": "vipa@chonburi.go.th", "isActive": true },
+  { "id": "3", "name": "ธนา บริหาร", "username": "executive", "password": "exec1234", "role": "executive", "email": "thana@chonburi.go.th", "isActive": true },
+  { "id": "4", "name": "สุรศักดิ์ ปฏิบัติ", "username": "oper2", "password": "oper21234", "role": "operator", "email": "surasak@chonburi.go.th", "isActive": true },
+  { "id": "5", "name": "มณี ควบคุม", "username": "oper3", "password": "oper31234", "role": "operator", "email": "manee@chonburi.go.th", "isActive": true },
+  { "id": "6", "name": "ประเสริฐ จัดการ", "username": "oper4", "password": "oper41234", "role": "operator", "email": "prasert@chonburi.go.th", "isActive": true },
+  { "id": "7", "name": "อรนุช เฝ้าระวัง", "username": "oper5", "password": "oper51234", "role": "operator", "email": "oranuch@chonburi.go.th", "isActive": false },
+  { "id": "8", "name": "กิตติ ตรวจสอบ", "username": "oper6", "password": "oper61234", "role": "operator", "email": "kitti@chonburi.go.th", "isActive": true },
+  { "id": "9", "name": "ลัดดา ดูแล", "username": "oper7", "password": "oper71234", "role": "operator", "email": "ladda@chonburi.go.th", "isActive": true },
+  { "id": "10", "name": "พนม รักษา", "username": "admin2", "password": "admin21234", "role": "admin", "email": "panom@chonburi.go.th", "isActive": true }
+]

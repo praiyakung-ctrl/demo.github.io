@@ -1,0 +1,123 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+
+const navItems = [
+  { to: '/map',       icon: Map,             label: 'แผนที่กล้อง', iconColor: 'text-cyan-500',   roles: ['admin', 'operator', 'executive'] },
+  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard',   iconColor: 'text-blue-600',   roles: ['admin', 'operator', 'executive'] },
+  { to: '/portal',    icon: FileText,        label: 'ยื่นขอกล้อง', iconColor: 'text-green-600',  roles: ['admin', 'operator', 'executive', 'citizen'] },
+  { to: '/reports',   icon: BarChart3,       label: 'รายงาน',      iconColor: 'text-amber-500',  roles: ['admin', 'operator', 'executive'] },
+];
+
+const adminItems = [
+  { to: '/admin/cameras', icon: Camera, label: 'จัดการกล้อง', iconColor: 'text-pink-500',   roles: ['admin'] },
+  { to: '/admin/users',   icon: Users,  label: 'จัดการผู้ใช้', iconColor: 'text-purple-500', roles: ['admin'] },
+];
+
+export function Sidebar() {
+  const { user } = useAuth();
+  const role = user?.role ?? '';
+  const [collapsed, setCollapsed] = useState(true);
+
+  const activeClass = (extra = '') =>
+    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-navy-700 border-2 border-navy-700 bg-navy-50 font-bold transition-all ${extra}`;
+  const inactiveClass = (extra = '') =>
+    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-navy-700 hover:bg-gray-100 font-bold transition-all ${extra}`;
+
+  return (
+    <aside
+      className="flex flex-col flex-shrink-0 min-h-0 bg-gray-100 border-r border-gray-200 transition-all duration-300"
+      style={{ width: collapsed ? '64px' : '240px' }}
+    >
+      {/* Toggle button */}
+      <div className="flex items-center justify-end px-2 pt-3 pb-1">
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="p-1.5 rounded-lg text-navy-400 hover:text-navy-700 hover:bg-gray-100 transition-colors"
+          title={collapsed ? 'ขยาย' : 'ย่อ'}
+        >
+          {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </button>
+      </div>
+
+      <nav className="flex-1 px-2 space-y-1 overflow-y-auto overflow-x-hidden pb-2">
+        {/* Main Menu header */}
+        <div className={`pb-1 ${collapsed ? 'flex justify-center pt-1' : 'px-2 pt-1'}`}>
+          {collapsed ? (
+            <Map size={16} className="text-navy-300" />
+          ) : (
+            <div className="flex items-center gap-2">
+              <div className="flex-1 border-t border-navy-200" />
+              <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap px-1">
+                Main Menu
+              </span>
+              <div className="flex-1 border-t border-navy-200" />
+            </div>
+          )}
+        </div>
+
+        {navItems
+          .filter(item => item.roles.includes(role))
+          .map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              title={collapsed ? item.label : undefined}
+              className={({ isActive }) =>
+                isActive
+                  ? activeClass(collapsed ? 'justify-center' : '')
+                  : inactiveClass(collapsed ? 'justify-center' : '')
+              }
+            >
+              <item.icon size={20} className={`flex-shrink-0 ${item.iconColor}`} />
+              {!collapsed && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
+            </NavLink>
+          ))}
+
+        {adminItems.some(i => i.roles.includes(role)) && (
+          <>
+            {/* Section header */}
+            <div className={`pt-3 pb-1 ${collapsed ? 'flex justify-center' : 'px-2'}`}>
+              {collapsed ? (
+                <Settings size={16} className="text-navy-300" />
+              ) : (
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 border-t border-navy-200" />
+                  <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap px-1">
+                    จัดการระบบ
+                  </span>
+                  <div className="flex-1 border-t border-navy-200" />
+                </div>
+              )}
+            </div>
+
+            {adminItems
+              .filter(item => item.roles.includes(role))
+              .map(item => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  title={collapsed ? item.label : undefined}
+                  className={({ isActive }) =>
+                    isActive
+                      ? activeClass(collapsed ? 'justify-center' : '')
+                      : inactiveClass(collapsed ? 'justify-center' : '')
+                  }
+                >
+                  <item.icon size={20} className={`flex-shrink-0 ${item.iconColor}`} />
+                  {!collapsed && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
+                </NavLink>
+              ))}
+          </>
+        )}
+      </nav>
+
+      {!collapsed && (
+        <div className="px-3 py-3 border-t border-gray-200">
+          <p className="text-xs text-navy-400 text-center">อบจ.ชลบุรี © 2568</p>
+        </div>
+      )}
+    </aside>
+  );
+}
