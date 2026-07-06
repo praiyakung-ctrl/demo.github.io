@@ -38,13 +38,13 @@ export function LoginPage() {
   const fillDemo = (u: string, p: string) => { setUsername(u); setPassword(p); setError(''); };
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundImage: `linear-gradient(rgba(27,58,107,0.8), rgba(37,99,235,0.8)), url(${import.meta.env.BASE_URL}camera001.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="min-h-screen flex" style={{ backgroundImage: 'linear-gradient(rgba(27,58,107,0.8), rgba(37,99,235,0.8)), url(${import.meta.env.BASE_URL}camera001.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Left: Form */}
       <div className="flex-1 flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         {/* Logo + Title */}
         <div className="text-center mb-8">
-          <img src={'${import.meta.env.BASE_URL}logo-obcj.jpg'} alt="อบจ.ชลบุรี" className="h-32 w-32 mx-auto mb-4 object-contain" />
+          <img src={'${import.meta.env.BASE_URL}logo-obcj.png'} alt="อบจ.ชลบุรี" className="h-32 w-32 mx-auto mb-4 object-contain" />
           <p className="text-white text-3xl font-bold mb-2">โครงการพัฒนาศักยภาพด้านความปลอดภัยบริเวณพื้นที่เสี่ยงภัยและเส้นทางคมนาคม บริเวณพื้นที่สาธารณะเสี่ยงภัยชุมชนในพื้นที่จังหวัดชลบุรี</p>
           <h1 className="text-white text-4xl font-bold leading-tight mb-2">ระบบฐานข้อมูลเพื่อการเข้าถึง</h1>
           <p className="text-blue-200 text-4xl font-bold">Data Integration and End Users</p>
