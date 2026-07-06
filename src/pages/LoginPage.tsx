@@ -38,7 +38,7 @@ export function LoginPage() {
   const fillDemo = (u: string, p: string) => { setUsername(u); setPassword(p); setError(''); };
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundImage: 'linear-gradient(rgba(27,58,107,0.8), rgba(37,99,235,0.8)), url(/camera001.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="min-h-screen flex" style={{ backgroundImage: `linear-gradient(rgba(27,58,107,0.8), rgba(37,99,235,0.8)), url(${import.meta.env.BASE_URL}camera001.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Left: Form */}
       <div className="flex-1 flex items-center justify-center p-8">
       <div className="w-full max-w-md">
