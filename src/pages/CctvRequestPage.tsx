@@ -1,10 +1,12 @@
 import { useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  BookOpen, Calendar, CheckCircle, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight,
-  FileSearch, FileText, HelpCircle, Home, Lock, LogOut, MapPin, Paperclip, Phone,
-  Search, ShieldCheck, Target, Trash2, Upload, User as UserIcon, Video,
+  Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight,
+  FileSearch, FileText, Home, Lock, MapPin, Paperclip,
+  ShieldCheck, Target, Trash2, Upload, User as UserIcon,
 } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
+import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
@@ -46,96 +48,11 @@ const DOC_SLOTS: { key: DocKey; label: string; required: boolean; hint: string }
 
 type Docs = Partial<Record<DocKey, string>>;
 
-/* ---------- Header (white, per mockup) ---------- */
-function PortalHeader() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const [showUser, setShowUser] = useState(false);
-
+/* ---------- Horizontal stepper (rendered inside CitizenHero) ---------- */
+function WizardStepper({ step }: { step: number }) {
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm relative z-20">
-      <div className="max-w-[1400px] mx-auto px-4 h-24 flex items-center gap-4">
-        <img
-          src={`${import.meta.env.BASE_URL}logo-obcj.png`}
-          alt="อบจ.ชลบุรี"
-          className="h-16 w-16 object-contain flex-shrink-0"
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-        />
-        <div className="min-w-0">
-          <p className="text-2xl font-extrabold text-navy-700 leading-tight truncate">องค์การบริหารส่วนจังหวัดชลบุรี</p>
-          <p className="text-lg text-gray-500 leading-tight truncate">ระบบฐานข้อมูลเพื่อการเข้าถึง (Data Integration and End Users)</p>
-        </div>
-
-        <Link
-          to="/portal"
-          className="hidden md:flex items-center gap-2 border border-navy-500 text-navy-700 font-bold text-xl px-5 py-2 rounded-xl hover:bg-navy-50 transition-colors flex-shrink-0"
-        >
-          <Home size={22} /> เมนูหลัก
-        </Link>
-
-        <div className="flex-1" />
-
-        <Link to="/portal" className="hidden lg:flex items-center gap-2 text-xl font-bold text-gray-700 hover:text-navy-700 transition-colors flex-shrink-0">
-          <Search size={22} /> ตรวจสอบคำขอ
-        </Link>
-        <a href="tel:038398333" className="hidden lg:flex items-center gap-2 text-xl font-bold text-gray-700 hover:text-navy-700 transition-colors flex-shrink-0">
-          <Phone size={22} /> ติดต่อเรา
-        </a>
-
-        {/* User */}
-        <div className="relative flex-shrink-0">
-          <button onClick={() => setShowUser(v => !v)} className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-50 transition-colors">
-            <div className="w-11 h-11 rounded-full bg-navy-100 text-navy-700 flex items-center justify-center text-2xl font-bold">
-              {user?.name?.charAt(0) ?? <UserIcon size={22} />}
-            </div>
-            <div className="text-left hidden sm:block">
-              <p className="text-xl font-bold text-gray-800 leading-tight">{user?.name}</p>
-              <p className="text-base text-gray-500 leading-tight">{user?.email}</p>
-            </div>
-            <ChevronDown size={18} className="text-gray-400" />
-          </button>
-          {showUser && (
-            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg py-1 w-56 z-50">
-              <div className="px-4 py-2 border-b border-gray-100">
-                <p className="text-lg font-bold text-gray-900">{user?.name}</p>
-                <p className="text-base text-gray-500 truncate">{user?.email}</p>
-              </div>
-              <button
-                onClick={() => { logout(); navigate('/login'); }}
-                className="flex items-center gap-2 w-full px-4 py-2 text-lg text-red-600 hover:bg-red-50 transition-colors"
-              >
-                <LogOut size={18} /> ออกจากระบบ
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
-  );
-}
-
-/* ---------- Hero banner + horizontal stepper ---------- */
-function HeroBanner({ step }: { step: number }) {
-  return (
-    <div className="relative bg-navy-700 overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-60 bg-cover bg-center"
-        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}background01.png)` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-700/95 via-navy-700/70 to-navy-500/30" />
-      <div className="relative max-w-[1400px] mx-auto px-4 py-8 flex flex-col lg:flex-row lg:items-center gap-6">
-        <div className="flex-1 min-w-0">
-          <h1 className="text-5xl font-extrabold text-white drop-shadow mb-2">ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV</h1>
-          <div className="flex items-center gap-2 text-xl text-blue-100">
-            <Link to="/portal" className="hover:text-white transition-colors">หน้าหลัก</Link>
-            <ChevronRight size={18} />
-            <span className="text-white font-bold">ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV</span>
-          </div>
-        </div>
-
-        {/* Stepper */}
-        <div className="flex items-start flex-shrink-0">
-          {WIZARD_STEPS.map((label, i) => {
+    <div className="flex items-start flex-shrink-0">
+      {WIZARD_STEPS.map((label, i) => {
             const n = i + 1;
             const isActive = n === step;
             const isDone = n < step;
@@ -157,54 +74,6 @@ function HeroBanner({ step }: { step: number }) {
               </div>
             );
           })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Left sidebar ---------- */
-function ServiceSidebar() {
-  const menu = [
-    { icon: Video, label: 'ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV', active: true },
-    { icon: FileSearch, label: 'ตรวจสอบสถานะคำขอ', active: false },
-    { icon: BookOpen, label: 'คู่มือการใช้งาน', active: false },
-    { icon: HelpCircle, label: 'คำถามที่พบบ่อย', active: false },
-  ];
-  return (
-    <div className="space-y-4">
-      <div className="card p-0 overflow-hidden">
-        <h3 className="text-2xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">บริการประชาชน</h3>
-        <nav>
-          {menu.map(({ icon: Icon, label, active }) => (
-            <button
-              key={label}
-              className={`w-full flex items-center gap-3 px-4 py-3 text-left text-xl transition-colors border-l-4 ${
-                active
-                  ? 'bg-navy-50 border-navy-700 text-navy-700 font-bold'
-                  : 'border-transparent text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <Icon size={24} className="flex-shrink-0" />
-              <span className="leading-tight">{label}</span>
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      <div className="card">
-        <h3 className="text-2xl font-bold text-navy-700 mb-1">ต้องการความช่วยเหลือ?</h3>
-        <p className="text-lg text-gray-500 mb-3">ติดต่อเจ้าหน้าที่</p>
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-navy-50 text-navy-700 flex items-center justify-center flex-shrink-0">
-            <Phone size={24} />
-          </div>
-          <div>
-            <p className="text-2xl font-extrabold text-navy-700 leading-tight">038-398-333</p>
-            <p className="text-lg text-gray-500 leading-tight">จันทร์ - ศุกร์ 08:30 - 16:30 น.</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -703,12 +572,14 @@ export function CctvRequestPage() {
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
-      <PortalHeader />
-      <HeroBanner step={step} />
+      <Navbar />
+      <CitizenHero title="ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV">
+        <WizardStepper step={step} />
+      </CitizenHero>
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_320px] gap-5 items-start">
         <aside className="hidden lg:block">
-          <ServiceSidebar />
+          <ServiceSidebar active="request" />
         </aside>
 
         <main className="min-w-0">{content}</main>
@@ -720,11 +591,7 @@ export function CctvRequestPage() {
         </aside>
       </div>
 
-      <footer className="bg-white border-t border-gray-200 py-4 mt-4">
-        <p className="text-center text-lg text-gray-400">
-          © {new Date().getFullYear() + 543} องค์การบริหารส่วนจังหวัดชลบุรี · ระบบฐานข้อมูลเพื่อการเข้าถึง (Data Integration and End Users)
-        </p>
-      </footer>
+      <CitizenFooter />
     </div>
   );
 }
