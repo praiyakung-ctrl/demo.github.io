@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CheckCircle, ChevronRight, ChevronLeft, FileText, Clock, User, Search, Activity, Camera as CameraIcon, Inbox, Hash } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { StatusBadge } from '../components/Badge';
@@ -260,9 +261,12 @@ function CitizenView() {
           <h2 className="text-5xl font-bold text-navy-700">คำขอของฉัน</h2>
           <p className="text-3xl text-navy-700">{requests.length} รายการ</p>
         </div>
-        <button onClick={() => { setView('new'); setStep(1); }} className="btn-primary">
-          + ยื่นคำขอใหม่
-        </button>
+        <div className="flex items-center gap-2">
+          <Link to="/portal/request" className="btn-secondary">ยื่นคำขอ (แบบใหม่)</Link>
+          <button onClick={() => { setView('new'); setStep(1); }} className="btn-primary">
+            + ยื่นคำขอใหม่
+          </button>
+        </div>
       </div>
 
       <div className="space-y-3">

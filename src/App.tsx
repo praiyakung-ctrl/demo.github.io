@@ -4,6 +4,7 @@ import { LoginPage } from './pages/LoginPage';
 import { MapPage } from './pages/MapPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CitizenPortalPage } from './pages/CitizenPortalPage';
+import { CctvRequestPage } from './pages/CctvRequestPage';
 import { AdminCamerasPage } from './pages/AdminCamerasPage';
 import { AdminUsersPage } from './pages/AdminUsersPage';
 import { ReportsPage } from './pages/ReportsPage';
@@ -42,6 +43,11 @@ function AppRoutes() {
       <Route path="/portal" element={
         <RequireAuth>
           <CitizenPortalPage />
+        </RequireAuth>
+      } />
+      <Route path="/portal/request" element={
+        <RequireAuth>
+          <CctvRequestPage />
         </RequireAuth>
       } />
       <Route path="/reports" element={
