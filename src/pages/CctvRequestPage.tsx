@@ -28,6 +28,7 @@ const PURPOSES = [
 
 interface RequestForm {
   purpose: string;
+  purposeOther: string;
   date: string;
   startTime: string;
   endTime: string;
@@ -36,7 +37,14 @@ interface RequestForm {
   reason: string;
 }
 
-const EMPTY_FORM: RequestForm = { purpose: '', date: '', startTime: '', endTime: '', location: '', detail: '', reason: '' };
+const EMPTY_FORM: RequestForm = { purpose: '', purposeOther: '', date: '', startTime: '', endTime: '', location: '', detail: '', reason: '' };
+
+const OTHER_PURPOSE = 'อื่นๆ';
+
+function purposeText(form: RequestForm): string {
+  if (form.purpose === OTHER_PURPOSE) return form.purposeOther ? `อื่นๆ (${form.purposeOther})` : OTHER_PURPOSE;
+  return form.purpose;
+}
 
 type DocKey = 'idCard' | 'policeReport' | 'other';
 
@@ -87,7 +95,7 @@ function SummaryCard({ form, docs }: { form: RequestForm; docs: Docs }) {
   const docNames = Object.values(docs).filter(Boolean);
   const items = [
     { icon: UserIcon, label: 'ผู้ยื่นคำขอ', value: user ? `${user.name}\n${user.email}` : '-' },
-    { icon: Target, label: 'วัตถุประสงค์', value: form.purpose || '-' },
+    { icon: Target, label: 'วัตถุประสงค์', value: purposeText(form) || '-' },
     { icon: Calendar, label: 'วันที่และเวลา', value: dateStr },
     { icon: MapPin, label: 'สถานที่เกิดเหตุ', value: form.location || '-' },
     { icon: Paperclip, label: 'เอกสารแนบ', value: docNames.length ? `${docNames.length} ไฟล์` : '-' },
@@ -176,6 +184,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
   const validate = () => {
     const e: Partial<Record<keyof RequestForm, string>> = {};
     if (!form.purpose) e.purpose = 'กรุณาเลือกวัตถุประสงค์';
+    if (form.purpose === OTHER_PURPOSE && !form.purposeOther.trim()) e.purposeOther = 'กรุณาระบุวัตถุประสงค์ในการขอดูข้อมูล';
     if (!form.date) e.date = 'กรุณาเลือกวันที่';
     if (!form.startTime || !form.endTime) e.startTime = 'กรุณาระบุช่วงเวลาให้ครบถ้วน';
     if (!form.location) e.location = 'กรุณาเลือกสถานที่เกิดเหตุ';
@@ -185,7 +194,11 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
   };
 
   const set = (key: keyof RequestForm, value: string) => {
-    setForm(f => ({ ...f, [key]: value }));
+    setForm(f => ({
+      ...f,
+      [key]: value,
+      ...(key === 'purpose' && value !== OTHER_PURPOSE ? { purposeOther: '' } : {}),
+    }));
     // the date/time trio shares one error line — clear it together
     const isDateTime = key === 'date' || key === 'startTime' || key === 'endTime';
     setErrors(e => ({ ...e, [key]: undefined, ...(isDateTime ? { date: undefined, startTime: undefined } : {}) }));
@@ -231,6 +244,19 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
             </select>
             {errors.purpose && <p className="text-lg text-red-500 mt-1">{errors.purpose}</p>}
           </div>
+
+          {form.purpose === OTHER_PURPOSE && (
+            <div>
+              <label className="label">โปรดระบุวัตถุประสงค์ <span className="text-red-500">*</span></label>
+              <input
+                value={form.purposeOther}
+                onChange={e => set('purposeOther', e.target.value)}
+                placeholder="ระบุวัตถุประสงค์ในการขอดูข้อมูลกล้อง CCTV"
+                className="input-field"
+              />
+              {errors.purposeOther && <p className="text-lg text-red-500 mt-1">{errors.purposeOther}</p>}
+            </div>
+          )}
 
           <div>
             <label className="label">วันที่และเวลาที่ต้องการดูข้อมูล <span className="text-red-500">*</span></label>
@@ -382,7 +408,7 @@ function Step3Review({ form, docs, onNext, onBack, goToStep }: {
 }) {
   const { user } = useAuth();
   const rows: [string, string][] = [
-    ['วัตถุประสงค์', form.purpose],
+    ['วัตถุประสงค์', purposeText(form)],
     ['วันที่', form.date ? formatThaiDate(form.date) : '-'],
     ['ช่วงเวลา', `${form.startTime} - ${form.endTime} น.`],
     ['สถานที่เกิดเหตุ', form.location],
