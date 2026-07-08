@@ -1,6 +1,6 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import { Search, Video, VideoOff, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, MonitorPlay, ParkingSquare, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
 import { useAuth } from '../context/AuthContext';
@@ -52,9 +52,13 @@ export function MapPage() {
   const [leftPanelVisible, setLeftPanelVisible] = useState(true);
   const [rightPanelVisible, setRightPanelVisible] = useState(false);
   const [liveSlots, setLiveSlots] = useState<LiveSlot[]>([
-    { cameraId: 'CAM-001' }, { cameraId: 'CAM-003' }, { cameraId: null },
-    { cameraId: null }, { cameraId: null },
+    { cameraId: 'CAM-001' }, { cameraId: 'CAM-002' }, { cameraId: 'CAM-003' },
+    { cameraId: 'CAM-005' }, { cameraId: 'CAM-009' }, { cameraId: null },
   ]);
+  const [layoutCount, setLayoutCount] = useState(6);
+  const [manageMode, setManageMode] = useState(false);
+  const [pickSlot, setPickSlot] = useState<number | null>(null);
+  const livePanelRef = useRef<HTMLDivElement>(null);
 
   const toggleEventFilter = (type: EventType) => {
     setEventFilters(prev => {
@@ -99,19 +103,29 @@ export function MapPage() {
     setActionNote('');
   }, [ackEvent, actionNote]);
 
-  const assignLive = (camId: string) => {
-    const emptySlot = liveSlots.findIndex(s => !s.cameraId);
+  const assignLive = (camId: string, slotIndex?: number) => {
     const alreadyAssigned = liveSlots.findIndex(s => s.cameraId === camId);
     if (alreadyAssigned >= 0) return;
-    if (emptySlot >= 0) {
-      setLiveSlots(prev => { const n = [...prev]; n[emptySlot] = { cameraId: camId }; return n; });
-    } else {
-      setLiveSlots(prev => { const n = [...prev]; n[4] = { cameraId: camId }; return n; });
-    }
+    setLiveSlots(prev => {
+      const n = [...prev];
+      const target = slotIndex ?? n.findIndex(s => !s.cameraId);
+      n[target >= 0 ? target : n.length - 1] = { cameraId: camId };
+      return n;
+    });
   };
 
   const removeFromLive = (index: number) => {
     setLiveSlots(prev => { const n = [...prev]; n[index] = { cameraId: null }; return n; });
+  };
+
+  const setLayout = (count: number) => {
+    setLayoutCount(count);
+    setLiveSlots(prev => {
+      // keep assigned cameras first so shrinking the grid never drops them needlessly
+      const next = prev.filter(s => s.cameraId).slice(0, count);
+      while (next.length < count) next.push({ cameraId: null });
+      return next;
+    });
   };
 
   return (
@@ -395,56 +409,131 @@ export function MapPage() {
           </div>
 
           {/* Live cameras */}
-          <div className="flex-1 p-3 overflow-y-auto">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Live Camera ({liveSlots.filter(s => s.cameraId).length}/{cameras.length})</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {liveSlots.map((slot, idx) => {
-                const cam = cameras.find(c => c.id === slot.cameraId);
-                return (
-                  <div key={idx} className={`relative bg-gray-800 rounded-lg overflow-hidden aspect-video flex items-center justify-center ${idx === 0 ? 'col-span-2' : ''}`}>
-                    {cam ? (
-                      <>
-                        <button
-                          onClick={() => setLiveCam(cam)}
-                          className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center"
-                          title="คลิกเพื่อดู Live ขนาดใหญ่"
-                        >
-                          <img
-                            src={cameraImage(cam)}
-                            alt={cam.location}
-                            className="absolute inset-0 w-full h-full object-cover hover:opacity-90 transition-opacity"
-                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                          />
-                        </button>
-                        <div className="absolute top-1 left-1 right-1 flex items-center justify-between pointer-events-none">
-                          <span className="bg-black/60 text-white text-xs px-1.5 py-0.5 rounded">{cam.id}</span>
-                          <span className="flex items-center gap-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded">
-                            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                            LIVE
-                          </span>
-                        </div>
+          <div ref={livePanelRef} className="flex-1 flex flex-col min-h-0 bg-white">
+            <div className="flex items-center justify-between gap-2 p-3 pb-2">
+              <h3 className="text-xl font-bold text-navy-700">Live Camera ({liveSlots.filter(s => s.cameraId).length}/{cameras.length})</h3>
+              <button
+                onClick={() => setManageMode(m => !m)}
+                className={`flex items-center gap-1.5 text-sm font-bold px-2.5 py-1.5 rounded-lg border transition-colors ${
+                  manageMode ? 'bg-navy-700 text-white border-navy-700' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                <Settings size={15} /> จัดการการแสดงผล
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-3">
+              <div className={`grid gap-2 ${layoutCount === 1 ? 'grid-cols-1' : layoutCount === 9 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                {liveSlots.map((slot, idx) => {
+                  const cam = cameras.find(c => c.id === slot.cameraId);
+                  return cam ? (
+                    <div key={idx} className="relative bg-gray-800 rounded-xl overflow-hidden aspect-video">
+                      <button
+                        onClick={() => setLiveCam(cam)}
+                        className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900"
+                        title="คลิกเพื่อดู Live ขนาดใหญ่"
+                      >
+                        <img
+                          src={cameraImage(cam)}
+                          alt={cam.location}
+                          className="absolute inset-0 w-full h-full object-cover hover:opacity-90 transition-opacity"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      </button>
+                      <div className="absolute top-1.5 left-1.5 right-1.5 flex items-center justify-between pointer-events-none">
+                        <span className="bg-gray-900/80 text-white text-xs font-bold px-2 py-0.5 rounded-md">{cam.id}</span>
+                        <span className="flex items-center gap-1 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-md">
+                          <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                          LIVE
+                        </span>
+                      </div>
+                      {manageMode && (
                         <button
                           onClick={() => removeFromLive(idx)}
-                          className="absolute top-1 right-8 bg-black/40 text-white rounded p-0.5 hover:bg-black/60"
+                          title="นำออกจากจอ"
+                          className="absolute top-7 right-1.5 bg-red-600/90 text-white rounded-md p-1 hover:bg-red-600"
                         >
-                          <X size={10} />
+                          <X size={12} />
                         </button>
-                        <p className="absolute bottom-1 left-1 text-white/80 text-xs truncate max-w-full px-1 pointer-events-none drop-shadow">{cam.location}</p>
-                      </>
-                    ) : (
-                      <div className="flex flex-col items-center text-gray-600">
-                        <VideoOff size={idx === 0 ? 24 : 16} />
-                        <span className="text-xs mt-1">ว่าง</span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                      )}
+                      <p className="absolute bottom-1.5 left-2 text-white text-xs font-medium truncate max-w-[90%] pointer-events-none drop-shadow">{cam.location}</p>
+                    </div>
+                  ) : (
+                    <button
+                      key={idx}
+                      onClick={() => setPickSlot(idx)}
+                      className="flex flex-col items-center justify-center gap-1.5 aspect-video rounded-xl border-2 border-dashed border-gray-300 text-gray-400 hover:border-navy-500 hover:text-navy-500 hover:bg-navy-50/40 transition-colors"
+                    >
+                      <Plus size={22} className="border-2 border-current rounded-full p-0.5" />
+                      <span className="text-sm font-bold">เพิ่มกล้อง</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <p className="text-base text-gray-400 mt-2 text-center">คลิกภาพเพื่อดู Live ขนาดใหญ่</p>
+
+            {/* Display controls */}
+            <div className="border-t border-gray-200 p-3">
+              <p className="text-base font-bold text-gray-800 mb-2">การควบคุมการแสดงผล</p>
+              <div className="flex items-center gap-1.5">
+                {([
+                  { count: 1, label: '1 จอ', Icon: Square },
+                  { count: 4, label: '4 จอ', Icon: Grid2x2 },
+                  { count: 6, label: '6 จอ', Icon: LayoutGrid },
+                  { count: 9, label: '9 จอ', Icon: Grid3x3 },
+                ]).map(({ count, label, Icon }) => (
+                  <button
+                    key={count}
+                    onClick={() => setLayout(count)}
+                    className={`flex items-center gap-1.5 text-sm font-bold px-2.5 py-2 rounded-lg border transition-colors ${
+                      layoutCount === count
+                        ? 'bg-navy-500 text-white border-navy-500'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon size={15} /> {label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => livePanelRef.current?.requestFullscreen?.()}
+                  title="แสดงผลเต็มจอ"
+                  className="ml-auto p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <Maximize2 size={15} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Camera picker for empty live slot */}
+      {pickSlot !== null && (
+        <div className="fixed inset-0 z-[600] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setPickSlot(null)} />
+          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md flex flex-col max-h-[80vh]">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+              <h3 className="text-2xl font-bold text-navy-700">เลือกกล้องเพื่อแสดงผล</h3>
+              <button onClick={() => setPickSlot(null)} className="text-gray-400 hover:text-gray-600"><X size={22} /></button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-2">
+              {cameras
+                .filter(c => c.status === 'Online' && !liveSlots.some(s => s.cameraId === c.id))
+                .map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => { assignLive(c.id, pickSlot); setPickSlot(null); }}
+                    className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left hover:bg-blue-50 transition-colors"
+                  >
+                    <CameraIcon size={18} className="flex-shrink-0" style={{ color: getMarkerColor(c) }} />
+                    <span className="text-xl font-bold text-navy-700 flex-shrink-0">{c.id}</span>
+                    <span className="text-lg text-gray-600 truncate">{c.location}</span>
+                  </button>
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Live CCTV Modal */}
       <LiveCameraModal camera={liveCam} onClose={() => setLiveCam(null)} />
