@@ -53,11 +53,11 @@ function pinIcon(color: string): L.DivIcon {
   let icon = pinIconCache.get(color);
   if (!icon) {
     icon = L.divIcon({
-      html: pinSvg(color, 30, 40),
+      html: pinSvg(color, 20, 27),
       className: '',
-      iconSize: [30, 40],
-      iconAnchor: [15, 38],
-      popupAnchor: [0, -34],
+      iconSize: [20, 27],
+      iconAnchor: [10, 26],
+      popupAnchor: [0, -22],
     });
     pinIconCache.set(color, icon);
   }
