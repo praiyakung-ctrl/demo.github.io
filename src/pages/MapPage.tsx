@@ -396,7 +396,7 @@ export function MapPage() {
 
           {/* Live cameras */}
           <div className="flex-1 p-3 overflow-y-auto">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Live Camera ({liveSlots.filter(s => s.cameraId).length}/5)</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Live Camera ({liveSlots.filter(s => s.cameraId).length}/{cameras.length})</h3>
             <div className="grid grid-cols-2 gap-2">
               {liveSlots.map((slot, idx) => {
                 const cam = cameras.find(c => c.id === slot.cameraId);
