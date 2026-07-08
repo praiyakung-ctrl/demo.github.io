@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
@@ -40,8 +40,22 @@ function getMarkerColor(cam: Camera): string {
 
 interface LiveSlot { cameraId: string | null }
 
+const MOBILE_QUERY = '(max-width: 767px)';
+
+function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return isMobile;
+}
+
 export function MapPage() {
   const { canEdit } = useAuth();
+  const isMobile = useIsMobile();
   const [events, setEvents] = useState<CctvEvent[]>(initialEvents);
   const [search, setSearch] = useState('');
   const [eventFilters, setEventFilters] = useState<Set<EventType>>(new Set());
@@ -50,7 +64,22 @@ export function MapPage() {
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [actionNote, setActionNote] = useState('');
   const [leftPanelVisible, setLeftPanelVisible] = useState(false);
-  const [rightPanelVisible, setRightPanelVisible] = useState(true);
+  // desktop opens the live panel by default; on mobile keep the map unobstructed
+  const [rightPanelVisible, setRightPanelVisible] = useState(() => !window.matchMedia(MOBILE_QUERY).matches);
+
+  // on mobile the panels overlay the map, so only one may be open at a time
+  const toggleLeftPanel = () => {
+    setLeftPanelVisible(v => {
+      if (!v && isMobile) setRightPanelVisible(false);
+      return !v;
+    });
+  };
+  const toggleRightPanel = () => {
+    setRightPanelVisible(v => {
+      if (!v && isMobile) setLeftPanelVisible(false);
+      return !v;
+    });
+  };
   const [liveSlots, setLiveSlots] = useState<LiveSlot[]>([
     { cameraId: 'CAM-001' }, { cameraId: 'CAM-002' }, { cameraId: 'CAM-003' },
     { cameraId: 'CAM-005' }, { cameraId: 'CAM-009' }, { cameraId: null },
@@ -132,7 +161,7 @@ export function MapPage() {
     <Layout>
       <div className="relative flex h-full min-h-0">
         {/* Left panel */}
-        <div className={`bg-blue-50 flex flex-col flex-shrink-0 overflow-hidden transition-all duration-300 border-r border-blue-200 ${leftPanelVisible ? 'w-80' : 'w-0'}`}>
+        <div className={`bg-blue-50 flex flex-col flex-shrink-0 overflow-hidden transition-all duration-300 border-r border-blue-200 max-md:absolute max-md:inset-y-0 max-md:left-0 max-md:z-[450] max-md:shadow-2xl ${leftPanelVisible ? 'w-80' : 'w-0'}`}>
           <div className="p-3 border-b border-blue-200 min-w-[320px]">
             <h2 className="text-navy-700 font-semibold text-xl mb-2">แผนที่กล้อง CCTV</h2>
             <div className="relative mb-2">
@@ -214,8 +243,8 @@ export function MapPage() {
 
         {/* Toggle left panel button */}
         <button
-          onClick={() => setLeftPanelVisible(!leftPanelVisible)}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-[401] bg-blue-50 text-navy-700 p-1 rounded-r-lg shadow-md border border-blue-200 hover:bg-blue-100 transition-colors"
+          onClick={toggleLeftPanel}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-[451] bg-blue-50 text-navy-700 p-1 rounded-r-lg shadow-md border border-blue-200 hover:bg-blue-100 transition-colors"
           style={{ left: leftPanelVisible ? '320px' : '0px' }}
           title={leftPanelVisible ? 'ซ่อนรายการกล้อง' : 'แสดงรายการกล้อง'}
         >
@@ -364,8 +393,8 @@ export function MapPage() {
 
         {/* Toggle right panel button */}
         <button
-          onClick={() => setRightPanelVisible(!rightPanelVisible)}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-[401] bg-white border border-gray-200 text-gray-600 p-1 rounded-l-lg shadow-lg hover:bg-gray-50 transition-colors"
+          onClick={toggleRightPanel}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-[451] bg-white border border-gray-200 text-gray-600 p-1 rounded-l-lg shadow-lg hover:bg-gray-50 transition-colors"
           style={{ right: rightPanelVisible ? '320px' : '0px' }}
           title={rightPanelVisible ? 'ซ่อนแผงขวา' : 'แสดงแผงขวา'}
         >
@@ -373,7 +402,7 @@ export function MapPage() {
         </button>
 
         {/* Right panel */}
-        <div className={`bg-white border-l border-gray-200 flex flex-col flex-shrink-0 overflow-hidden transition-all duration-300 ${rightPanelVisible ? 'w-80' : 'w-0'}`}>
+        <div className={`bg-white border-l border-gray-200 flex flex-col flex-shrink-0 overflow-hidden transition-all duration-300 max-md:absolute max-md:inset-y-0 max-md:right-0 max-md:z-[450] max-md:shadow-2xl ${rightPanelVisible ? 'w-80' : 'w-0'}`}>
           {/* Events */}
           <div className="p-3 border-b border-gray-100">
             <h3 className="text-xl font-bold text-gray-900 mb-2">เหตุการณ์ล่าสุด</h3>
