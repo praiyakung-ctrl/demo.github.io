@@ -59,7 +59,7 @@ type Docs = Partial<Record<DocKey, string>>;
 /* ---------- Horizontal stepper (rendered inside CitizenHero) ---------- */
 function WizardStepper({ step }: { step: number }) {
   return (
-    <div className="flex items-start flex-shrink-0">
+    <div className="flex items-start flex-shrink-0 max-w-full overflow-x-auto pb-1">
       {WIZARD_STEPS.map((label, i) => {
             const n = i + 1;
             const isActive = n === step;

@@ -74,6 +74,27 @@
   font-family: 'TH Sarabun New', sans-serif;
 }
 
+/* Mobile responsive type scale: shift every text-* size down 3 Tailwind steps
+   on small screens (< md). Desktop keeps the original sizes. Placed after the
+   Tailwind layers so these declarations win the cascade at equal specificity. */
+@media (max-width: 767px) {
+  .text-6xl { font-size: 1.875rem; line-height: 2.25rem; } /* → 3xl */
+  .text-5xl { font-size: 1.5rem;   line-height: 2rem; }    /* → 2xl */
+  .text-4xl { font-size: 1.25rem;  line-height: 1.75rem; } /* → xl */
+  .text-3xl { font-size: 1.125rem; line-height: 1.75rem; } /* → lg */
+  .text-2xl { font-size: 1rem;     line-height: 1.5rem; }  /* → base */
+  .text-xl  { font-size: 0.875rem; line-height: 1.25rem; } /* → sm */
+  .text-lg  { font-size: 0.75rem;  line-height: 1rem; }    /* → xs */
+  .text-base { font-size: 0.7rem;  line-height: 1rem; }
+  .text-sm  { font-size: 0.65rem;  line-height: 0.95rem; }
+  .text-xs  { font-size: 0.6rem;   line-height: 0.9rem; }
+
+  /* component classes bake their size in via @apply, so shift them here too */
+  .btn-primary, .btn-secondary, .btn-danger { font-size: 1rem; }  /* 2xl → base */
+  .input-field { font-size: 1rem; }                               /* 2xl → base */
+  .label { font-size: 0.875rem; }                                 /* xl → sm */
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
