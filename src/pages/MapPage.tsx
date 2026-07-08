@@ -49,8 +49,8 @@ export function MapPage() {
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [actionNote, setActionNote] = useState('');
-  const [leftPanelVisible, setLeftPanelVisible] = useState(true);
-  const [rightPanelVisible, setRightPanelVisible] = useState(false);
+  const [leftPanelVisible, setLeftPanelVisible] = useState(false);
+  const [rightPanelVisible, setRightPanelVisible] = useState(true);
   const [liveSlots, setLiveSlots] = useState<LiveSlot[]>([
     { cameraId: 'CAM-001' }, { cameraId: 'CAM-002' }, { cameraId: 'CAM-003' },
     { cameraId: 'CAM-005' }, { cameraId: 'CAM-009' }, { cameraId: null },
