@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
@@ -36,6 +37,31 @@ function getMarkerColor(cam: Camera): string {
   if (cam.status === 'Offline') return MARKER_COLORS.offline;
   if (cam.currentEvent && cam.currentEvent !== 'normal') return MARKER_COLORS[cam.currentEvent] ?? MARKER_COLORS.normal;
   return MARKER_COLORS.normal;
+}
+
+/* teardrop map-pin SVG, reused by the leaflet markers and the legend */
+function pinSvg(color: string, width: number, height: number): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 32" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35))">
+    <path d="M12 1C6 1 1.5 5.6 1.5 11.4 1.5 19.4 12 31 12 31s10.5-11.6 10.5-19.6C22.5 5.6 18 1 12 1z" fill="${color}" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="12" cy="11.4" r="4.2" fill="#fff"/>
+  </svg>`;
+}
+
+const pinIconCache = new Map<string, L.DivIcon>();
+
+function pinIcon(color: string): L.DivIcon {
+  let icon = pinIconCache.get(color);
+  if (!icon) {
+    icon = L.divIcon({
+      html: pinSvg(color, 30, 40),
+      className: '',
+      iconSize: [30, 40],
+      iconAnchor: [15, 38],
+      popupAnchor: [0, -34],
+    });
+    pinIconCache.set(color, icon);
+  }
+  return icon;
 }
 
 interface LiveSlot { cameraId: string | null }
@@ -296,14 +322,10 @@ export function MapPage() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {cameras.map(cam => (
-              <CircleMarker
+              <Marker
                 key={cam.id}
-                center={[cam.lat, cam.lng]}
-                radius={10}
-                fillColor={getMarkerColor(cam)}
-                color="#fff"
-                weight={2}
-                fillOpacity={0.9}
+                position={[cam.lat, cam.lng]}
+                icon={pinIcon(getMarkerColor(cam))}
               >
                 <Popup minWidth={260}>
                   <div style={{ fontFamily: "'TH Sarabun New', sans-serif", minWidth: 260 }}>
@@ -374,7 +396,7 @@ export function MapPage() {
                     </div>
                   </div>
                 </Popup>
-              </CircleMarker>
+              </Marker>
             ))}
           </MapContainer>
 
@@ -383,7 +405,7 @@ export function MapPage() {
             <p className="font-semibold text-gray-700 mb-1">สัญลักษณ์</p>
             {Object.entries({ normal: 'ปกติ', traffic: 'รถติด', gunshot: 'เสียงปืน', parking: 'จอดผิด', flood: 'น้ำท่วม', crowd: 'ชุมนุม', offline: 'ออฟไลน์' }).map(([k, label]) => (
               <div key={k} className="flex items-center gap-1.5 mb-0.5">
-                <div className="w-3 h-3 rounded-full border border-white" style={{ backgroundColor: MARKER_COLORS[k] }} />
+                <span dangerouslySetInnerHTML={{ __html: pinSvg(MARKER_COLORS[k], 11, 15) }} />
                 <span className="text-gray-600">{label}</span>
               </div>
             ))}
