@@ -1,6 +1,5 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
@@ -10,6 +9,7 @@ import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
+import { pinIcon, pinSvg } from '../utils/mapPin';
 
 const cameras = camerasData as Camera[];
 const initialEvents = eventsData as CctvEvent[];
@@ -37,31 +37,6 @@ function getMarkerColor(cam: Camera): string {
   if (cam.status === 'Offline') return MARKER_COLORS.offline;
   if (cam.currentEvent && cam.currentEvent !== 'normal') return MARKER_COLORS[cam.currentEvent] ?? MARKER_COLORS.normal;
   return MARKER_COLORS.normal;
-}
-
-/* teardrop map-pin SVG, reused by the leaflet markers and the legend */
-function pinSvg(color: string, width: number, height: number): string {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 32" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35))">
-    <path d="M12 1C6 1 1.5 5.6 1.5 11.4 1.5 19.4 12 31 12 31s10.5-11.6 10.5-19.6C22.5 5.6 18 1 12 1z" fill="${color}" stroke="#fff" stroke-width="1.5"/>
-    <circle cx="12" cy="11.4" r="4.2" fill="#fff"/>
-  </svg>`;
-}
-
-const pinIconCache = new Map<string, L.DivIcon>();
-
-function pinIcon(color: string): L.DivIcon {
-  let icon = pinIconCache.get(color);
-  if (!icon) {
-    icon = L.divIcon({
-      html: pinSvg(color, 20, 27),
-      className: '',
-      iconSize: [20, 27],
-      iconAnchor: [10, 26],
-      popupAnchor: [0, -22],
-    });
-    pinIconCache.set(color, icon);
-  }
-  return icon;
 }
 
 interface LiveSlot { cameraId: string | null }

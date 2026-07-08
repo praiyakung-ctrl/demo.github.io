@@ -1,24 +1,27 @@
 import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import {
   Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight,
-  FileSearch, FileText, Home, Lock, MapPin, Paperclip,
-  ShieldCheck, Target, Trash2, Upload, User as UserIcon,
+  FileSearch, FileText, Home, Info, Lock, MapPin, Paperclip, Search,
+  ShieldCheck, Target, Trash2, Upload, User as UserIcon, Video, X,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
+import { LiveCameraModal, districtOf } from '../components/LiveCameraModal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
+import { pinIcon } from '../utils/mapPin';
 
 const cameras = camerasData as Camera[];
-const locations = [...new Set(cameras.filter(c => c.status === 'Online').map(c => c.location))];
+const onlineCameras = cameras.filter(c => c.status === 'Online');
 
 const WIZARD_STEPS = ['กรอกข้อมูลคำขอ', 'อัปโหลดเอกสาร', 'ตรวจสอบข้อมูล', 'ยืนยันคำขอ', 'เสร็จสิ้น'];
 
 const PURPOSES = [
-  'อุบัติเหตุจราจร',
+  'เหตุอุบัติเหตุ / อุบัติเหตุจราจร',
   'ทรัพย์สินสูญหาย / ถูกโจรกรรม',
   'เหตุทะเลาะวิวาท / ทำร้ายร่างกาย',
   'ประกอบหลักฐานทางคดี / กฎหมาย',
@@ -26,18 +29,30 @@ const PURPOSES = [
   'อื่นๆ',
 ];
 
+const MAX_REQUEST_HOURS = 6;
+const MAX_BACK_DAYS = 7;
+
 interface RequestForm {
+  cameraId: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
   purpose: string;
   purposeOther: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  location: string;
-  detail: string;
+  incidentLocation: string;
   reason: string;
+  contactEmail: string;
 }
 
-const EMPTY_FORM: RequestForm = { purpose: '', purposeOther: '', date: '', startTime: '', endTime: '', location: '', detail: '', reason: '' };
+const EMPTY_FORM: RequestForm = {
+  cameraId: '', startDate: '', startTime: '', endDate: '', endTime: '',
+  purpose: '', purposeOther: '', incidentLocation: '', reason: '', contactEmail: '',
+};
+
+function findCamera(id: string): Camera | null {
+  return cameras.find(c => c.id === id) ?? null;
+}
 
 const OTHER_PURPOSE = 'อื่นๆ';
 
@@ -87,17 +102,25 @@ function WizardStepper({ step }: { step: number }) {
 }
 
 /* ---------- Right column ---------- */
+function formatRange(form: RequestForm): string {
+  if (!form.startDate) return '-';
+  const start = `${formatThaiDate(form.startDate)}${form.startTime ? ` ${form.startTime}` : ''}`;
+  if (!form.endDate && !form.endTime) return start;
+  const sameDay = form.endDate === form.startDate;
+  const end = `${form.endDate && !sameDay ? `${formatThaiDate(form.endDate)} ` : ''}${form.endTime}`;
+  return `${start} - ${end} น.`;
+}
+
 function SummaryCard({ form, docs }: { form: RequestForm; docs: Docs }) {
   const { user } = useAuth();
-  const dateStr = form.date
-    ? `${formatThaiDate(form.date)}${form.startTime ? ` ${form.startTime}` : ''}${form.endTime ? ` - ${form.endTime} น.` : ''}`
-    : '-';
+  const selectedCam = findCamera(form.cameraId);
   const docNames = Object.values(docs).filter(Boolean);
   const items = [
     { icon: UserIcon, label: 'ผู้ยื่นคำขอ', value: user ? `${user.name}\n${user.email}` : '-' },
+    { icon: Video, label: 'กล้องที่เลือก', value: selectedCam ? `${selectedCam.id}\n${selectedCam.location}` : '-' },
     { icon: Target, label: 'วัตถุประสงค์', value: purposeText(form) || '-' },
-    { icon: Calendar, label: 'วันที่และเวลา', value: dateStr },
-    { icon: MapPin, label: 'สถานที่เกิดเหตุ', value: form.location || '-' },
+    { icon: Calendar, label: 'วันที่และเวลา', value: formatRange(form) },
+    { icon: MapPin, label: 'สถานที่เกิดเหตุ', value: form.incidentLocation || '-' },
     { icon: Paperclip, label: 'เอกสารแนบ', value: docNames.length ? `${docNames.length} ไฟล์` : '-' },
   ];
   return (
@@ -172,23 +195,43 @@ function StepsCard({ step }: { step: number }) {
 }
 
 /* ---------- Step 1: request form ---------- */
+type FormErrors = Partial<Record<keyof RequestForm | 'datetime', string>>;
+
 function Step1Form({ form, setForm, onNext, onCancel }: {
   form: RequestForm;
   setForm: React.Dispatch<React.SetStateAction<RequestForm>>;
   onNext: () => void;
   onCancel: () => void;
 }) {
-  const { user } = useAuth();
-  const [errors, setErrors] = useState<Partial<Record<keyof RequestForm, string>>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [pickerTab, setPickerTab] = useState<'map' | 'search'>('map');
+  const [camSearch, setCamSearch] = useState('');
+  const [previewCam, setPreviewCam] = useState<Camera | null>(null);
+
+  const selectedCam = findCamera(form.cameraId);
+  const filteredCams = onlineCameras.filter(c =>
+    c.id.toLowerCase().includes(camSearch.toLowerCase()) || c.location.includes(camSearch)
+  );
 
   const validate = () => {
-    const e: Partial<Record<keyof RequestForm, string>> = {};
+    const e: FormErrors = {};
+    if (!form.cameraId) e.cameraId = 'กรุณาเลือกกล้อง CCTV จากแผนที่หรือรายการค้นหา';
+    if (!form.startDate || !form.startTime || !form.endDate || !form.endTime) {
+      e.datetime = 'กรุณาระบุวันที่และเวลาให้ครบถ้วน';
+    } else {
+      const start = new Date(`${form.startDate}T${form.startTime}`);
+      const end = new Date(`${form.endDate}T${form.endTime}`);
+      const daysBack = (Date.now() - start.getTime()) / 86400000;
+      if (end <= start) e.datetime = 'วันที่/เวลาสิ้นสุดต้องอยู่หลังเวลาเริ่มต้น';
+      else if (end.getTime() - start.getTime() > MAX_REQUEST_HOURS * 3600000) e.datetime = `ขอข้อมูลได้ไม่เกินครั้งละ ${MAX_REQUEST_HOURS} ชั่วโมง`;
+      else if (daysBack > MAX_BACK_DAYS) e.datetime = `ขอข้อมูลย้อนหลังได้ไม่เกิน ${MAX_BACK_DAYS} วัน`;
+    }
     if (!form.purpose) e.purpose = 'กรุณาเลือกวัตถุประสงค์';
     if (form.purpose === OTHER_PURPOSE && !form.purposeOther.trim()) e.purposeOther = 'กรุณาระบุวัตถุประสงค์ในการขอดูข้อมูล';
-    if (!form.date) e.date = 'กรุณาเลือกวันที่';
-    if (!form.startTime || !form.endTime) e.startTime = 'กรุณาระบุช่วงเวลาให้ครบถ้วน';
-    if (!form.location) e.location = 'กรุณาเลือกสถานที่เกิดเหตุ';
+    if (!form.incidentLocation.trim()) e.incidentLocation = 'กรุณาระบุสถานที่เกิดเหตุ';
     if (!form.reason.trim()) e.reason = 'กรุณาระบุเหตุผลประกอบการขอข้อมูล';
+    if (!form.contactEmail.trim()) e.contactEmail = 'กรุณาระบุอีเมลสำหรับติดต่อ';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contactEmail)) e.contactEmail = 'รูปแบบอีเมลไม่ถูกต้อง';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -199,50 +242,173 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
       [key]: value,
       ...(key === 'purpose' && value !== OTHER_PURPOSE ? { purposeOther: '' } : {}),
     }));
-    // the date/time trio shares one error line — clear it together
-    const isDateTime = key === 'date' || key === 'startTime' || key === 'endTime';
-    setErrors(e => ({ ...e, [key]: undefined, ...(isDateTime ? { date: undefined, startTime: undefined } : {}) }));
+    // the date/time quartet shares one error line — clear it together
+    const isDateTime = key === 'startDate' || key === 'startTime' || key === 'endDate' || key === 'endTime';
+    setErrors(e => ({ ...e, [key]: undefined, ...(isDateTime ? { datetime: undefined } : {}) }));
   };
+
+  const tabCls = (active: boolean) =>
+    `px-6 py-2 rounded-lg text-xl font-bold border transition-colors ${
+      active ? 'bg-navy-700 text-white border-navy-700' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+    }`;
 
   return (
     <div className="card p-6 space-y-6">
-      {/* 1. Requester (Google OAuth verified) */}
+      {/* 1. Request info */}
       <section>
-        <div className="flex items-center gap-3 mb-3">
-          <h2 className="text-3xl font-bold text-gray-800">1. ข้อมูลผู้ยื่นคำขอ</h2>
-          <span className="bg-green-100 text-green-700 text-lg font-bold px-3 py-0.5 rounded-full">ยืนยันตัวตนแล้ว</span>
-        </div>
-        <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3 mb-3">
+        <h2 className="text-3xl font-bold text-gray-800 mb-3">1. ข้อมูลคำขอ</h2>
+        <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
           <CheckCircle2 size={26} className="text-green-600 flex-shrink-0" />
-          <p className="text-xl text-green-800 font-medium">ยืนยันตัวตนด้วยบัญชี Google (OAuth 2.0) เรียบร้อยแล้ว</p>
-        </div>
-        <div className="flex items-center gap-4 border border-gray-200 rounded-xl px-4 py-4">
-          {/* Google G logo */}
-          <svg viewBox="0 0 48 48" className="w-10 h-10 flex-shrink-0" aria-hidden="true">
-            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
-            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
-            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
-            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-          </svg>
-          <div className="flex-1 min-w-0">
-            <p className="text-2xl font-bold text-gray-800 leading-tight">{user?.name}</p>
-            <p className="text-lg text-gray-500 leading-tight truncate">{user?.email}</p>
-          </div>
-          <button className="text-xl text-navy-500 font-bold hover:text-navy-700 hover:underline flex-shrink-0">เปลี่ยนบัญชี</button>
+          <p className="text-xl text-green-800 font-medium">ลงชื่อเข้าใช้ด้วย Google (OAuth 2.0) เรียบร้อยแล้ว</p>
         </div>
       </section>
 
-      {/* 2. Request detail */}
+      {/* 1.1 Camera picker */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">2. รายละเอียดคำขอ</h2>
-        <div className="space-y-4">
+        <h3 className="text-2xl font-bold text-gray-800 mb-3">1.1 เลือกตำแหน่งกล้อง CCTV</h3>
+        <div className="flex gap-2 mb-3">
+          <button onClick={() => setPickerTab('map')} className={tabCls(pickerTab === 'map')}>แผนที่</button>
+          <button onClick={() => setPickerTab('search')} className={tabCls(pickerTab === 'search')}>ค้นหากล้อง</button>
+        </div>
+
+        {pickerTab === 'map' ? (
+          <div className="rounded-xl overflow-hidden border border-gray-200 h-[300px] relative z-0">
+            <MapContainer center={[13.05, 100.95]} zoom={9} className="w-full h-full">
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {onlineCameras.map(cam => (
+                <Marker
+                  key={cam.id}
+                  position={[cam.lat, cam.lng]}
+                  icon={pinIcon(cam.id === form.cameraId ? '#22C55E' : '#1B3A6B')}
+                  eventHandlers={{ click: () => set('cameraId', cam.id) }}
+                >
+                  <Popup minWidth={200}>
+                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                      <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
+                      <p className="text-lg font-bold text-gray-800 leading-snug">{cam.location}</p>
+                      <p className="text-base text-gray-500 mb-2">ต.{districtOf(cam.location).replace(' / ', ' อ.')} จ.ชลบุรี</p>
+                      <button
+                        onClick={() => setPreviewCam(cam)}
+                        className="flex items-center gap-1.5 text-navy-500 font-bold text-lg hover:underline"
+                      >
+                        <Video size={18} /> ดูภาพสด
+                      </button>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
+          </div>
+        ) : (
+          <div className="border border-gray-200 rounded-xl overflow-hidden">
+            <div className="relative p-3 border-b border-gray-100">
+              <Search size={20} className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                value={camSearch}
+                onChange={e => setCamSearch(e.target.value)}
+                placeholder="ค้นหารหัสกล้องหรือสถานที่..."
+                className="input-field pl-10"
+              />
+            </div>
+            <div className="max-h-[240px] overflow-y-auto">
+              {filteredCams.map(cam => (
+                <button
+                  key={cam.id}
+                  onClick={() => set('cameraId', cam.id)}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors border-l-4 ${
+                    cam.id === form.cameraId ? 'bg-green-50 border-green-500' : 'border-transparent hover:bg-gray-50'
+                  }`}
+                >
+                  <Video size={20} className={cam.id === form.cameraId ? 'text-green-600' : 'text-navy-500'} />
+                  <span className="text-xl font-bold text-navy-700 flex-shrink-0">{cam.id}</span>
+                  <span className="text-lg text-gray-600 truncate">{cam.location}</span>
+                </button>
+              ))}
+              {filteredCams.length === 0 && <p className="text-xl text-gray-400 text-center py-6">ไม่พบกล้องที่ค้นหา</p>}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-3">
+          <label className="label">กล้องที่เลือก <span className="text-red-500">*</span></label>
+          <div className="flex gap-2">
+            <div className="input-field flex items-center gap-2 flex-1 min-w-0">
+              {selectedCam ? (
+                <>
+                  <Video size={22} className="text-navy-500 flex-shrink-0" />
+                  <span className="font-bold text-gray-800 flex-shrink-0">{selectedCam.id}</span>
+                  <span className="text-gray-600 truncate">{selectedCam.location}</span>
+                  <button onClick={() => set('cameraId', '')} title="ล้างกล้องที่เลือก" className="ml-auto text-gray-400 hover:text-red-500 flex-shrink-0">
+                    <X size={22} />
+                  </button>
+                </>
+              ) : (
+                <span className="text-gray-400">คลิกหมุดบนแผนที่ หรือใช้แท็บค้นหากล้อง</span>
+              )}
+            </div>
+            <button onClick={() => { set('cameraId', ''); setPickerTab('map'); }} className="btn-secondary whitespace-nowrap">
+              เปลี่ยนกล้อง
+            </button>
+          </div>
+          {errors.cameraId && <p className="text-lg text-red-500 mt-1">{errors.cameraId}</p>}
+        </div>
+      </section>
+
+      {/* 1.2 Date & time range */}
+      <section>
+        <h3 className="text-2xl font-bold text-gray-800 mb-3">1.2 ระบุวันที่และเวลาที่ต้องการ</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto_1fr_1fr] gap-2 items-end">
           <div>
-            <label className="label">วัตถุประสงค์ในการขอดูข้อมูล <span className="text-red-500">*</span></label>
-            <select value={form.purpose} onChange={e => set('purpose', e.target.value)} className="input-field">
-              <option value="">เลือกวัตถุประสงค์</option>
-              {PURPOSES.map(p => <option key={p} value={p}>{p}</option>)}
-            </select>
-            {errors.purpose && <p className="text-lg text-red-500 mt-1">{errors.purpose}</p>}
+            <label className="label">วันที่เริ่มต้น <span className="text-red-500">*</span></label>
+            <input type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)} className="input-field" />
+          </div>
+          <div>
+            <label className="label">เวลาเริ่มต้น <span className="text-red-500">*</span></label>
+            <input type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
+          </div>
+          <span className="hidden sm:block text-xl text-gray-600 text-center px-1 pb-2.5">ถึง</span>
+          <div>
+            <label className="label">วันที่สิ้นสุด <span className="text-red-500">*</span></label>
+            <input type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)} className="input-field" />
+          </div>
+          <div>
+            <label className="label">เวลาสิ้นสุด <span className="text-red-500">*</span></label>
+            <input type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
+          </div>
+        </div>
+        {errors.datetime && <p className="text-lg text-red-500 mt-1">{errors.datetime}</p>}
+        <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 text-navy-700 text-lg rounded-lg px-3 py-2 mt-2">
+          <Info size={18} className="flex-shrink-0" />
+          ช่วงเวลาที่สามารถขอข้อมูลได้ไม่เกิน {MAX_BACK_DAYS} วัน และไม่เกินครั้งละ {MAX_REQUEST_HOURS} ชั่วโมง
+        </div>
+      </section>
+
+      {/* 1.3 Request detail */}
+      <section>
+        <h3 className="text-2xl font-bold text-gray-800 mb-3">1.3 รายละเอียดคำขอ</h3>
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="label">วัตถุประสงค์ในการขอข้อมูล <span className="text-red-500">*</span></label>
+              <select value={form.purpose} onChange={e => set('purpose', e.target.value)} className="input-field">
+                <option value="">เลือกวัตถุประสงค์</option>
+                {PURPOSES.map(p => <option key={p} value={p}>{p}</option>)}
+              </select>
+              {errors.purpose && <p className="text-lg text-red-500 mt-1">{errors.purpose}</p>}
+            </div>
+            <div>
+              <label className="label">สถานที่เกิดเหตุ <span className="text-red-500">*</span></label>
+              <input
+                value={form.incidentLocation}
+                onChange={e => set('incidentLocation', e.target.value)}
+                placeholder="ถ.บางแสนสาย 1 ใกล้แยกลงหาดวอน"
+                className="input-field"
+              />
+              {errors.incidentLocation && <p className="text-lg text-red-500 mt-1">{errors.incidentLocation}</p>}
+            </div>
           </div>
 
           {form.purpose === OTHER_PURPOSE && (
@@ -259,46 +425,27 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
           )}
 
           <div>
-            <label className="label">วันที่และเวลาที่ต้องการดูข้อมูล <span className="text-red-500">*</span></label>
-            <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_1fr_auto_1fr] gap-2 items-center">
-              <input type="date" value={form.date} onChange={e => set('date', e.target.value)} className="input-field" />
-              <input type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
-              <span className="text-xl text-gray-600 text-center px-1">ถึง</span>
-              <input type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
-            </div>
-            {(errors.date || errors.startTime) && <p className="text-lg text-red-500 mt-1">{errors.date ?? errors.startTime}</p>}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="label">สถานที่เกิดเหตุ <span className="text-red-500">*</span></label>
-              <select value={form.location} onChange={e => set('location', e.target.value)} className="input-field">
-                <option value="">เลือกพื้นที่</option>
-                {locations.map(l => <option key={l} value={l}>{l}</option>)}
-              </select>
-              {errors.location && <p className="text-lg text-red-500 mt-1">{errors.location}</p>}
-            </div>
-            <div>
-              <label className="label">ระบุรายละเอียดเพิ่มเติม (ถ้ามี)</label>
-              <input
-                value={form.detail}
-                onChange={e => set('detail', e.target.value)}
-                placeholder="เช่น ชื่อสถานที่ ถนน ซอย หรือจุดสังเกต"
-                className="input-field"
-              />
-            </div>
-          </div>
-
-          <div>
             <label className="label">เหตุผลประกอบการขอข้อมูล <span className="text-red-500">*</span></label>
             <textarea
               value={form.reason}
               onChange={e => set('reason', e.target.value)}
-              rows={4}
-              placeholder="กรุณาระบุเหตุผลและความจำเป็นในการขอข้อมูลกล้อง CCTV อย่างละเอียด"
+              rows={3}
+              placeholder="ต้องการภาพจากกล้องวงจรปิดเพื่อใช้เป็นหลักฐานในการเคลมประกันภัย จากอุบัติเหตุรถชนกัน"
               className="input-field resize-none"
             />
             {errors.reason && <p className="text-lg text-red-500 mt-1">{errors.reason}</p>}
+          </div>
+
+          <div className="sm:max-w-md">
+            <label className="label">อีเมลสำหรับติดต่อ <span className="text-red-500">*</span></label>
+            <input
+              type="email"
+              value={form.contactEmail}
+              onChange={e => set('contactEmail', e.target.value)}
+              placeholder="you@example.com"
+              className="input-field"
+            />
+            {errors.contactEmail && <p className="text-lg text-red-500 mt-1">{errors.contactEmail}</p>}
           </div>
         </div>
       </section>
@@ -309,6 +456,9 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
           บันทึกและไปต่อ <ChevronRight size={24} />
         </button>
       </div>
+
+      {/* live preview from the map popup */}
+      <LiveCameraModal camera={previewCam} onClose={() => setPreviewCam(null)} />
     </div>
   );
 }
@@ -407,13 +557,14 @@ function Step3Review({ form, docs, onNext, onBack, goToStep }: {
   goToStep: (n: number) => void;
 }) {
   const { user } = useAuth();
+  const selectedCam = findCamera(form.cameraId);
   const rows: [string, string][] = [
+    ['กล้องที่เลือก', selectedCam ? `${selectedCam.id} · ${selectedCam.location}` : '-'],
+    ['วันที่และเวลา', formatRange(form)],
     ['วัตถุประสงค์', purposeText(form)],
-    ['วันที่', form.date ? formatThaiDate(form.date) : '-'],
-    ['ช่วงเวลา', `${form.startTime} - ${form.endTime} น.`],
-    ['สถานที่เกิดเหตุ', form.location],
-    ['รายละเอียดเพิ่มเติม', form.detail || '-'],
+    ['สถานที่เกิดเหตุ', form.incidentLocation],
     ['เหตุผลประกอบ', form.reason],
+    ['อีเมลสำหรับติดต่อ', form.contactEmail],
   ];
   const attachedDocs = DOC_SLOTS.filter(s => docs[s.key]);
 
@@ -563,8 +714,9 @@ function Step5Done({ reqNo }: { reqNo: string }) {
 /* ---------- Page ---------- */
 export function CctvRequestPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState<RequestForm>(EMPTY_FORM);
+  const [form, setForm] = useState<RequestForm>(() => ({ ...EMPTY_FORM, contactEmail: user?.email ?? '' }));
   const [docs, setDocs] = useState<Docs>({});
   const [reqNo, setReqNo] = useState('');
 
