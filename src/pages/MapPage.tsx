@@ -1,7 +1,8 @@
 import { useState, useMemo, useCallback } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import { Search, Video, VideoOff, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
+import { Search, Video, VideoOff, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, MonitorPlay, ParkingSquare, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
+import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import eventsData from '../data/events.json';
@@ -45,6 +46,7 @@ export function MapPage() {
   const [search, setSearch] = useState('');
   const [eventFilters, setEventFilters] = useState<Set<EventType>>(new Set());
   const [selectedCam, setSelectedCam] = useState<Camera | null>(null);
+  const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [actionNote, setActionNote] = useState('');
   const [leftPanelVisible, setLeftPanelVisible] = useState(true);
@@ -308,16 +310,25 @@ export function MapPage() {
                       อัปเดต: {cam.lastUpdate ? formatThaiDateTimeSec(cam.lastUpdate) : '—'}
                     </p>
 
-                    {/* Live button */}
-                    {canEdit && (
+                    {/* Live buttons */}
+                    <div className="flex gap-2">
                       <button
-                        onClick={() => assignLive(cam.id)}
-                        className="w-full bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                        onClick={() => setLiveCam(cam)}
+                        className="flex-1 bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <Video size={18} />
                         ดู Live
                       </button>
-                    )}
+                      {canEdit && (
+                        <button
+                          onClick={() => assignLive(cam.id)}
+                          className="flex-1 bg-white hover:bg-navy-50 text-navy-700 border border-navy-500 text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                        >
+                          <MonitorPlay size={18} />
+                          เพิ่มเข้าจอ Live
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </Popup>
               </CircleMarker>
@@ -393,10 +404,19 @@ export function MapPage() {
                   <div key={idx} className={`relative bg-gray-800 rounded-lg overflow-hidden aspect-video flex items-center justify-center ${idx === 0 ? 'col-span-2' : ''}`}>
                     {cam ? (
                       <>
-                        <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                          <Video size={idx === 0 ? 32 : 20} className="text-gray-500" />
-                        </div>
-                        <div className="absolute top-1 left-1 right-1 flex items-center justify-between">
+                        <button
+                          onClick={() => setLiveCam(cam)}
+                          className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center"
+                          title="คลิกเพื่อดู Live ขนาดใหญ่"
+                        >
+                          <img
+                            src={cameraImage(cam)}
+                            alt={cam.location}
+                            className="absolute inset-0 w-full h-full object-cover hover:opacity-90 transition-opacity"
+                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                          />
+                        </button>
+                        <div className="absolute top-1 left-1 right-1 flex items-center justify-between pointer-events-none">
                           <span className="bg-black/60 text-white text-xs px-1.5 py-0.5 rounded">{cam.id}</span>
                           <span className="flex items-center gap-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded">
                             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
@@ -409,7 +429,7 @@ export function MapPage() {
                         >
                           <X size={10} />
                         </button>
-                        <p className="absolute bottom-1 left-1 text-white/60 text-xs truncate max-w-full px-1">{cam.location}</p>
+                        <p className="absolute bottom-1 left-1 text-white/80 text-xs truncate max-w-full px-1 pointer-events-none drop-shadow">{cam.location}</p>
                       </>
                     ) : (
                       <div className="flex flex-col items-center text-gray-600">
@@ -421,10 +441,13 @@ export function MapPage() {
                 );
               })}
             </div>
-            <p className="text-base text-gray-400 mt-2 text-center">คลิกกล้องในรายการเพื่อแสดงภาพ Live</p>
+            <p className="text-base text-gray-400 mt-2 text-center">คลิกภาพเพื่อดู Live ขนาดใหญ่</p>
           </div>
         </div>
       </div>
+
+      {/* Live CCTV Modal */}
+      <LiveCameraModal camera={liveCam} onClose={() => setLiveCam(null)} />
 
       {/* Acknowledge Modal */}
       {ackEvent && (
