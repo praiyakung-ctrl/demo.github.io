@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
+import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -296,7 +297,7 @@ export function MapPage() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {cameras.map(cam => (
+            <CameraClusterMarkers cameras={cameras} renderMarker={cam => (
               <Marker
                 key={cam.id}
                 position={[cam.lat, cam.lng]}
@@ -372,7 +373,7 @@ export function MapPage() {
                   </div>
                 </Popup>
               </Marker>
-            ))}
+            )} />
           </MapContainer>
 
           {/* Legend */}

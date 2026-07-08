@@ -7,8 +7,9 @@ import {
   ShieldCheck, Target, Trash2, Upload, User as UserIcon, Video, X,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
+import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
-import { LiveCameraModal, districtOf } from '../components/LiveCameraModal';
+import { districtOf } from '../components/LiveCameraModal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
@@ -206,7 +207,6 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
   const [errors, setErrors] = useState<FormErrors>({});
   const [pickerTab, setPickerTab] = useState<'map' | 'search'>('map');
   const [camSearch, setCamSearch] = useState('');
-  const [previewCam, setPreviewCam] = useState<Camera | null>(null);
 
   const selectedCam = findCamera(form.cameraId);
   const filteredCams = onlineCameras.filter(c =>
@@ -278,7 +278,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {onlineCameras.map(cam => (
+              <CameraClusterMarkers cameras={onlineCameras} renderMarker={cam => (
                 <Marker
                   key={cam.id}
                   position={[cam.lat, cam.lng]}
@@ -289,17 +289,11 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                     <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                       <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
                       <p className="text-lg font-bold text-gray-800 leading-snug">{cam.location}</p>
-                      <p className="text-base text-gray-500 mb-2">ต.{districtOf(cam.location).replace(' / ', ' อ.')} จ.ชลบุรี</p>
-                      <button
-                        onClick={() => setPreviewCam(cam)}
-                        className="flex items-center gap-1.5 text-navy-500 font-bold text-lg hover:underline"
-                      >
-                        <Video size={18} /> ดูภาพสด
-                      </button>
+                      <p className="text-base text-gray-500">ต.{districtOf(cam.location).replace(' / ', ' อ.')} จ.ชลบุรี</p>
                     </div>
                   </Popup>
                 </Marker>
-              ))}
+              )} />
             </MapContainer>
           </div>
         ) : (
@@ -457,8 +451,6 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         </button>
       </div>
 
-      {/* live preview from the map popup */}
-      <LiveCameraModal camera={previewCam} onClose={() => setPreviewCam(null)} />
     </div>
   );
 }
