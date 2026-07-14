@@ -7,9 +7,10 @@ interface ModalProps {
   title: string;
   children: ReactNode;
   size?: 'sm' | 'md' | 'lg';
+  icon?: ReactNode;
 }
 
-export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalProps) {
+export function Modal({ isOpen, onClose, title, children, size = 'md', icon }: ModalProps) {
   if (!isOpen) return null;
 
   const widthClass = {
@@ -25,7 +26,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
         <div className="flex items-center justify-between px-6 py-4 bg-navy-700 rounded-t-xl">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center">
-              <Camera size={20} className="text-white" />
+              {icon ?? <Camera size={20} className="text-white" />}
             </div>
             <h3 className="text-xl font-bold text-white">{title}</h3>
           </div>

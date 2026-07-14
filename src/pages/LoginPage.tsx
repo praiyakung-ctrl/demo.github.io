@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Eye, EyeOff, Shield } from 'lucide-react';
+import { Eye, EyeOff, KeyRound, MailCheck, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { Modal } from '../components/Modal';
 
 export function LoginPage() {
   const { login, loginAsGoogle, user } = useAuth();
@@ -10,6 +11,10 @@ export function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotSending, setForgotSending] = useState(false);
+  const [forgotSent, setForgotSent] = useState(false);
 
   if (user) {
     const redirect = user.role === 'executive' ? '/dashboard' : user.role === 'citizen' ? '/portal' : '/map';
@@ -36,6 +41,21 @@ export function LoginPage() {
   };
 
   const fillDemo = (u: string, p: string) => { setUsername(u); setPassword(p); setError(''); };
+
+  const handleForgotSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setForgotSending(true);
+    await new Promise(r => setTimeout(r, 600));
+    setForgotSending(false);
+    setForgotSent(true);
+  };
+
+  const closeForgot = () => {
+    setShowForgot(false);
+    setForgotEmail('');
+    setForgotSending(false);
+    setForgotSent(false);
+  };
 
   return (
     <div className="min-h-screen flex" style={{ backgroundImage: `linear-gradient(rgba(27,58,107,0.55), rgba(27,58,107,0.65)), url(${import.meta.env.BASE_URL}background01.webp)`, backgroundSize: 'cover', backgroundPosition: 'right center' }}>
@@ -88,6 +108,16 @@ export function LoginPage() {
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowForgot(true)}
+                className="text-lg text-navy-700 hover:text-navy-500 hover:underline font-medium"
+              >
+                ลืมรหัสผ่าน?
+              </button>
             </div>
 
             {error && <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
@@ -144,6 +174,52 @@ export function LoginPage() {
         </div>
       </div>
       </div>
+
+      {/* Forgot password modal */}
+      <Modal
+        isOpen={showForgot}
+        onClose={closeForgot}
+        title="ลืมรหัสผ่าน"
+        size="sm"
+        icon={<KeyRound size={20} className="text-white" />}
+      >
+        {forgotSent ? (
+          <div className="text-center py-2">
+            <MailCheck size={48} className="text-green-600 mx-auto mb-3" />
+            <p className="text-xl font-semibold text-gray-900 mb-1">ส่งลิงก์เรียบร้อยแล้ว</p>
+            <p className="text-lg text-gray-600 mb-5">
+              ส่งลิงก์รีเซ็ตรหัสผ่านไปที่ <span className="font-medium text-gray-900">{forgotEmail}</span> แล้ว
+              กรุณาตรวจสอบอีเมลของท่าน
+            </p>
+            <button onClick={closeForgot} className="btn-primary w-full py-2.5 text-lg">ปิด</button>
+          </div>
+        ) : (
+          <form onSubmit={handleForgotSubmit} className="space-y-4">
+            <p className="text-lg text-gray-600">
+              กรอกอีเมลที่ลงทะเบียนไว้ ระบบจะส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ไปให้
+            </p>
+            <div>
+              <label className="label">อีเมล</label>
+              <input
+                type="email"
+                value={forgotEmail}
+                onChange={e => setForgotEmail(e.target.value)}
+                placeholder="กรอกอีเมลของท่าน"
+                className="input-field"
+                required
+                autoFocus
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={forgotSending}
+              className="btn-primary w-full py-2.5 text-lg disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {forgotSending ? 'กำลังส่ง...' : 'ส่งลิงก์รีเซ็ตรหัสผ่าน'}
+            </button>
+          </form>
+        )}
+      </Modal>
     </div>
   );
 }
