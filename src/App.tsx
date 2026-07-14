@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { loadA11ySettings } from './utils/a11ySettings';
 import { LoginPage } from './pages/LoginPage';
 import { MapPage } from './pages/MapPage';
 import { DashboardPage } from './pages/DashboardPage';
@@ -71,6 +73,11 @@ function AppRoutes() {
 }
 
 function App() {
+  // apply saved font-scale / high-contrast preferences before any page renders
+  useEffect(() => {
+    loadA11ySettings();
+  }, []);
+
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>

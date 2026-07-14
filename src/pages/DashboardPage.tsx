@@ -4,6 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line,
 } from 'recharts';
+import type { PieLabelRenderProps } from 'recharts';
 import { Layout } from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import lprData from '../data/lpr.json';
@@ -11,7 +12,7 @@ import eventsData from '../data/events.json';
 import camerasData from '../data/cameras.json';
 import requestsData from '../data/requests.json';
 import type { CctvEvent, MonthlyEventData, LprRoad, CitizenRequest, Camera as CameraType } from '../types';
-import { EVENT_LABELS } from '../types';
+import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { formatThaiDateTime } from '../utils/formatDate';
 
 const events = eventsData as CctvEvent[];
@@ -37,12 +38,14 @@ const EVENT_COLORS_MAP: Record<string, string> = {
 
 const MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.'];
 
-function ChartTooltip({ active, payload, label }: any) {
+interface TooltipEntry { value: number; color: string; dataKey: string; name: string }
+
+function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: TooltipEntry[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
     <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }} className="bg-white border border-gray-200 rounded-xl shadow-xl p-3 min-w-[180px]">
       <p className="font-extrabold text-gray-700 text-xl mb-2">{label}</p>
-      {[...payload].reverse().map((entry: any) => {
+      {[...payload].reverse().map(entry => {
         const Icon = EVENT_TYPE_ICONS[entry.dataKey as keyof typeof EVENT_TYPE_ICONS];
         return (
           <div key={entry.dataKey} className="flex items-center gap-2 text-lg py-0.5">
@@ -55,10 +58,10 @@ function ChartTooltip({ active, payload, label }: any) {
   );
 }
 
-function ChartLegend({ payload }: any) {
+function ChartLegend({ payload }: { payload?: { value: string; color: string; dataKey: string }[] }) {
   return (
     <div className="flex flex-wrap gap-3 justify-center mt-2">
-      {payload?.map((entry: any) => {
+      {payload?.map(entry => {
         const Icon = EVENT_TYPE_ICONS[entry.dataKey as keyof typeof EVENT_TYPE_ICONS];
         return (
           <div key={entry.dataKey} className="flex items-center gap-1 text-lg text-gray-600">
@@ -124,7 +127,13 @@ export function DashboardPage() {
     alert('ฟีเจอร์ Export Excel กำลังพัฒนา');
   };
 
-  const CustomPieLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+  const CustomPieLabel = (props: PieLabelRenderProps) => {
+    const cx = Number(props.cx ?? 0);
+    const cy = Number(props.cy ?? 0);
+    const midAngle = Number(props.midAngle ?? 0);
+    const innerRadius = Number(props.innerRadius ?? 0);
+    const outerRadius = Number(props.outerRadius ?? 0);
+    const percent = Number(props.percent ?? 0);
     if (percent < 0.05) return null;
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -143,11 +152,12 @@ export function DashboardPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900">Dashboard ภาพรวมระบบ</h2>
+            <h1 className="text-4xl font-bold text-gray-900">Dashboard ภาพรวมระบบ</h1>
             <p className="text-xl text-gray-500">ข้อมูลกล้อง CCTV และเหตุการณ์จังหวัดชลบุรี</p>
           </div>
           <div className="flex gap-2">
             <select
+              aria-label="เลือกเดือน"
               value={filterMonth}
               onChange={e => setFilterMonth(e.target.value)}
               className="input-field py-2 text-lg w-44"
@@ -196,7 +206,7 @@ export function DashboardPage() {
             icon={Users}
             label="คำขอรอดำเนินการ"
             value={pendingRequests.length}
-            gradient="bg-gradient-to-br from-amber-400 to-yellow-600"
+            gradient="bg-gradient-to-br from-amber-600 to-orange-800"
             iconBg="bg-white/20"
             sub={<span className="font-semibold text-white">รอตรวจสอบ</span>}
           />
@@ -214,6 +224,7 @@ export function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <div className="card p-4 lg:col-span-3">
             <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)</h3>
+            <div role="img" aria-label="กราฟแท่งเหตุการณ์ CCTV รายเดือน แยกตามประเภท ข้อมูลเดียวกับตารางสรุปเหตุการณ์รายเดือนด้านล่าง">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={monthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -228,10 +239,12 @@ export function DashboardPage() {
                 <Bar dataKey="crowd" name="ชุมนุม" stackId="a" fill={EVENT_COLORS_MAP.crowd} radius={[2, 2, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
+            </div>
           </div>
 
           <div className="card p-4 lg:col-span-2">
             <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">สัดส่วนเหตุการณ์ทั้งหมด</h3>
+            <div role="img" aria-label={`กราฟวงกลมสัดส่วนเหตุการณ์ทั้งหมด: ${pieData.map(d => `${d.name} ${d.value} ครั้ง`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
                 <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} dataKey="value" labelLine={false} label={CustomPieLabel}>
@@ -242,6 +255,7 @@ export function DashboardPage() {
                 <Tooltip formatter={(v) => [`${v} ครั้ง`]} />
               </PieChart>
             </ResponsiveContainer>
+            </div>
             <div className="flex flex-wrap gap-3 justify-center mt-2">
               {pieData.map(d => {
                 const Icon = EVENT_TYPE_ICONS[d.key as keyof typeof EVENT_TYPE_ICONS];
@@ -260,6 +274,7 @@ export function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="card p-4">
             <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">LPR Top 10 ถนน (คัน/วัน)</h3>
+            <div role="img" aria-label={`กราฟแท่งแนวนอน LPR สิบอันดับถนน: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={roads} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" horizontal={false} />
@@ -269,10 +284,12 @@ export function DashboardPage() {
                 <Bar dataKey="count" fill="#2563EB" radius={[0, 3, 3, 0]} />
               </BarChart>
             </ResponsiveContainer>
+            </div>
           </div>
 
           <div className="card p-4">
             <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">แนวโน้มเหตุการณ์ 7 วันล่าสุด</h3>
+            <div role="img" aria-label={`กราฟเส้นแนวโน้ม 7 วันล่าสุด: ${daily.map(d => `${d.date} ${d.count.toLocaleString()}`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={240}>
               <LineChart data={daily} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -282,6 +299,7 @@ export function DashboardPage() {
                 <Line type="monotone" dataKey="count" name="จำนวนรถ" stroke="#2563EB" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               </LineChart>
             </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
@@ -303,13 +321,13 @@ export function DashboardPage() {
               <table className="w-full text-xl">
                 <thead>
                   <tr className="border-b border-gray-100">
-                    <th className="text-left text-xl text-gray-500 pb-2 font-semibold">เดือน</th>
-                    <th className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_COLORS_MAP.traffic }}>รถติด</th>
-                    <th className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_COLORS_MAP.gunshot }}>ปืน</th>
-                    <th className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_COLORS_MAP.parking }}>จอดผิด</th>
-                    <th className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_COLORS_MAP.flood }}>น้ำท่วม</th>
-                    <th className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_COLORS_MAP.crowd }}>ชุมนุม</th>
-                    <th className="text-right text-xl text-gray-500 pb-2 font-semibold">รวม</th>
+                    <th scope="col" className="text-left text-xl text-gray-600 pb-2 font-semibold">เดือน</th>
+                    <th scope="col" className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_TEXT_COLORS.traffic }}>รถติด</th>
+                    <th scope="col" className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_TEXT_COLORS.gunshot }}>ปืน</th>
+                    <th scope="col" className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_TEXT_COLORS.parking }}>จอดผิด</th>
+                    <th scope="col" className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_TEXT_COLORS.flood }}>น้ำท่วม</th>
+                    <th scope="col" className="text-right text-xl pb-2 font-semibold" style={{ color: EVENT_TEXT_COLORS.crowd }}>ชุมนุม</th>
+                    <th scope="col" className="text-right text-xl text-gray-600 pb-2 font-semibold">รวม</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -345,7 +363,7 @@ export function DashboardPage() {
                       style={{ color: EVENT_COLORS_MAP[ev.eventType] ?? '#9CA3AF' }}
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-xl font-bold" style={{ color: EVENT_COLORS_MAP[ev.eventType] ?? '#374151' }}>
+                      <p className="text-xl font-bold" style={{ color: EVENT_TEXT_COLORS[ev.eventType] ?? '#374151' }}>
                         {ev.cameraId} : {ev.cameraName} - {EVENT_LABELS[ev.eventType]}
                       </p>
                       <p className="text-lg text-navy-700">{formatThaiDateTime(ev.timestamp)}</p>

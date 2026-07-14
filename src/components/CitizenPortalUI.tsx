@@ -84,7 +84,7 @@ export function ServiceSidebar({ active }: { active: ServiceMenuKey }) {
 export function CitizenFooter() {
   return (
     <footer className="bg-white border-t border-gray-200 py-4 mt-4">
-      <p className="text-center text-lg text-gray-400">
+      <p className="text-center text-lg text-gray-600">
         © {new Date().getFullYear() + 543} องค์การบริหารส่วนจังหวัดชลบุรี · ระบบฐานข้อมูลเพื่อการเข้าถึง (Data Integration and End Users)
       </p>
     </footer>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, Clock, FileText, Hash, Inbox, MapPin, Plus, Search, Target, User, Activity, Camera as CameraIcon } from 'lucide-react';
-import { Layout } from '../components/Layout';
+import { Layout, SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
@@ -141,6 +141,7 @@ function CitizenView() {
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
+      <SkipLink />
       <Navbar />
       <CitizenHero title="ตรวจสอบสถานะคำขอ" />
 
@@ -149,7 +150,7 @@ function CitizenView() {
           <ServiceSidebar active="status" />
         </aside>
 
-        <main className="min-w-0">
+        <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none">
           {selectedReq
             ? <RequestDetail req={selectedReq} onBack={() => setSelectedReq(null)} />
             : <RequestList requests={requests} onSelect={setSelectedReq} />}
@@ -192,10 +193,11 @@ function StaffView() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="ค้นหา..."
+              aria-label="ค้นหาคำขอด้วยเลขที่คำขอหรือชื่อ"
               className="w-full pl-9 pr-3 py-2 text-2xl border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-navy-500"
             />
           </div>
-          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="w-full text-2xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none">
+          <select aria-label="กรองตามสถานะ" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="w-full text-2xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500">
             <option value="all">ทุกสถานะ</option>
             {['ใหม่', 'รอดำเนินการ', 'รอภาพ', 'อนุมัติ', 'ส่งแล้ว', 'ได้รับแล้ว'].map(s => <option key={s}>{s}</option>)}
           </select>

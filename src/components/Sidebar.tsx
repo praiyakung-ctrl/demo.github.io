@@ -34,14 +34,16 @@ export function Sidebar() {
       <div className="flex items-center justify-end px-2 pt-3 pb-1">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-lg text-navy-400 hover:text-navy-700 hover:bg-gray-100 transition-colors"
-          title={collapsed ? 'ขยาย' : 'ย่อ'}
+          className="p-1.5 rounded-lg text-navy-500 hover:text-navy-700 hover:bg-gray-100 transition-colors"
+          title={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
+          aria-label={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
+          aria-expanded={!collapsed}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
       </div>
 
-      <nav className="flex-1 px-2 space-y-1 overflow-y-auto overflow-x-hidden pb-2">
+      <nav aria-label="เมนูหลัก" className="flex-1 px-2 space-y-1 overflow-y-auto overflow-x-hidden pb-2">
         {/* Main Menu header */}
         <div className={`pb-1 ${collapsed ? 'flex justify-center pt-1' : 'px-2 pt-1'}`}>
           {collapsed ? (
@@ -64,6 +66,7 @@ export function Sidebar() {
               key={item.to}
               to={item.to}
               title={collapsed ? item.label : undefined}
+              aria-label={item.label}
               className={({ isActive }) =>
                 isActive
                   ? activeClass(collapsed ? 'justify-center' : '')
@@ -99,6 +102,7 @@ export function Sidebar() {
                   key={item.to}
                   to={item.to}
                   title={collapsed ? item.label : undefined}
+              aria-label={item.label}
                   className={({ isActive }) =>
                     isActive
                       ? activeClass(collapsed ? 'justify-center' : '')

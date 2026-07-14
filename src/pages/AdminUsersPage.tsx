@@ -72,7 +72,7 @@ export function AdminUsersPage() {
               <Users size={26} className="text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-extrabold text-white">จัดการผู้ใช้งาน</h2>
+              <h1 className="text-2xl font-extrabold text-white">จัดการผู้ใช้งาน</h1>
               <div className="flex items-center gap-2 mt-0.5">
                 <span className="text-sm text-navy-200">ผู้ใช้ในระบบทั้งหมด</span>
                 <span className="bg-white/25 text-white text-sm font-bold px-2.5 py-0.5 rounded-full">{users.length} คน</span>
@@ -96,6 +96,7 @@ export function AdminUsersPage() {
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder="ค้นหาชื่อ, Username, หรืออีเมล..."
+                  aria-label="ค้นหาชื่อ Username หรืออีเมล"
                   className="w-full pl-9 pr-3 py-2 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:border-navy-400 bg-white"
                 />
               </div>
@@ -109,7 +110,7 @@ export function AdminUsersPage() {
                 <thead>
                   <tr className="bg-navy-700">
                     {['ชื่อ-นามสกุล', 'Username', 'อีเมล', 'บทบาท', 'สถานะ', 'ดำเนินการ'].map(h => (
-                      <th key={h} className="text-left text-base font-bold text-white px-4 py-3">{h}</th>
+                      <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -163,27 +164,27 @@ export function AdminUsersPage() {
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editUser ? 'แก้ไขผู้ใช้' : 'เพิ่มผู้ใช้ใหม่'}>
         <div className="space-y-3">
           <div>
-            <label className="label">ชื่อ-นามสกุล *</label>
-            <input value={form.name} onChange={e => set('name', e.target.value)} className="input-field" />
+            <label htmlFor="user-name" className="label">ชื่อ-นามสกุล *</label>
+            <input id="user-name" value={form.name} onChange={e => set('name', e.target.value)} className="input-field" />
           </div>
           <div>
-            <label className="label">Username *</label>
-            <input value={form.username} onChange={e => set('username', e.target.value)} className="input-field" />
+            <label htmlFor="user-username" className="label">Username *</label>
+            <input id="user-username" value={form.username} onChange={e => set('username', e.target.value)} className="input-field" />
           </div>
           <div>
-            <label className="label">อีเมล</label>
-            <input type="email" value={form.email} onChange={e => set('email', e.target.value)} className="input-field" />
+            <label htmlFor="user-email" className="label">อีเมล</label>
+            <input id="user-email" type="email" value={form.email} onChange={e => set('email', e.target.value)} className="input-field" />
           </div>
           <div>
-            <label className="label">บทบาท</label>
-            <select value={form.role} onChange={e => set('role', e.target.value)} className="input-field">
+            <label htmlFor="user-role" className="label">บทบาท</label>
+            <select id="user-role" value={form.role} onChange={e => set('role', e.target.value)} className="input-field">
               {ROLE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </div>
           {!editUser && (
             <div>
-              <label className="label">รหัสผ่าน *</label>
-              <input type="password" value={form.password} onChange={e => set('password', e.target.value)} className="input-field" />
+              <label htmlFor="user-password" className="label">รหัสผ่าน *</label>
+              <input id="user-password" type="password" value={form.password} onChange={e => set('password', e.target.value)} className="input-field" />
             </div>
           )}
           <div className="flex items-center gap-2">

@@ -6,7 +6,7 @@ import {
 import { Layout } from '../components/Layout';
 import lprData from '../data/lpr.json';
 import type { MonthlyEventData, LprRoad } from '../types';
-import { EVENT_LABELS } from '../types';
+import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 
 const monthly = lprData.monthly as MonthlyEventData[];
 const roads = lprData.roads as LprRoad[];
@@ -82,7 +82,7 @@ export function ReportsPage() {
   const toggleType = (type: string) => {
     setSelectedTypes(prev => {
       const n = new Set(prev);
-      n.has(type) ? n.delete(type) : n.add(type);
+      if (n.has(type)) n.delete(type); else n.add(type);
       return n;
     });
   };
@@ -100,7 +100,7 @@ export function ReportsPage() {
       <div className="p-5 space-y-5 max-w-screen-xl mx-auto">
         {/* Header */}
         <div>
-          <h2 className="text-4xl font-bold text-gray-900">รายงาน</h2>
+          <h1 className="text-4xl font-bold text-gray-900">รายงาน</h1>
           <p className="text-xl text-gray-900 font-bold">ข้อมูลเหตุการณ์ CCTV และ LPR จังหวัดชลบุรี</p>
         </div>
 
@@ -111,6 +111,7 @@ export function ReportsPage() {
             <div className="flex items-center gap-2 flex-shrink-0">
               <span className="text-lg font-bold text-gray-900 whitespace-nowrap">เดือน:</span>
               <select
+                aria-label="เลือกเดือน"
                 value={selectedMonth}
                 onChange={e => setSelectedMonth(e.target.value)}
                 className="input-field py-1.5 text-lg w-40"
@@ -180,13 +181,13 @@ export function ReportsPage() {
             <table className="w-full text-xl">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="text-left text-lg font-semibold text-gray-500 px-4 py-2.5">เดือน</th>
+                  <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">เดือน</th>
                   {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                    <th key={t} className="text-right text-lg font-semibold px-4 py-2.5" style={{ color: EVENT_COLORS_MAP[t] }}>
+                    <th key={t} scope="col" className="text-right text-lg font-semibold px-4 py-2.5" style={{ color: EVENT_TEXT_COLORS[t] }}>
                       {EVENT_LABELS[t]}
                     </th>
                   ))}
-                  <th className="text-right text-lg font-semibold text-gray-500 px-4 py-2.5">รวมทั้งหมด</th>
+                  <th scope="col" className="text-right text-lg font-semibold text-gray-600 px-4 py-2.5">รวมทั้งหมด</th>
                 </tr>
               </thead>
               <tbody>
@@ -206,7 +207,7 @@ export function ReportsPage() {
                   <tr className="border-t-2 border-gray-200 bg-gray-50 font-bold">
                     <td className="px-4 py-2.5 text-gray-900">รวม</td>
                     {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                      <td key={t} className="px-4 py-2.5 text-right" style={{ color: EVENT_COLORS_MAP[t] }}>
+                      <td key={t} className="px-4 py-2.5 text-right" style={{ color: EVENT_TEXT_COLORS[t] }}>
                         {filteredMonthly.reduce((sum, r) => sum + (r[t] ?? 0), 0)}
                       </td>
                     ))}
@@ -220,7 +221,11 @@ export function ReportsPage() {
           </div>
 
           {/* Bar chart */}
-          <div className="p-4 border-t border-gray-100">
+          <div
+            className="p-4 border-t border-gray-100"
+            role="img"
+            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านบน"
+          >
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

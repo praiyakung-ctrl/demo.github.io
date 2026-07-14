@@ -111,6 +111,17 @@ export const EVENT_COLORS: Record<EventType, string> = {
   normal: '#22C55E',
 };
 
+/* Darker shades that pass WCAG AA (>= 4.5:1) when used as text on white —
+   EVENT_COLORS stays for fills/backgrounds where white text sits on top. */
+export const EVENT_TEXT_COLORS: Record<EventType, string> = {
+  traffic: '#C2410C',
+  gunshot: '#DC2626',
+  parking: '#92400E',
+  flood: '#1D4ED8',
+  crowd: '#A16207',
+  normal: '#15803D',
+};
+
 export const ROLE_LABELS: Record<UserRole, string> = {
   admin: 'ผู้ดูแลระบบ',
   operator: 'เจ้าหน้าที่ควบคุม',

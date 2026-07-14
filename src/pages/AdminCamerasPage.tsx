@@ -37,6 +37,7 @@ export function AdminCamerasPage() {
 
   const openEdit = (cam: Camera) => {
     setEditCam(cam);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- destructuring to drop id
     const { id, ...rest } = cam;
     setForm(rest);
     setModalOpen(true);
@@ -70,7 +71,7 @@ export function AdminCamerasPage() {
               <Video size={26} className="text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-extrabold text-white">จัดการกล้อง CCTV</h2>
+              <h1 className="text-2xl font-extrabold text-white">จัดการกล้อง CCTV</h1>
               <div className="flex items-center gap-2 mt-0.5">
                 <span className="text-sm text-navy-200">กล้องในระบบทั้งหมด</span>
                 <span className="bg-white/25 text-white text-sm font-bold px-2.5 py-0.5 rounded-full">{cameras.length} กล้อง</span>
@@ -94,6 +95,7 @@ export function AdminCamerasPage() {
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder="ค้นหา Camera ID, ชื่อ, หรือสถานที่..."
+                  aria-label="ค้นหา Camera ID ชื่อ หรือสถานที่"
                   className="w-full pl-9 pr-3 py-2 text-xl border-2 border-gray-200 rounded-xl focus:outline-none focus:border-navy-400 bg-white"
                 />
               </div>
@@ -107,7 +109,7 @@ export function AdminCamerasPage() {
                 <thead>
                   <tr className="bg-navy-700">
                     {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ทิศทาง', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
-                      <th key={h} className="text-left text-xl font-bold text-white px-4 py-3">{h}</th>
+                      <th key={h} scope="col" className="text-left text-xl font-bold text-white px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -195,12 +197,12 @@ export function AdminCamerasPage() {
             </div>
             <div className="grid grid-cols-2 gap-3 p-4">
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">ชื่อกล้อง <span className="text-red-500">*</span></label>
-                <input value={form.name} onChange={e => set('name', e.target.value)} className="input-field" placeholder="เช่น กล้อง CCTV หน้าตลาด" />
+                <label htmlFor="cam-name" className="text-sm font-bold text-navy-700 mb-1 block">ชื่อกล้อง <span className="text-red-500">*</span></label>
+                <input id="cam-name" value={form.name} onChange={e => set('name', e.target.value)} className="input-field" placeholder="เช่น กล้อง CCTV หน้าตลาด" />
               </div>
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">สถานที่ <span className="text-red-500">*</span></label>
-                <input value={form.location} onChange={e => set('location', e.target.value)} className="input-field" placeholder="เช่น ถนนสุขุมวิท" />
+                <label htmlFor="cam-location" className="text-sm font-bold text-navy-700 mb-1 block">สถานที่ <span className="text-red-500">*</span></label>
+                <input id="cam-location" value={form.location} onChange={e => set('location', e.target.value)} className="input-field" placeholder="เช่น ถนนสุขุมวิท" />
               </div>
             </div>
           </div>
@@ -213,12 +215,12 @@ export function AdminCamerasPage() {
             </div>
             <div className="grid grid-cols-2 gap-3 p-4">
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">Latitude</label>
-                <input type="number" step="0.0001" value={form.lat} onChange={e => set('lat', parseFloat(e.target.value))} className="input-field font-mono" />
+                <label htmlFor="cam-lat" className="text-sm font-bold text-navy-700 mb-1 block">Latitude</label>
+                <input id="cam-lat" type="number" step="0.0001" value={form.lat} onChange={e => set('lat', parseFloat(e.target.value))} className="input-field font-mono" />
               </div>
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">Longitude</label>
-                <input type="number" step="0.0001" value={form.lng} onChange={e => set('lng', parseFloat(e.target.value))} className="input-field font-mono" />
+                <label htmlFor="cam-lng" className="text-sm font-bold text-navy-700 mb-1 block">Longitude</label>
+                <input id="cam-lng" type="number" step="0.0001" value={form.lng} onChange={e => set('lng', parseFloat(e.target.value))} className="input-field font-mono" />
               </div>
             </div>
           </div>
@@ -231,26 +233,26 @@ export function AdminCamerasPage() {
             </div>
             <div className="grid grid-cols-2 gap-3 p-4">
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">ประเภทกล้อง</label>
-                <select value={form.type} onChange={e => set('type', e.target.value)} className="input-field">
+                <label htmlFor="cam-type" className="text-sm font-bold text-navy-700 mb-1 block">ประเภทกล้อง</label>
+                <select id="cam-type" value={form.type} onChange={e => set('type', e.target.value)} className="input-field">
                   <option>Fixed</option>
                   <option>PTZ</option>
                 </select>
               </div>
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">หน่วยงาน</label>
+                <label htmlFor="cam-org" className="text-sm font-bold text-navy-700 mb-1 block">หน่วยงาน</label>
                 <div className="relative">
                   <Building2 size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input value={form.organization} onChange={e => set('organization', e.target.value)} className="input-field pl-8" placeholder="เช่น อบจ.ชลบุรี" />
+                  <input id="cam-org" value={form.organization} onChange={e => set('organization', e.target.value)} className="input-field pl-8" placeholder="เช่น อบจ.ชลบุรี" />
                 </div>
               </div>
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">ทิศทาง</label>
-                <input value={form.direction} onChange={e => set('direction', e.target.value)} className="input-field" placeholder="เช่น เหนือ-ใต้" />
+                <label htmlFor="cam-direction" className="text-sm font-bold text-navy-700 mb-1 block">ทิศทาง</label>
+                <input id="cam-direction" value={form.direction} onChange={e => set('direction', e.target.value)} className="input-field" placeholder="เช่น เหนือ-ใต้" />
               </div>
               <div>
-                <label className="text-sm font-bold text-navy-700 mb-1 block">สถานะ</label>
-                <select value={form.status} onChange={e => set('status', e.target.value)} className="input-field">
+                <label htmlFor="cam-status" className="text-sm font-bold text-navy-700 mb-1 block">สถานะ</label>
+                <select id="cam-status" value={form.status} onChange={e => set('status', e.target.value)} className="input-field">
                   <option>Online</option>
                   <option>Offline</option>
                 </select>
@@ -265,8 +267,8 @@ export function AdminCamerasPage() {
               <span className="text-sm font-bold text-orange-700">การเชื่อมต่อ</span>
             </div>
             <div className="p-4">
-              <label className="text-sm font-bold text-navy-700 mb-1 block">RTSP URL (Mock)</label>
-              <input value={form.rtspUrl} onChange={e => set('rtspUrl', e.target.value)} placeholder="rtsp://mock-server/cam-xxx" className="input-field font-mono text-sm" />
+              <label htmlFor="cam-rtsp" className="text-sm font-bold text-navy-700 mb-1 block">RTSP URL (Mock)</label>
+              <input id="cam-rtsp" value={form.rtspUrl} onChange={e => set('rtspUrl', e.target.value)} placeholder="rtsp://mock-server/cam-xxx" className="input-field font-mono text-sm" />
             </div>
           </div>
 

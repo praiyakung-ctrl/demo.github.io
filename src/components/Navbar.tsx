@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, Waves, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
-import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS } from '../types';
+import { AccessibilityToolbar } from './AccessibilityToolbar';
+import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS } from '../types';
 import eventsData from '../data/events.json';
 import requestsData from '../data/requests.json';
 import type { CctvEvent, CitizenRequest } from '../types';
@@ -37,6 +38,34 @@ export function Navbar() {
   const [time, setTime] = useState(new Date());
   const [showUser, setShowUser] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
+  const notifRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
+  const notifBtnRef = useRef<HTMLButtonElement>(null);
+  const userBtnRef = useRef<HTMLButtonElement>(null);
+
+  // close dropdowns on outside click or Escape (returning focus to the toggle)
+  useEffect(() => {
+    if (!showNotif && !showUser) return;
+    const onDocClick = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (notifRef.current?.contains(t) || userRef.current?.contains(t)) return;
+      setShowNotif(false);
+      setShowUser(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (showNotif) notifBtnRef.current?.focus();
+      if (showUser) userBtnRef.current?.focus();
+      setShowNotif(false);
+      setShowUser(false);
+    };
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [showNotif, showUser]);
 
   const unackEvents = allEvents.filter(e => !e.isAcknowledged);
   // citizens are notified about their CCTV request status, not CCTV events
@@ -66,9 +95,9 @@ export function Navbar() {
           }}
         />
         <div className="min-w-0">
-          <h1 className="text-3xl font-extrabold text-white leading-tight truncate drop-shadow">
+          <p className="text-3xl font-extrabold text-white leading-tight truncate drop-shadow">
             โครงการพัฒนาศักยภาพด้านความปลอดภัยฯ จังหวัดชลบุรี
-          </h1>
+          </p>
           <p className="text-xl font-extrabold text-green-300 leading-tight truncate hidden md:block">
             ระบบฐานข้อมูลเพื่อการเข้าถึง Data Integration and End Users
           </p>
@@ -77,6 +106,11 @@ export function Navbar() {
 
       {/* Right side */}
       <div className="flex items-center gap-3 flex-shrink-0">
+        {/* Accessibility toolbar */}
+        <div className="hidden sm:block">
+          <AccessibilityToolbar />
+        </div>
+
         {/* Date + Time */}
         <div className="hidden sm:flex items-center gap-2 bg-navy-800 border border-navy-600 rounded-lg px-3 py-1.5">
           <span className="text-lg font-bold text-white">{dateStr}</span>
@@ -85,10 +119,13 @@ export function Navbar() {
         </div>
 
         {/* Notifications */}
-        <div className="relative">
+        <div className="relative" ref={notifRef}>
           <button
+            ref={notifBtnRef}
             onClick={() => { setShowNotif(!showNotif); setShowUser(false); }}
-            aria-label="การแจ้งเตือน"
+            aria-label={unackCount > 0 ? `การแจ้งเตือน ${unackCount} รายการ` : 'การแจ้งเตือน'}
+            aria-haspopup="true"
+            aria-expanded={showNotif}
             className="relative p-2 hover:bg-navy-600 rounded-lg transition-colors group"
           >
             <Bell size={26} className={`transition-colors ${unackCount > 0 ? 'text-orange-400 animate-bounce' : 'text-navy-200 group-hover:text-orange-400'}`} />
@@ -133,7 +170,7 @@ export function Navbar() {
                           <StatusBadge status={req.status} />
                         </div>
                         <p className="text-xs text-gray-500 truncate">{req.cameraId} · {req.cameraLocation}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">อัปเดตล่าสุด {timeAgo(latestActivity(req))}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">อัปเดตล่าสุด {timeAgo(latestActivity(req))}</p>
                       </div>
                     </button>
                   ))
@@ -177,11 +214,11 @@ export function Navbar() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-900">
-                          <span style={{ color: EVENT_COLORS[ev.eventType] }}>{EVENT_LABELS[ev.eventType]}</span>
+                          <span style={{ color: EVENT_TEXT_COLORS[ev.eventType] }}>{EVENT_LABELS[ev.eventType]}</span>
                           {' — '}{ev.cameraId}
                         </p>
                         <p className="text-xs text-gray-500 truncate">{ev.cameraName}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{timeAgo(ev.timestamp)}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{timeAgo(ev.timestamp)}</p>
                       </div>
                     </div>
                     );
@@ -199,9 +236,13 @@ export function Navbar() {
         </div>
 
         {/* User */}
-        <div className="relative">
+        <div className="relative" ref={userRef}>
           <button
+            ref={userBtnRef}
             onClick={() => setShowUser(!showUser)}
+            aria-label={`เมนูผู้ใช้ ${user?.name ?? ''}`}
+            aria-haspopup="true"
+            aria-expanded={showUser}
             className="flex items-center gap-2 p-2 hover:bg-navy-600 rounded-lg transition-colors"
           >
             <CircleUser size={36} className="text-white flex-shrink-0" />

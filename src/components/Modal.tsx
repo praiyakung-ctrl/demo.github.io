@@ -1,5 +1,7 @@
+import { useId } from 'react';
 import { X, Camera } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { useDialog } from '../hooks/useDialog';
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,6 +13,9 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children, size = 'md', icon }: ModalProps) {
+  const dialogRef = useDialog(isOpen, onClose);
+  const titleId = useId();
+
   if (!isOpen) return null;
 
   const widthClass = {
@@ -21,16 +26,27 @@ export function Modal({ isOpen, onClose, title, children, size = 'md', icon }: M
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className={`relative bg-white rounded-xl shadow-2xl w-full ${widthClass} max-h-[90vh] overflow-y-auto`}>
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        className={`relative bg-white rounded-xl shadow-2xl w-full ${widthClass} max-h-[90vh] overflow-y-auto`}
+      >
         <div className="flex items-center justify-between px-6 py-4 bg-navy-700 rounded-t-xl">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center">
+            <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center" aria-hidden="true">
               {icon ?? <Camera size={20} className="text-white" />}
             </div>
-            <h3 className="text-xl font-bold text-white">{title}</h3>
+            <h3 id={titleId} className="text-xl font-bold text-white">{title}</h3>
           </div>
-          <button onClick={onClose} className="p-1.5 hover:bg-white/20 rounded-lg transition-colors">
+          <button
+            onClick={onClose}
+            aria-label="ปิดหน้าต่าง"
+            className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+          >
             <X size={20} className="text-white" />
           </button>
         </div>
@@ -51,13 +67,25 @@ interface ConfirmDialogProps {
 }
 
 export function ConfirmDialog({ isOpen, onClose, onConfirm, title, message, confirmLabel = 'ยืนยัน', danger = false }: ConfirmDialogProps) {
+  const dialogRef = useDialog(isOpen, onClose);
+  const titleId = useId();
+  const messageId = useId();
+
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-sm p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600 mb-6">{message}</p>
+      <div className="absolute inset-0 bg-black/40" onClick={onClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={messageId}
+        tabIndex={-1}
+        className="relative bg-white rounded-xl shadow-xl w-full max-w-sm p-6"
+      >
+        <h3 id={titleId} className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+        <p id={messageId} className="text-gray-600 mb-6">{message}</p>
         <div className="flex gap-3 justify-end">
           <button onClick={onClose} className="btn-secondary">ยกเลิก</button>
           <button

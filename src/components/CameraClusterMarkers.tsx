@@ -71,7 +71,10 @@ export function CameraClusterMarkers({ cameras, renderMarker, zoomThreshold = 13
           position={[group.lat, group.lng]}
           icon={clusterIcon(group.cameras.length)}
           title={`${group.location} (${group.cameras.length} กล้อง)`}
+          alt={`กลุ่มกล้อง ${group.location} ${group.cameras.length} กล้อง กด Enter เพื่อซูมเข้า`}
+          keyboard={true}
           eventHandlers={{
+            // Leaflet fires click for both mouse and keyboard Enter on focused markers
             click: () => map.flyTo([group.lat, group.lng], zoomThreshold + 2, { duration: 0.8 }),
           }}
         />

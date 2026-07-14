@@ -10,7 +10,8 @@
   body {
     margin: 0;
     font-family: 'TH Sarabun New', 'Noto Sans Thai', 'Leelawadee UI', 'Tahoma', sans-serif;
-    font-size: 16px;
+    /* 1rem (not px) so the accessibility toolbar's html font-size scaling applies */
+    font-size: 1rem;
     line-height: 1.6;
     background-color: #F0F2F5;
     color: #1A202C;
@@ -53,6 +54,76 @@
   .label {
     @apply block text-xl font-bold text-gray-700 mb-1;
   }
+}
+
+/* ---------- Accessibility ---------- */
+
+/* Skip link: hidden until keyboard focus */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 3000;
+  background: #1B3A6B;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.75rem 0;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  outline: 3px solid #F59E0B;
+}
+
+/* Visible focus indicator everywhere (keyboard only) */
+:focus-visible {
+  outline: 3px solid #2563EB;
+  outline-offset: 2px;
+}
+
+/* Stop blink/pulse/bounce and transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High-contrast mode (toggled by the accessibility toolbar via .high-contrast on <html>) */
+html.high-contrast body {
+  background-color: #fff;
+  color: #000;
+}
+html.high-contrast .text-gray-400,
+html.high-contrast .text-gray-500,
+html.high-contrast .text-gray-600,
+html.high-contrast .text-gray-700 {
+  color: #111827 !important;
+}
+html.high-contrast .text-blue-100,
+html.high-contrast .text-blue-200,
+html.high-contrast .text-navy-200,
+html.high-contrast .text-navy-300,
+html.high-contrast .text-navy-400,
+html.high-contrast .text-green-300 {
+  color: #fff !important;
+}
+html.high-contrast .border-gray-50,
+html.high-contrast .border-gray-100,
+html.high-contrast .border-gray-200,
+html.high-contrast .border-blue-100,
+html.high-contrast .border-blue-200 {
+  border-color: #374151 !important;
+}
+html.high-contrast a {
+  text-decoration: underline;
+}
+html.high-contrast .bg-gray-50,
+html.high-contrast .bg-blue-50 {
+  background-color: #fff !important;
 }
 
 /* Blink animation for camera icons with active events */

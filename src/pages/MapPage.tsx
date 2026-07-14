@@ -3,14 +3,16 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
-import { LiveCameraModal, cameraImage } from '../components/LiveCameraModal';
+import { LiveCameraModal } from '../components/LiveCameraModal';
+import { cameraImage } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
-import { EVENT_COLORS, EVENT_LABELS } from '../types';
+import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
 import { pinIcon, pinSvg } from '../utils/mapPin';
+import { useDialog } from '../hooks/useDialog';
 
 const cameras = camerasData as Camera[];
 const initialEvents = eventsData as CctvEvent[];
@@ -90,6 +92,8 @@ export function MapPage() {
   const [manageMode, setManageMode] = useState(false);
   const [pickSlot, setPickSlot] = useState<number | null>(null);
   const livePanelRef = useRef<HTMLDivElement>(null);
+  const pickerDialogRef = useDialog(pickSlot !== null, () => setPickSlot(null));
+  const ackDialogRef = useDialog(ackEvent !== null, () => setAckEvent(null));
 
   const toggleEventFilter = (type: EventType) => {
     setEventFilters(prev => {
@@ -165,7 +169,7 @@ export function MapPage() {
         {/* Left panel */}
         <div className={`bg-blue-50 flex flex-col flex-shrink-0 overflow-hidden transition-all duration-300 border-r border-blue-200 max-md:absolute max-md:inset-y-0 max-md:left-0 max-md:z-[450] max-md:shadow-2xl ${leftPanelVisible ? 'w-80' : 'w-0'}`}>
           <div className="p-3 border-b border-blue-200 min-w-[320px]">
-            <h2 className="text-navy-700 font-semibold text-xl mb-2">แผนที่กล้อง CCTV</h2>
+            <h1 className="text-navy-700 font-semibold text-xl mb-2">แผนที่กล้อง CCTV</h1>
             <div className="relative mb-2">
               <Search size={16} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-navy-400" />
               <input
@@ -173,7 +177,8 @@ export function MapPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="ค้นหากล้อง..."
-                className="w-full bg-white text-navy-700 placeholder-navy-300 text-xl pl-8 pr-3 py-2 rounded-lg border border-blue-200 focus:outline-none focus:border-navy-500"
+                aria-label="ค้นหากล้อง"
+                className="w-full bg-white text-navy-700 placeholder-navy-400 text-xl pl-8 pr-3 py-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-navy-500"
               />
             </div>
             <p className="text-navy-700 text-base font-semibold mb-2">เลือกเหตุการณ์ :</p>
@@ -249,6 +254,8 @@ export function MapPage() {
           className="absolute left-0 top-1/2 -translate-y-1/2 z-[451] bg-blue-50 text-navy-700 p-1 rounded-r-lg shadow-md border border-blue-200 hover:bg-blue-100 transition-colors"
           style={{ left: leftPanelVisible ? '320px' : '0px' }}
           title={leftPanelVisible ? 'ซ่อนรายการกล้อง' : 'แสดงรายการกล้อง'}
+          aria-label={leftPanelVisible ? 'ซ่อนรายการกล้อง' : 'แสดงรายการกล้อง'}
+          aria-expanded={leftPanelVisible}
         >
           {leftPanelVisible ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
@@ -257,7 +264,7 @@ export function MapPage() {
         <div className="flex-1 flex flex-col min-w-0">
           {/* Unacknowledged alert banners — above map, not absolute */}
           {unackEvents.length > 0 && (
-            <div className="flex-shrink-0 space-y-1 p-2 bg-gray-100 border-b border-gray-200 z-10">
+            <div role="status" aria-live="polite" className="flex-shrink-0 space-y-1 p-2 bg-gray-100 border-b border-gray-200 z-10">
               {unackEvents.slice(0, 2).map(ev => (
                 <div
                   key={ev.id}
@@ -302,6 +309,9 @@ export function MapPage() {
                 key={cam.id}
                 position={[cam.lat, cam.lng]}
                 icon={pinIcon(getMarkerColor(cam))}
+                title={`${cam.id} ${cam.location}`}
+                alt={`กล้อง ${cam.id} ${cam.location}`}
+                keyboard={true}
               >
                 <Popup minWidth={260}>
                   <div style={{ fontFamily: "'TH Sarabun New', sans-serif", minWidth: 260 }}>
@@ -395,6 +405,8 @@ export function MapPage() {
           className="absolute right-0 top-1/2 -translate-y-1/2 z-[451] bg-white border border-gray-200 text-gray-600 p-1 rounded-l-lg shadow-lg hover:bg-gray-50 transition-colors"
           style={{ right: rightPanelVisible ? '320px' : '0px' }}
           title={rightPanelVisible ? 'ซ่อนแผงขวา' : 'แสดงแผงขวา'}
+          aria-label={rightPanelVisible ? 'ซ่อนแผงขวา' : 'แสดงแผงขวา'}
+          aria-expanded={rightPanelVisible}
         >
           {rightPanelVisible ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
@@ -416,7 +428,7 @@ export function MapPage() {
                     style={{ color: EVENT_COLORS[ev.eventType] }}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-base font-bold truncate" style={{ color: EVENT_COLORS[ev.eventType] }}>
+                    <p className="text-base font-bold truncate" style={{ color: EVENT_TEXT_COLORS[ev.eventType] }}>
                       {ev.cameraId} : {ev.cameraName} - {EVENT_LABELS[ev.eventType]}
                     </p>
                     <p className="text-sm text-navy-700">{formatThaiDateTimeSec(ev.timestamp)}</p>
@@ -424,7 +436,11 @@ export function MapPage() {
                   {ev.isAcknowledged
                     ? <CheckCircle size={14} className="text-green-500 flex-shrink-0" />
                     : canEdit && (
-                      <button onClick={() => { setAckEvent(ev); setActionNote(''); }} className="flex-shrink-0">
+                      <button
+                        onClick={() => { setAckEvent(ev); setActionNote(''); }}
+                        aria-label={`รับทราบเหตุการณ์ ${ev.cameraId} ${EVENT_LABELS[ev.eventType]}`}
+                        className="flex-shrink-0"
+                      >
                         <AlertTriangle size={14} className="text-orange-500" />
                       </button>
                     )
@@ -459,6 +475,7 @@ export function MapPage() {
                         onClick={() => setLiveCam(cam)}
                         className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900"
                         title="คลิกเพื่อดู Live ขนาดใหญ่"
+                        aria-label={`ดู Live ขนาดใหญ่ ${cam.id} ${cam.location}`}
                       >
                         <img
                           src={cameraImage(cam)}
@@ -478,6 +495,7 @@ export function MapPage() {
                         <button
                           onClick={() => removeFromLive(idx)}
                           title="นำออกจากจอ"
+                          aria-label={`นำ ${cam.id} ออกจากจอ`}
                           className="absolute top-7 right-1.5 bg-red-600/90 text-white rounded-md p-1 hover:bg-red-600"
                         >
                           <X size={12} />
@@ -524,6 +542,7 @@ export function MapPage() {
                 <button
                   onClick={() => livePanelRef.current?.requestFullscreen?.()}
                   title="แสดงผลเต็มจอ"
+                  aria-label="แสดงผลเต็มจอ"
                   className="ml-auto p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                   <Maximize2 size={15} />
@@ -537,11 +556,18 @@ export function MapPage() {
       {/* Camera picker for empty live slot */}
       {pickSlot !== null && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setPickSlot(null)} />
-          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md flex flex-col max-h-[80vh]">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setPickSlot(null)} aria-hidden="true" />
+          <div
+            ref={pickerDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="เลือกกล้องเพื่อแสดงผล"
+            tabIndex={-1}
+            className="relative bg-white rounded-xl shadow-xl w-full max-w-md flex flex-col max-h-[80vh]"
+          >
             <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
               <h3 className="text-2xl font-bold text-navy-700">เลือกกล้องเพื่อแสดงผล</h3>
-              <button onClick={() => setPickSlot(null)} className="text-gray-400 hover:text-gray-600"><X size={22} /></button>
+              <button onClick={() => setPickSlot(null)} aria-label="ปิดหน้าต่าง" className="text-gray-500 hover:text-gray-700"><X size={22} /></button>
             </div>
             <div className="flex-1 overflow-y-auto p-2">
               {cameras
@@ -568,8 +594,15 @@ export function MapPage() {
       {/* Acknowledge Modal */}
       {ackEvent && (
         <div className="fixed inset-0 z-[500] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setAckEvent(null)} />
-          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setAckEvent(null)} aria-hidden="true" />
+          <div
+            ref={ackDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="รับทราบเหตุการณ์"
+            tabIndex={-1}
+            className="relative bg-white rounded-xl shadow-xl w-full max-w-md p-6"
+          >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: EVENT_COLORS[ackEvent.eventType] + '20' }}>
                 <AlertTriangle style={{ color: EVENT_COLORS[ackEvent.eventType] }} size={20} />
@@ -597,8 +630,9 @@ export function MapPage() {
               </div>
             </div>
 
-            <label className="label">การดำเนินการ</label>
+            <label htmlFor="ack-action-note" className="label">การดำเนินการ</label>
             <textarea
+              id="ack-action-note"
               value={actionNote}
               onChange={e => setActionNote(e.target.value)}
               placeholder="N/A"

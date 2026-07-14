@@ -14,9 +14,13 @@ export default {
           DEFAULT: '#1B3A6B',
           50: '#EFF6FF',
           100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#3B82F6',
           500: '#2563EB',
           600: '#1D4ED8',
           700: '#1B3A6B',
+          800: '#142C52',
         },
         event: {
           traffic: '#F97316',

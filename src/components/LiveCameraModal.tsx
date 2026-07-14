@@ -6,46 +6,8 @@ import {
 import type { Camera } from '../types';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { formatThaiDate, formatThaiDateTimeSec } from '../utils/formatDate';
-
-/* mock live feed: dedicated images for specific cameras, otherwise cycle the 8 samples */
-const CAMERA_IMAGE_OVERRIDES: Record<string, string> = {
-  'CAM-001': 'CCTVCamera002.png',
-  'CAM-003': 'CCTVCamera003.png',
-};
-
-export function cameraImage(cam: Camera): string {
-  const override = CAMERA_IMAGE_OVERRIDES[cam.id];
-  if (override) return `${import.meta.env.BASE_URL}${override}`;
-  const n = ((parseInt(cam.id.slice(4), 10) || 1) - 1) % 8 + 1;
-  return `${import.meta.env.BASE_URL}camera${String(n).padStart(3, '0')}.jpg`;
-}
-
-const DISTRICTS: [string, string][] = [
-  ['เนินสุธาวาส', 'บ้านสวน / เมืองชลบุรี'],
-  ['ข้าวหลาม', 'แสนสุข / เมืองชลบุรี'],
-  ['กระทิงลาย', 'นาเกลือ / บางละมุง'],
-  ['คุณพ่อเรย์', 'หนองปรือ / บางละมุง'],
-  ['สิริกิติ์', 'พลูตาหลวง / สัตหีบ'],
-  ['บางแสน', 'แสนสุข / เมืองชลบุรี'],
-  ['หนองมน', 'แสนสุข / เมืองชลบุรี'],
-  ['อ่างศิลา', 'อ่างศิลา / เมืองชลบุรี'],
-  ['พัทยา', 'หนองปรือ / บางละมุง'],
-  ['นาเกลือ', 'นาเกลือ / บางละมุง'],
-  ['ศรีราชา', 'ศรีราชา / ศรีราชา'],
-  ['แหลมฉบัง', 'ทุ่งสุขลา / ศรีราชา'],
-  ['สัตหีบ', 'สัตหีบ / สัตหีบ'],
-  ['พลูตาหลวง', 'พลูตาหลวง / สัตหีบ'],
-  ['บ้านบึง', 'บ้านบึง / บ้านบึง'],
-  ['พนัสนิคม', 'พนัสนิคม / พนัสนิคม'],
-  ['พานทอง', 'พานทอง / พานทอง'],
-  ['บางปะกง', 'บางปะกง / บางปะกง'],
-  ['ชลบุรี', 'บางปลาสร้อย / เมืองชลบุรี'],
-];
-
-export function districtOf(location: string): string {
-  const hit = DISTRICTS.find(([key]) => location.includes(key));
-  return hit ? hit[1] : 'จังหวัดชลบุรี';
-}
+import { useDialog } from '../hooks/useDialog';
+import { cameraImage, districtOf } from '../utils/cameraDisplay';
 
 function formatLastUpdate(lastUpdate: string): string {
   // cameras.json stores time-only strings like "09:41:21"
@@ -65,13 +27,23 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
   const [playing, setPlaying] = useState(true);
   const [recording, setRecording] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [prevCameraId, setPrevCameraId] = useState<string | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useDialog(camera !== null, onClose);
 
-  useEffect(() => {
-    if (!camera) return;
+  // reset player state when a different camera opens (adjust-state-during-render pattern)
+  if (camera && camera.id !== prevCameraId) {
+    setPrevCameraId(camera.id);
     setPlaying(true);
     setRecording(false);
     setLinkCopied(false);
+  }
+  if (!camera && prevCameraId !== null) {
+    setPrevCameraId(null);
+  }
+
+  useEffect(() => {
+    if (!camera) return;
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, [camera]);
@@ -127,8 +99,15 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto p-5">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`ภาพสดกล้อง ${camera.id} ${camera.location}`}
+        tabIndex={-1}
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto p-5"
+      >
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
           <h3 className="text-2xl font-extrabold text-gray-900 truncate">{camera.id} : {camera.location}</h3>
@@ -190,6 +169,7 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
 
         {/* Action buttons */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
+          {/* eslint-disable-next-line react-hooks/refs -- playerRef is only read inside click handlers, never during render */}
           {actions.map(({ icon: Icon, label, onClick, disabled, active }) => (
             <button
               key={label}

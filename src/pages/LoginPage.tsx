@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { Eye, EyeOff, KeyRound, MailCheck, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Modal } from '../components/Modal';
+import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 
 export function LoginPage() {
   const { login, loginAsGoogle, user } = useAuth();
@@ -66,6 +67,11 @@ export function LoginPage() {
 
   return (
     <div className="min-h-screen flex" style={{ backgroundImage: `linear-gradient(rgba(27,58,107,0.55), rgba(27,58,107,0.65)), url(${import.meta.env.BASE_URL}background01.webp)`, backgroundSize: 'cover', backgroundPosition: 'right center' }}>
+      {/* Accessibility toolbar */}
+      <div className="absolute top-3 right-3 z-10">
+        <AccessibilityToolbar />
+      </div>
+
       {/* Centered form */}
       <div className="flex-1 flex items-center justify-center p-8">
       <div className="w-full max-w-md">
@@ -86,9 +92,11 @@ export function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="label">ชื่อผู้ใช้</label>
+              <label htmlFor="login-username" className="label">ชื่อผู้ใช้</label>
               <input
+                id="login-username"
                 type="text"
+                autoComplete="username"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="กรอกชื่อผู้ใช้"
@@ -97,10 +105,12 @@ export function LoginPage() {
               />
             </div>
             <div>
-              <label className="label">รหัสผ่าน</label>
+              <label htmlFor="login-password" className="label">รหัสผ่าน</label>
               <div className="relative">
                 <input
+                  id="login-password"
                   type={showPass ? 'text' : 'password'}
+                  autoComplete="current-password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="กรอกรหัสผ่าน"
@@ -110,7 +120,8 @@ export function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  aria-label={showPass ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -136,7 +147,7 @@ export function LoginPage() {
               </button>
             </div>
 
-            {error && <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
+            {error && <p role="alert" className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
             <button
               type="submit"
@@ -149,7 +160,7 @@ export function LoginPage() {
 
           <div className="my-4 flex items-center gap-3">
             <div className="flex-1 border-t border-gray-200" />
-            <span className="text-2xl text-gray-400">หรือ</span>
+            <span className="text-2xl text-gray-500">หรือ</span>
             <div className="flex-1 border-t border-gray-200" />
           </div>
 
@@ -215,15 +226,16 @@ export function LoginPage() {
               กรอกอีเมลที่ลงทะเบียนไว้ ระบบจะส่งลิงก์สำหรับตั้งรหัสผ่านใหม่ไปให้
             </p>
             <div>
-              <label className="label">อีเมล</label>
+              <label htmlFor="forgot-email" className="label">อีเมล</label>
               <input
+                id="forgot-email"
                 type="email"
+                autoComplete="email"
                 value={forgotEmail}
                 onChange={e => setForgotEmail(e.target.value)}
                 placeholder="กรอกอีเมลของท่าน"
                 className="input-field"
                 required
-                autoFocus
               />
             </div>
             <button

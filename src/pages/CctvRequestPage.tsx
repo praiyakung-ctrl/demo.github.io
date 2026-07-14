@@ -7,9 +7,10 @@ import {
   ShieldCheck, Target, Trash2, Upload, User as UserIcon, Video, X,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
+import { SkipLink } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
-import { districtOf } from '../components/LiveCameraModal';
+import { districtOf } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
@@ -283,6 +284,9 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                   key={cam.id}
                   position={[cam.lat, cam.lng]}
                   icon={pinIcon(cam.id === form.cameraId ? '#22C55E' : '#1B3A6B')}
+                  title={`${cam.id} ${cam.location}`}
+                  alt={`เลือกกล้อง ${cam.id} ${cam.location}`}
+                  keyboard={true}
                   eventHandlers={{ click: () => set('cameraId', cam.id) }}
                 >
                   <Popup minWidth={200}>
@@ -304,6 +308,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                 value={camSearch}
                 onChange={e => setCamSearch(e.target.value)}
                 placeholder="ค้นหารหัสกล้องหรือสถานที่..."
+                aria-label="ค้นหารหัสกล้องหรือสถานที่"
                 className="input-field pl-10"
               />
             </div>
@@ -327,7 +332,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         )}
 
         <div className="mt-3">
-          <label className="label">กล้องที่เลือก <span className="text-red-500">*</span></label>
+          <span className="label">กล้องที่เลือก <span className="text-red-500">*</span></span>
           <div className="flex gap-2">
             <div className="input-field flex items-center gap-2 flex-1 min-w-0">
               {selectedCam ? (
@@ -335,7 +340,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                   <Video size={22} className="text-navy-500 flex-shrink-0" />
                   <span className="font-bold text-gray-800 flex-shrink-0">{selectedCam.id}</span>
                   <span className="text-gray-600 truncate">{selectedCam.location}</span>
-                  <button onClick={() => set('cameraId', '')} title="ล้างกล้องที่เลือก" className="ml-auto text-gray-400 hover:text-red-500 flex-shrink-0">
+                  <button onClick={() => set('cameraId', '')} title="ล้างกล้องที่เลือก" aria-label="ล้างกล้องที่เลือก" className="ml-auto text-gray-500 hover:text-red-500 flex-shrink-0">
                     <X size={22} />
                   </button>
                 </>
@@ -347,7 +352,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
               เปลี่ยนกล้อง
             </button>
           </div>
-          {errors.cameraId && <p className="text-lg text-red-500 mt-1">{errors.cameraId}</p>}
+          {errors.cameraId && <p role="alert" className="text-lg text-red-600 mt-1">{errors.cameraId}</p>}
         </div>
       </section>
 
@@ -356,24 +361,24 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         <h3 className="text-2xl font-bold text-gray-800 mb-3">1.2 ระบุวันที่และเวลาที่ต้องการ</h3>
         <div className="grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto_1fr_1fr] gap-2 items-end">
           <div>
-            <label className="label">วันที่เริ่มต้น <span className="text-red-500">*</span></label>
-            <input type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)} className="input-field" />
+            <label htmlFor="req-start-date" className="label">วันที่เริ่มต้น <span className="text-red-500">*</span></label>
+            <input id="req-start-date" type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)} className="input-field" />
           </div>
           <div>
-            <label className="label">เวลาเริ่มต้น <span className="text-red-500">*</span></label>
-            <input type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
+            <label htmlFor="req-start-time" className="label">เวลาเริ่มต้น <span className="text-red-500">*</span></label>
+            <input id="req-start-time" type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
           </div>
           <span className="hidden sm:block text-xl text-gray-600 text-center px-1 pb-2.5">ถึง</span>
           <div>
-            <label className="label">วันที่สิ้นสุด <span className="text-red-500">*</span></label>
-            <input type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)} className="input-field" />
+            <label htmlFor="req-end-date" className="label">วันที่สิ้นสุด <span className="text-red-500">*</span></label>
+            <input id="req-end-date" type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)} className="input-field" />
           </div>
           <div>
-            <label className="label">เวลาสิ้นสุด <span className="text-red-500">*</span></label>
-            <input type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
+            <label htmlFor="req-end-time" className="label">เวลาสิ้นสุด <span className="text-red-500">*</span></label>
+            <input id="req-end-time" type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
           </div>
         </div>
-        {errors.datetime && <p className="text-lg text-red-500 mt-1">{errors.datetime}</p>}
+        {errors.datetime && <p role="alert" className="text-lg text-red-600 mt-1">{errors.datetime}</p>}
         <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 text-navy-700 text-lg rounded-lg px-3 py-2 mt-2">
           <Info size={18} className="flex-shrink-0" />
           ช่วงเวลาที่สามารถขอข้อมูลได้ไม่เกิน {MAX_BACK_DAYS} วัน และไม่เกินครั้งละ {MAX_REQUEST_HOURS} ชั่วโมง
@@ -386,60 +391,65 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="label">วัตถุประสงค์ในการขอข้อมูล <span className="text-red-500">*</span></label>
-              <select value={form.purpose} onChange={e => set('purpose', e.target.value)} className="input-field">
+              <label htmlFor="req-purpose" className="label">วัตถุประสงค์ในการขอข้อมูล <span className="text-red-500">*</span></label>
+              <select id="req-purpose" value={form.purpose} onChange={e => set('purpose', e.target.value)} className="input-field">
                 <option value="">เลือกวัตถุประสงค์</option>
                 {PURPOSES.map(p => <option key={p} value={p}>{p}</option>)}
               </select>
-              {errors.purpose && <p className="text-lg text-red-500 mt-1">{errors.purpose}</p>}
+              {errors.purpose && <p role="alert" className="text-lg text-red-600 mt-1">{errors.purpose}</p>}
             </div>
             <div>
-              <label className="label">สถานที่เกิดเหตุ <span className="text-red-500">*</span></label>
+              <label htmlFor="req-incident-location" className="label">สถานที่เกิดเหตุ <span className="text-red-500">*</span></label>
               <input
+                id="req-incident-location"
                 value={form.incidentLocation}
                 onChange={e => set('incidentLocation', e.target.value)}
                 placeholder="ถ.บางแสนสาย 1 ใกล้แยกลงหาดวอน"
                 className="input-field"
               />
-              {errors.incidentLocation && <p className="text-lg text-red-500 mt-1">{errors.incidentLocation}</p>}
+              {errors.incidentLocation && <p role="alert" className="text-lg text-red-600 mt-1">{errors.incidentLocation}</p>}
             </div>
           </div>
 
           {form.purpose === OTHER_PURPOSE && (
             <div>
-              <label className="label">โปรดระบุวัตถุประสงค์ <span className="text-red-500">*</span></label>
+              <label htmlFor="req-purpose-other" className="label">โปรดระบุวัตถุประสงค์ <span className="text-red-500">*</span></label>
               <input
+                id="req-purpose-other"
                 value={form.purposeOther}
                 onChange={e => set('purposeOther', e.target.value)}
                 placeholder="ระบุวัตถุประสงค์ในการขอดูข้อมูลกล้อง CCTV"
                 className="input-field"
               />
-              {errors.purposeOther && <p className="text-lg text-red-500 mt-1">{errors.purposeOther}</p>}
+              {errors.purposeOther && <p role="alert" className="text-lg text-red-600 mt-1">{errors.purposeOther}</p>}
             </div>
           )}
 
           <div>
-            <label className="label">เหตุผลประกอบการขอข้อมูล <span className="text-red-500">*</span></label>
+            <label htmlFor="req-reason" className="label">เหตุผลประกอบการขอข้อมูล <span className="text-red-500">*</span></label>
             <textarea
+              id="req-reason"
               value={form.reason}
               onChange={e => set('reason', e.target.value)}
               rows={3}
               placeholder="ต้องการภาพจากกล้องวงจรปิดเพื่อใช้เป็นหลักฐานในการเคลมประกันภัย จากอุบัติเหตุรถชนกัน"
               className="input-field resize-none"
             />
-            {errors.reason && <p className="text-lg text-red-500 mt-1">{errors.reason}</p>}
+            {errors.reason && <p role="alert" className="text-lg text-red-600 mt-1">{errors.reason}</p>}
           </div>
 
           <div className="sm:max-w-md">
-            <label className="label">อีเมลสำหรับติดต่อ <span className="text-red-500">*</span></label>
+            <label htmlFor="req-contact-email" className="label">อีเมลสำหรับติดต่อ <span className="text-red-500">*</span></label>
             <input
+              id="req-contact-email"
               type="email"
+              autoComplete="email"
               value={form.contactEmail}
               onChange={e => set('contactEmail', e.target.value)}
               placeholder="you@example.com"
               className="input-field"
             />
-            {errors.contactEmail && <p className="text-lg text-red-500 mt-1">{errors.contactEmail}</p>}
+            {errors.contactEmail && <p role="alert" className="text-lg text-red-600 mt-1">{errors.contactEmail}</p>}
           </div>
         </div>
       </section>
@@ -494,6 +504,7 @@ function Step2Upload({ docs, setDocs, onNext, onBack }: {
                     onClick={() => setDocs(d => ({ ...d, [key]: undefined }))}
                     className="text-red-500 hover:text-red-600 p-1"
                     title="ลบไฟล์"
+                    aria-label={`ลบไฟล์ ${fileName}`}
                   >
                     <Trash2 size={22} />
                   </button>
@@ -520,7 +531,7 @@ function Step2Upload({ docs, setDocs, onNext, onBack }: {
         })}
       </div>
 
-      {error && <p className="text-xl text-red-500">{error}</p>}
+      {error && <p role="alert" className="text-xl text-red-600">{error}</p>}
 
       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
         <button onClick={onBack} className="btn-secondary flex items-center gap-2">
@@ -742,6 +753,7 @@ export function CctvRequestPage() {
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
+      <SkipLink />
       <Navbar />
       <CitizenHero title="ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV">
         <WizardStepper step={step} />
@@ -752,7 +764,7 @@ export function CctvRequestPage() {
           <ServiceSidebar active="request" />
         </aside>
 
-        <main className="min-w-0">{content}</main>
+        <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none">{content}</main>
 
         <aside className="space-y-4">
           <SummaryCard form={form} docs={docs} />
