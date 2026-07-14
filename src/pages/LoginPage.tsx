@@ -11,6 +11,7 @@ export function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotSending, setForgotSending] = useState(false);
@@ -110,7 +111,16 @@ export function LoginPage() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={e => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 rounded border-gray-300 accent-[#1b3a6b] cursor-pointer"
+                />
+                จำฉันไว้
+              </label>
               <button
                 type="button"
                 onClick={() => setShowForgot(true)}
