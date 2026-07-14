@@ -10,7 +10,7 @@ export function CitizenHero({ title, children }: { title: string; children?: Rea
     <div className="relative bg-navy-700 overflow-hidden">
       <div
         className="absolute inset-0 opacity-60 bg-cover bg-center"
-        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}background01.png)` }}
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}background01.webp)` }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-navy-700/95 via-navy-700/70 to-navy-500/30" />
       <div className="relative max-w-[1400px] mx-auto px-4 py-8 flex flex-col lg:flex-row lg:items-center gap-6">

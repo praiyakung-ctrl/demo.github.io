@@ -58,7 +58,7 @@ export function Navbar() {
       {/* Logo + Title */}
       <div className="flex items-center gap-3 min-w-0 flex-1">
         <img
-          src={`${import.meta.env.BASE_URL}logo-obcj.png`}
+          src={`${import.meta.env.BASE_URL}logo-obcj.svg`}
           alt="อบจ.ชลบุรี"
           className="h-20 w-20 object-contain flex-shrink-0 drop-shadow-lg"
           onError={(e) => {
