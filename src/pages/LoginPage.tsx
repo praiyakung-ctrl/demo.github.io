@@ -44,7 +44,7 @@ export function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo + Title */}
         <div className="text-center mb-8">
-          <img src={`${import.meta.env.BASE_URL}logo-obcj.svg`} alt="อบจ.ชลบุรี" className="h-32 w-32 mx-auto mb-4 object-contain" />
+          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="อบจ.ชลบุรี" className="h-32 w-32 mx-auto mb-4 object-contain" />
           <p className="text-white text-3xl font-bold mb-2">โครงการพัฒนาศักยภาพด้านความปลอดภัยบริเวณพื้นที่เสี่ยงภัยและเส้นทางคมนาคม บริเวณพื้นที่สาธารณะเสี่ยงภัยชุมชนในพื้นที่จังหวัดชลบุรี</p>
           <h1 className="text-white text-4xl font-bold leading-tight mb-2">ระบบฐานข้อมูลเพื่อการเข้าถึง</h1>
           <p className="text-blue-200 text-4xl font-bold">Data Integration and End Users</p>
