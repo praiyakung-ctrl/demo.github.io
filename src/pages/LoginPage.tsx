@@ -6,12 +6,12 @@ import { Modal } from '../components/Modal';
 
 export function LoginPage() {
   const { login, loginAsGoogle, user } = useAuth();
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(() => localStorage.getItem('remembered_username') ?? '');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(() => localStorage.getItem('remembered_username') !== null);
   const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotSending, setForgotSending] = useState(false);
@@ -28,7 +28,13 @@ export function LoginPage() {
     setError('');
     await new Promise(r => setTimeout(r, 500));
     const ok = login(username, password);
-    if (!ok) {
+    if (ok) {
+      if (rememberMe) {
+        localStorage.setItem('remembered_username', username);
+      } else {
+        localStorage.removeItem('remembered_username');
+      }
+    } else {
       setError('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
     }
     setLoading(false);
