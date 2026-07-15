@@ -5,17 +5,9 @@ import {
 } from 'lucide-react';
 import type { Camera } from '../types';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
-import { formatThaiDate, formatThaiDateTimeSec } from '../utils/formatDate';
+import { formatLastUpdate } from '../utils/formatDate';
 import { useDialog } from '../hooks/useDialog';
 import { cameraImage, districtOf } from '../utils/cameraDisplay';
-
-function formatLastUpdate(lastUpdate: string): string {
-  // cameras.json stores time-only strings like "09:41:21"
-  if (/^\d{2}:\d{2}(:\d{2})?$/.test(lastUpdate)) {
-    return `${formatThaiDate(new Date().toISOString())} ${lastUpdate}`;
-  }
-  return formatThaiDateTimeSec(lastUpdate);
-}
 
 function overlayClock(d: Date): string {
   const p = (n: number) => String(n).padStart(2, '0');

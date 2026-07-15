@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass, Wifi } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
@@ -10,7 +10,7 @@ import camerasData from '../data/cameras.json';
 import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
 import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
-import { formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
+import { formatLastUpdate, formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
 import { pinIcon, pinSvg } from '../utils/mapPin';
 import { useDialog } from '../hooks/useDialog';
 
@@ -356,9 +356,18 @@ export function MapPage() {
                       )}
                     </div>
 
+                    {/* NT MPLS link */}
+                    <div className="flex items-start gap-2 mb-3">
+                      <Wifi size={18} className="text-navy-400 mt-0.5 flex-shrink-0" />
+                      <div className="text-base text-gray-600 leading-snug">
+                        <p className="font-bold text-gray-700">โครงข่าย NT MPLS</p>
+                        <p>LPR {cam.lprMbps} Mbps · Unity 8 {cam.unityMbps} Mbps · รวม {cam.lprMbps + cam.unityMbps} Mbps</p>
+                      </div>
+                    </div>
+
                     {/* Last update */}
                     <p className="text-sm text-gray-400 mb-3">
-                      อัปเดต: {cam.lastUpdate ? formatThaiDateTimeSec(cam.lastUpdate) : '—'}
+                      อัปเดต: {cam.lastUpdate ? formatLastUpdate(cam.lastUpdate) : '—'}
                     </p>
 
                     {/* Live buttons */}

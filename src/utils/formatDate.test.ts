@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  formatLastUpdate,
   formatThaiDate,
   formatThaiDateTime,
   formatThaiDateTimeSec,
@@ -29,6 +30,17 @@ describe('formatDate', () => {
 
   it('formatTime returns hh:mm น. only', () => {
     expect(formatTime(NOON)).toBe('12:30 น.');
+  });
+
+  describe('formatLastUpdate', () => {
+    it("prefixes today's Thai date for time-only strings", () => {
+      const today = formatThaiDate(new Date().toISOString());
+      expect(formatLastUpdate('09:41:21')).toBe(`${today} 09:41:21`);
+    });
+
+    it('formats full ISO strings as Thai datetime', () => {
+      expect(formatLastUpdate(NOON)).toBe('15/07/2569 12:30:45 น.');
+    });
   });
 
   describe('timeAgo', () => {

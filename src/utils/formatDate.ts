@@ -34,6 +34,15 @@ export function formatTime(isoString: string): string {
   return `${hour}:${min} น.`;
 }
 
+/* cameras.json stores time-only strings like "09:41:21" — prefix today's date;
+   full ISO strings format as-is */
+export function formatLastUpdate(lastUpdate: string): string {
+  if (/^\d{2}:\d{2}(:\d{2})?$/.test(lastUpdate)) {
+    return `${formatThaiDate(new Date().toISOString())} ${lastUpdate}`;
+  }
+  return formatThaiDateTimeSec(lastUpdate);
+}
+
 export function timeAgo(isoString: string): string {
   const now = new Date();
   const past = new Date(isoString);
