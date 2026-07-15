@@ -17,6 +17,9 @@ export interface Camera {
   direction: string;
   lastUpdate: string;
   currentEvent: EventType;
+  /* NT MPLS link bandwidth per camera */
+  lprMbps: number;
+  unityMbps: number;
 }
 
 export interface CctvEvent {

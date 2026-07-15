@@ -1,14 +1,35 @@
 import { useState } from 'react';
-import { Download, FileText, BarChart2, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight } from 'lucide-react';
+import { Download, FileText, BarChart2, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import { Layout } from '../components/Layout';
 import lprData from '../data/lpr.json';
-import type { MonthlyEventData, LprRoad } from '../types';
+import camerasData from '../data/cameras.json';
+import type { Camera, MonthlyEventData, LprRoad } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 
 const monthly = lprData.monthly as MonthlyEventData[];
+
+/* NT MPLS link summary per installation site, in CAM-ID order.
+   LPR/Unity 8 are per-camera rates; Total Link = cameras × (LPR + Unity 8). */
+const mplsSites = (() => {
+  const sites: { location: string; count: number; lprMbps: number; unityMbps: number; totalMbps: number }[] = [];
+  for (const cam of camerasData as Camera[]) {
+    let site = sites.find(s => s.location === cam.location);
+    if (!site) {
+      site = { location: cam.location, count: 0, lprMbps: cam.lprMbps, unityMbps: cam.unityMbps, totalMbps: 0 };
+      sites.push(site);
+    }
+    site.count += 1;
+    site.totalMbps += cam.lprMbps + cam.unityMbps;
+  }
+  return sites;
+})();
+const mplsTotal = {
+  count: mplsSites.reduce((s, x) => s + x.count, 0),
+  totalMbps: mplsSites.reduce((s, x) => s + x.totalMbps, 0),
+};
 const roads = lprData.roads as LprRoad[];
 const entries = lprData.entries as { id: string; plate: string; road: string; timestamp: string; direction: string; type: string }[];
 
@@ -239,6 +260,62 @@ export function ReportsPage() {
               </BarChart>
             </ResponsiveContainer>
           </div>
+        </div>
+
+        {/* Section: NT MPLS network links */}
+        <div className="card overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            <div className="flex items-center gap-2">
+              <Wifi size={24} className="text-navy-700" />
+              <h3 className="font-bold text-gray-900 text-xl">โครงข่ายสื่อสาร NT MPLS รายจุดติดตั้ง</h3>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => handleExport('NT MPLS', 'PDF')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
+                <Download size={18} /> PDF
+              </button>
+              <button onClick={() => handleExport('NT MPLS', 'Excel')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
+                <Download size={18} /> Excel
+              </button>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-xl">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5">จุดติดตั้ง</th>
+                  <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">สถานที่ติดตั้งเสาและกล้อง</th>
+                  <th scope="col" className="text-right text-lg font-semibold text-gray-600 px-4 py-2.5">จำนวนกล้อง</th>
+                  <th scope="col" className="text-right text-lg font-semibold text-gray-600 px-4 py-2.5">LPR (Mbps)</th>
+                  <th scope="col" className="text-right text-lg font-semibold text-gray-600 px-4 py-2.5">Unity 8 (Mbps)</th>
+                  <th scope="col" className="text-right text-lg font-semibold text-gray-600 px-4 py-2.5">Total Link NT MPLS (Mbps)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mplsSites.map((site, i) => (
+                  <tr key={site.location} className="border-t border-gray-50 hover:bg-gray-50">
+                    <td className="px-4 py-2.5 text-center text-gray-700">{i + 1}</td>
+                    <td className="px-4 py-2.5 font-medium text-gray-900">{site.location}</td>
+                    <td className="px-4 py-2.5 text-right text-gray-700">{site.count}</td>
+                    <td className="px-4 py-2.5 text-right text-gray-700">{site.lprMbps}</td>
+                    <td className="px-4 py-2.5 text-right text-gray-700">{site.unityMbps}</td>
+                    <td className="px-4 py-2.5 text-right font-bold text-gray-900">{site.totalMbps}</td>
+                  </tr>
+                ))}
+                <tr className="border-t-2 border-gray-200 bg-gray-50 font-bold">
+                  <td className="px-4 py-2.5" />
+                  <td className="px-4 py-2.5 text-gray-900">รวม</td>
+                  <td className="px-4 py-2.5 text-right text-gray-900">{mplsTotal.count}</td>
+                  <td className="px-4 py-2.5" />
+                  <td className="px-4 py-2.5" />
+                  <td className="px-4 py-2.5 text-right text-gray-900">{mplsTotal.totalMbps}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="px-4 pb-4 pt-2 text-base text-gray-500">
+            อัตรารับส่งข้อมูลต่อกล้อง: LPR 6 Mbps และ Unity 8 จำนวน 6 Mbps — Total Link = จำนวนกล้อง × 12 Mbps
+          </p>
         </div>
 
         {/* Section 2: LPR */}

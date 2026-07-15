@@ -13,6 +13,7 @@ const EMPTY: Omit<Camera, 'id'> = {
   name: '', location: '', lat: 13.36, lng: 100.98,
   type: 'Fixed', organization: '', rtspUrl: '', status: 'Online',
   direction: '', lastUpdate: new Date().toISOString(), currentEvent: 'normal',
+  lprMbps: 6, unityMbps: 6,
 };
 
 export function AdminCamerasPage() {
@@ -266,9 +267,21 @@ export function AdminCamerasPage() {
               <Wifi size={16} className="text-orange-600" />
               <span className="text-sm font-bold text-orange-700">การเชื่อมต่อ</span>
             </div>
-            <div className="p-4">
-              <label htmlFor="cam-rtsp" className="text-sm font-bold text-navy-700 mb-1 block">RTSP URL (Mock)</label>
-              <input id="cam-rtsp" value={form.rtspUrl} onChange={e => set('rtspUrl', e.target.value)} placeholder="rtsp://mock-server/cam-xxx" className="input-field font-mono text-sm" />
+            <div className="p-4 space-y-3">
+              <div>
+                <label htmlFor="cam-rtsp" className="text-sm font-bold text-navy-700 mb-1 block">RTSP URL (Mock)</label>
+                <input id="cam-rtsp" value={form.rtspUrl} onChange={e => set('rtspUrl', e.target.value)} placeholder="rtsp://mock-server/cam-xxx" className="input-field font-mono text-sm" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="cam-lpr-mbps" className="text-sm font-bold text-navy-700 mb-1 block">LPR (Mbps)</label>
+                  <input id="cam-lpr-mbps" type="number" min={0} value={form.lprMbps} onChange={e => set('lprMbps', Number(e.target.value))} className="input-field" />
+                </div>
+                <div>
+                  <label htmlFor="cam-unity-mbps" className="text-sm font-bold text-navy-700 mb-1 block">Unity 8 (Mbps)</label>
+                  <input id="cam-unity-mbps" type="number" min={0} value={form.unityMbps} onChange={e => set('unityMbps', Number(e.target.value))} className="input-field" />
+                </div>
+              </div>
             </div>
           </div>
 
