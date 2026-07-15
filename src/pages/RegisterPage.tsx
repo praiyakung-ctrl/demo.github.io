@@ -31,6 +31,11 @@ const COLLECTED_DATA = [
   'ประเภทผู้ใช้งาน และวัตถุประสงค์การใช้งาน',
 ];
 
+/* Red asterisk for required fields */
+function Req() {
+  return <span className="text-red-600" aria-hidden="true"> *</span>;
+}
+
 interface ProfileForm {
   name: string;
   address: string;
@@ -185,35 +190,35 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="reg-name" className="label">ชื่อ-นามสกุล *</label>
+                  <label htmlFor="reg-name" className="label">ชื่อ-นามสกุล<Req /></label>
                   <input id="reg-name" type="text" value={form.name} onChange={e => set({ name: e.target.value })} placeholder="กรอกชื่อ-นามสกุล" className="input-field" required />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-address" className="label">ที่อยู่ *</label>
+                  <label htmlFor="reg-address" className="label">ที่อยู่<Req /></label>
                   <textarea id="reg-address" value={form.address} onChange={e => set({ address: e.target.value })} placeholder="บ้านเลขที่ หมู่ ซอย ถนน ตำบล/แขวง อำเภอ/เขต" rows={2} className="input-field" required />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="reg-province" className="label">จังหวัด *</label>
+                    <label htmlFor="reg-province" className="label">จังหวัด<Req /></label>
                     <select id="reg-province" value={form.province} onChange={e => set({ province: e.target.value })} className="input-field" required>
                       {THAI_PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="reg-postal" className="label">รหัสไปรษณีย์ *</label>
+                    <label htmlFor="reg-postal" className="label">รหัสไปรษณีย์<Req /></label>
                     <input id="reg-postal" type="text" inputMode="numeric" pattern="[0-9]{5}" title="รหัสไปรษณีย์ 5 หลัก" value={form.postalCode} onChange={e => set({ postalCode: e.target.value })} placeholder="เช่น 20000" className="input-field" required />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="reg-phone" className="label">เบอร์โทรศัพท์มือถือ *</label>
+                  <label htmlFor="reg-phone" className="label">เบอร์โทรศัพท์มือถือ<Req /></label>
                   <input id="reg-phone" type="tel" inputMode="numeric" pattern="0[0-9]{9}" title="เบอร์มือถือ 10 หลัก ขึ้นต้นด้วย 0" value={form.phone} onChange={e => set({ phone: e.target.value })} placeholder="เช่น 0812345678" className="input-field" required />
                 </div>
 
                 <div>
-                  <label htmlFor="reg-type" className="label">ประเภทผู้ใช้งาน *</label>
+                  <label htmlFor="reg-type" className="label">ประเภทผู้ใช้งาน<Req /></label>
                   <select id="reg-type" value={form.memberType} onChange={e => set({ memberType: e.target.value as MemberType })} className="input-field" required>
                     <option value="" disabled>เลือกประเภทผู้ใช้งาน</option>
                     {MEMBER_TYPE_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
@@ -221,7 +226,7 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="reg-purpose" className="label">วัตถุประสงค์การใช้งาน *</label>
+                  <label htmlFor="reg-purpose" className="label">วัตถุประสงค์การใช้งาน<Req /></label>
                   <select id="reg-purpose" value={form.purpose} onChange={e => set({ purpose: e.target.value })} className="input-field" required>
                     <option value="" disabled>เลือกวัตถุประสงค์</option>
                     {MEMBER_PURPOSE_OPTIONS.map(p => <option key={p} value={p}>{p}</option>)}
@@ -230,7 +235,7 @@ export function RegisterPage() {
 
                 {form.purpose === OTHER && (
                   <div>
-                    <label htmlFor="reg-purpose-other" className="label">โปรดระบุวัตถุประสงค์ *</label>
+                    <label htmlFor="reg-purpose-other" className="label">โปรดระบุวัตถุประสงค์<Req /></label>
                     <input id="reg-purpose-other" type="text" value={form.purposeOther} onChange={e => set({ purposeOther: e.target.value })} placeholder="ระบุวัตถุประสงค์การใช้งาน" className="input-field" required />
                   </div>
                 )}
