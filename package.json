@@ -1,8 +1,13 @@
 {
-  "name": "demo",
+  "name": "chonburi-cctv-data-integration-demo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Demo web application for CCTV data integration and citizen services of Chonburi Provincial Administrative Organization (Data Integration and End Users)",
+  "license": "UNLICENSED",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
