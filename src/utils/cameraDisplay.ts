@@ -2,15 +2,15 @@ import type { Camera } from '../types';
 
 /* mock live feed: dedicated images for specific cameras, otherwise cycle the 8 samples */
 const CAMERA_IMAGE_OVERRIDES: Record<string, string> = {
-  'CAM-001': 'CCTVCamera002.png',
-  'CAM-003': 'CCTVCamera003.png',
+  'CAM-001': 'CCTVCamera002.webp',
+  'CAM-003': 'CCTVCamera003.webp',
 };
 
 export function cameraImage(cam: Camera): string {
   const override = CAMERA_IMAGE_OVERRIDES[cam.id];
   if (override) return `${import.meta.env.BASE_URL}${override}`;
   const n = ((parseInt(cam.id.slice(4), 10) || 1) - 1) % 8 + 1;
-  return `${import.meta.env.BASE_URL}camera${String(n).padStart(3, '0')}.jpg`;
+  return `${import.meta.env.BASE_URL}camera${String(n).padStart(3, '0')}.webp`;
 }
 
 const DISTRICTS: [string, string][] = [

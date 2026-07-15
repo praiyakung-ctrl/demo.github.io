@@ -19,6 +19,7 @@ jobs:
           node-version: 20
       - run: npm install --legacy-peer-deps
       - run: npm run lint
+      - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

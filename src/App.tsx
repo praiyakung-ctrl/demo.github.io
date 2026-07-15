@@ -1,16 +1,28 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { loadA11ySettings } from './utils/a11ySettings';
 import { LoginPage } from './pages/LoginPage';
-import { MapPage } from './pages/MapPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { CitizenPortalPage } from './pages/CitizenPortalPage';
-import { CctvRequestPage } from './pages/CctvRequestPage';
-import { AdminCamerasPage } from './pages/AdminCamerasPage';
-import { AdminUsersPage } from './pages/AdminUsersPage';
-import { ReportsPage } from './pages/ReportsPage';
 import type { UserRole } from './types';
+
+/* Route-based code splitting: every page after login loads as its own chunk,
+   so the initial bundle stays small. LoginPage stays eager — it is the first
+   page every user sees. */
+const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
+const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
+const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m => ({ default: m.CitizenPortalPage })));
+const CctvRequestPage = lazy(() => import('./pages/CctvRequestPage').then(m => ({ default: m.CctvRequestPage })));
+const AdminCamerasPage = lazy(() => import('./pages/AdminCamerasPage').then(m => ({ default: m.AdminCamerasPage })));
+const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
+const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
+
+function PageLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50" role="status">
+      <p className="text-xl text-gray-500">กำลังโหลด...</p>
+    </div>
+  );
+}
 
 function RequireAuth({ children, roles }: { children: React.ReactNode; roles?: UserRole[] }) {
   const { user } = useAuth();
@@ -81,7 +93,9 @@ function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
-        <AppRoutes />
+        <Suspense fallback={<PageLoading />}>
+          <AppRoutes />
+        </Suspense>
       </AuthProvider>
     </BrowserRouter>
   );

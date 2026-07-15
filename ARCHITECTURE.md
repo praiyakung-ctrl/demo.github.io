@@ -150,6 +150,7 @@ flowchart LR
 - Route ที่ไม่ระบุ `roles` (เช่น `/portal`) อนุญาตทุกบทบาทที่ Login แล้ว
 - `DefaultRedirect` (path `/`) ส่งผู้ใช้ไปหน้าแรกตามบทบาท: citizen → `/portal`, executive → `/dashboard`, อื่น ๆ → `/map`
 - `BrowserRouter` ตั้ง `basename` จาก `import.meta.env.BASE_URL` เพื่อให้ตรงกับ `base: '/demo.github.io/'` ใน [vite.config.ts](vite.config.ts) (จำเป็นสำหรับ GitHub Pages)
+- **Code Splitting ราย Route** — ทุกหน้ายกเว้น `LoginPage` โหลดแบบ `React.lazy` (แยก chunk ต่อหน้า ครอบด้วย `Suspense`) ทำให้ bundle แรกเหลือ ~205 kB จากเดิม ~985 kB — ไลบรารีหนักอย่าง Recharts/Leaflet ถูกโหลดเฉพาะเมื่อเข้าหน้าที่ใช้จริง
 
 ---
 
@@ -293,4 +294,4 @@ flowchart LR
 | ภาพกล้อง Live | ภาพนิ่งจำลอง | Streaming gateway (เช่น RTSP → HLS/WebRTC) |
 | ความยินยอม PDPA | เก็บใน localStorage รายเบราว์เซอร์ | บันทึกฝั่ง Server ผูกกับบัญชีผู้ใช้ พร้อม Audit log |
 | การแจ้งเตือนเหตุการณ์ | ข้อมูลนิ่งจาก JSON | WebSocket / Server-Sent Events จากระบบวิเคราะห์ภาพ |
-| ขนาด Bundle | Single chunk (~980 kB min) | Code splitting ราย Route (`React.lazy`) |
+| Test coverage | Unit test เฉพาะ `utils/` และ `AuthContext` (Vitest) | เพิ่ม Integration/E2E test (เช่น Playwright) ครอบคลุม flow สำคัญ |

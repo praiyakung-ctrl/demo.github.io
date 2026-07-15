@@ -119,6 +119,7 @@ npm run dev
 | `npm run build` | ตรวจสอบ TypeScript และ Build สำหรับ Production (ผลลัพธ์ที่ `dist/`) |
 | `npm run preview` | ทดสอบไฟล์ที่ Build แล้วในเครื่อง |
 | `npm run lint` | ตรวจสอบคุณภาพโค้ดด้วย ESLint |
+| `npm test` | รัน Unit test ด้วย Vitest |
 
 ---
 
