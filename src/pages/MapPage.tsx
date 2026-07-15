@@ -1,9 +1,11 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, Waves, Users, MapPin, Building2, Compass, Wifi } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, Wifi } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
+import { ConfirmDialog } from '../components/Modal';
+import { findReport, saveReport, savedReports } from '../utils/cameraReports';
 import { cameraImage } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -58,7 +60,7 @@ function useIsMobile(): boolean {
 }
 
 export function MapPage() {
-  const { canEdit } = useAuth();
+  const { user, canEdit } = useAuth();
   const isMobile = useIsMobile();
   const [events, setEvents] = useState<CctvEvent[]>(initialEvents);
   const [search, setSearch] = useState('');
@@ -66,6 +68,14 @@ export function MapPage() {
   const [selectedCam, setSelectedCam] = useState<Camera | null>(null);
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
+  const [reportCam, setReportCam] = useState<Camera | null>(null);
+  const [reportedIds, setReportedIds] = useState<Set<string>>(() => new Set(savedReports().map(r => r.cameraId)));
+
+  const confirmReport = () => {
+    if (!reportCam) return;
+    saveReport({ cameraId: reportCam.id, reportedBy: user?.name ?? '-', reportedAt: new Date().toISOString() });
+    setReportedIds(prev => new Set(prev).add(reportCam.id));
+  };
   const [actionNote, setActionNote] = useState('');
   const [leftPanelVisible, setLeftPanelVisible] = useState(false);
   // desktop opens the live panel by default; on mobile keep the map unobstructed
@@ -370,25 +380,49 @@ export function MapPage() {
                       อัปเดต: {cam.lastUpdate ? formatLastUpdate(cam.lastUpdate) : '—'}
                     </p>
 
-                    {/* Live buttons */}
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setLiveCam(cam)}
-                        className="flex-1 bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
-                      >
-                        <Video size={18} />
-                        ดู Live
-                      </button>
-                      {canEdit && (
+                    {cam.status === 'Online' ? (
+                      /* Live buttons — only for cameras that can actually stream */
+                      <div className="flex gap-2">
                         <button
-                          onClick={() => assignLive(cam.id)}
-                          className="flex-1 bg-white hover:bg-navy-50 text-navy-700 border border-navy-500 text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                          onClick={() => setLiveCam(cam)}
+                          className="flex-1 bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
                         >
-                          <MonitorPlay size={18} />
-                          เพิ่มเข้าจอ Live
+                          <Video size={18} />
+                          ดู Live
                         </button>
-                      )}
-                    </div>
+                        {canEdit && (
+                          <button
+                            onClick={() => assignLive(cam.id)}
+                            className="flex-1 bg-white hover:bg-navy-50 text-navy-700 border border-navy-500 text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                          >
+                            <MonitorPlay size={18} />
+                            เพิ่มเข้าจอ Live
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      /* Offline: explain the state and offer a report action instead */
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 bg-gray-100 text-gray-600 text-base font-bold px-3 py-2.5 rounded-lg">
+                          <VideoOff size={18} className="flex-shrink-0" />
+                          กล้องออฟไลน์ — ไม่สามารถดูภาพสดได้
+                        </div>
+                        {reportedIds.has(cam.id) ? (
+                          <div role="status" className="flex items-center gap-2 bg-green-50 text-green-700 text-base font-bold px-3 py-2.5 rounded-lg">
+                            <CheckCircle2 size={18} className="flex-shrink-0" />
+                            แจ้งเจ้าหน้าที่แล้ว {(() => { const r = findReport(cam.id); return r ? formatThaiDateTime(r.reportedAt) : ''; })()}
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setReportCam(cam)}
+                            className="w-full bg-amber-500 hover:bg-amber-600 text-white text-base font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                          >
+                            <Wrench size={18} />
+                            แจ้งเจ้าหน้าที่ตรวจสอบ
+                          </button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </Popup>
               </Marker>
@@ -599,6 +633,16 @@ export function MapPage() {
 
       {/* Live CCTV Modal */}
       <LiveCameraModal camera={liveCam} onClose={() => setLiveCam(null)} />
+
+      {/* Report offline camera */}
+      <ConfirmDialog
+        isOpen={reportCam !== null}
+        onClose={() => setReportCam(null)}
+        onConfirm={confirmReport}
+        title="แจ้งเจ้าหน้าที่ตรวจสอบกล้อง"
+        message={`ยืนยันการแจ้งเจ้าหน้าที่ให้ตรวจสอบกล้อง ${reportCam?.id ?? ''} (${reportCam?.location ?? ''}) ที่ออฟไลน์อยู่หรือไม่?`}
+        confirmLabel="แจ้งเจ้าหน้าที่"
+      />
 
       {/* Acknowledge Modal */}
       {ackEvent && (
