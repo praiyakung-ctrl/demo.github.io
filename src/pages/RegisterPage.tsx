@@ -45,6 +45,8 @@ interface ProfileForm {
   memberType: MemberType | '';
   purpose: string;
   purposeOther: string;
+  acceptTerms: boolean;
+  acceptPdpa: boolean;
 }
 
 export function RegisterPage() {
@@ -58,6 +60,7 @@ export function RegisterPage() {
   const [form, setForm] = useState<ProfileForm>({
     name: '', address: '', province: 'ชลบุรี', postalCode: '', phone: '',
     memberType: '', purpose: '', purposeOther: '',
+    acceptTerms: false, acceptPdpa: false,
   });
 
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
@@ -92,6 +95,8 @@ export function RegisterPage() {
       phone: form.phone,
       memberType: form.memberType,
       purpose: form.purpose === OTHER && form.purposeOther ? `อื่นๆ (${form.purposeOther})` : form.purpose,
+      acceptedTerms: form.acceptTerms,
+      acceptedPdpa: form.acceptPdpa,
       registeredAt: new Date().toISOString(),
     };
     saveMember(member);
@@ -239,6 +244,33 @@ export function RegisterPage() {
                     <input id="reg-purpose-other" type="text" value={form.purposeOther} onChange={e => set({ purposeOther: e.target.value })} placeholder="ระบุวัตถุประสงค์การใช้งาน" className="input-field" required />
                   </div>
                 )}
+
+                {/* Consent checkboxes — both required before submitting */}
+                <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg space-y-3">
+                  <label className="flex items-start gap-3 text-lg text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={form.acceptTerms}
+                      onChange={e => set({ acceptTerms: e.target.checked })}
+                      className="w-5 h-5 mt-0.5 shrink-0 rounded border-gray-300 accent-[#1b3a6b] cursor-pointer"
+                      required
+                    />
+                    <span>ข้าพเจ้ายอมรับเงื่อนไขการใช้งานระบบ<Req /></span>
+                  </label>
+                  <label className="flex items-start gap-3 text-lg text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={form.acceptPdpa}
+                      onChange={e => set({ acceptPdpa: e.target.checked })}
+                      className="w-5 h-5 mt-0.5 shrink-0 rounded border-gray-300 accent-[#1b3a6b] cursor-pointer"
+                      required
+                    />
+                    <span>
+                      ข้าพเจ้ายินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
+                      ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)<Req />
+                    </span>
+                  </label>
+                </div>
 
                 <button type="submit" disabled={submitting} className="btn-primary w-full py-3 text-xl disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? 'กำลังบันทึกข้อมูล...' : 'สมัครสมาชิก'}

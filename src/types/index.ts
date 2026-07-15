@@ -109,6 +109,8 @@ export interface CitizenMember {
   phone: string;
   memberType: MemberType;
   purpose: string;
+  acceptedTerms: boolean;
+  acceptedPdpa: boolean;
   registeredAt: string;
 }
 

@@ -13,6 +13,8 @@ const member = (over: Partial<CitizenMember> = {}): CitizenMember => ({
   phone: '0812345678',
   memberType: 'ประชาชน',
   purpose: 'ขอภาพเพื่อดำเนินคดี',
+  acceptedTerms: true,
+  acceptedPdpa: true,
   registeredAt: '2026-07-15T10:00:00.000Z',
   ...over,
 });
