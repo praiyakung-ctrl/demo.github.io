@@ -4,7 +4,7 @@ import { Eye, EyeOff, KeyRound, MailCheck, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Modal } from '../components/Modal';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
-import { PdpaConsentModal } from '../components/PdpaConsentModal';
+import { PdpaConsentBanner } from '../components/PdpaConsentBanner';
 import { hasPdpaConsent, savePdpaConsent } from '../utils/pdpaConsent';
 
 export function LoginPage() {
@@ -252,8 +252,8 @@ export function LoginPage() {
         )}
       </Modal>
 
-      {/* PDPA consent modal */}
-      <PdpaConsentModal
+      {/* PDPA consent banner */}
+      <PdpaConsentBanner
         isOpen={showPdpa}
         onAccept={() => { savePdpaConsent(); setShowPdpa(false); }}
       />
