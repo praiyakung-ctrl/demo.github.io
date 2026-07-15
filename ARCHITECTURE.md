@@ -171,6 +171,7 @@ flowchart LR
 | `auth_user` | [AuthContext.tsx](src/context/AuthContext.tsx) | ผู้ใช้ที่ Login (JSON `User`) — ทำให้ Refresh แล้วยังไม่หลุด |
 | `remembered_username` | [LoginPage.tsx](src/pages/LoginPage.tsx) | ชื่อผู้ใช้เมื่อติ๊ก "จำฉันไว้" |
 | `pdpa_consent` | [utils/pdpaConsent.ts](src/utils/pdpaConsent.ts) | `{"accepted": true, "date": "<ISO 8601>"}` |
+| `registered_members` | [utils/memberStorage.ts](src/utils/memberStorage.ts) | สมาชิกประชาชนที่สมัครผ่าน Google OAuth (JSON `CitizenMember[]`) |
 | `a11y_font_scale` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | ขนาดอักษร (100 / 112.5 / 125 %) |
 | `a11y_high_contrast` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | เปิด/ปิดโหมดคอนทราสต์สูง |
 

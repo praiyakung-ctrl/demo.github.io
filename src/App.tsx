@@ -8,6 +8,7 @@ import type { UserRole } from './types';
 /* Route-based code splitting: every page after login loads as its own chunk,
    so the initial bundle stays small. LoginPage stays eager — it is the first
    page every user sees. */
+const RegisterPage = lazy(() => import('./pages/RegisterPage').then(m => ({ default: m.RegisterPage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m => ({ default: m.CitizenPortalPage })));
@@ -43,6 +44,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/" element={<DefaultRedirect />} />
       <Route path="/map" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>

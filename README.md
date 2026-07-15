@@ -139,6 +139,7 @@ npm run dev
 | เส้นทาง (Route) | หน้า | Admin | Operator | Executive | Citizen |
 |---|---|:---:|:---:|:---:|:---:|
 | `/login` | เข้าสู่ระบบ | ✅ | ✅ | ✅ | ✅ |
+| `/register` | สมัครสมาชิกประชาชน (Google OAuth) | ✅ | ✅ | ✅ | ✅ |
 | `/map` | แผนที่กล้อง CCTV | ✅ | ✅ | ✅ | — |
 | `/dashboard` | แดชบอร์ด | ✅ | ✅ | ✅ | — |
 | `/reports` | รายงาน | ✅ | ✅ | ✅ | — |

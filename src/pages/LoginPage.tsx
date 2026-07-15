@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Eye, EyeOff, KeyRound, MailCheck, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Modal } from '../components/Modal';
@@ -180,6 +180,13 @@ export function LoginPage() {
             </svg>
             เข้าสู่ระบบด้วย Google (สำหรับประชาชน)
           </button>
+
+          <p className="mt-4 text-center text-lg text-gray-600">
+            ยังไม่มีบัญชี?{' '}
+            <Link to="/register" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+              สมัครสมาชิกสำหรับประชาชน
+            </Link>
+          </p>
 
           {/* Demo credentials */}
           <div className="mt-5 p-3 bg-gray-50 rounded-lg border border-gray-100">

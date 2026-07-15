@@ -83,6 +83,35 @@ export interface TimelineEntry {
   completed: boolean;
 }
 
+export type MemberType = 'ประชาชน' | 'นิติบุคคล' | 'หน่วยงานราชการ' | 'บริษัทประกัน' | 'ทนายความ' | 'อื่นๆ';
+
+export const MEMBER_TYPE_OPTIONS: MemberType[] = [
+  'ประชาชน', 'นิติบุคคล', 'หน่วยงานราชการ', 'บริษัทประกัน', 'ทนายความ', 'อื่นๆ',
+];
+
+export const MEMBER_PURPOSE_OPTIONS = [
+  'ขอภาพเพื่อดำเนินคดี',
+  'เคลมประกันภัย',
+  'ใช้เป็นหลักฐาน',
+  'อื่นๆ',
+] as const;
+
+/* Citizen who registered through Google OAuth on the register page */
+export interface CitizenMember {
+  id: string;
+  googleSub: string;
+  email: string;
+  name: string;
+  picture?: string;
+  address: string;
+  province: string;
+  postalCode: string;
+  phone: string;
+  memberType: MemberType;
+  purpose: string;
+  registeredAt: string;
+}
+
 export interface User {
   id: string;
   name: string;

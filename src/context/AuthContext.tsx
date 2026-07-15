@@ -6,7 +6,7 @@ import usersData from '../data/users.json';
 interface AuthContextType {
   user: User | null;
   login: (username: string, password: string) => boolean;
-  loginAsGoogle: () => void;
+  loginAsGoogle: (profile?: { name: string; email: string }) => void;
   logout: () => void;
   isAdmin: boolean;
   isOperator: boolean;
@@ -35,13 +35,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
-  const loginAsGoogle = () => {
+  const loginAsGoogle = (profile?: { name: string; email: string }) => {
     const citizen: User = {
       id: 'citizen-001',
-      name: 'ประชาชน ทดสอบ',
+      name: profile?.name ?? 'ประชาชน ทดสอบ',
       username: 'citizen',
       role: 'citizen' as UserRole,
-      email: 'citizen@gmail.com',
+      email: profile?.email ?? 'citizen@gmail.com',
       isActive: true,
     };
     setUser(citizen);
