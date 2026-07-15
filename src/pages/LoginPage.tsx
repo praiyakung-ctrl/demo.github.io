@@ -4,6 +4,8 @@ import { Eye, EyeOff, KeyRound, MailCheck, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Modal } from '../components/Modal';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
+import { PdpaConsentModal } from '../components/PdpaConsentModal';
+import { hasPdpaConsent, savePdpaConsent } from '../utils/pdpaConsent';
 
 export function LoginPage() {
   const { login, loginAsGoogle, user } = useAuth();
@@ -17,6 +19,7 @@ export function LoginPage() {
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotSending, setForgotSending] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
+  const [showPdpa, setShowPdpa] = useState(() => !hasPdpaConsent());
 
   if (user) {
     const redirect = user.role === 'executive' ? '/dashboard' : user.role === 'citizen' ? '/portal' : '/map';
@@ -248,6 +251,12 @@ export function LoginPage() {
           </form>
         )}
       </Modal>
+
+      {/* PDPA consent modal */}
+      <PdpaConsentModal
+        isOpen={showPdpa}
+        onAccept={() => { savePdpaConsent(); setShowPdpa(false); }}
+      />
     </div>
   );
 }
