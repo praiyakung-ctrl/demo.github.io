@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
 const adminItems = [
   { to: '/admin/cameras', icon: Camera, label: 'จัดการกล้อง', iconColor: 'text-pink-500',   roles: ['admin'] },
   { to: '/admin/users',   icon: Users,  label: 'จัดการผู้ใช้', iconColor: 'text-purple-500', roles: ['admin'] },
+  { to: '/admin/repairs', icon: Wrench, label: 'กล้องรอตรวจสอบ', iconColor: 'text-orange-500', roles: ['admin'] },
 ];
 
 export function Sidebar() {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, Waves, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
@@ -9,6 +9,7 @@ import eventsData from '../data/events.json';
 import requestsData from '../data/requests.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
+import { pendingReports } from '../utils/cameraReports';
 
 const allEvents = eventsData as CctvEvent[];
 const allRequests = requestsData as CitizenRequest[];
@@ -33,7 +34,7 @@ const EVENT_TYPE_ICONS = {
 } as const;
 
 export function Navbar() {
-  const { user, logout, isCitizen } = useAuth();
+  const { user, logout, isCitizen, isAdmin } = useAuth();
   const navigate = useNavigate();
   const [time, setTime] = useState(new Date());
   const [showUser, setShowUser] = useState(false);
@@ -68,9 +69,11 @@ export function Navbar() {
   }, [showNotif, showUser]);
 
   const unackEvents = allEvents.filter(e => !e.isAcknowledged);
+  // admins also see cameras reported for inspection (read fresh — dropdown toggles re-render)
+  const repairReports = isAdmin ? pendingReports() : [];
   // citizens are notified about their CCTV request status, not CCTV events
   const activeRequests = myRequests.filter(r => r.status !== 'ได้รับแล้ว' && r.status !== 'ปฏิเสธ');
-  const unackCount = isCitizen ? activeRequests.length : unackEvents.length;
+  const unackCount = isCitizen ? activeRequests.length : unackEvents.length + repairReports.length;
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -197,6 +200,31 @@ export function Navbar() {
                   {unackCount} รายการ
                 </span>
               </div>
+
+              {/* Cameras reported for inspection (admin only) */}
+              {repairReports.length > 0 && (
+                <div className="border-b border-amber-100">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-amber-50">
+                    <Wrench size={14} className="text-amber-600" />
+                    <span className="text-xs font-bold text-amber-700">กล้องรอตรวจสอบ ({repairReports.length})</span>
+                  </div>
+                  {repairReports.slice(0, 5).map(rep => (
+                    <button
+                      key={`${rep.cameraId}-${rep.reportedAt}`}
+                      onClick={() => { setShowNotif(false); navigate('/admin/repairs'); }}
+                      className="w-full text-left flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-amber-50/60 transition-colors"
+                    >
+                      <Wrench size={18} className="mt-0.5 flex-shrink-0 text-amber-500" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-900">
+                          {rep.cameraId} — {rep.note || 'ไม่ระบุอาการ'}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-0.5">แจ้งโดย {rep.reportedBy} · {timeAgo(rep.reportedAt)}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="max-h-72 overflow-y-auto">
                 {unackEvents.length === 0 ? (

@@ -4,8 +4,8 @@ import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, X, ChevronLeft
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
-import { ConfirmDialog } from '../components/Modal';
-import { findReport, saveReport, savedReports } from '../utils/cameraReports';
+import { Modal } from '../components/Modal';
+import { findPendingReport, pendingReports, saveReport } from '../utils/cameraReports';
 import { cameraImage } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -69,12 +69,26 @@ export function MapPage() {
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [reportCam, setReportCam] = useState<Camera | null>(null);
-  const [reportedIds, setReportedIds] = useState<Set<string>>(() => new Set(savedReports().map(r => r.cameraId)));
+  const [reportNote, setReportNote] = useState('');
+  const [reportedIds, setReportedIds] = useState<Set<string>>(() => new Set(pendingReports().map(r => r.cameraId)));
 
-  const confirmReport = () => {
+  const closeReport = () => {
+    setReportCam(null);
+    setReportNote('');
+  };
+
+  const confirmReport = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!reportCam) return;
-    saveReport({ cameraId: reportCam.id, reportedBy: user?.name ?? '-', reportedAt: new Date().toISOString() });
+    saveReport({
+      cameraId: reportCam.id,
+      reportedBy: user?.name ?? '-',
+      reportedAt: new Date().toISOString(),
+      note: reportNote.trim() || undefined,
+      status: 'pending',
+    });
     setReportedIds(prev => new Set(prev).add(reportCam.id));
+    closeReport();
   };
   const [actionNote, setActionNote] = useState('');
   const [leftPanelVisible, setLeftPanelVisible] = useState(false);
@@ -410,7 +424,7 @@ export function MapPage() {
                         {reportedIds.has(cam.id) ? (
                           <div role="status" className="flex items-center gap-2 bg-green-50 text-green-700 text-base font-bold px-3 py-2.5 rounded-lg">
                             <CheckCircle2 size={18} className="flex-shrink-0" />
-                            แจ้งเจ้าหน้าที่แล้ว {(() => { const r = findReport(cam.id); return r ? formatThaiDateTime(r.reportedAt) : ''; })()}
+                            แจ้งเจ้าหน้าที่แล้ว {(() => { const r = findPendingReport(cam.id); return r ? formatThaiDateTime(r.reportedAt) : ''; })()}
                           </div>
                         ) : (
                           <button
@@ -635,14 +649,35 @@ export function MapPage() {
       <LiveCameraModal camera={liveCam} onClose={() => setLiveCam(null)} />
 
       {/* Report offline camera */}
-      <ConfirmDialog
+      <Modal
         isOpen={reportCam !== null}
-        onClose={() => setReportCam(null)}
-        onConfirm={confirmReport}
+        onClose={closeReport}
         title="แจ้งเจ้าหน้าที่ตรวจสอบกล้อง"
-        message={`ยืนยันการแจ้งเจ้าหน้าที่ให้ตรวจสอบกล้อง ${reportCam?.id ?? ''} (${reportCam?.location ?? ''}) ที่ออฟไลน์อยู่หรือไม่?`}
-        confirmLabel="แจ้งเจ้าหน้าที่"
-      />
+        size="sm"
+        icon={<Wrench size={20} className="text-white" />}
+      >
+        <form onSubmit={confirmReport} className="space-y-4">
+          <p className="text-lg text-gray-700">
+            กล้อง <span className="font-bold text-navy-700">{reportCam?.id}</span>
+            {' '}({reportCam?.location}) ออฟไลน์อยู่ — ระบบจะส่งเรื่องให้เจ้าหน้าที่ตรวจสอบ
+          </p>
+          <div>
+            <label htmlFor="report-note" className="label">อาการเสีย / หมายเหตุ (ถ้ามี)</label>
+            <textarea
+              id="report-note"
+              value={reportNote}
+              onChange={e => setReportNote(e.target.value)}
+              placeholder="เช่น ภาพไม่ขึ้น สัญญาณหลุดเป็นช่วง ๆ เสาไฟดับ"
+              rows={3}
+              className="input-field"
+            />
+          </div>
+          <div className="flex gap-3 justify-end">
+            <button type="button" onClick={closeReport} className="btn-secondary text-lg">ยกเลิก</button>
+            <button type="submit" className="btn-primary text-lg">แจ้งเจ้าหน้าที่</button>
+          </div>
+        </form>
+      </Modal>
 
       {/* Acknowledge Modal */}
       {ackEvent && (

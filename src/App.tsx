@@ -15,6 +15,7 @@ const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m 
 const CctvRequestPage = lazy(() => import('./pages/CctvRequestPage').then(m => ({ default: m.CctvRequestPage })));
 const AdminCamerasPage = lazy(() => import('./pages/AdminCamerasPage').then(m => ({ default: m.AdminCamerasPage })));
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
+const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m => ({ default: m.AdminRepairsPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 
 function PageLoading() {
@@ -79,6 +80,11 @@ function AppRoutes() {
       <Route path="/admin/users" element={
         <RequireAuth roles={['admin']}>
           <AdminUsersPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/repairs" element={
+        <RequireAuth roles={['admin']}>
+          <AdminRepairsPage />
         </RequireAuth>
       } />
       <Route path="*" element={<Navigate to="/" replace />} />
