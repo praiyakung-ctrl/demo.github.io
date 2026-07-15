@@ -277,6 +277,7 @@ flowchart LR
 - `npm run build` รัน **TypeScript type-check (`tsc -b`) ก่อนเสมอ** — Type error ทำให้ Build fail
 - ค่า `base: '/demo.github.io/'` ใน `vite.config.ts` ต้องตรงกับชื่อ Repository และถูกส่งต่อไปเป็น `basename` ของ Router โดยอัตโนมัติผ่าน `import.meta.env.BASE_URL`
 - ไฟล์ Static (โลโก้, ภาพพื้นหลัง) อ้างอิงผ่าน `import.meta.env.BASE_URL` เช่นกัน เพื่อให้ทำงานได้ทั้ง local และ Pages
+- **SPA Deep-link Fallback** — GitHub Pages ไม่รู้จัก Route ฝั่ง Client ดังนั้น [public/404.html](public/404.html) จะรับทุก path ที่ไม่มีไฟล์จริง แล้ว Redirect กลับ root พร้อมเข้ารหัส path เดิมไว้ใน query string (`/map` → `/?/map`) จากนั้น script ใน [index.html](index.html) ถอดรหัสคืนด้วย `history.replaceState` ก่อน React โหลด (เทคนิค [spa-github-pages](https://github.com/rafgraph/spa-github-pages))
 
 ---
 

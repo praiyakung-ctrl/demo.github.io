@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <title>กำลังเปลี่ยนเส้นทาง…</title>
+    <script>
+      // GitHub Pages SPA fallback (spa-github-pages by rafgraph, MIT).
+      // Pages serves this file for any unknown path; redirect to the site
+      // root with the original path encoded in the query string, so the
+      // decode script in index.html can restore it before React loads.
+      // pathSegmentsToKeep = 1 keeps the repo segment (/demo.github.io).
+      var pathSegmentsToKeep = 1;
+
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
