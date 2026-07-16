@@ -296,4 +296,4 @@ flowchart LR
 | ภาพกล้อง Live | ภาพนิ่งจำลอง | Streaming gateway (เช่น RTSP → HLS/WebRTC) |
 | ความยินยอม PDPA | เก็บใน localStorage รายเบราว์เซอร์ | บันทึกฝั่ง Server ผูกกับบัญชีผู้ใช้ พร้อม Audit log |
 | การแจ้งเตือนเหตุการณ์ | ข้อมูลนิ่งจาก JSON | WebSocket / Server-Sent Events จากระบบวิเคราะห์ภาพ |
-| Test coverage | Unit test เฉพาะ `utils/` และ `AuthContext` (Vitest) | เพิ่ม Integration/E2E test (เช่น Playwright) ครอบคลุม flow สำคัญ |
+| Test coverage | Unit test (Vitest) + E2E test (Playwright ใน `e2e/` รันใน CI ก่อน deploy) | ขยาย E2E ครอบคลุมหน้า Admin/Portal เพิ่มเติม |

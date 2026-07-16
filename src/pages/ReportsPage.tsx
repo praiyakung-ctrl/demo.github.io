@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Download, FileText, BarChart2, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -8,6 +8,7 @@ import lprData from '../data/lpr.json';
 import camerasData from '../data/cameras.json';
 import type { Camera, MonthlyEventData, LprRoad } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
+import { exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
 
 const monthly = lprData.monthly as MonthlyEventData[];
 
@@ -112,8 +113,47 @@ export function ReportsPage() {
     ? monthly
     : monthly.filter((_r, i) => String(i + 1) === selectedMonth);
 
-  const handleExport = (section: string, format: string) => {
-    alert(`Export ${section} เป็น ${format} — กำลังพัฒนาฟีเจอร์นี้`);
+  const eventsRef = useRef<HTMLDivElement>(null);
+  const mplsRef = useRef<HTMLDivElement>(null);
+  const lprRef = useRef<HTMLDivElement>(null);
+  const [exporting, setExporting] = useState(false);
+
+  const activeTypes = EVENT_TYPES.filter(t => selectedTypes.has(t));
+
+  const excelRows: Record<string, (string | number)[][]> = {
+    'CCTV Events': [
+      ['เดือน', ...activeTypes.map(t => EVENT_LABELS[t]), 'รวมทั้งหมด'],
+      ...filteredMonthly.map(row => [
+        `${row.month} 2568`,
+        ...activeTypes.map(t => row[t] ?? 0),
+        EVENT_TYPES.reduce((s, t) => s + (row[t] ?? 0), 0),
+      ]),
+    ],
+    'NT MPLS': [
+      ['จุดติดตั้ง', 'สถานที่ติดตั้งเสาและกล้อง', 'จำนวนกล้อง', 'LPR (Mbps)', 'Unity 8 (Mbps)', 'Total Link NT MPLS (Mbps)'],
+      ...mplsSites.map((s, i) => [i + 1, s.location, s.count, s.lprMbps, s.unityMbps, s.totalMbps]),
+      ['', 'รวม', mplsTotal.count, '', '', mplsTotal.totalMbps],
+    ],
+    'LPR': [
+      ['อันดับ', 'ถนน', 'จำนวน (คัน/วัน)'],
+      ...roads.map((r, i) => [i + 1, r.road, r.count]),
+    ],
+  };
+
+  const handleExport = async (section: string, format: string) => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      const filename = `รายงาน-${section.replace(/\s+/g, '-')}-${todayStamp()}`;
+      if (format === 'Excel') {
+        await exportRowsToExcel(excelRows[section], section, `${filename}.xlsx`);
+      } else {
+        const el = { 'CCTV Events': eventsRef, 'NT MPLS': mplsRef, 'LPR': lprRef }[section]?.current;
+        if (el) await exportElementToPdf(el, `${filename}.pdf`);
+      }
+    } finally {
+      setExporting(false);
+    }
   };
 
   return (
@@ -182,17 +222,17 @@ export function ReportsPage() {
         </div>
 
         {/* Section 1: CCTV Events */}
-        <div className="card overflow-hidden">
+        <div ref={eventsRef} className="card overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <FileText size={24} className="text-navy-700" />
               <h3 className="font-bold text-gray-900 text-xl">รายงานเหตุการณ์ CCTV รายเดือน (2568)</h3>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => handleExport('CCTV Events', 'PDF')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('CCTV Events', 'PDF')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> PDF
               </button>
-              <button onClick={() => handleExport('CCTV Events', 'Excel')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('CCTV Events', 'Excel')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> Excel
               </button>
             </div>
@@ -263,17 +303,17 @@ export function ReportsPage() {
         </div>
 
         {/* Section: NT MPLS network links */}
-        <div className="card overflow-hidden">
+        <div ref={mplsRef} className="card overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <Wifi size={24} className="text-navy-700" />
               <h3 className="font-bold text-gray-900 text-xl">โครงข่ายสื่อสาร NT MPLS รายจุดติดตั้ง</h3>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => handleExport('NT MPLS', 'PDF')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('NT MPLS', 'PDF')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> PDF
               </button>
-              <button onClick={() => handleExport('NT MPLS', 'Excel')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('NT MPLS', 'Excel')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> Excel
               </button>
             </div>
@@ -319,17 +359,17 @@ export function ReportsPage() {
         </div>
 
         {/* Section 2: LPR */}
-        <div className="card overflow-hidden">
+        <div ref={lprRef} className="card overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <BarChart2 size={24} className="text-navy-700" />
               <h3 className="font-bold text-gray-900 text-xl">รายงาน LPR แยกถนน Top 10</h3>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => handleExport('LPR', 'PDF')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('LPR', 'PDF')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> PDF
               </button>
-              <button onClick={() => handleExport('LPR', 'Excel')} className="flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
+              <button onClick={() => handleExport('LPR', 'Excel')} disabled={exporting} className="disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 text-lg font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
                 <Download size={18} /> Excel
               </button>
             </div>

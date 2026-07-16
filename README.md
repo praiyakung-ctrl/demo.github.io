@@ -120,6 +120,7 @@ npm run dev
 | `npm run preview` | ทดสอบไฟล์ที่ Build แล้วในเครื่อง |
 | `npm run lint` | ตรวจสอบคุณภาพโค้ดด้วย ESLint |
 | `npm test` | รัน Unit test ด้วย Vitest |
+| `npm run test:e2e` | รัน E2E test ด้วย Playwright (ต้อง `npm run build` ก่อน; ครั้งแรกในเครื่องที่ไม่มี Chrome ให้รัน `npx playwright install chromium`) |
 
 ---
 
