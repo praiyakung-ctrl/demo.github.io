@@ -109,7 +109,7 @@ export function AdminCamerasPage() {
               <table className="w-full text-xl">
                 <thead>
                   <tr className="bg-navy-700">
-                    {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ทิศทาง', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
+                    {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ทิศทาง', 'โครงข่าย NT MPLS', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
                       <th key={h} scope="col" className="text-left text-xl font-bold text-white px-4 py-3">{h}</th>
                     ))}
                   </tr>
@@ -153,6 +153,16 @@ export function AdminCamerasPage() {
                         <div className="flex items-center gap-1.5">
                           <Compass size={19} className="text-gray-400 flex-shrink-0" />
                           <span className="text-gray-700 text-lg">{cam.direction || '—'}</span>
+                        </div>
+                      </td>
+                      {/* NT MPLS link */}
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-1.5">
+                          <Wifi size={19} className="text-navy-400 flex-shrink-0" />
+                          <div>
+                            <p className="text-lg font-bold text-navy-700 whitespace-nowrap">รวม {cam.lprMbps + cam.unityMbps} Mbps</p>
+                            <p className="text-sm text-gray-500 whitespace-nowrap">LPR {cam.lprMbps} · Unity 8 {cam.unityMbps}</p>
+                          </div>
                         </div>
                       </td>
                       {/* Status */}
