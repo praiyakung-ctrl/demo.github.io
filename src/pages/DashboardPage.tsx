@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Camera, AlertTriangle, Users, Car, TrendingUp, FileDown, FileSpreadsheet, CheckCircle, Crosshair, ParkingSquare, Waves } from 'lucide-react';
+import { Camera, AlertTriangle, Users, Car, TrendingUp, FileDown, FileSpreadsheet, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line,
@@ -88,6 +88,23 @@ function SummaryCard({ icon: Icon, label, value, sub, gradient, iconBg }: {
       </div>
       <p className="text-6xl font-extrabold text-white leading-none">{value}</p>
       {sub && <div className="text-lg font-semibold text-white">{sub}</div>}
+    </div>
+  );
+}
+
+/* Card section header: icon in a navy square on a light-blue strip */
+function SectionHeader({ icon: Icon, title, action }: {
+  icon: React.ElementType; title: string; action?: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2 -mx-4 -mt-4 mb-3 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100 rounded-t-xl">
+      <div className="flex items-center gap-2.5">
+        <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <Icon size={20} className="text-white" />
+        </div>
+        <h3 className="font-extrabold text-navy-700 text-2xl">{title}</h3>
+      </div>
+      {action}
     </div>
   );
 }
@@ -223,7 +240,7 @@ export function DashboardPage() {
         {/* Charts row 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <div className="card p-4 lg:col-span-3">
-            <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)</h3>
+            <SectionHeader icon={BarChart3} title="เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)" />
             <div role="img" aria-label="กราฟแท่งเหตุการณ์ CCTV รายเดือน แยกตามประเภท ข้อมูลเดียวกับตารางสรุปเหตุการณ์รายเดือนด้านล่าง">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={monthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
@@ -243,7 +260,7 @@ export function DashboardPage() {
           </div>
 
           <div className="card p-4 lg:col-span-2">
-            <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">สัดส่วนเหตุการณ์ทั้งหมด</h3>
+            <SectionHeader icon={PieChartIcon} title="สัดส่วนเหตุการณ์ทั้งหมด" />
             <div role="img" aria-label={`กราฟวงกลมสัดส่วนเหตุการณ์ทั้งหมด: ${pieData.map(d => `${d.name} ${d.value} ครั้ง`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
@@ -273,7 +290,7 @@ export function DashboardPage() {
         {/* Charts row 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="card p-4">
-            <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">LPR Top 10 ถนน (คัน/วัน)</h3>
+            <SectionHeader icon={Route} title="LPR Top 10 ถนน (คัน/วัน)" />
             <div role="img" aria-label={`กราฟแท่งแนวนอน LPR สิบอันดับถนน: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={roads} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
@@ -288,7 +305,7 @@ export function DashboardPage() {
           </div>
 
           <div className="card p-4">
-            <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">แนวโน้มเหตุการณ์ 7 วันล่าสุด</h3>
+            <SectionHeader icon={TrendingUp} title="แนวโน้มเหตุการณ์ 7 วันล่าสุด" />
             <div role="img" aria-label={`กราฟเส้นแนวโน้ม 7 วันล่าสุด: ${daily.map(d => `${d.date} ${d.count.toLocaleString()}`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={240}>
               <LineChart data={daily} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
@@ -306,17 +323,20 @@ export function DashboardPage() {
         {/* Table + latest events */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <div className="card p-4 lg:col-span-3">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-extrabold text-navy-700 text-2xl">สรุปเหตุการณ์รายเดือน</h3>
-              <div className="flex gap-2">
-                <button onClick={handleExportPDF} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
-                  <FileDown size={20} /> Export PDF
-                </button>
-                <button onClick={handleExportExcel} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
-                  <FileSpreadsheet size={20} /> Export Excel
-                </button>
-              </div>
-            </div>
+            <SectionHeader
+              icon={Table2}
+              title="สรุปเหตุการณ์รายเดือน"
+              action={
+                <div className="flex gap-2">
+                  <button onClick={handleExportPDF} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
+                    <FileDown size={20} /> Export PDF
+                  </button>
+                  <button onClick={handleExportExcel} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
+                    <FileSpreadsheet size={20} /> Export Excel
+                  </button>
+                </div>
+              }
+            />
             <div className="overflow-x-auto">
               <table className="w-full text-xl">
                 <thead>
@@ -350,7 +370,7 @@ export function DashboardPage() {
           </div>
 
           <div className="card p-4 lg:col-span-2">
-            <h3 className="font-extrabold text-navy-700 mb-3 text-2xl">เหตุการณ์ล่าสุด</h3>
+            <SectionHeader icon={Bell} title="เหตุการณ์ล่าสุด" />
             <div className="space-y-2">
               {latestEvents.map(ev => {
                 const EvIcon = EVENT_TYPE_ICONS[ev.eventType] ?? AlertTriangle;
