@@ -1,13 +1,17 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
   DEFAULT_GROUPS,
+  assignUserToGroup,
   deleteGroup,
   groupForUser,
   hasPermission,
+  membersOfGroup,
+  removeAssignment,
+  savedAssignments,
   savedGroups,
   saveGroup,
 } from './groupStorage';
-import type { UserGroup } from '../types';
+import type { User, UserGroup } from '../types';
 
 const customGroup: UserGroup = {
   id: 'grp-maintenance',
@@ -67,6 +71,39 @@ describe('groupStorage', () => {
     expect(hasPermission(g, 'adminRepairs', 'edit')).toBe(true);
     expect(hasPermission(g, 'adminRepairs', 'delete')).toBe(false);
     expect(hasPermission(g, 'dashboard', 'view')).toBe(false);
+  });
+
+  it('assignment CRUD and resolution priority: assignment > groupId > role', () => {
+    localStorage.setItem('user_group_assignments', '{broken');
+    expect(savedAssignments()).toEqual({});
+
+    saveGroup(customGroup);
+    assignUserToGroup('u2', 'grp-maintenance');
+    expect(groupForUser({ id: 'u2', role: 'operator', groupId: 'grp-executive' }).id).toBe('grp-maintenance');
+
+    removeAssignment('u2');
+    expect(groupForUser({ id: 'u2', role: 'operator', groupId: 'grp-executive' }).id).toBe('grp-executive');
+    expect(groupForUser({ id: 'u2', role: 'operator' }).id).toBe('grp-operator');
+  });
+
+  it('membersOfGroup separates role-default members from assigned ones', () => {
+    saveGroup(customGroup);
+    const users: User[] = [
+      { id: 'u1', name: 'แอดมิน', username: 'admin', role: 'admin', email: 'a@a', isActive: true },
+      { id: 'u2', name: 'วิภา', username: 'operator', role: 'operator', email: 'b@b', isActive: true },
+    ];
+    assignUserToGroup('u2', 'grp-maintenance');
+
+    const maintenance = membersOfGroup('grp-maintenance', users);
+    expect(maintenance).toHaveLength(1);
+    expect(maintenance[0].user.id).toBe('u2');
+    expect(maintenance[0].byAssignment).toBe(true);
+
+    const adminMembers = membersOfGroup('grp-admin', users);
+    expect(adminMembers).toHaveLength(1);
+    expect(adminMembers[0].byAssignment).toBe(false);
+
+    expect(membersOfGroup('grp-operator', users)).toHaveLength(0); // u2 moved away
   });
 
   it('permission edits on a system group persist', () => {

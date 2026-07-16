@@ -175,6 +175,7 @@ flowchart LR
 | `registered_members` | [utils/memberStorage.ts](src/utils/memberStorage.ts) | สมาชิกประชาชนที่สมัครผ่าน Google OAuth (JSON `CitizenMember[]`) |
 | `camera_reports` | [utils/cameraReports.ts](src/utils/cameraReports.ts) | รายการแจ้งตรวจสอบกล้องออฟไลน์ (JSON `CameraReport[]` พร้อมสถานะ pending/resolved) |
 | `user_groups` | [utils/groupStorage.ts](src/utils/groupStorage.ts) | กลุ่มผู้ใช้และสิทธิ์รายเมนู (JSON `UserGroup[]` — seed 4 กลุ่มระบบจากบทบาทเดิม) |
+| `user_group_assignments` | [utils/groupStorage.ts](src/utils/groupStorage.ts) | การกำหนดสมาชิกเข้ากลุ่มรายคน (JSON `Record<userId, groupId>`) |
 | `a11y_font_scale` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | ขนาดอักษร (100 / 112.5 / 125 %) |
 | `a11y_high_contrast` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | เปิด/ปิดโหมดคอนทราสต์สูง |
 

@@ -6,7 +6,7 @@ import { Modal, ConfirmDialog } from '../components/Modal';
 import usersData from '../data/users.json';
 import type { User } from '../types';
 import { useAuth } from '../context/AuthContext';
-import { groupForUser, savedGroups } from '../utils/groupStorage';
+import { assignUserToGroup, groupForUser, removeAssignment, savedGroups } from '../utils/groupStorage';
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: 'ผู้ดูแลระบบ' },
@@ -50,12 +50,14 @@ export function AdminUsersPage() {
 
   const handleSave = () => {
     const record = { ...form, groupId: form.groupId || undefined };
+    const id = editUser?.id ?? String(Date.now());
     if (editUser) {
-      setUsers(prev => prev.map(u => u.id === editUser.id ? { ...u, ...record } : u));
+      setUsers(prev => prev.map(u => u.id === id ? { ...u, ...record } : u));
     } else {
-      const newId = String(Date.now());
-      setUsers(prev => [...prev, { id: newId, ...record }]);
+      setUsers(prev => [...prev, { id, ...record }]);
     }
+    // keep the persistent assignment store (shared with /admin/groups) in sync
+    if (record.groupId) assignUserToGroup(id, record.groupId); else removeAssignment(id);
     setModalOpen(false);
   };
 

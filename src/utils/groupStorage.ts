@@ -85,14 +85,57 @@ export function deleteGroup(id: string): boolean {
   return true;
 }
 
-export function groupForUser(user: Pick<User, 'role' | 'groupId'>): UserGroup {
+/* ---------- Explicit user→group assignments (persisted) ---------- */
+
+const ASSIGNMENTS_KEY = 'user_group_assignments';
+
+export function savedAssignments(): Record<string, string> {
+  try {
+    const raw = localStorage.getItem(ASSIGNMENTS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+export function assignUserToGroup(userId: string, groupId: string): void {
+  localStorage.setItem(ASSIGNMENTS_KEY, JSON.stringify({ ...savedAssignments(), [userId]: groupId }));
+}
+
+/* Removing an assignment reverts the user to their role's system group */
+export function removeAssignment(userId: string): void {
+  const assignments = savedAssignments();
+  delete assignments[userId];
+  localStorage.setItem(ASSIGNMENTS_KEY, JSON.stringify(assignments));
+}
+
+/* Resolution order: persisted assignment → session groupId → role's system group */
+export function groupForUser(user: Pick<User, 'role' | 'groupId'> & { id?: string }): UserGroup {
   const groups = savedGroups();
-  if (user.groupId) {
-    const byId = groups.find(g => g.id === user.groupId);
-    if (byId) return byId;
+  const assignedId = user.id ? savedAssignments()[user.id] : undefined;
+  for (const candidate of [assignedId, user.groupId]) {
+    if (candidate) {
+      const byId = groups.find(g => g.id === candidate);
+      if (byId) return byId;
+    }
   }
   return groups.find(g => g.id === ROLE_GROUP[user.role])
     ?? DEFAULT_GROUPS.find(g => g.id === ROLE_GROUP[user.role])!;
+}
+
+export interface GroupMember {
+  user: User;
+  /* true = added explicitly (removable), false = member via role default */
+  byAssignment: boolean;
+}
+
+export function membersOfGroup(groupId: string, users: User[]): GroupMember[] {
+  const assignments = savedAssignments();
+  return users
+    .filter(u => groupForUser(u).id === groupId)
+    .map(u => ({ user: u, byAssignment: assignments[u.id] === groupId }));
 }
 
 export function hasPermission(group: UserGroup, menu: MenuKey, action: PermissionAction): boolean {

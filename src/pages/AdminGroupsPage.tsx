@@ -1,10 +1,16 @@
 import { useState } from 'react';
-import { Lock, Pencil, Plus, ShieldCheck, Trash2 } from 'lucide-react';
+import { Lock, Pencil, Plus, ShieldCheck, Trash2, User as UserIcon, UserMinus, Users } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { Modal, ConfirmDialog } from '../components/Modal';
-import { deleteGroup, saveGroup, savedGroups } from '../utils/groupStorage';
+import { RoleBadge } from '../components/Badge';
+import {
+  assignUserToGroup, deleteGroup, membersOfGroup, removeAssignment, saveGroup, savedGroups,
+} from '../utils/groupStorage';
+import usersData from '../data/users.json';
 import { ACTION_OPTIONS, MENU_OPTIONS } from '../types';
-import type { MenuKey, PermissionAction, UserGroup } from '../types';
+import type { MenuKey, PermissionAction, User, UserGroup } from '../types';
+
+const allUsers = usersData as User[];
 
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [],
@@ -16,6 +22,11 @@ export function AdminGroupsPage() {
   const [editing, setEditing] = useState<UserGroup | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [membersGroup, setMembersGroup] = useState<UserGroup | null>(null);
+  const [addUserId, setAddUserId] = useState('');
+  const [removeUserId, setRemoveUserId] = useState<string | null>(null);
+  // bump to recompute member lists after add/remove
+  const [membersVersion, setMembersVersion] = useState(0);
 
   const openAdd = () => {
     setIsNew(true);
@@ -70,6 +81,28 @@ export function AdminGroupsPage() {
   const menuCount = (g: UserGroup) =>
     MENU_OPTIONS.filter(m => (g.permissions[m.key] ?? []).length > 0).length;
 
+  /* membersVersion in the deps makes counts/lists recompute after add/remove */
+  void membersVersion;
+  const members = membersGroup ? membersOfGroup(membersGroup.id, allUsers) : [];
+  const nonMembers = membersGroup
+    ? allUsers.filter(u => !members.some(m => m.user.id === u.id))
+    : [];
+
+  const handleAddMember = () => {
+    if (!membersGroup || !addUserId) return;
+    assignUserToGroup(addUserId, membersGroup.id);
+    setAddUserId('');
+    setMembersVersion(v => v + 1);
+  };
+
+  const handleRemoveMember = () => {
+    if (removeUserId) {
+      removeAssignment(removeUserId);
+      setMembersVersion(v => v + 1);
+    }
+    setRemoveUserId(null);
+  };
+
   return (
     <Layout>
       <div className="flex flex-col h-full">
@@ -123,6 +156,9 @@ export function AdminGroupsPage() {
                       </td>
                       <td className="px-4 py-2.5">
                         <div className="flex gap-2 justify-center">
+                          <button onClick={() => setMembersGroup(group)} className="flex items-center gap-1 px-2.5 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
+                            <Users size={13} /> สมาชิก ({membersOfGroup(group.id, allUsers).length})
+                          </button>
                           <button onClick={() => openEdit(group)} className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
                             <Pencil size={13} /> แก้ไขสิทธิ์
                           </button>
@@ -221,6 +257,84 @@ export function AdminGroupsPage() {
           </form>
         )}
       </Modal>
+
+      {/* Group members */}
+      <Modal
+        isOpen={membersGroup !== null}
+        onClose={() => { setMembersGroup(null); setAddUserId(''); }}
+        title={`สมาชิกกลุ่ม — ${membersGroup?.name ?? ''}`}
+        size="md"
+        icon={<Users size={20} className="text-white" />}
+      >
+        <div className="space-y-4">
+          {/* Add member */}
+          <div className="flex gap-2 items-end p-3 bg-blue-50 border border-blue-100 rounded-lg">
+            <div className="flex-1">
+              <label htmlFor="add-member" className="label">เพิ่มสมาชิกเข้ากลุ่ม</label>
+              <select id="add-member" value={addUserId} onChange={e => setAddUserId(e.target.value)} className="input-field">
+                <option value="" disabled>เลือกผู้ใช้...</option>
+                {nonMembers.map(u => (
+                  <option key={u.id} value={u.id}>{u.name} ({u.username})</option>
+                ))}
+              </select>
+            </div>
+            <button onClick={handleAddMember} disabled={!addUserId} className="btn-primary text-lg py-2.5 disabled:opacity-60 disabled:cursor-not-allowed">
+              <span className="flex items-center gap-1.5"><Plus size={16} /> เพิ่ม</span>
+            </button>
+          </div>
+
+          {/* Member list */}
+          {members.length === 0 ? (
+            <div className="text-center py-6 text-gray-400">
+              <Users size={36} className="mx-auto mb-2 text-gray-300" />
+              <p className="text-lg">ยังไม่มีสมาชิกในกลุ่มนี้</p>
+            </div>
+          ) : (
+            <ul className="divide-y divide-gray-100 border border-gray-100 rounded-lg overflow-hidden">
+              {members.map(({ user, byAssignment }) => (
+                <li key={user.id} className="flex items-center gap-3 px-4 py-2.5 bg-white hover:bg-gray-50">
+                  <div className="w-9 h-9 rounded-full bg-navy-100 border border-navy-300 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                    <UserIcon size={18} className="text-navy-700" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-navy-700 text-lg truncate">{user.name}</p>
+                    <p className="text-sm text-gray-500 font-mono">{user.username}</p>
+                  </div>
+                  <RoleBadge role={user.role} />
+                  {byAssignment ? (
+                    <span className="text-xs font-bold px-2 py-1 rounded-lg bg-blue-100 text-blue-700 whitespace-nowrap">กำหนดเอง</span>
+                  ) : (
+                    <span className="text-xs font-bold px-2 py-1 rounded-lg bg-gray-100 text-gray-500 whitespace-nowrap">ตามบทบาท</span>
+                  )}
+                  {byAssignment && (
+                    <button
+                      onClick={() => setRemoveUserId(user.id)}
+                      aria-label={`นำ ${user.name} ออกจากกลุ่ม`}
+                      className="flex items-center gap-1 px-2 py-1.5 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-lg shadow-sm transition-all"
+                    >
+                      <UserMinus size={13} /> นำออก
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="text-sm text-gray-500">
+            สมาชิก "ตามบทบาท" มาจากค่าเริ่มต้นของบทบาทผู้ใช้ จะนำออกได้เฉพาะสมาชิกที่ถูกเพิ่มแบบ "กำหนดเอง"
+            (การนำออกจะทำให้ผู้ใช้กลับไปใช้สิทธิ์ตามบทบาทเดิม)
+          </p>
+        </div>
+      </Modal>
+
+      <ConfirmDialog
+        isOpen={removeUserId !== null}
+        onClose={() => setRemoveUserId(null)}
+        onConfirm={handleRemoveMember}
+        title="นำสมาชิกออกจากกลุ่ม"
+        message={`ต้องการนำ "${allUsers.find(u => u.id === removeUserId)?.name ?? ''}" ออกจากกลุ่มนี้ใช่หรือไม่? ผู้ใช้จะกลับไปใช้สิทธิ์ตามบทบาทเดิม`}
+        confirmLabel="นำออก"
+        danger
+      />
 
       <ConfirmDialog
         isOpen={deleteId !== null}
