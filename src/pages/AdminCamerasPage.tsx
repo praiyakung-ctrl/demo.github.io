@@ -7,8 +7,10 @@ import { Modal, ConfirmDialog } from '../components/Modal';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { Pagination } from '../components/Pagination';
 
 const INITIAL = camerasData as Camera[];
+const PAGE_SIZE = 10;
 
 const EMPTY: Omit<Camera, 'id'> = {
   name: '', location: '', lat: 13.36, lng: 100.98,
@@ -25,12 +27,17 @@ export function AdminCamerasPage() {
   const [editCam, setEditCam] = useState<Camera | null>(null);
   const [form, setForm] = useState<Omit<Camera, 'id'>>(EMPTY);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
   const filtered = cameras.filter(c =>
     c.id.toLowerCase().includes(search.toLowerCase()) ||
     c.name.toLowerCase().includes(search.toLowerCase()) ||
     c.location.toLowerCase().includes(search.toLowerCase())
   );
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const openAdd = () => {
     setEditCam(null);
@@ -98,7 +105,7 @@ export function AdminCamerasPage() {
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" />
                 <input
                   value={search}
-                  onChange={e => setSearch(e.target.value)}
+                  onChange={e => { setSearch(e.target.value); setPage(1); }}
                   placeholder="ค้นหา Camera ID, ชื่อ, หรือสถานที่..."
                   aria-label="ค้นหา Camera ID ชื่อ หรือสถานที่"
                   className="w-full pl-9 pr-3 py-2 text-xl border-2 border-gray-200 rounded-xl focus:outline-none focus:border-navy-400 bg-white"
@@ -119,7 +126,7 @@ export function AdminCamerasPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((cam, idx) => (
+                  {pageRows.map((cam, idx) => (
                     <tr key={cam.id} className={`border-b border-gray-100 hover:bg-blue-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'}`}>
                       {/* Camera ID */}
                       <td className="px-4 py-3">
@@ -203,6 +210,8 @@ export function AdminCamerasPage() {
                 </tbody>
               </table>
             </div>
+
+            <Pagination total={filtered.length} page={safePage} pageSize={PAGE_SIZE} onPageChange={setPage} />
           </div>
         </div>
       </div>

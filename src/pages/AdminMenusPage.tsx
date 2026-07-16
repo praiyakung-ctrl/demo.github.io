@@ -5,6 +5,9 @@ import { ConfirmDialog } from '../components/Modal';
 import { LOCKED_MENUS, resetMenuSettings, savedMenuSettings, saveMenuSettings } from '../utils/menuStorage';
 import { MENU_OPTIONS } from '../types';
 import type { MenuSetting } from '../types';
+import { Pagination } from '../components/Pagination';
+
+const PAGE_SIZE = 10;
 
 const MENU_PATHS: Record<string, string> = {
   map: '/map', dashboard: '/dashboard', portal: '/portal', reports: '/reports',
@@ -16,6 +19,11 @@ export function AdminMenusPage() {
   const [settings, setSettings] = useState<MenuSetting[]>(() => savedMenuSettings());
   const [saved, setSaved] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(settings.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = settings.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const update = (key: string, patch: Partial<MenuSetting>) => {
     setSaved(false);
@@ -77,7 +85,8 @@ export function AdminMenusPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {settings.map((setting, i) => {
+                  {pageRows.map((setting, idx) => {
+                    const i = (safePage - 1) * PAGE_SIZE + idx; // index in the full settings list
                     const locked = LOCKED_MENUS.includes(setting.key);
                     return (
                       <tr key={setting.key} className={`border-t border-gray-50 ${setting.enabled ? 'hover:bg-gray-50' : 'bg-gray-50/80 opacity-70'}`}>
@@ -139,6 +148,8 @@ export function AdminMenusPage() {
                 </tbody>
               </table>
             </div>
+
+            <Pagination total={settings.length} page={safePage} pageSize={PAGE_SIZE} onPageChange={setPage} />
 
             {/* Footer actions */}
             <div className="flex items-center justify-between gap-3 p-4 bg-gray-50 border-t border-gray-100">

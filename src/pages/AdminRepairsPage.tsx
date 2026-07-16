@@ -7,8 +7,10 @@ import type { CameraReport } from '../utils/cameraReports';
 import { formatThaiDateTime } from '../utils/formatDate';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
+import { Pagination } from '../components/Pagination';
 
 const cameras = camerasData as Camera[];
+const PAGE_SIZE = 10;
 
 function cameraOf(id: string): Camera | null {
   return cameras.find(c => c.id === id) ?? null;
@@ -19,8 +21,13 @@ export function AdminRepairsPage() {
     [...savedReports()].sort((a, b) => (a.status === b.status ? b.reportedAt.localeCompare(a.reportedAt) : a.status === 'pending' ? -1 : 1))
   );
   const [resolveId, setResolveId] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
   const pendingCount = reports.filter(r => r.status === 'pending').length;
+
+  const totalPages = Math.max(1, Math.ceil(reports.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = reports.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const handleResolve = () => {
     if (!resolveId) return;
@@ -78,7 +85,7 @@ export function AdminRepairsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {reports.map(rep => {
+                    {pageRows.map(rep => {
                       const cam = cameraOf(rep.cameraId);
                       return (
                         <tr key={`${rep.cameraId}-${rep.reportedAt}`} className="border-t border-gray-50 hover:bg-gray-50">
@@ -119,6 +126,7 @@ export function AdminRepairsPage() {
                     })}
                   </tbody>
                 </table>
+                <Pagination total={reports.length} page={safePage} pageSize={PAGE_SIZE} onPageChange={setPage} />
               </div>
             )}
           </div>

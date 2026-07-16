@@ -10,6 +10,9 @@ import { menuLabel } from '../utils/menuStorage';
 import { savedUsers } from '../utils/userStorage';
 import { ACTION_OPTIONS, MENU_OPTIONS } from '../types';
 import type { MenuKey, PermissionAction, UserGroup } from '../types';
+import { Pagination } from '../components/Pagination';
+
+const PAGE_SIZE = 10;
 
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [],
@@ -26,6 +29,11 @@ export function AdminGroupsPage() {
   const [removeUserId, setRemoveUserId] = useState<string | null>(null);
   // bump to recompute member lists after add/remove
   const [membersVersion, setMembersVersion] = useState(0);
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(groups.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = groups.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const openAdd = () => {
     setIsNew(true);
@@ -140,7 +148,7 @@ export function AdminGroupsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {groups.map(group => (
+                  {pageRows.map(group => (
                     <tr key={group.id} className="border-t border-gray-50 hover:bg-gray-50">
                       <td className="px-4 py-2.5 font-bold text-navy-700">{group.name}</td>
                       <td className="px-4 py-2.5 text-gray-700">{group.description}</td>
@@ -174,6 +182,8 @@ export function AdminGroupsPage() {
                 </tbody>
               </table>
             </div>
+
+            <Pagination total={groups.length} page={safePage} pageSize={PAGE_SIZE} onPageChange={setPage} />
           </div>
         </div>
       </div>

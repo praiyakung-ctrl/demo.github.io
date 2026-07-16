@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown, Download, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
 import { Layout } from '../components/Layout';
+import { Pagination } from '../components/Pagination';
 import { RoleBadge, StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
 import type { User } from '../types';
@@ -320,45 +321,7 @@ export function AdminUsersPage() {
               </table>
             </div>
 
-            {/* Pagination */}
-            {sorted.length > PAGE_SIZE && (
-              <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200">
-                <span className="text-base text-gray-600">
-                  แสดง {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, sorted.length)} จาก {sorted.length} รายการ
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={safePage === 1}
-                    aria-label="หน้าก่อนหน้า"
-                    className="p-2 rounded-lg text-navy-700 hover:bg-navy-50 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
-                    <button
-                      key={n}
-                      onClick={() => setPage(n)}
-                      aria-label={`หน้า ${n}`}
-                      aria-current={n === safePage ? 'page' : undefined}
-                      className={`min-w-[36px] px-2 py-1.5 rounded-lg text-base font-bold transition-colors ${
-                        n === safePage ? 'bg-navy-700 text-white' : 'text-navy-700 hover:bg-navy-50'
-                      }`}
-                    >
-                      {n}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                    disabled={safePage === totalPages}
-                    aria-label="หน้าถัดไป"
-                    className="p-2 rounded-lg text-navy-700 hover:bg-navy-50 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
-              </div>
-            )}
+            <Pagination total={sorted.length} page={safePage} pageSize={PAGE_SIZE} onPageChange={setPage} />
           </div>
         </div>
       </div>
