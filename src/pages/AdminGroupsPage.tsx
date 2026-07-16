@@ -6,12 +6,10 @@ import { RoleBadge } from '../components/Badge';
 import {
   assignUserToGroup, deleteGroup, membersOfGroup, removeAssignment, saveGroup, savedGroups,
 } from '../utils/groupStorage';
-import usersData from '../data/users.json';
 import { menuLabel } from '../utils/menuStorage';
+import { savedUsers } from '../utils/userStorage';
 import { ACTION_OPTIONS, MENU_OPTIONS } from '../types';
-import type { MenuKey, PermissionAction, User, UserGroup } from '../types';
-
-const allUsers = usersData as User[];
+import type { MenuKey, PermissionAction, UserGroup } from '../types';
 
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [],
@@ -84,6 +82,7 @@ export function AdminGroupsPage() {
 
   /* membersVersion in the deps makes counts/lists recompute after add/remove */
   void membersVersion;
+  const allUsers = savedUsers(); // fresh read so edits on /admin/users are reflected
   const members = membersGroup ? membersOfGroup(membersGroup.id, allUsers) : [];
   const nonMembers = membersGroup
     ? allUsers.filter(u => !members.some(m => m.user.id === u.id))

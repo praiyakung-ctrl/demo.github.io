@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { MenuKey, PermissionAction, User, UserRole } from '../types';
-import usersData from '../data/users.json';
 import { groupForUser, hasPermission } from '../utils/groupStorage';
+import { savedUsers } from '../utils/userStorage';
 
 interface AuthContextType {
   user: User | null;
@@ -27,7 +27,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = (username: string, password: string): boolean => {
-    const found = (usersData as User[]).find(
+    // read through userStorage so users created/edited on /admin/users can log in
+    const found = savedUsers().find(
       u => u.username === username && u.password === password && u.isActive
     );
     if (found) {

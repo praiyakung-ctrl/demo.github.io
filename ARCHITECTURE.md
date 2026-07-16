@@ -177,6 +177,7 @@ flowchart LR
 | `user_groups` | [utils/groupStorage.ts](src/utils/groupStorage.ts) | กลุ่มผู้ใช้และสิทธิ์รายเมนู (JSON `UserGroup[]` — seed 4 กลุ่มระบบจากบทบาทเดิม) |
 | `user_group_assignments` | [utils/groupStorage.ts](src/utils/groupStorage.ts) | การกำหนดสมาชิกเข้ากลุ่มรายคน (JSON `Record<userId, groupId>`) |
 | `menu_settings` | [utils/menuStorage.ts](src/utils/menuStorage.ts) | ชื่อ/ลำดับ/สถานะเปิดปิดของเมนู (JSON `MenuSetting[]` — เมนูกู้คืนระบบปิดไม่ได้) |
+| `admin_users` | [utils/userStorage.ts](src/utils/userStorage.ts) | รายชื่อผู้ใช้ที่จัดการในหน้า Admin (JSON `User[]` — seed จาก users.json) |
 | `a11y_font_scale` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | ขนาดอักษร (100 / 112.5 / 125 %) |
 | `a11y_high_contrast` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | เปิด/ปิดโหมดคอนทราสต์สูง |
 

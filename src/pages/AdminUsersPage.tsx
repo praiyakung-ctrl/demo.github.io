@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import { Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { RoleBadge, StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
-import usersData from '../data/users.json';
 import type { User } from '../types';
+import { ROLE_LABELS } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { assignUserToGroup, groupForUser, removeAssignment, savedGroups } from '../utils/groupStorage';
+import { savedUsers, saveUsers } from '../utils/userStorage';
+import { exportRowsToExcel, todayStamp } from '../utils/exportReport';
+
+const PAGE_SIZE = 10;
+
+type SortKey = 'name' | 'username' | 'email' | 'role';
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: 'ผู้ดูแลระบบ' },
@@ -26,21 +32,81 @@ function Req() {
 }
 
 export function AdminUsersPage() {
-  const { can } = useAuth();
+  const { user: currentUser, can } = useAuth();
   const groups = savedGroups();
-  const [users, setUsers] = useState<User[]>(usersData as User[]);
+  const [users, setUsersState] = useState<User[]>(() => savedUsers());
   const [search, setSearch] = useState('');
+  const [filterRole, setFilterRole] = useState('all');
+  const [filterGroup, setFilterGroup] = useState('all');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortAsc, setSortAsc] = useState(true);
+  const [page, setPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [editUser, setEditUser] = useState<User | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [resetId, setResetId] = useState<string | null>(null);
+  const [resetDoneName, setResetDoneName] = useState<string | null>(null);
+
+  // every mutation persists so edits survive refresh (and new users can log in)
+  const setUsers = (updater: (prev: User[]) => User[]) => {
+    setUsersState(prev => {
+      const next = updater(prev);
+      saveUsers(next);
+      return next;
+    });
+  };
+
+  /* is this row the account currently logged in? (guard against self-lockout) */
+  const isSelf = (u: User) => currentUser !== null && (u.id === currentUser.id || u.username === currentUser.username);
 
   const filtered = users.filter(u =>
-    u.name.toLowerCase().includes(search.toLowerCase()) ||
-    u.username.toLowerCase().includes(search.toLowerCase()) ||
-    u.email.toLowerCase().includes(search.toLowerCase())
+    (u.name.toLowerCase().includes(search.toLowerCase()) ||
+      u.username.toLowerCase().includes(search.toLowerCase()) ||
+      u.email.toLowerCase().includes(search.toLowerCase())) &&
+    (filterRole === 'all' || u.role === filterRole) &&
+    (filterGroup === 'all' || groupForUser(u).id === filterGroup) &&
+    (filterStatus === 'all' || String(u.isActive) === filterStatus)
   );
+
+  const sorted = sortKey === null ? filtered : [...filtered].sort((a, b) => {
+    const va = sortKey === 'role' ? ROLE_LABELS[a.role] : a[sortKey];
+    const vb = sortKey === 'role' ? ROLE_LABELS[b.role] : b[sortKey];
+    return sortAsc ? va.localeCompare(vb, 'th') : vb.localeCompare(va, 'th');
+  });
+
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageRows = sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  const toggleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortAsc(a => !a);
+    } else {
+      setSortKey(key);
+      setSortAsc(true);
+    }
+  };
+
+  const toggleActive = (u: User) => {
+    if (isSelf(u)) return;
+    setUsers(prev => prev.map(x => x.id === u.id ? { ...x, isActive: !x.isActive } : x));
+  };
+
+  const handleExport = () => {
+    exportRowsToExcel(
+      [
+        ['ชื่อ-นามสกุล', 'Username', 'อีเมล', 'เบอร์โทรศัพท์', 'แผนก/สังกัด', 'บทบาท', 'กลุ่มสิทธิ์', 'สถานะ'],
+        ...sorted.map(u => [
+          u.name, u.username, u.email, u.phone ?? '', u.department ?? '',
+          ROLE_LABELS[u.role], groupForUser(u).name, u.isActive ? 'Active' : 'Inactive',
+        ]),
+      ],
+      'ผู้ใช้งาน',
+      `รายชื่อผู้ใช้งาน-${todayStamp()}.xlsx`
+    );
+  };
 
   const openAdd = () => {
     setEditUser(null);
@@ -124,34 +190,62 @@ export function AdminUsersPage() {
         <div className="flex-1 overflow-auto p-5">
           <div className="card overflow-hidden shadow-md">
 
-            {/* Search */}
-            <div className="flex items-center gap-3 p-4 bg-gray-50 border-b border-gray-200">
-              <div className="relative flex-1 max-w-sm">
+            {/* Search + filters */}
+            <div className="flex flex-wrap items-center gap-3 p-4 bg-gray-50 border-b border-gray-200">
+              <div className="relative flex-1 min-w-[220px] max-w-sm">
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" />
                 <input
                   value={search}
-                  onChange={e => setSearch(e.target.value)}
+                  onChange={e => { setSearch(e.target.value); setPage(1); }}
                   placeholder="ค้นหาชื่อ, Username, หรืออีเมล..."
                   aria-label="ค้นหาชื่อ Username หรืออีเมล"
                   className="w-full pl-9 pr-3 py-2 text-base border-2 border-gray-200 rounded-xl focus:outline-none focus:border-navy-400 bg-white"
                 />
               </div>
+              <select aria-label="กรองตามบทบาท" value={filterRole} onChange={e => { setFilterRole(e.target.value); setPage(1); }} className="input-field w-auto py-2 text-base">
+                <option value="all">ทุกบทบาท</option>
+                {Object.entries(ROLE_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
+              <select aria-label="กรองตามกลุ่มสิทธิ์" value={filterGroup} onChange={e => { setFilterGroup(e.target.value); setPage(1); }} className="input-field w-auto py-2 text-base">
+                <option value="all">ทุกกลุ่มสิทธิ์</option>
+                {groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+              </select>
+              <select aria-label="กรองตามสถานะ" value={filterStatus} onChange={e => { setFilterStatus(e.target.value); setPage(1); }} className="input-field w-auto py-2 text-base">
+                <option value="all">ทุกสถานะ</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
               <span className="text-base text-navy-700 font-bold flex-shrink-0">
-                พบ {filtered.length} / {users.length} รายการ
+                พบ {sorted.length} / {users.length} รายการ
               </span>
+              <button onClick={handleExport} className="ml-auto flex items-center gap-2 text-base font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 transition-all flex-shrink-0">
+                <Download size={16} /> Excel
+              </button>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-navy-700">
-                    {['ชื่อ-นามสกุล', 'Username', 'อีเมล', 'บทบาท', 'กลุ่มสิทธิ์', 'สถานะ', 'ดำเนินการ'].map(h => (
+                    {([
+                      ['ชื่อ-นามสกุล', 'name'], ['Username', 'username'], ['อีเมล', 'email'], ['บทบาท', 'role'],
+                    ] as [string, SortKey][]).map(([h, key]) => (
+                      <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">
+                        <button onClick={() => toggleSort(key)} className="flex items-center gap-1.5 hover:text-amber-300 transition-colors">
+                          {h}
+                          {sortKey === key
+                            ? (sortAsc ? <ArrowUp size={14} /> : <ArrowDown size={14} />)
+                            : <ArrowUpDown size={14} className="opacity-50" />}
+                        </button>
+                      </th>
+                    ))}
+                    {['กลุ่มสิทธิ์', 'สถานะ', 'ดำเนินการ'].map(h => (
                       <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((user, idx) => (
+                  {pageRows.map((user, idx) => (
                     <tr key={user.id} className={`border-b border-blue-100 hover:bg-blue-100 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-blue-50'}`}>
                       {/* Name with User icon */}
                       <td className="px-4 py-3">
@@ -182,9 +276,20 @@ export function AdminUsersPage() {
                       <td className="px-4 py-3"><RoleBadge role={user.role} /></td>
                       {/* Permission group */}
                       <td className="px-4 py-3 text-base text-navy-700">{groupForUser(user).name}</td>
-                      {/* Status */}
+                      {/* Status — click to toggle (except your own account) */}
                       <td className="px-4 py-3">
-                        <StatusBadge status={user.isActive ? 'Active' : 'Inactive'} />
+                        {isSelf(user) ? (
+                          <StatusBadge status={user.isActive ? 'Active' : 'Inactive'} />
+                        ) : (
+                          <button
+                            onClick={() => toggleActive(user)}
+                            title={user.isActive ? 'คลิกเพื่อปิดใช้งาน' : 'คลิกเพื่อเปิดใช้งาน'}
+                            aria-label={`${user.isActive ? 'ปิด' : 'เปิด'}ใช้งาน ${user.name}`}
+                            className="hover:scale-105 transition-transform"
+                          >
+                            <StatusBadge status={user.isActive ? 'Active' : 'Inactive'} />
+                          </button>
+                        )}
                       </td>
                       {/* Actions */}
                       <td className="px-4 py-3">
@@ -199,10 +304,13 @@ export function AdminUsersPage() {
                               <KeyRound size={13} /> Reset
                             </button>
                           )}
-                          {can('adminUsers', 'delete') && (
+                          {can('adminUsers', 'delete') && !isSelf(user) && (
                             <button onClick={() => setDeleteId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="ลบ">
                               <Trash2 size={13} /> ลบ
                             </button>
+                          )}
+                          {isSelf(user) && (
+                            <span className="text-xs text-gray-400 self-center px-1" title="ไม่สามารถลบบัญชีที่กำลังใช้งานอยู่ได้">บัญชีของคุณ</span>
                           )}
                         </div>
                       </td>
@@ -211,6 +319,46 @@ export function AdminUsersPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* Pagination */}
+            {sorted.length > PAGE_SIZE && (
+              <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200">
+                <span className="text-base text-gray-600">
+                  แสดง {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, sorted.length)} จาก {sorted.length} รายการ
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => setPage(p => Math.max(1, p - 1))}
+                    disabled={safePage === 1}
+                    aria-label="หน้าก่อนหน้า"
+                    className="p-2 rounded-lg text-navy-700 hover:bg-navy-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                    <button
+                      key={n}
+                      onClick={() => setPage(n)}
+                      aria-label={`หน้า ${n}`}
+                      aria-current={n === safePage ? 'page' : undefined}
+                      className={`min-w-[36px] px-2 py-1.5 rounded-lg text-base font-bold transition-colors ${
+                        n === safePage ? 'bg-navy-700 text-white' : 'text-navy-700 hover:bg-navy-50'
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                    disabled={safePage === totalPages}
+                    aria-label="หน้าถัดไป"
+                    className="p-2 rounded-lg text-navy-700 hover:bg-navy-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -344,11 +492,32 @@ export function AdminUsersPage() {
       <ConfirmDialog
         isOpen={!!resetId}
         onClose={() => setResetId(null)}
-        onConfirm={() => { alert(`Reset รหัสผ่านสำเร็จ ระบบส่งอีเมลแล้ว`); setResetId(null); }}
+        onConfirm={() => {
+          setResetDoneName(users.find(u => u.id === resetId)?.name ?? '');
+          setResetId(null);
+        }}
         title="Reset รหัสผ่าน"
         message="ต้องการ reset รหัสผ่านผู้ใช้นี้? ระบบจะส่งรหัสผ่านใหม่ทางอีเมล"
         confirmLabel="Reset"
       />
+
+      {/* Reset success */}
+      <Modal
+        isOpen={resetDoneName !== null}
+        onClose={() => setResetDoneName(null)}
+        title="Reset รหัสผ่านสำเร็จ"
+        size="sm"
+        icon={<KeyRound size={20} className="text-white" />}
+      >
+        <div className="text-center py-2">
+          <MailCheck size={48} className="text-green-600 mx-auto mb-3" aria-hidden="true" />
+          <p className="text-xl font-semibold text-gray-900 mb-1">ส่งรหัสผ่านใหม่เรียบร้อยแล้ว</p>
+          <p className="text-lg text-gray-600 mb-5">
+            ระบบส่งลิงก์ตั้งรหัสผ่านใหม่ไปยังอีเมลของ <span className="font-medium text-gray-900">{resetDoneName}</span> แล้ว
+          </p>
+          <button onClick={() => setResetDoneName(null)} className="btn-primary w-full py-2.5 text-lg">ปิด</button>
+        </div>
+      </Modal>
     </Layout>
   );
 }
