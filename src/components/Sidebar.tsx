@@ -1,28 +1,34 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings, ShieldCheck, Wrench } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, ListTree, Settings, ShieldCheck, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { savedMenuSettings } from '../utils/menuStorage';
 import type { MenuKey } from '../types';
 
-/* Menu visibility is driven by the user's group permissions (see groupStorage);
-   the system groups reproduce the old hardcoded role behavior. */
-const navItems: { to: string; icon: typeof Map; label: string; iconColor: string; menuKey: MenuKey }[] = [
-  { to: '/map',       icon: Map,             label: 'แผนที่กล้อง', iconColor: 'text-cyan-500',  menuKey: 'map' },
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard',   iconColor: 'text-blue-600',  menuKey: 'dashboard' },
-  { to: '/portal',    icon: FileText,        label: 'ยื่นขอกล้อง', iconColor: 'text-green-600', menuKey: 'portal' },
-  { to: '/reports',   icon: BarChart3,       label: 'รายงาน',      iconColor: 'text-amber-500', menuKey: 'reports' },
-];
-
-const adminItems: { to: string; icon: typeof Map; label: string; iconColor: string; menuKey: MenuKey }[] = [
-  { to: '/admin/cameras', icon: Camera,      label: 'จัดการกล้อง',       iconColor: 'text-pink-500',   menuKey: 'adminCameras' },
-  { to: '/admin/users',   icon: Users,       label: 'จัดการผู้ใช้',       iconColor: 'text-purple-500', menuKey: 'adminUsers' },
-  { to: '/admin/repairs', icon: Wrench,      label: 'กล้องรอตรวจสอบ',    iconColor: 'text-orange-500', menuKey: 'adminRepairs' },
-  { to: '/admin/groups',  icon: ShieldCheck, label: 'จัดการกลุ่มสิทธิ์', iconColor: 'text-teal-600',   menuKey: 'adminGroups' },
-];
+/* Static per-menu config (route + icon); label/order/enabled come from
+   menu settings (/admin/menus), visibility from group permissions. */
+const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: string; section: 'main' | 'admin' }> = {
+  map:          { to: '/map',            icon: Map,             iconColor: 'text-cyan-500',   section: 'main' },
+  dashboard:    { to: '/dashboard',      icon: LayoutDashboard, iconColor: 'text-blue-600',   section: 'main' },
+  portal:       { to: '/portal',         icon: FileText,        iconColor: 'text-green-600',  section: 'main' },
+  reports:      { to: '/reports',        icon: BarChart3,       iconColor: 'text-amber-500',  section: 'main' },
+  adminCameras: { to: '/admin/cameras',  icon: Camera,          iconColor: 'text-pink-500',   section: 'admin' },
+  adminUsers:   { to: '/admin/users',    icon: Users,           iconColor: 'text-purple-500', section: 'admin' },
+  adminRepairs: { to: '/admin/repairs',  icon: Wrench,          iconColor: 'text-orange-500', section: 'admin' },
+  adminGroups:  { to: '/admin/groups',   icon: ShieldCheck,     iconColor: 'text-teal-600',   section: 'admin' },
+  adminMenus:   { to: '/admin/menus',    icon: ListTree,        iconColor: 'text-indigo-500', section: 'admin' },
+};
 
 export function Sidebar() {
   const { can } = useAuth();
   const [collapsed, setCollapsed] = useState(true);
+
+  // read fresh per render so edits on /admin/menus apply on the next navigation
+  const visibleItems = savedMenuSettings()
+    .filter(s => s.enabled && can(s.key, 'view'))
+    .map(s => ({ ...MENU_CONFIG[s.key], label: s.label, menuKey: s.key }));
+  const navItems = visibleItems.filter(i => i.section === 'main');
+  const adminItems = visibleItems.filter(i => i.section === 'admin');
 
   const activeClass = (extra = '') =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-navy-700 border-2 border-navy-700 bg-navy-50 font-bold transition-all ${extra}`;
@@ -63,9 +69,7 @@ export function Sidebar() {
           )}
         </div>
 
-        {navItems
-          .filter(item => can(item.menuKey, 'view'))
-          .map(item => (
+        {navItems.map(item => (
             <NavLink
               key={item.to}
               to={item.to}
@@ -82,7 +86,7 @@ export function Sidebar() {
             </NavLink>
           ))}
 
-        {adminItems.some(i => can(i.menuKey, 'view')) && (
+        {adminItems.length > 0 && (
           <>
             {/* Section header */}
             <div className={`pt-3 pb-1 ${collapsed ? 'flex justify-center' : 'px-2'}`}>
@@ -99,9 +103,7 @@ export function Sidebar() {
               )}
             </div>
 
-            {adminItems
-              .filter(item => can(item.menuKey, 'view'))
-              .map(item => (
+            {adminItems.map(item => (
                 <NavLink
                   key={item.to}
                   to={item.to}

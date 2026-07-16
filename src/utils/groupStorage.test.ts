@@ -20,7 +20,7 @@ const customGroup: UserGroup = {
   isSystem: false,
   permissions: {
     map: ['view'], dashboard: [], portal: [], reports: [],
-    adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [],
+    adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [], adminMenus: [],
   },
 };
 

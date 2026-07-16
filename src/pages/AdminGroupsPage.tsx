@@ -7,6 +7,7 @@ import {
   assignUserToGroup, deleteGroup, membersOfGroup, removeAssignment, saveGroup, savedGroups,
 } from '../utils/groupStorage';
 import usersData from '../data/users.json';
+import { menuLabel } from '../utils/menuStorage';
 import { ACTION_OPTIONS, MENU_OPTIONS } from '../types';
 import type { MenuKey, PermissionAction, User, UserGroup } from '../types';
 
@@ -14,7 +15,7 @@ const allUsers = usersData as User[];
 
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [],
-  adminCameras: [], adminUsers: [], adminRepairs: [], adminGroups: [],
+  adminCameras: [], adminUsers: [], adminRepairs: [], adminGroups: [], adminMenus: [],
 };
 
 export function AdminGroupsPage() {
@@ -229,7 +230,7 @@ export function AdminGroupsPage() {
                 <tbody>
                   {MENU_OPTIONS.map((menu, i) => (
                     <tr key={menu.key} className={`border-t border-gray-100 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'}`}>
-                      <td className="px-4 py-2 font-medium text-gray-800">{menu.label}</td>
+                      <td className="px-4 py-2 font-medium text-gray-800">{menuLabel(menu.key)}</td>
                       {ACTION_OPTIONS.map(action => (
                         <td key={action.key} className="text-center px-3 py-2">
                           <input

@@ -133,7 +133,7 @@ export interface User {
 
 export type MenuKey =
   | 'map' | 'dashboard' | 'portal' | 'reports'
-  | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups';
+  | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus';
 
 export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
 
@@ -155,7 +155,16 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'adminUsers',   label: 'จัดการผู้ใช้' },
   { key: 'adminRepairs', label: 'กล้องรอตรวจสอบ' },
   { key: 'adminGroups',  label: 'จัดการกลุ่มและสิทธิ์' },
+  { key: 'adminMenus',   label: 'จัดการเมนู' },
 ];
+
+/* Per-menu presentation settings managed on /admin/menus */
+export interface MenuSetting {
+  key: MenuKey;
+  label: string;
+  order: number;
+  enabled: boolean;
+}
 
 export const ACTION_OPTIONS: { key: PermissionAction; label: string }[] = [
   { key: 'view',   label: 'ดู' },

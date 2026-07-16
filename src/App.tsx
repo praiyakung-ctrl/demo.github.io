@@ -17,6 +17,7 @@ const AdminCamerasPage = lazy(() => import('./pages/AdminCamerasPage').then(m =>
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
 const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m => ({ default: m.AdminRepairsPage })));
 const AdminGroupsPage = lazy(() => import('./pages/AdminGroupsPage').then(m => ({ default: m.AdminGroupsPage })));
+const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ default: m.AdminMenusPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 
 function PageLoading() {
@@ -91,6 +92,11 @@ function AppRoutes() {
       <Route path="/admin/groups" element={
         <RequireAuth roles={['admin']}>
           <AdminGroupsPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/menus" element={
+        <RequireAuth roles={['admin']}>
+          <AdminMenusPage />
         </RequireAuth>
       } />
       <Route path="*" element={<Navigate to="/" replace />} />
