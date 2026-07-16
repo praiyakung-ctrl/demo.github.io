@@ -14,7 +14,8 @@ export function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(() => localStorage.getItem('remembered_username') !== null);
+  // remember-me starts checked on every visit; users opt out per login
+  const [rememberMe, setRememberMe] = useState(true);
   const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotSending, setForgotSending] = useState(false);

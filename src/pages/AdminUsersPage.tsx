@@ -226,12 +226,12 @@ export function AdminUsersPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-navy-700">
+                  <tr className="bg-blue-200">
                     {([
                       ['ชื่อ-นามสกุล', 'name'], ['Username', 'username'], ['อีเมล', 'email'], ['บทบาท', 'role'],
                     ] as [string, SortKey][]).map(([h, key]) => (
-                      <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">
-                        <button onClick={() => toggleSort(key)} className="flex items-center gap-1.5 hover:text-amber-300 transition-colors">
+                      <th key={h} scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-3">
+                        <button onClick={() => toggleSort(key)} className="flex items-center gap-1.5 hover:text-blue-700 transition-colors">
                           {h}
                           {sortKey === key
                             ? (sortAsc ? <ArrowUp size={14} /> : <ArrowDown size={14} />)
@@ -240,7 +240,7 @@ export function AdminUsersPage() {
                       </th>
                     ))}
                     {['กลุ่มสิทธิ์', 'สถานะ', 'ดำเนินการ'].map(h => (
-                      <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">{h}</th>
+                      <th key={h} scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>

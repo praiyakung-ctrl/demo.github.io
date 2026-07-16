@@ -68,12 +68,12 @@ export function AdminMenusPage() {
           <div className="card overflow-hidden shadow-md">
             <div className="overflow-x-auto">
               <table className="w-full text-xl">
-                <thead className="bg-gray-50">
+                <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5 w-28">ลำดับ</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">ชื่อเมนู</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">เส้นทาง</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5 w-40">เปิดใช้งาน</th>
+                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5 w-28">ลำดับ</th>
+                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">ชื่อเมนู</th>
+                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">เส้นทาง</th>
+                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5 w-40">เปิดใช้งาน</th>
                   </tr>
                 </thead>
                 <tbody>

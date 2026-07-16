@@ -112,9 +112,9 @@ export function AdminCamerasPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-xl">
                 <thead>
-                  <tr className="bg-navy-700">
+                  <tr className="bg-blue-200">
                     {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ทิศทาง', 'โครงข่าย NT MPLS', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
-                      <th key={h} scope="col" className="text-left text-xl font-bold text-white px-4 py-3">{h}</th>
+                      <th key={h} scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>

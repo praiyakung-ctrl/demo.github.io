@@ -130,13 +130,13 @@ export function AdminGroupsPage() {
           <div className="card overflow-hidden shadow-md">
             <div className="overflow-x-auto">
               <table className="w-full text-xl">
-                <thead className="bg-gray-50">
+                <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">ชื่อกลุ่ม</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-gray-600 px-4 py-2.5">คำอธิบาย</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5">เมนูที่เข้าถึงได้</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5">ประเภท</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-gray-600 px-4 py-2.5">ดำเนินการ</th>
+                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">ชื่อกลุ่ม</th>
+                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">คำอธิบาย</th>
+                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">เมนูที่เข้าถึงได้</th>
+                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">ประเภท</th>
+                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">ดำเนินการ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -218,11 +218,11 @@ export function AdminGroupsPage() {
             {/* Permission matrix */}
             <div className="rounded-xl border border-gray-200 overflow-hidden">
               <table className="w-full text-lg">
-                <thead className="bg-navy-700">
+                <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-left text-base font-bold text-white px-4 py-2.5">เมนู</th>
+                    <th scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-2.5">เมนู</th>
                     {ACTION_OPTIONS.map(a => (
-                      <th key={a.key} scope="col" className="text-center text-base font-bold text-white px-3 py-2.5 w-20">{a.label}</th>
+                      <th key={a.key} scope="col" className="text-center text-base font-bold text-navy-700 px-3 py-2.5 w-20">{a.label}</th>
                     ))}
                   </tr>
                 </thead>
