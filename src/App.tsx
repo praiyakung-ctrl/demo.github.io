@@ -19,6 +19,9 @@ const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m =>
 const AdminGroupsPage = lazy(() => import('./pages/AdminGroupsPage').then(m => ({ default: m.AdminGroupsPage })));
 const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ default: m.AdminMenusPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
+const AdminAuditLogPage = lazy(() => import('./pages/AdminAuditLogPage').then(m => ({ default: m.AdminAuditLogPage })));
+const AdminApiPage = lazy(() => import('./pages/AdminApiPage').then(m => ({ default: m.AdminApiPage })));
+const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage').then(m => ({ default: m.AdminSettingsPage })));
 
 function PageLoading() {
   return (
@@ -97,6 +100,21 @@ function AppRoutes() {
       <Route path="/admin/menus" element={
         <RequireAuth roles={['admin']}>
           <AdminMenusPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/audit-log" element={
+        <RequireAuth roles={['admin']}>
+          <AdminAuditLogPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/api" element={
+        <RequireAuth roles={['admin']}>
+          <AdminApiPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/settings" element={
+        <RequireAuth roles={['admin']}>
+          <AdminSettingsPage />
         </RequireAuth>
       } />
       <Route path="*" element={<Navigate to="/" replace />} />

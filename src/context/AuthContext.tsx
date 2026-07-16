@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { MenuKey, PermissionAction, User, UserRole } from '../types';
 import { groupForUser, hasPermission } from '../utils/groupStorage';
 import { savedUsers } from '../utils/userStorage';
+import { logAudit } from '../utils/auditLog';
 
 interface AuthContextType {
   user: User | null;
@@ -34,6 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (found) {
       setUser(found);
       localStorage.setItem('auth_user', JSON.stringify(found));
+      logAudit(found, 'login', 'ระบบ', 'เข้าสู่ระบบสำเร็จ');
       return true;
     }
     return false;
@@ -50,9 +52,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     setUser(citizen);
     localStorage.setItem('auth_user', JSON.stringify(citizen));
+    logAudit(citizen, 'login', 'ระบบ', 'เข้าสู่ระบบผ่าน Google');
   };
 
   const logout = () => {
+    if (user) logAudit(user, 'logout', 'ระบบ', 'ออกจากระบบ');
     setUser(null);
     localStorage.removeItem('auth_user');
   };

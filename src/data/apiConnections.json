@@ -1,0 +1,52 @@
+[
+  {
+    "id": "api-001",
+    "name": "Live Camera Streaming (VMS)",
+    "type": "camera",
+    "endpoint": "rtsp://vms.chonburi-cctv.local:554",
+    "config": { "streamUrl": "rtsp://vms.chonburi-cctv.local:554", "hlsUrl": "https://vms.chonburi-cctv.local/hls" },
+    "enabled": true,
+    "status": "connected",
+    "lastChecked": "2026-07-16T09:30:00"
+  },
+  {
+    "id": "api-002",
+    "name": "Google OAuth 2.0",
+    "type": "oauth",
+    "endpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+    "config": { "clientId": "chonburi-cctv-demo.apps.googleusercontent.com", "clientSecret": "GOCSPX-demo-secret", "redirectUri": "https://cctv.chonburi.go.th/auth/callback" },
+    "enabled": true,
+    "status": "connected",
+    "lastChecked": "2026-07-16T09:30:00"
+  },
+  {
+    "id": "api-003",
+    "name": "LDAP อบจ.ชลบุรี",
+    "type": "ldap",
+    "endpoint": "ldap://ldap.chonburi.go.th:389",
+    "config": { "serverUrl": "ldap://ldap.chonburi.go.th:389", "baseDn": "dc=chonburi,dc=go,dc=th", "bindDn": "cn=cctv-service,ou=services,dc=chonburi,dc=go,dc=th" },
+    "enabled": false,
+    "status": "disconnected",
+    "lastChecked": "2026-07-14T14:00:00"
+  },
+  {
+    "id": "api-004",
+    "name": "LPR Data Service",
+    "type": "rest",
+    "endpoint": "https://lpr-api.chonburi-cctv.local/v1",
+    "config": { "baseUrl": "https://lpr-api.chonburi-cctv.local/v1", "apiKey": "lpr-demo-key-2569" },
+    "enabled": true,
+    "status": "connected",
+    "lastChecked": "2026-07-16T09:30:00"
+  },
+  {
+    "id": "api-005",
+    "name": "NT MPLS Monitoring",
+    "type": "rest",
+    "endpoint": "https://mpls-monitor.ntplc.co.th/api",
+    "config": { "baseUrl": "https://mpls-monitor.ntplc.co.th/api", "apiKey": "nt-mpls-demo-key" },
+    "enabled": true,
+    "status": "error",
+    "lastChecked": "2026-07-16T08:45:00"
+  }
+]

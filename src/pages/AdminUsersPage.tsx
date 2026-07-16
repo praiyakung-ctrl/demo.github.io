@@ -9,6 +9,7 @@ import { ROLE_LABELS } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { assignUserToGroup, groupForUser, removeAssignment, savedGroups } from '../utils/groupStorage';
 import { savedUsers, saveUsers } from '../utils/userStorage';
+import { logAudit } from '../utils/auditLog';
 import { exportRowsToExcel, todayStamp } from '../utils/exportReport';
 
 const PAGE_SIZE = 10;
@@ -147,8 +148,10 @@ export function AdminUsersPage() {
     const id = editUser?.id ?? String(Date.now());
     if (editUser) {
       setUsers(prev => prev.map(u => u.id === id ? { ...u, ...record } : u));
+      logAudit(currentUser, 'edit', 'จัดการผู้ใช้งาน', `แก้ไขผู้ใช้: ${record.name}`);
     } else {
       setUsers(prev => [...prev, { id, ...record }]);
+      logAudit(currentUser, 'create', 'จัดการผู้ใช้งาน', `เพิ่มผู้ใช้ใหม่: ${record.name}`);
     }
     // keep the persistent assignment store (shared with /admin/groups) in sync
     if (record.groupId) assignUserToGroup(id, record.groupId); else removeAssignment(id);
@@ -156,7 +159,11 @@ export function AdminUsersPage() {
   };
 
   const handleDelete = () => {
-    if (deleteId) setUsers(prev => prev.filter(u => u.id !== deleteId));
+    if (deleteId) {
+      const target = users.find(u => u.id === deleteId);
+      setUsers(prev => prev.filter(u => u.id !== deleteId));
+      logAudit(currentUser, 'delete', 'จัดการผู้ใช้งาน', `ลบผู้ใช้: ${target?.name ?? deleteId}`);
+    }
     setDeleteId(null);
   };
 

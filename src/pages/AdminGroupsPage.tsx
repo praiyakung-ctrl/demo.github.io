@@ -17,6 +17,7 @@ const PAGE_SIZE = 10;
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [],
   adminCameras: [], adminUsers: [], adminRepairs: [], adminGroups: [], adminMenus: [],
+  adminAuditLog: [], adminApi: [], adminSettings: [],
 };
 
 export function AdminGroupsPage() {

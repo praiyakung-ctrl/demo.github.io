@@ -8,6 +8,7 @@ import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { Pagination } from '../components/Pagination';
+import { logAudit } from '../utils/auditLog';
 
 const INITIAL = camerasData as Camera[];
 const PAGE_SIZE = 10;
@@ -20,7 +21,7 @@ const EMPTY: Omit<Camera, 'id'> = {
 };
 
 export function AdminCamerasPage() {
-  const { can } = useAuth();
+  const { can, user: currentUser } = useAuth();
   const [cameras, setCameras] = useState<Camera[]>(INITIAL);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,15 +57,20 @@ export function AdminCamerasPage() {
   const handleSave = () => {
     if (editCam) {
       setCameras(prev => prev.map(c => c.id === editCam.id ? { ...form, id: editCam.id } : c));
+      logAudit(currentUser, 'edit', 'จัดการกล้อง CCTV', `แก้ไขข้อมูลกล้อง ${editCam.id}`);
     } else {
       const newId = `CAM-${String(cameras.length + 1).padStart(3, '0')}`;
       setCameras(prev => [...prev, { ...form, id: newId }]);
+      logAudit(currentUser, 'create', 'จัดการกล้อง CCTV', `เพิ่มกล้องใหม่: ${newId} ${form.name}`);
     }
     setModalOpen(false);
   };
 
   const handleDelete = () => {
-    if (deleteId) setCameras(prev => prev.filter(c => c.id !== deleteId));
+    if (deleteId) {
+      setCameras(prev => prev.filter(c => c.id !== deleteId));
+      logAudit(currentUser, 'delete', 'จัดการกล้อง CCTV', `ลบกล้อง ${deleteId}`);
+    }
     setDeleteId(null);
   };
 

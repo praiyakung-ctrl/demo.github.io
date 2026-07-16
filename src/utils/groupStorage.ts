@@ -16,6 +16,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: ALL, adminUsers: ALL, adminRepairs: ALL, adminGroups: ALL, adminMenus: ALL,
+      adminAuditLog: ALL, adminApi: ALL, adminSettings: ALL,
     },
   },
   {
@@ -26,6 +27,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
     },
   },
   {
@@ -36,6 +38,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
     },
   },
   {
@@ -46,6 +49,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: NONE, dashboard: NONE, portal: ALL, reports: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
     },
   },
 ];

@@ -21,6 +21,7 @@ const customGroup: UserGroup = {
   permissions: {
     map: ['view'], dashboard: [], portal: [], reports: [],
     adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [], adminMenus: [],
+    adminAuditLog: [], adminApi: [], adminSettings: [],
   },
 };
 

@@ -13,6 +13,7 @@ const MENU_PATHS: Record<string, string> = {
   map: '/map', dashboard: '/dashboard', portal: '/portal', reports: '/reports',
   adminCameras: '/admin/cameras', adminUsers: '/admin/users',
   adminRepairs: '/admin/repairs', adminGroups: '/admin/groups', adminMenus: '/admin/menus',
+  adminAuditLog: '/admin/audit-log', adminApi: '/admin/api', adminSettings: '/admin/settings',
 };
 
 export function AdminMenusPage() {
