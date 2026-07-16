@@ -68,16 +68,16 @@ export function AdminCamerasPage() {
       <div className="flex flex-col h-full">
 
         {/* Page header banner */}
-        <div className="bg-navy-700 px-6 py-4 flex items-center justify-between shadow-md flex-shrink-0">
+        <div className="bg-blue-50 border-b-2 border-blue-100 px-6 py-4 flex items-center justify-between shadow-sm flex-shrink-0">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-navy-700 rounded-xl flex items-center justify-center">
               <Video size={26} className="text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-white">จัดการกล้อง CCTV</h1>
+              <h1 className="text-2xl font-extrabold text-navy-700">จัดการกล้อง CCTV</h1>
               <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-sm text-navy-200">กล้องในระบบทั้งหมด</span>
-                <span className="bg-white/25 text-white text-sm font-bold px-2.5 py-0.5 rounded-full">{cameras.length} กล้อง</span>
+                <span className="text-sm text-gray-600">กล้องในระบบทั้งหมด</span>
+                <span className="bg-navy-700 text-white text-sm font-bold px-2.5 py-0.5 rounded-full">{cameras.length} กล้อง</span>
               </div>
             </div>
           </div>
