@@ -309,10 +309,10 @@ export function DashboardPage() {
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-extrabold text-navy-700 text-2xl">สรุปเหตุการณ์รายเดือน</h3>
               <div className="flex gap-2">
-                <button onClick={handleExportPDF} className="btn-primary text-lg font-extrabold py-2 px-4 flex items-center gap-2">
+                <button onClick={handleExportPDF} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
                   <FileDown size={20} /> Export PDF
                 </button>
-                <button onClick={handleExportExcel} className="btn-primary text-lg font-extrabold py-2 px-4 flex items-center gap-2">
+                <button onClick={handleExportExcel} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
                   <FileSpreadsheet size={20} /> Export Excel
                 </button>
               </div>
