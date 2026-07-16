@@ -127,6 +127,11 @@ export interface User {
   password?: string;
   /* group-based permissions; when absent, falls back to the system group of the role */
   groupId?: string;
+  phone?: string;
+  /* profile photo as data-URI (demo) */
+  picture?: string;
+  department?: string;
+  note?: string;
 }
 
 /* ---------- Group-based permissions (RBAC) ---------- */

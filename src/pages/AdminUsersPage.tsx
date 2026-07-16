@@ -17,7 +17,13 @@ const ROLE_OPTIONS = [
 const EMPTY_FORM = {
   name: '', username: '', email: '', role: 'operator' as 'admin' | 'operator' | 'executive' | 'citizen',
   password: '', isActive: true, groupId: '',
+  phone: '', picture: '', department: '', note: '',
 };
+
+/* Red asterisk for required fields */
+function Req() {
+  return <span className="text-red-600" aria-hidden="true"> *</span>;
+}
 
 export function AdminUsersPage() {
   const { can } = useAuth();
@@ -44,12 +50,33 @@ export function AdminUsersPage() {
 
   const openEdit = (user: User) => {
     setEditUser(user);
-    setForm({ name: user.name, username: user.username, email: user.email, role: user.role as 'admin' | 'operator' | 'executive' | 'citizen', password: '', isActive: user.isActive, groupId: user.groupId ?? '' });
+    setForm({
+      name: user.name, username: user.username, email: user.email,
+      role: user.role as 'admin' | 'operator' | 'executive' | 'citizen',
+      password: '', isActive: user.isActive, groupId: user.groupId ?? '',
+      phone: user.phone ?? '', picture: user.picture ?? '',
+      department: user.department ?? '', note: user.note ?? '',
+    });
     setModalOpen(true);
   };
 
-  const handleSave = () => {
-    const record = { ...form, groupId: form.groupId || undefined };
+  const handlePhoto = (file: File | undefined) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => set('picture', reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    const record = {
+      ...form,
+      groupId: form.groupId || undefined,
+      phone: form.phone || undefined,
+      picture: form.picture || undefined,
+      department: form.department || undefined,
+      note: form.note || undefined,
+    };
     const id = editUser?.id ?? String(Date.now());
     if (editUser) {
       setUsers(prev => prev.map(u => u.id === id ? { ...u, ...record } : u));
@@ -129,18 +156,28 @@ export function AdminUsersPage() {
                       {/* Name with User icon */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-navy-100 border-2 border-navy-300 flex items-center justify-center flex-shrink-0">
-                            <UserIcon size={20} className="text-navy-700" />
+                          {user.picture ? (
+                            <img src={user.picture} alt="" className="w-10 h-10 rounded-full object-cover border-2 border-navy-300 flex-shrink-0" />
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-navy-100 border-2 border-navy-300 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                              <UserIcon size={20} className="text-navy-700" />
+                            </div>
+                          )}
+                          <div className="min-w-0">
+                            <p className="font-bold text-navy-700 text-base">{user.name}</p>
+                            {user.department && <p className="text-xs text-gray-500 truncate max-w-[220px]">{user.department}</p>}
                           </div>
-                          <span className="font-bold text-navy-700 text-base">{user.name}</span>
                         </div>
                       </td>
                       {/* Username */}
                       <td className="px-4 py-3">
                         <span className="font-mono text-sm font-bold text-navy-700">{user.username}</span>
                       </td>
-                      {/* Email */}
-                      <td className="px-4 py-3 text-lg text-navy-700">{user.email}</td>
+                      {/* Email + phone */}
+                      <td className="px-4 py-3">
+                        <p className="text-lg text-navy-700">{user.email}</p>
+                        {user.phone && <p className="text-sm text-gray-500">โทร {user.phone}</p>}
+                      </td>
                       {/* Role */}
                       <td className="px-4 py-3"><RoleBadge role={user.role} /></td>
                       {/* Permission group */}
@@ -179,18 +216,79 @@ export function AdminUsersPage() {
       </div>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editUser ? 'แก้ไขผู้ใช้' : 'เพิ่มผู้ใช้ใหม่'}>
-        <div className="space-y-3">
+        <form onSubmit={handleSave} className="space-y-3">
+          {/* Profile photo */}
           <div>
-            <label htmlFor="user-name" className="label">ชื่อ-นามสกุล *</label>
-            <input id="user-name" value={form.name} onChange={e => set('name', e.target.value)} className="input-field" />
+            <span className="label">รูปภาพสมาชิก</span>
+            <div className="flex items-center gap-3">
+              {form.picture ? (
+                <img src={form.picture} alt="รูปภาพสมาชิก" className="w-16 h-16 rounded-full object-cover border-2 border-navy-200 flex-shrink-0" />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-navy-100 border-2 border-navy-300 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                  <UserIcon size={28} className="text-navy-700" />
+                </div>
+              )}
+              <div className="flex-1 space-y-1.5">
+                <input
+                  id="user-photo"
+                  type="file"
+                  accept="image/*"
+                  aria-label="เลือกรูปภาพสมาชิก"
+                  onChange={e => handlePhoto(e.target.files?.[0])}
+                  className="block w-full text-sm text-gray-600 file:mr-3 file:px-3 file:py-1.5 file:rounded-lg file:border-0 file:bg-navy-700 file:text-white file:text-sm file:font-bold file:cursor-pointer hover:file:bg-navy-600"
+                />
+                {form.picture && (
+                  <button type="button" onClick={() => set('picture', '')} className="text-sm text-red-600 hover:underline font-medium">
+                    นำรูปออก
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
           <div>
-            <label htmlFor="user-username" className="label">Username *</label>
-            <input id="user-username" value={form.username} onChange={e => set('username', e.target.value)} className="input-field" />
+            <label htmlFor="user-name" className="label">ชื่อ-นามสกุล<Req /></label>
+            <input id="user-name" value={form.name} onChange={e => set('name', e.target.value)} className="input-field" required />
+          </div>
+          <div>
+            <label htmlFor="user-username" className="label">Username<Req /></label>
+            <input id="user-username" value={form.username} onChange={e => set('username', e.target.value)} className="input-field" required />
           </div>
           <div>
             <label htmlFor="user-email" className="label">อีเมล</label>
-            <input id="user-email" type="email" value={form.email} onChange={e => set('email', e.target.value)} className="input-field" />
+            <input
+              id="user-email"
+              type="email"
+              value={form.email}
+              onChange={e => set('email', e.target.value)}
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              title="รูปแบบอีเมลไม่ถูกต้อง เช่น name@example.com"
+              placeholder="เช่น somchai@chonburi.go.th"
+              className="input-field"
+            />
+          </div>
+          <div>
+            <label htmlFor="user-phone" className="label">เบอร์โทรศัพท์</label>
+            <input
+              id="user-phone"
+              type="tel"
+              inputMode="numeric"
+              value={form.phone}
+              onChange={e => set('phone', e.target.value)}
+              pattern="0[0-9]{8,9}"
+              title="เบอร์โทร 9-10 หลัก ขึ้นต้นด้วย 0 เช่น 0812345678"
+              placeholder="เช่น 0812345678"
+              className="input-field"
+            />
+          </div>
+          <div>
+            <label htmlFor="user-department" className="label">แผนก/หน่วยงาน/สังกัด</label>
+            <input
+              id="user-department"
+              value={form.department}
+              onChange={e => set('department', e.target.value)}
+              placeholder="เช่น กองสาธารณสุขและสิ่งแวดล้อม อบจ.ชลบุรี"
+              className="input-field"
+            />
           </div>
           <div>
             <label htmlFor="user-role" className="label">บทบาท</label>
@@ -207,19 +305,30 @@ export function AdminUsersPage() {
           </div>
           {!editUser && (
             <div>
-              <label htmlFor="user-password" className="label">รหัสผ่าน *</label>
-              <input id="user-password" type="password" value={form.password} onChange={e => set('password', e.target.value)} className="input-field" />
+              <label htmlFor="user-password" className="label">รหัสผ่าน<Req /></label>
+              <input id="user-password" type="password" value={form.password} onChange={e => set('password', e.target.value)} className="input-field" required />
             </div>
           )}
+          <div>
+            <label htmlFor="user-note" className="label">หมายเหตุ</label>
+            <textarea
+              id="user-note"
+              value={form.note}
+              onChange={e => set('note', e.target.value)}
+              rows={2}
+              placeholder="ข้อมูลเพิ่มเติมเกี่ยวกับผู้ใช้ (ถ้ามี)"
+              className="input-field"
+            />
+          </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" id="isActive" checked={form.isActive} onChange={e => set('isActive', e.target.checked)} className="rounded" />
             <label htmlFor="isActive" className="text-sm text-gray-700">เปิดใช้งาน (Active)</label>
           </div>
-        </div>
-        <div className="flex gap-3 justify-end mt-4">
-          <button onClick={() => setModalOpen(false)} className="btn-secondary">ยกเลิก</button>
-          <button onClick={handleSave} className="btn-primary">บันทึก</button>
-        </div>
+          <div className="flex gap-3 justify-end mt-4">
+            <button type="button" onClick={() => setModalOpen(false)} className="btn-secondary">ยกเลิก</button>
+            <button type="submit" className="btn-primary">บันทึก</button>
+          </div>
+        </form>
       </Modal>
 
       <ConfirmDialog
