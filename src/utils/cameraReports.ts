@@ -1,5 +1,7 @@
 /* Reports filed by staff when an offline camera needs inspection */
 
+import repairsData from '../data/repairs.json';
+
 export interface CameraReport {
   cameraId: string;
   reportedBy: string;
@@ -10,15 +12,17 @@ export interface CameraReport {
 }
 
 const REPORTS_KEY = 'camera_reports';
+const SEED = repairsData as CameraReport[];
 
+/* Seeds sample repair history on first use (same pattern as userStorage) */
 export function savedReports(): CameraReport[] {
   try {
     const raw = localStorage.getItem(REPORTS_KEY);
-    if (!raw) return [];
+    if (!raw) return SEED;
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : SEED;
   } catch {
-    return [];
+    return SEED;
   }
 }
 

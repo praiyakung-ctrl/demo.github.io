@@ -1,0 +1,64 @@
+[
+  {
+    "cameraId": "CAM-012",
+    "reportedBy": "วิภา ควบคุม",
+    "reportedAt": "2026-07-15T08:42:00.000Z",
+    "note": "ภาพไม่ขึ้น หน้าจอดำตั้งแต่ช่วงเช้า",
+    "status": "pending"
+  },
+  {
+    "cameraId": "CAM-029",
+    "reportedBy": "กิตติ ตรวจสอบ",
+    "reportedAt": "2026-07-14T13:15:00.000Z",
+    "note": "สัญญาณหลุดเป็นช่วง ๆ ภาพกระตุกบ่อย",
+    "status": "pending"
+  },
+  {
+    "cameraId": "CAM-042",
+    "reportedBy": "สมศักดิ์ ผู้ดูแล",
+    "reportedAt": "2026-07-12T09:30:00.000Z",
+    "note": "ไฟฟ้าดับบริเวณเสา กล้องไม่ทำงานทั้งจุด",
+    "status": "resolved",
+    "resolvedAt": "2026-07-13T11:05:00.000Z"
+  },
+  {
+    "cameraId": "CAM-004",
+    "reportedBy": "วิภา ควบคุม",
+    "reportedAt": "2026-07-08T10:20:00.000Z",
+    "note": "เลนส์เบลอ มีคราบน้ำเกาะหน้าเลนส์",
+    "status": "resolved",
+    "resolvedAt": "2026-07-09T14:40:00.000Z"
+  },
+  {
+    "cameraId": "CAM-017",
+    "reportedBy": "กิตติ ตรวจสอบ",
+    "reportedAt": "2026-07-03T15:55:00.000Z",
+    "note": "สายสัญญาณถูกตัด คาดว่าจากงานก่อสร้างข้างเคียง",
+    "status": "resolved",
+    "resolvedAt": "2026-07-05T09:10:00.000Z"
+  },
+  {
+    "cameraId": "CAM-035",
+    "reportedBy": "สมศักดิ์ ผู้ดูแล",
+    "reportedAt": "2026-06-28T08:05:00.000Z",
+    "note": "กล้อง PTZ หมุนไม่ได้ ค้างทิศเดิม",
+    "status": "resolved",
+    "resolvedAt": "2026-06-30T16:25:00.000Z"
+  },
+  {
+    "cameraId": "CAM-008",
+    "reportedBy": "วิภา ควบคุม",
+    "reportedAt": "2026-06-21T11:45:00.000Z",
+    "note": "",
+    "status": "resolved",
+    "resolvedAt": "2026-06-21T17:30:00.000Z"
+  },
+  {
+    "cameraId": "CAM-021",
+    "reportedBy": "ลัดดา ดูแล",
+    "reportedAt": "2026-06-15T07:50:00.000Z",
+    "note": "ภาพมืดผิดปกติช่วงกลางคืน ไฟอินฟราเรดอาจเสีย",
+    "status": "resolved",
+    "resolvedAt": "2026-06-17T10:15:00.000Z"
+  }
+]
