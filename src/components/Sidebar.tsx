@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings, Wrench } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, Settings, ShieldCheck, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import type { MenuKey } from '../types';
 
-const navItems = [
-  { to: '/map',       icon: Map,             label: 'แผนที่กล้อง', iconColor: 'text-cyan-500',   roles: ['admin', 'operator', 'executive'] },
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard',   iconColor: 'text-blue-600',   roles: ['admin', 'operator', 'executive'] },
-  { to: '/portal',    icon: FileText,        label: 'ยื่นขอกล้อง', iconColor: 'text-green-600',  roles: ['admin', 'operator', 'executive', 'citizen'] },
-  { to: '/reports',   icon: BarChart3,       label: 'รายงาน',      iconColor: 'text-amber-500',  roles: ['admin', 'operator', 'executive'] },
+/* Menu visibility is driven by the user's group permissions (see groupStorage);
+   the system groups reproduce the old hardcoded role behavior. */
+const navItems: { to: string; icon: typeof Map; label: string; iconColor: string; menuKey: MenuKey }[] = [
+  { to: '/map',       icon: Map,             label: 'แผนที่กล้อง', iconColor: 'text-cyan-500',  menuKey: 'map' },
+  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard',   iconColor: 'text-blue-600',  menuKey: 'dashboard' },
+  { to: '/portal',    icon: FileText,        label: 'ยื่นขอกล้อง', iconColor: 'text-green-600', menuKey: 'portal' },
+  { to: '/reports',   icon: BarChart3,       label: 'รายงาน',      iconColor: 'text-amber-500', menuKey: 'reports' },
 ];
 
-const adminItems = [
-  { to: '/admin/cameras', icon: Camera, label: 'จัดการกล้อง', iconColor: 'text-pink-500',   roles: ['admin'] },
-  { to: '/admin/users',   icon: Users,  label: 'จัดการผู้ใช้', iconColor: 'text-purple-500', roles: ['admin'] },
-  { to: '/admin/repairs', icon: Wrench, label: 'กล้องรอตรวจสอบ', iconColor: 'text-orange-500', roles: ['admin'] },
+const adminItems: { to: string; icon: typeof Map; label: string; iconColor: string; menuKey: MenuKey }[] = [
+  { to: '/admin/cameras', icon: Camera,      label: 'จัดการกล้อง',       iconColor: 'text-pink-500',   menuKey: 'adminCameras' },
+  { to: '/admin/users',   icon: Users,       label: 'จัดการผู้ใช้',       iconColor: 'text-purple-500', menuKey: 'adminUsers' },
+  { to: '/admin/repairs', icon: Wrench,      label: 'กล้องรอตรวจสอบ',    iconColor: 'text-orange-500', menuKey: 'adminRepairs' },
+  { to: '/admin/groups',  icon: ShieldCheck, label: 'จัดการกลุ่มสิทธิ์', iconColor: 'text-teal-600',   menuKey: 'adminGroups' },
 ];
 
 export function Sidebar() {
-  const { user } = useAuth();
-  const role = user?.role ?? '';
+  const { can } = useAuth();
   const [collapsed, setCollapsed] = useState(true);
 
   const activeClass = (extra = '') =>
@@ -61,7 +64,7 @@ export function Sidebar() {
         </div>
 
         {navItems
-          .filter(item => item.roles.includes(role))
+          .filter(item => can(item.menuKey, 'view'))
           .map(item => (
             <NavLink
               key={item.to}
@@ -79,7 +82,7 @@ export function Sidebar() {
             </NavLink>
           ))}
 
-        {adminItems.some(i => i.roles.includes(role)) && (
+        {adminItems.some(i => can(i.menuKey, 'view')) && (
           <>
             {/* Section header */}
             <div className={`pt-3 pb-1 ${collapsed ? 'flex justify-center' : 'px-2'}`}>
@@ -97,7 +100,7 @@ export function Sidebar() {
             </div>
 
             {adminItems
-              .filter(item => item.roles.includes(role))
+              .filter(item => can(item.menuKey, 'view'))
               .map(item => (
                 <NavLink
                   key={item.to}

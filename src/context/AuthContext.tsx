@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { User, UserRole } from '../types';
+import type { MenuKey, PermissionAction, User, UserRole } from '../types';
 import usersData from '../data/users.json';
+import { groupForUser, hasPermission } from '../utils/groupStorage';
 
 interface AuthContextType {
   user: User | null;
@@ -13,6 +14,8 @@ interface AuthContextType {
   isExecutive: boolean;
   isCitizen: boolean;
   canEdit: boolean;
+  /* group-based permission check: may the current user perform `action` in `menu`? */
+  can: (menu: MenuKey, action: PermissionAction) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -55,6 +58,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const role = user?.role;
 
+  // groups are read fresh on every check so edits on /admin/groups take effect
+  // as soon as the user navigates (no stale cache)
+  const can = (menu: MenuKey, action: PermissionAction): boolean => {
+    if (!user) return false;
+    return hasPermission(groupForUser(user), menu, action);
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -66,6 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isExecutive: role === 'executive',
       isCitizen: role === 'citizen',
       canEdit: role === 'admin' || role === 'operator',
+      can,
     }}>
       {children}
     </AuthContext.Provider>

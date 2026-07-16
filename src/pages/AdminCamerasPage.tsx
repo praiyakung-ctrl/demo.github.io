@@ -6,6 +6,7 @@ import { StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
+import { useAuth } from '../context/AuthContext';
 
 const INITIAL = camerasData as Camera[];
 
@@ -17,6 +18,7 @@ const EMPTY: Omit<Camera, 'id'> = {
 };
 
 export function AdminCamerasPage() {
+  const { can } = useAuth();
   const [cameras, setCameras] = useState<Camera[]>(INITIAL);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -79,9 +81,11 @@ export function AdminCamerasPage() {
               </div>
             </div>
           </div>
-          <button onClick={openAdd} className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl border-2 border-green-400 shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base">
-            <Plus size={20} /> เพิ่มกล้อง
-          </button>
+          {can('adminCameras', 'create') && (
+            <button onClick={openAdd} className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl border-2 border-green-400 shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base">
+              <Plus size={20} /> เพิ่มกล้อง
+            </button>
+          )}
         </div>
 
         {/* Content */}
@@ -179,12 +183,16 @@ export function AdminCamerasPage() {
                       {/* Actions */}
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
-                          <button onClick={() => openEdit(cam)} className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
-                            <Pencil size={13} /> แก้ไข
-                          </button>
-                          <button onClick={() => setDeleteId(cam.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
-                            <Trash2 size={13} /> ลบ
-                          </button>
+                          {can('adminCameras', 'edit') && (
+                            <button onClick={() => openEdit(cam)} className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
+                              <Pencil size={13} /> แก้ไข
+                            </button>
+                          )}
+                          {can('adminCameras', 'delete') && (
+                            <button onClick={() => setDeleteId(cam.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all">
+                              <Trash2 size={13} /> ลบ
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>

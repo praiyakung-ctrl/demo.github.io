@@ -125,7 +125,44 @@ export interface User {
   email: string;
   isActive: boolean;
   password?: string;
+  /* group-based permissions; when absent, falls back to the system group of the role */
+  groupId?: string;
 }
+
+/* ---------- Group-based permissions (RBAC) ---------- */
+
+export type MenuKey =
+  | 'map' | 'dashboard' | 'portal' | 'reports'
+  | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups';
+
+export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
+
+export interface UserGroup {
+  id: string;
+  name: string;
+  description: string;
+  /* system groups mirror the built-in roles: permissions editable, not deletable */
+  isSystem: boolean;
+  permissions: Record<MenuKey, PermissionAction[]>;
+}
+
+export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
+  { key: 'map',          label: 'แผนที่กล้อง' },
+  { key: 'dashboard',    label: 'Dashboard' },
+  { key: 'portal',       label: 'ยื่นขอกล้อง (พอร์ทัลประชาชน)' },
+  { key: 'reports',      label: 'รายงาน' },
+  { key: 'adminCameras', label: 'จัดการกล้อง' },
+  { key: 'adminUsers',   label: 'จัดการผู้ใช้' },
+  { key: 'adminRepairs', label: 'กล้องรอตรวจสอบ' },
+  { key: 'adminGroups',  label: 'จัดการกลุ่มและสิทธิ์' },
+];
+
+export const ACTION_OPTIONS: { key: PermissionAction; label: string }[] = [
+  { key: 'view',   label: 'ดู' },
+  { key: 'create', label: 'เพิ่ม' },
+  { key: 'edit',   label: 'แก้ไข' },
+  { key: 'delete', label: 'ลบ' },
+];
 
 export const EVENT_LABELS: Record<EventType, string> = {
   traffic: 'รถติด',

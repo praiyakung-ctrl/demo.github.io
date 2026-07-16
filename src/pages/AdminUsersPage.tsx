@@ -5,6 +5,8 @@ import { RoleBadge, StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
 import usersData from '../data/users.json';
 import type { User } from '../types';
+import { useAuth } from '../context/AuthContext';
+import { groupForUser, savedGroups } from '../utils/groupStorage';
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: 'ผู้ดูแลระบบ' },
@@ -14,10 +16,12 @@ const ROLE_OPTIONS = [
 
 const EMPTY_FORM = {
   name: '', username: '', email: '', role: 'operator' as 'admin' | 'operator' | 'executive' | 'citizen',
-  password: '', isActive: true,
+  password: '', isActive: true, groupId: '',
 };
 
 export function AdminUsersPage() {
+  const { can } = useAuth();
+  const groups = savedGroups();
   const [users, setUsers] = useState<User[]>(usersData as User[]);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,16 +44,17 @@ export function AdminUsersPage() {
 
   const openEdit = (user: User) => {
     setEditUser(user);
-    setForm({ name: user.name, username: user.username, email: user.email, role: user.role as 'admin' | 'operator' | 'executive' | 'citizen', password: '', isActive: user.isActive });
+    setForm({ name: user.name, username: user.username, email: user.email, role: user.role as 'admin' | 'operator' | 'executive' | 'citizen', password: '', isActive: user.isActive, groupId: user.groupId ?? '' });
     setModalOpen(true);
   };
 
   const handleSave = () => {
+    const record = { ...form, groupId: form.groupId || undefined };
     if (editUser) {
-      setUsers(prev => prev.map(u => u.id === editUser.id ? { ...u, ...form } : u));
+      setUsers(prev => prev.map(u => u.id === editUser.id ? { ...u, ...record } : u));
     } else {
       const newId = String(Date.now());
-      setUsers(prev => [...prev, { id: newId, ...form }]);
+      setUsers(prev => [...prev, { id: newId, ...record }]);
     }
     setModalOpen(false);
   };
@@ -79,9 +84,11 @@ export function AdminUsersPage() {
               </div>
             </div>
           </div>
-          <button onClick={openAdd} className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl border-2 border-green-400 shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base">
-            <Plus size={20} /> เพิ่มผู้ใช้
-          </button>
+          {can('adminUsers', 'create') && (
+            <button onClick={openAdd} className="flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl border-2 border-green-400 shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base">
+              <Plus size={20} /> เพิ่มผู้ใช้
+            </button>
+          )}
         </div>
 
         {/* Content */}
@@ -109,7 +116,7 @@ export function AdminUsersPage() {
               <table className="w-full">
                 <thead>
                   <tr className="bg-navy-700">
-                    {['ชื่อ-นามสกุล', 'Username', 'อีเมล', 'บทบาท', 'สถานะ', 'ดำเนินการ'].map(h => (
+                    {['ชื่อ-นามสกุล', 'Username', 'อีเมล', 'บทบาท', 'กลุ่มสิทธิ์', 'สถานะ', 'ดำเนินการ'].map(h => (
                       <th key={h} scope="col" className="text-left text-base font-bold text-white px-4 py-3">{h}</th>
                     ))}
                   </tr>
@@ -134,6 +141,8 @@ export function AdminUsersPage() {
                       <td className="px-4 py-3 text-lg text-navy-700">{user.email}</td>
                       {/* Role */}
                       <td className="px-4 py-3"><RoleBadge role={user.role} /></td>
+                      {/* Permission group */}
+                      <td className="px-4 py-3 text-base text-navy-700">{groupForUser(user).name}</td>
                       {/* Status */}
                       <td className="px-4 py-3">
                         <StatusBadge status={user.isActive ? 'Active' : 'Inactive'} />
@@ -141,15 +150,21 @@ export function AdminUsersPage() {
                       {/* Actions */}
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
-                          <button onClick={() => openEdit(user)} className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="แก้ไข">
-                            <Pencil size={13} /> แก้ไข
-                          </button>
-                          <button onClick={() => setResetId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="Reset รหัสผ่าน">
-                            <KeyRound size={13} /> Reset
-                          </button>
-                          <button onClick={() => setDeleteId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="ลบ">
-                            <Trash2 size={13} /> ลบ
-                          </button>
+                          {can('adminUsers', 'edit') && (
+                            <button onClick={() => openEdit(user)} className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="แก้ไข">
+                              <Pencil size={13} /> แก้ไข
+                            </button>
+                          )}
+                          {can('adminUsers', 'edit') && (
+                            <button onClick={() => setResetId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="Reset รหัสผ่าน">
+                              <KeyRound size={13} /> Reset
+                            </button>
+                          )}
+                          {can('adminUsers', 'delete') && (
+                            <button onClick={() => setDeleteId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="ลบ">
+                              <Trash2 size={13} /> ลบ
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -179,6 +194,13 @@ export function AdminUsersPage() {
             <label htmlFor="user-role" className="label">บทบาท</label>
             <select id="user-role" value={form.role} onChange={e => set('role', e.target.value)} className="input-field">
               {ROLE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="user-group" className="label">กลุ่มสิทธิ์การใช้งาน</label>
+            <select id="user-group" value={form.groupId} onChange={e => set('groupId', e.target.value)} className="input-field">
+              <option value="">ตามบทบาท (ค่าเริ่มต้น)</option>
+              {groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
             </select>
           </div>
           {!editUser && (

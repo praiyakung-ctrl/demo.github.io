@@ -151,6 +151,7 @@ flowchart LR
 - `DefaultRedirect` (path `/`) ส่งผู้ใช้ไปหน้าแรกตามบทบาท: citizen → `/portal`, executive → `/dashboard`, อื่น ๆ → `/map`
 - `BrowserRouter` ตั้ง `basename` จาก `import.meta.env.BASE_URL` เพื่อให้ตรงกับ `base: '/demo.github.io/'` ใน [vite.config.ts](vite.config.ts) (จำเป็นสำหรับ GitHub Pages)
 - **Code Splitting ราย Route** — ทุกหน้ายกเว้น `LoginPage` โหลดแบบ `React.lazy` (แยก chunk ต่อหน้า ครอบด้วย `Suspense`) ทำให้ bundle แรกเหลือ ~205 kB จากเดิม ~985 kB — ไลบรารีหนักอย่าง Recharts/Leaflet ถูกโหลดเฉพาะเมื่อเข้าหน้าที่ใช้จริง
+- **สิทธิ์แบบกลุ่ม (Configurable RBAC)** — นอกจาก role guard ระดับ Route แล้ว การมองเห็นเมนูใน Sidebar และปุ่ม เพิ่ม/แก้ไข/ลบ ในหน้า Admin ถูกควบคุมด้วย `can(menu, action)` จาก [AuthContext](src/context/AuthContext.tsx) ซึ่งอ่าน permission matrix ของกลุ่มผู้ใช้ ([utils/groupStorage.ts](src/utils/groupStorage.ts)) — ผู้ดูแลระบบตั้งค่าได้ที่หน้า `/admin/groups`
 
 ---
 
@@ -173,6 +174,7 @@ flowchart LR
 | `pdpa_consent` | [utils/pdpaConsent.ts](src/utils/pdpaConsent.ts) | `{"accepted": true, "date": "<ISO 8601>"}` |
 | `registered_members` | [utils/memberStorage.ts](src/utils/memberStorage.ts) | สมาชิกประชาชนที่สมัครผ่าน Google OAuth (JSON `CitizenMember[]`) |
 | `camera_reports` | [utils/cameraReports.ts](src/utils/cameraReports.ts) | รายการแจ้งตรวจสอบกล้องออฟไลน์ (JSON `CameraReport[]` พร้อมสถานะ pending/resolved) |
+| `user_groups` | [utils/groupStorage.ts](src/utils/groupStorage.ts) | กลุ่มผู้ใช้และสิทธิ์รายเมนู (JSON `UserGroup[]` — seed 4 กลุ่มระบบจากบทบาทเดิม) |
 | `a11y_font_scale` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | ขนาดอักษร (100 / 112.5 / 125 %) |
 | `a11y_high_contrast` | [utils/a11ySettings.ts](src/utils/a11ySettings.ts) | เปิด/ปิดโหมดคอนทราสต์สูง |
 
