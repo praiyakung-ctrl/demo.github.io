@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronDown, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { savedMenuSettings } from '../utils/menuStorage';
 import type { MenuKey } from '../types';
@@ -24,65 +24,42 @@ const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: st
   adminSettings: { to: '/admin/settings',  icon: Settings,      iconColor: 'text-slate-500',  section: 'backend' },
 };
 
-/* Section divider header; collapsed sidebars show a small icon instead */
-function SectionHeader({ title, icon: Icon, collapsed, first = false }: {
-  title: string; icon: typeof Map; collapsed: boolean; first?: boolean;
-}) {
-  return (
-    <div className={`${first ? 'pt-1' : 'pt-3'} pb-1 ${collapsed ? 'flex justify-center' : 'px-2'}`}>
-      {collapsed ? (
-        <Icon size={16} className="text-navy-300" />
-      ) : (
-        <div className="flex items-center gap-2">
-          <div className="flex-1 border-t border-navy-200" />
-          <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap px-1">
-            {title}
-          </span>
-          <div className="flex-1 border-t border-navy-200" />
-        </div>
-      )}
-    </div>
-  );
-}
+const SECTION_META: Record<Section, { title: string; icon: typeof Map }> = {
+  main:    { title: 'Main Menu',     icon: Map },
+  admin:   { title: 'จัดการระบบ',    icon: Settings },
+  backend: { title: 'System Config', icon: SlidersHorizontal },
+};
 
 export function Sidebar() {
   const { can } = useAuth();
+  const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(true);
+
+  // start with only the group of the current page expanded
+  const [openSections, setOpenSections] = useState<Record<Section, boolean>>(() => {
+    const active = (Object.values(MENU_CONFIG).find(c => pathname.startsWith(c.to))?.section ?? 'main') as Section;
+    return { main: active === 'main', admin: active === 'admin', backend: active === 'backend' };
+  });
+
+  const toggleSection = (section: Section) =>
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
 
   // read fresh per render so edits on /admin/menus apply on the next navigation
   const visibleItems = savedMenuSettings()
     .filter(s => s.enabled && can(s.key, 'view'))
     .map(s => ({ ...MENU_CONFIG[s.key], label: s.label, menuKey: s.key }));
-  const navItems = visibleItems.filter(i => i.section === 'main');
-  const adminItems = visibleItems.filter(i => i.section === 'admin');
-  const backendItems = visibleItems.filter(i => i.section === 'backend');
+
+  const sections: Section[] = ['main', 'admin', 'backend'];
 
   const activeClass = (extra = '') =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-navy-700 border-2 border-navy-700 bg-navy-50 font-bold transition-all ${extra}`;
   const inactiveClass = (extra = '') =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-navy-700 hover:bg-gray-100 font-bold transition-all ${extra}`;
 
-  const renderItems = (items: typeof visibleItems) => items.map(item => (
-    <NavLink
-      key={item.to}
-      to={item.to}
-      title={collapsed ? item.label : undefined}
-      aria-label={item.label}
-      className={({ isActive }) =>
-        isActive
-          ? activeClass(collapsed ? 'justify-center' : '')
-          : inactiveClass(collapsed ? 'justify-center' : '')
-      }
-    >
-      <item.icon size={20} className={`flex-shrink-0 ${item.iconColor}`} />
-      {!collapsed && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
-    </NavLink>
-  ));
-
-  const toggleButton = (
+  const collapseButton = (
     <button
-      onClick={() => setCollapsed(!collapsed)}
-      className="p-1.5 rounded-lg text-navy-500 hover:text-navy-700 hover:bg-gray-100 transition-colors flex-shrink-0"
+      onClick={e => { e.stopPropagation(); setCollapsed(!collapsed); }}
+      className="p-1.5 rounded-lg text-navy-500 hover:text-navy-700 hover:bg-gray-200 transition-colors flex-shrink-0"
       title={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
       aria-label={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
       aria-expanded={!collapsed}
@@ -97,37 +74,64 @@ export function Sidebar() {
       style={{ width: collapsed ? '64px' : '240px' }}
     >
       <nav aria-label="เมนูหลัก" className="flex-1 px-2 space-y-1 overflow-y-auto overflow-x-hidden pt-3 pb-2">
-        {/* Main Menu header — toggle button shares the row */}
-        <div className={`pb-1 ${collapsed ? 'flex justify-center pt-1' : 'px-2 pt-1'}`}>
-          {collapsed ? (
-            toggleButton
-          ) : (
-            <div className="flex items-center gap-2">
-              <div className="flex-1 border-t border-navy-200" />
-              <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap px-1">
-                Main Menu
-              </span>
-              <div className="flex-1 border-t border-navy-200" />
-              {toggleButton}
+        {/* sidebar collapse toggle — collapsed mode has no room for it inside headers */}
+        {collapsed && <div className="flex justify-center pb-1">{collapseButton}</div>}
+
+        {sections.map(section => {
+          const items = visibleItems.filter(i => i.section === section);
+          if (items.length === 0) return null;
+          const meta = SECTION_META[section];
+          const open = openSections[section];
+          return (
+            <div key={section}>
+              {/* Section header: click toggles its sub-menu */}
+              <div className={`${section === 'main' ? 'pt-0' : 'pt-2'} pb-1 flex items-center gap-1`}>
+                <button
+                  onClick={() => toggleSection(section)}
+                  aria-expanded={open}
+                  aria-label={`${open ? 'ซ่อน' : 'แสดง'}เมนู ${meta.title}`}
+                  title={collapsed ? meta.title : undefined}
+                  className={`flex-1 flex items-center rounded-lg hover:bg-gray-200 transition-colors ${
+                    collapsed ? 'justify-center p-1.5' : 'gap-2 px-2 py-1.5'
+                  }`}
+                >
+                  <meta.icon size={collapsed ? 18 : 16} className="text-navy-500 flex-shrink-0" />
+                  {!collapsed && (
+                    <>
+                      <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap">
+                        {meta.title}
+                      </span>
+                      <div className="flex-1 border-t border-navy-200" />
+                      <ChevronDown
+                        size={16}
+                        className={`text-navy-500 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+                      />
+                    </>
+                  )}
+                </button>
+                {section === 'main' && !collapsed && collapseButton}
+              </div>
+
+              {/* Sub-menu items */}
+              {open && items.map(item => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  title={collapsed ? item.label : undefined}
+                  aria-label={item.label}
+                  className={({ isActive }) =>
+                    isActive
+                      ? activeClass(collapsed ? 'justify-center' : '')
+                      : inactiveClass(collapsed ? 'justify-center' : '')
+                  }
+                >
+                  <item.icon size={20} className={`flex-shrink-0 ${item.iconColor}`} />
+                  {!collapsed && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
+                </NavLink>
+              ))}
             </div>
-          )}
-        </div>
-
-        {renderItems(navItems)}
-
-        {adminItems.length > 0 && (
-          <>
-            <SectionHeader title="จัดการระบบ" icon={Settings} collapsed={collapsed} />
-            {renderItems(adminItems)}
-          </>
-        )}
-
-        {backendItems.length > 0 && (
-          <>
-            <SectionHeader title="System Config" icon={SlidersHorizontal} collapsed={collapsed} />
-            {renderItems(backendItems)}
-          </>
-        )}
+          );
+        })}
       </nav>
 
       {!collapsed && (
