@@ -70,10 +70,10 @@ export function AdminMenusPage() {
               <table className="w-full text-xl">
                 <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5 w-28">ลำดับ</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">ชื่อเมนู</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">เส้นทาง</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5 w-40">เปิดใช้งาน</th>
+                    <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5 w-28">ลำดับ</th>
+                    <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">ชื่อเมนู</th>
+                    <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">เส้นทาง</th>
+                    <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5 w-40">เปิดใช้งาน</th>
                   </tr>
                 </thead>
                 <tbody>

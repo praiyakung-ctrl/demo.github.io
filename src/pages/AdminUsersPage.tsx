@@ -230,7 +230,7 @@ export function AdminUsersPage() {
                     {([
                       ['ชื่อ-นามสกุล', 'name'], ['Username', 'username'], ['อีเมล', 'email'], ['บทบาท', 'role'],
                     ] as [string, SortKey][]).map(([h, key]) => (
-                      <th key={h} scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-3">
+                      <th key={h} scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-3">
                         <button onClick={() => toggleSort(key)} className="flex items-center gap-1.5 hover:text-blue-700 transition-colors">
                           {h}
                           {sortKey === key
@@ -240,7 +240,7 @@ export function AdminUsersPage() {
                       </th>
                     ))}
                     {['กลุ่มสิทธิ์', 'สถานะ', 'ดำเนินการ'].map(h => (
-                      <th key={h} scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-3">{h}</th>
+                      <th key={h} scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-3">{h}</th>
                     ))}
                   </tr>
                 </thead>

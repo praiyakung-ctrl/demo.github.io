@@ -68,13 +68,13 @@ export function AdminRepairsPage() {
                 <table className="w-full text-xl">
                   <thead className="bg-blue-200">
                     <tr>
-                      <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">กล้อง</th>
-                      <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">สถานที่</th>
-                      <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">อาการ / หมายเหตุ</th>
-                      <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">ผู้แจ้ง</th>
-                      <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">วันเวลาแจ้ง</th>
-                      <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">สถานะ</th>
-                      <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">การจัดการ</th>
+                      <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">กล้อง</th>
+                      <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">สถานที่</th>
+                      <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">อาการ / หมายเหตุ</th>
+                      <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">ผู้แจ้ง</th>
+                      <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">วันเวลาแจ้ง</th>
+                      <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5">สถานะ</th>
+                      <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5">การจัดการ</th>
                     </tr>
                   </thead>
                   <tbody>

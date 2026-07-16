@@ -132,11 +132,11 @@ export function AdminGroupsPage() {
               <table className="w-full text-xl">
                 <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">ชื่อกลุ่ม</th>
-                    <th scope="col" className="text-left text-lg font-semibold text-navy-700 px-4 py-2.5">คำอธิบาย</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">เมนูที่เข้าถึงได้</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">ประเภท</th>
-                    <th scope="col" className="text-center text-lg font-semibold text-navy-700 px-4 py-2.5">ดำเนินการ</th>
+                    <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">ชื่อกลุ่ม</th>
+                    <th scope="col" className="text-left text-xl font-semibold text-navy-700 px-4 py-2.5">คำอธิบาย</th>
+                    <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5">เมนูที่เข้าถึงได้</th>
+                    <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5">ประเภท</th>
+                    <th scope="col" className="text-center text-xl font-semibold text-navy-700 px-4 py-2.5">ดำเนินการ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -220,9 +220,9 @@ export function AdminGroupsPage() {
               <table className="w-full text-lg">
                 <thead className="bg-blue-200">
                   <tr>
-                    <th scope="col" className="text-left text-base font-bold text-navy-700 px-4 py-2.5">เมนู</th>
+                    <th scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-2.5">เมนู</th>
                     {ACTION_OPTIONS.map(a => (
-                      <th key={a.key} scope="col" className="text-center text-base font-bold text-navy-700 px-3 py-2.5 w-20">{a.label}</th>
+                      <th key={a.key} scope="col" className="text-center text-xl font-bold text-navy-700 px-3 py-2.5 w-20">{a.label}</th>
                     ))}
                   </tr>
                 </thead>
