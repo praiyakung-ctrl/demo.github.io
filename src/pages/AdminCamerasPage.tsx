@@ -152,12 +152,15 @@ export function AdminCamerasPage() {
                           <span className="text-gray-700 text-lg truncate max-w-[180px]">{cam.organization}</span>
                         </div>
                       </td>
-                      {/* Direction */}
+                      {/* Direction + coordinates */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
                           <Compass size={19} className="text-gray-400 flex-shrink-0" />
                           <span className="text-gray-700 text-lg">{cam.direction || '—'}</span>
                         </div>
+                        <p className="text-sm text-gray-500 font-mono mt-0.5 whitespace-nowrap" title="ละติจูด, ลองจิจูด">
+                          {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}
+                        </p>
                       </td>
                       {/* NT MPLS link */}
                       <td className="px-4 py-3">
