@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Camera, AlertTriangle, Users, Car, TrendingUp, FileDown, FileSpreadsheet, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Camera, AlertTriangle, Users, Car, TrendingUp, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line,
@@ -14,6 +14,11 @@ import requestsData from '../data/requests.json';
 import type { CctvEvent, MonthlyEventData, LprRoad, CitizenRequest, Camera as CameraType } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { formatThaiDateTime } from '../utils/formatDate';
+import { ExportButtons } from '../components/ExportButtons';
+import {
+  exportChartWithTableToExcel, exportChartWithTableToPdf,
+  exportElementToPdf, exportRowsToExcel, todayStamp,
+} from '../utils/exportReport';
 
 const events = eventsData as CctvEvent[];
 const cameras = camerasData as CameraType[];
@@ -136,12 +141,68 @@ export function DashboardPage() {
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, 8);
 
-  const handleExportPDF = () => {
-    alert('ฟีเจอร์ Export PDF กำลังพัฒนา');
+  /* chart-box export: chart image + data table in a single PDF/Excel file */
+  const monthlyChartRef = useRef<HTMLDivElement>(null);
+  const pieChartRef = useRef<HTMLDivElement>(null);
+  const lprChartRef = useRef<HTMLDivElement>(null);
+  const trendChartRef = useRef<HTMLDivElement>(null);
+  const summaryTableRef = useRef<HTMLDivElement>(null);
+  const [exporting, setExporting] = useState(false);
+
+  const monthlyRows: (string | number)[][] = [
+    ['เดือน', 'รถติด', 'เสียงปืน', 'จอดผิด', 'น้ำท่วม', 'ชุมนุม', 'รวม'],
+    ...monthly.map(r => [
+      r.month, r.traffic, r.gunshot, r.parking, r.flood, r.crowd,
+      r.traffic + r.gunshot + r.parking + r.flood + r.crowd,
+    ]),
+  ];
+  const pieRows: (string | number)[][] = [
+    ['ประเภทเหตุการณ์', 'จำนวน (ครั้ง)'],
+    ...pieData.map(d => [d.name, d.value]),
+  ];
+  const lprRows: (string | number)[][] = [
+    ['ถนน', 'จำนวน (คัน/วัน)'],
+    ...roads.map(r => [r.road, r.count]),
+  ];
+  const dailyRows: (string | number)[][] = [
+    ['วันที่', 'จำนวน'],
+    ...daily.map(d => [d.date, d.count]),
+  ];
+
+  const exportChart = async (
+    ref: React.RefObject<HTMLDivElement | null>,
+    rows: (string | number)[][],
+    name: string,
+    format: 'pdf' | 'excel'
+  ) => {
+    const el = ref.current;
+    if (!el || exporting) return;
+    setExporting(true);
+    try {
+      const filename = `${name}-${todayStamp()}`;
+      if (format === 'excel') {
+        await exportChartWithTableToExcel(el, rows, name, `${filename}.xlsx`);
+      } else {
+        await exportChartWithTableToPdf(el, rows, `${filename}.pdf`);
+      }
+    } finally {
+      setExporting(false);
+    }
   };
 
-  const handleExportExcel = () => {
-    alert('ฟีเจอร์ Export Excel กำลังพัฒนา');
+  const exportSummary = async (format: 'pdf' | 'excel') => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      const filename = `สรุปเหตุการณ์รายเดือน-${todayStamp()}`;
+      if (format === 'excel') {
+        await exportRowsToExcel(monthlyRows, 'สรุปรายเดือน', `${filename}.xlsx`);
+      } else if (summaryTableRef.current) {
+        await exportElementToPdf(summaryTableRef.current, `${filename}.pdf`);
+      }
+    } finally {
+      setExporting(false);
+    }
   };
 
   const CustomPieLabel = (props: PieLabelRenderProps) => {
@@ -239,8 +300,12 @@ export function DashboardPage() {
 
         {/* Charts row 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <div className="card p-4 lg:col-span-3">
-            <SectionHeader icon={BarChart3} title="เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)" />
+          <div ref={monthlyChartRef} className="card p-4 lg:col-span-3">
+            <SectionHeader
+              icon={BarChart3}
+              title="เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)"
+              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(monthlyChartRef, monthlyRows, 'เหตุการณ์รายเดือน', 'pdf')} onExcel={() => exportChart(monthlyChartRef, monthlyRows, 'เหตุการณ์รายเดือน', 'excel')} />}
+            />
             <div role="img" aria-label="กราฟแท่งเหตุการณ์ CCTV รายเดือน แยกตามประเภท ข้อมูลเดียวกับตารางสรุปเหตุการณ์รายเดือนด้านล่าง">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={monthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
@@ -259,8 +324,12 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="card p-4 lg:col-span-2">
-            <SectionHeader icon={PieChartIcon} title="สัดส่วนเหตุการณ์ทั้งหมด" />
+          <div ref={pieChartRef} className="card p-4 lg:col-span-2">
+            <SectionHeader
+              icon={PieChartIcon}
+              title="สัดส่วนเหตุการณ์ทั้งหมด"
+              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(pieChartRef, pieRows, 'สัดส่วนเหตุการณ์', 'pdf')} onExcel={() => exportChart(pieChartRef, pieRows, 'สัดส่วนเหตุการณ์', 'excel')} />}
+            />
             <div role="img" aria-label={`กราฟวงกลมสัดส่วนเหตุการณ์ทั้งหมด: ${pieData.map(d => `${d.name} ${d.value} ครั้ง`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
@@ -289,8 +358,12 @@ export function DashboardPage() {
 
         {/* Charts row 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="card p-4">
-            <SectionHeader icon={Route} title="LPR Top 10 ถนน (คัน/วัน)" />
+          <div ref={lprChartRef} className="card p-4">
+            <SectionHeader
+              icon={Route}
+              title="LPR Top 10 ถนน (คัน/วัน)"
+              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(lprChartRef, lprRows, 'LPR-Top10-ถนน', 'pdf')} onExcel={() => exportChart(lprChartRef, lprRows, 'LPR Top 10 ถนน', 'excel')} />}
+            />
             <div role="img" aria-label={`กราฟแท่งแนวนอน LPR สิบอันดับถนน: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={roads} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
@@ -304,8 +377,12 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div className="card p-4">
-            <SectionHeader icon={TrendingUp} title="แนวโน้มเหตุการณ์ 7 วันล่าสุด" />
+          <div ref={trendChartRef} className="card p-4">
+            <SectionHeader
+              icon={TrendingUp}
+              title="แนวโน้มเหตุการณ์ 7 วันล่าสุด"
+              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(trendChartRef, dailyRows, 'แนวโน้ม-7-วัน', 'pdf')} onExcel={() => exportChart(trendChartRef, dailyRows, 'แนวโน้ม 7 วัน', 'excel')} />}
+            />
             <div role="img" aria-label={`กราฟเส้นแนวโน้ม 7 วันล่าสุด: ${daily.map(d => `${d.date} ${d.count.toLocaleString()}`).join(', ')}`}>
             <ResponsiveContainer width="100%" height={240}>
               <LineChart data={daily} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
@@ -322,20 +399,11 @@ export function DashboardPage() {
 
         {/* Table + latest events */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <div className="card p-4 lg:col-span-3">
+          <div ref={summaryTableRef} className="card p-4 lg:col-span-3">
             <SectionHeader
               icon={Table2}
               title="สรุปเหตุการณ์รายเดือน"
-              action={
-                <div className="flex gap-2">
-                  <button onClick={handleExportPDF} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-red-500 text-white border-2 border-red-600 shadow hover:bg-red-600 hover:shadow-lg hover:scale-105 transition-all">
-                    <FileDown size={20} /> Export PDF
-                  </button>
-                  <button onClick={handleExportExcel} className="flex items-center gap-2 text-lg font-extrabold py-2 px-4 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all">
-                    <FileSpreadsheet size={20} /> Export Excel
-                  </button>
-                </div>
-              }
+              action={<ExportButtons disabled={exporting} onPdf={() => exportSummary('pdf')} onExcel={() => exportSummary('excel')} />}
             />
             <div className="overflow-x-auto">
               <table className="w-full text-xl">

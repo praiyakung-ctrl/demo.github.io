@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowUp, ArrowUpDown, Download, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown, FileSpreadsheet, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
 import { RoleBadge, StatusBadge } from '../components/Badge';
@@ -219,8 +219,8 @@ export function AdminUsersPage() {
               <span className="text-base text-navy-700 font-bold flex-shrink-0">
                 พบ {sorted.length} / {users.length} รายการ
               </span>
-              <button onClick={handleExport} className="ml-auto flex items-center gap-2 text-base font-bold px-4 py-2 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 transition-all flex-shrink-0">
-                <Download size={16} /> Excel
+              <button onClick={handleExport} title="Export Excel" aria-label="Export Excel" className="ml-auto flex items-center justify-center p-2.5 rounded-xl bg-emerald-500 text-white border-2 border-emerald-600 shadow hover:bg-emerald-600 hover:shadow-lg hover:scale-105 transition-all flex-shrink-0">
+                <FileSpreadsheet size={20} />
               </button>
             </div>
 
