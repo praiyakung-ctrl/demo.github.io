@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, Clock, FileText, Hash, Inbox, MapPin, Plus, Search, Target, User, Activity, Camera as CameraIcon } from 'lucide-react';
 import { Layout, SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
-import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
 import { useAuth } from '../context/AuthContext';
 import requestsData from '../data/requests.json';
@@ -146,6 +146,7 @@ function CitizenView() {
       <CitizenHero title="ตรวจสอบสถานะคำขอ" />
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
+        <div className="lg:hidden"><ServiceMenuChips active="status" /></div>
         <aside className="hidden lg:block">
           <ServiceSidebar active="status" />
         </aside>

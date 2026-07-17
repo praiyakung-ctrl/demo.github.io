@@ -92,6 +92,19 @@ export async function exportElementToPdf(el: HTMLElement, filename: string): Pro
   pdf.save(filename);
 }
 
+/* Capture each section separately and start every section on a fresh page —
+   used by the manual so a chapter never begins mid-page. Portrait suits documents. */
+export async function exportSectionsToPdf(sections: HTMLElement[], filename: string): Promise<void> {
+  const { html2canvas, jsPDF } = await loadCaptureLibs();
+  const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  for (let i = 0; i < sections.length; i++) {
+    if (i > 0) pdf.addPage();
+    const canvas = await html2canvas(sections[i], { scale: 2, backgroundColor: '#ffffff' });
+    addCanvasToPdf(pdf, canvas, 8);
+  }
+  pdf.save(filename);
+}
+
 /* Chart capture + data table stacked in a single PDF */
 export async function exportChartWithTableToPdf(
   chartEl: HTMLElement,

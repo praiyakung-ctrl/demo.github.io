@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Phone, Video } from 'lucide-react';
+import { ORG_INFO } from '../data/orgInfo';
 
 /* Shared UI for citizen-facing pages (CctvRequestPage, CitizenPortalPage):
    navy hero banner, service sidebar, footer — keeps both pages on one theme. */
@@ -73,12 +74,36 @@ export function ServiceSidebar({ active }: { active: ServiceMenuKey }) {
             <Phone size={24} />
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-700 leading-tight">038-398-333</p>
-            <p className="text-lg text-gray-500 leading-tight">จันทร์ - ศุกร์ 08:30 - 16:30 น.</p>
+            <p className="text-2xl font-extrabold text-navy-700 leading-tight">{ORG_INFO.hotline}</p>
+            <p className="text-lg text-gray-500 leading-tight">{ORG_INFO.officeHours}</p>
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+/* Mobile replacement for ServiceSidebar (which is hidden below lg):
+   a horizontally scrollable chip bar so every citizen page stays reachable. */
+export function ServiceMenuChips({ active }: { active: ServiceMenuKey }) {
+  return (
+    <nav aria-label="บริการประชาชน" className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+      {MENU.filter(item => 'to' in item).map(({ key, icon: Icon, label, ...item }) => (
+        <Link
+          key={key}
+          to={(item as { to: string }).to}
+          aria-current={key === active ? 'page' : undefined}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full text-lg font-bold whitespace-nowrap flex-shrink-0 border-2 transition-colors ${
+            key === active
+              ? 'bg-navy-700 border-navy-700 text-white'
+              : 'bg-white border-gray-200 text-navy-700 hover:bg-gray-50'
+          }`}
+        >
+          <Icon size={20} className="flex-shrink-0" />
+          {label}
+        </Link>
+      ))}
+    </nav>
   );
 }
 

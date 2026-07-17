@@ -54,14 +54,17 @@ export function AdminNotificationsPage() {
   /* ----- settings (tabs 1–2 share one save) ----- */
   const [settings, setSettings] = useState<NotificationSettings>(() => savedNotificationSettings());
   const [saved, setSaved] = useState(false);
+  const [dirty, setDirty] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
 
   const setEventRule = (type: NotifiableEventType, patch: Partial<NotificationSettings['events'][NotifiableEventType]>) => {
     setSaved(false);
+    setDirty(true);
     setSettings(s => ({ ...s, events: { ...s.events, [type]: { ...s.events[type], ...patch } } }));
   };
   const setChannel = <K extends ChannelKey>(key: K, patch: Partial<NotificationSettings['channels'][K]>) => {
     setSaved(false);
+    setDirty(true);
     setSettings(s => ({ ...s, channels: { ...s.channels, [key]: { ...s.channels[key], ...patch } } }));
   };
 
@@ -70,6 +73,7 @@ export function AdminNotificationsPage() {
     saveNotificationSettings(settings);
     logAudit(currentUser, 'edit', MENU_NAME, 'บันทึกการตั้งค่าการแจ้งเตือน');
     setSaved(true);
+    setDirty(false);
   };
 
   const handleReset = () => {
@@ -77,6 +81,7 @@ export function AdminNotificationsPage() {
     setSettings(DEFAULT_NOTIFICATION_SETTINGS);
     logAudit(currentUser, 'edit', MENU_NAME, 'คืนค่าการตั้งค่าการแจ้งเตือนเป็นค่าเริ่มต้น');
     setSaved(false);
+    setDirty(false);
   };
 
   /* ----- recipients ----- */
@@ -191,6 +196,13 @@ export function AdminNotificationsPage() {
                 }`}
               >
                 <Icon size={20} /> {label}
+                {dirty && (key === 'events' || key === 'channels') && (
+                  <span
+                    className="w-2.5 h-2.5 rounded-full bg-amber-400 flex-shrink-0"
+                    title="มีการแก้ไขที่ยังไม่บันทึก"
+                    aria-label="มีการแก้ไขที่ยังไม่บันทึก"
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -390,6 +402,11 @@ export function AdminNotificationsPage() {
                     <RotateCcw size={16} /> คืนค่าเริ่มต้น
                   </button>
                   <div className="flex items-center gap-3">
+                    {dirty && (
+                      <span role="status" className="text-lg font-bold text-amber-600">
+                        ● มีการแก้ไขที่ยังไม่บันทึก
+                      </span>
+                    )}
                     {saved && (
                       <span role="status" className="flex items-center gap-1.5 text-lg font-bold text-green-700">
                         <CheckCircle2 size={18} /> บันทึกแล้ว

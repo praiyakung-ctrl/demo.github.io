@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { AlertTriangle, ArrowRight, BookOpen, FileDown, FileSearch, Info, LogIn, ShieldCheck, UserPlus, Video } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
-import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
-import { exportElementToPdf, todayStamp } from '../utils/exportReport';
+import { exportSectionsToPdf, todayStamp } from '../utils/exportReport';
+import { ORG_INFO } from '../data/orgInfo';
 
 interface Callout {
   type: 'note' | 'warning';
@@ -94,7 +95,7 @@ const CHAPTERS: Chapter[] = [
     ],
     callouts: [
       { type: 'warning', text: 'ข้อมูลภาพที่ได้รับอนุญาตให้นำไปใช้เฉพาะตามวัตถุประสงค์ที่ระบุในคำขอเท่านั้น ห้ามเผยแพร่ต่อสาธารณะหรือนำไปใช้ละเมิดสิทธิของบุคคลอื่น มิฉะนั้นอาจมีความผิดตามกฎหมาย' },
-      { type: 'note', text: 'หากมีข้อสงสัยเพิ่มเติม ติดต่อเจ้าหน้าที่ได้ที่หมายเลข 038-398-333 ในวันจันทร์ - ศุกร์ เวลา 08:30 - 16:30 น.' },
+      { type: 'note', text: `หากมีข้อสงสัยเพิ่มเติม ติดต่อเจ้าหน้าที่ได้ที่หมายเลข ${ORG_INFO.hotline} ${ORG_INFO.officeHours}` },
     ],
   },
 ];
@@ -201,13 +202,16 @@ function ChapterContent({ chapter, number, forPrint = false }: { chapter: Chapte
 export function ManualPage() {
   const [chapterIndex, setChapterIndex] = useState(0);
   const [exporting, setExporting] = useState(false);
-  const pdfRef = useRef<HTMLDivElement>(null);
+  // section 0 = title page, 1..n = chapters; each becomes its own PDF page
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleExportPdf = async () => {
-    if (exporting || !pdfRef.current) return;
+    if (exporting) return;
+    const sections = sectionRefs.current.filter((el): el is HTMLDivElement => el !== null);
+    if (sections.length === 0) return;
     setExporting(true);
     try {
-      await exportElementToPdf(pdfRef.current, `คู่มือการใช้งาน-${todayStamp()}.pdf`);
+      await exportSectionsToPdf(sections, `คู่มือการใช้งาน-${todayStamp()}.pdf`);
     } finally {
       setExporting(false);
     }
@@ -222,6 +226,7 @@ export function ManualPage() {
       <CitizenHero title="คู่มือการใช้งาน" />
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
+        <div className="lg:hidden"><ServiceMenuChips active="manual" /></div>
         <aside className="hidden lg:block">
           <ServiceSidebar active="manual" />
         </aside>
@@ -290,16 +295,19 @@ export function ManualPage() {
         </main>
       </div>
 
-      {/* Off-screen full manual used only for the PDF export */}
-      <div ref={pdfRef} aria-hidden="true" className="fixed -left-[9999px] top-0 w-[900px] bg-white p-8">
-        <div className="text-center pb-5 mb-6 border-b-2 border-navy-700">
-          <h1 className="text-4xl font-extrabold text-navy-700">คู่มือการใช้งานระบบสำหรับประชาชน</h1>
-          <p className="text-xl text-gray-600 mt-1">
-            ระบบฐานข้อมูลเพื่อการเข้าถึง (Data Integration and End Users) · องค์การบริหารส่วนจังหวัดชลบุรี
-          </p>
+      {/* Off-screen full manual used only for the PDF export — one section per PDF page */}
+      <div aria-hidden="true" className="fixed -left-[9999px] top-0 w-[900px]">
+        <div ref={el => { sectionRefs.current[0] = el; }} className="bg-white p-8">
+          <div className="text-center py-16 border-b-2 border-navy-700">
+            <h1 className="text-4xl font-extrabold text-navy-700">คู่มือการใช้งานระบบสำหรับประชาชน</h1>
+            <p className="text-xl text-gray-600 mt-2">
+              ระบบฐานข้อมูลเพื่อการเข้าถึง (Data Integration and End Users)
+            </p>
+            <p className="text-xl text-gray-600">{ORG_INFO.nameTh}</p>
+          </div>
         </div>
         {CHAPTERS.map((ch, i) => (
-          <div key={ch.title} className={i > 0 ? 'mt-8 pt-8 border-t border-gray-200' : ''}>
+          <div key={ch.title} ref={el => { sectionRefs.current[i + 1] = el; }} className="bg-white p-8">
             <ChapterContent chapter={ch} number={i + 1} forPrint />
           </div>
         ))}

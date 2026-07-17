@@ -9,7 +9,7 @@ import {
 import { Navbar } from '../components/Navbar';
 import { SkipLink } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
-import { CitizenFooter, CitizenHero, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { districtOf } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -760,6 +760,7 @@ export function CctvRequestPage() {
       </CitizenHero>
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_320px] gap-5 items-start">
+        <div className="lg:hidden"><ServiceMenuChips active="request" /></div>
         <aside className="hidden lg:block">
           <ServiceSidebar active="request" />
         </aside>
