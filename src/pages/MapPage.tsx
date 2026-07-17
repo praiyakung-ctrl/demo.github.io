@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, Wifi } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, X, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, Grid2x2, Grid3x3, LayoutGrid, Maximize2, MonitorPlay, ParkingSquare, Plus, Settings, Square, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
@@ -378,15 +378,6 @@ export function MapPage() {
                           {EVENT_LABELS[cam.currentEvent]}
                         </span>
                       )}
-                    </div>
-
-                    {/* NT MPLS link */}
-                    <div className="flex items-start gap-2 mb-3">
-                      <Wifi size={18} className="text-navy-400 mt-0.5 flex-shrink-0" />
-                      <div className="text-base text-gray-600 leading-snug">
-                        <p className="font-bold text-gray-700">โครงข่าย NT MPLS</p>
-                        <p>LPR {cam.lprMbps} Mbps · Unity 8 {cam.unityMbps} Mbps · รวม {cam.lprMbps + cam.unityMbps} Mbps</p>
-                      </div>
                     </div>
 
                     {/* Last update */}
