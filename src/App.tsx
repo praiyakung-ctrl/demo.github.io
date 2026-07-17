@@ -22,6 +22,7 @@ const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ 
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const AdminAuditLogPage = lazy(() => import('./pages/AdminAuditLogPage').then(m => ({ default: m.AdminAuditLogPage })));
 const AdminApiPage = lazy(() => import('./pages/AdminApiPage').then(m => ({ default: m.AdminApiPage })));
+const AdminNotificationsPage = lazy(() => import('./pages/AdminNotificationsPage').then(m => ({ default: m.AdminNotificationsPage })));
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage').then(m => ({ default: m.AdminSettingsPage })));
 
 function PageLoading() {
@@ -116,6 +117,11 @@ function AppRoutes() {
       <Route path="/admin/api" element={
         <RequireAuth roles={['admin']}>
           <AdminApiPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/notifications" element={
+        <RequireAuth roles={['admin']}>
+          <AdminNotificationsPage />
         </RequireAuth>
       } />
       <Route path="/admin/settings" element={

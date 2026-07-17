@@ -10,6 +10,7 @@ import requestsData from '../data/requests.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
 import { pendingReports } from '../utils/cameraReports';
+import { savedNotificationSettings } from '../utils/notificationSettings';
 
 const allEvents = eventsData as CctvEvent[];
 const allRequests = requestsData as CitizenRequest[];
@@ -68,7 +69,11 @@ export function Navbar() {
     };
   }, [showNotif, showUser]);
 
-  const unackEvents = allEvents.filter(e => !e.isAcknowledged);
+  // honor per-event-type enable flags from /admin/notifications (read fresh — dropdown toggles re-render)
+  const notifRules = savedNotificationSettings().events;
+  const unackEvents = allEvents.filter(e =>
+    !e.isAcknowledged && (e.eventType === 'normal' || notifRules[e.eventType]?.enabled !== false)
+  );
   // admins also see cameras reported for inspection (read fresh — dropdown toggles re-render)
   const repairReports = isAdmin ? pendingReports() : [];
   // citizens are notified about their CCTV request status, not CCTV events

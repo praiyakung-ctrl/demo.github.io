@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, Camera, Users, ChevronDown, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, BellRing, Camera, Users, ChevronDown, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { savedMenuSettings } from '../utils/menuStorage';
 import type { MenuKey } from '../types';
@@ -21,6 +21,7 @@ const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: st
   adminMenus:   { to: '/admin/menus',    icon: ListTree,        iconColor: 'text-indigo-500', section: 'admin' },
   adminAuditLog: { to: '/admin/audit-log', icon: ScrollText,    iconColor: 'text-rose-500',   section: 'backend' },
   adminApi:      { to: '/admin/api',       icon: Plug,          iconColor: 'text-sky-500',    section: 'backend' },
+  adminNotifications: { to: '/admin/notifications', icon: BellRing, iconColor: 'text-yellow-600', section: 'backend' },
   adminSettings: { to: '/admin/settings',  icon: Settings,      iconColor: 'text-slate-500',  section: 'backend' },
 };
 

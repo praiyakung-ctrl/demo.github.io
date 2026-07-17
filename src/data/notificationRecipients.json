@@ -1,0 +1,34 @@
+[
+  {
+    "id": "nr-1",
+    "enabled": true,
+    "targetType": "group",
+    "targetId": "grp-admin",
+    "channels": ["line", "email"],
+    "eventTypes": ["traffic", "gunshot", "parking", "flood", "crowd"]
+  },
+  {
+    "id": "nr-2",
+    "enabled": true,
+    "targetType": "group",
+    "targetId": "grp-operator",
+    "channels": ["line"],
+    "eventTypes": ["traffic", "gunshot", "flood", "crowd"]
+  },
+  {
+    "id": "nr-3",
+    "enabled": true,
+    "targetType": "user",
+    "targetId": "3",
+    "channels": ["email"],
+    "eventTypes": ["gunshot", "flood"]
+  },
+  {
+    "id": "nr-4",
+    "enabled": false,
+    "targetType": "user",
+    "targetId": "4",
+    "channels": ["line", "sms"],
+    "eventTypes": ["gunshot"]
+  }
+]

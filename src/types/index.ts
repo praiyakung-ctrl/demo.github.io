@@ -139,7 +139,7 @@ export interface User {
 export type MenuKey =
   | 'map' | 'dashboard' | 'portal' | 'reports'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
-  | 'adminAuditLog' | 'adminApi' | 'adminSettings';
+  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings';
 
 export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
 
@@ -164,6 +164,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'adminMenus',   label: 'จัดการเมนู' },
   { key: 'adminAuditLog', label: 'ประวัติการใช้งานระบบ' },
   { key: 'adminApi',      label: 'จัดการการเชื่อมต่อ API' },
+  { key: 'adminNotifications', label: 'จัดการการแจ้งเตือน' },
   { key: 'adminSettings', label: 'ตั้งค่าระบบ' },
 ];
 

@@ -16,7 +16,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: ALL, adminUsers: ALL, adminRepairs: ALL, adminGroups: ALL, adminMenus: ALL,
-      adminAuditLog: ALL, adminApi: ALL, adminSettings: ALL,
+      adminAuditLog: ALL, adminApi: ALL, adminNotifications: ALL, adminSettings: ALL,
     },
   },
   {
@@ -27,7 +27,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
-      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
     },
   },
   {
@@ -38,7 +38,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
-      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
     },
   },
   {
@@ -49,7 +49,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: NONE, dashboard: NONE, portal: ALL, reports: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
-      adminAuditLog: NONE, adminApi: NONE, adminSettings: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
     },
   },
 ];
@@ -66,7 +66,12 @@ export function savedGroups(): UserGroup[] {
     const raw = localStorage.getItem(GROUPS_KEY);
     if (!raw) return DEFAULT_GROUPS;
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_GROUPS;
+    if (!Array.isArray(parsed) || parsed.length === 0) return DEFAULT_GROUPS;
+    // merge permission keys added in newer versions so stored groups keep working
+    return parsed.map((g: UserGroup) => {
+      const base = DEFAULT_GROUPS.find(d => d.id === g.id);
+      return base ? { ...g, permissions: { ...base.permissions, ...g.permissions } } : g;
+    });
   } catch {
     return DEFAULT_GROUPS;
   }
