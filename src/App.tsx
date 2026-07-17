@@ -15,6 +15,7 @@ const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m 
 const CctvRequestPage = lazy(() => import('./pages/CctvRequestPage').then(m => ({ default: m.CctvRequestPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const FaqPage = lazy(() => import('./pages/FaqPage').then(m => ({ default: m.FaqPage })));
+const ManualPage = lazy(() => import('./pages/ManualPage').then(m => ({ default: m.ManualPage })));
 const AdminCamerasPage = lazy(() => import('./pages/AdminCamerasPage').then(m => ({ default: m.AdminCamerasPage })));
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
 const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m => ({ default: m.AdminRepairsPage })));
@@ -83,6 +84,11 @@ function AppRoutes() {
       <Route path="/faq" element={
         <RequireAuth>
           <FaqPage />
+        </RequireAuth>
+      } />
+      <Route path="/manual" element={
+        <RequireAuth>
+          <ManualPage />
         </RequireAuth>
       } />
       <Route path="/reports" element={
