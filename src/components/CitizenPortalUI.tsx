@@ -32,7 +32,7 @@ const MENU = [
   { key: 'request', icon: Video, label: 'ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV', to: '/portal/request' },
   { key: 'status', icon: FileSearch, label: 'ตรวจสอบสถานะคำขอ', to: '/portal' },
   { key: 'manual', icon: BookOpen, label: 'คู่มือการใช้งาน' },
-  { key: 'faq', icon: HelpCircle, label: 'คำถามที่พบบ่อย' },
+  { key: 'faq', icon: HelpCircle, label: 'คำถามที่พบบ่อย', to: '/faq' },
   { key: 'about', icon: Building2, label: 'เกี่ยวกับ อบจ.ชลบุรี', to: '/about' },
 ] as const;
 
