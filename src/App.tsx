@@ -13,6 +13,7 @@ const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.Map
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m => ({ default: m.CitizenPortalPage })));
 const CctvRequestPage = lazy(() => import('./pages/CctvRequestPage').then(m => ({ default: m.CctvRequestPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const AdminCamerasPage = lazy(() => import('./pages/AdminCamerasPage').then(m => ({ default: m.AdminCamerasPage })));
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ default: m.AdminUsersPage })));
 const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m => ({ default: m.AdminRepairsPage })));
@@ -70,6 +71,11 @@ function AppRoutes() {
       <Route path="/portal/request" element={
         <RequireAuth>
           <CctvRequestPage />
+        </RequireAuth>
+      } />
+      <Route path="/about" element={
+        <RequireAuth>
+          <AboutPage />
         </RequireAuth>
       } />
       <Route path="/reports" element={

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ChevronRight, FileSearch, HelpCircle, Phone, Video } from 'lucide-react';
+import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Phone, Video } from 'lucide-react';
 
 /* Shared UI for citizen-facing pages (CctvRequestPage, CitizenPortalPage):
    navy hero banner, service sidebar, footer — keeps both pages on one theme. */
@@ -33,6 +33,7 @@ const MENU = [
   { key: 'status', icon: FileSearch, label: 'ตรวจสอบสถานะคำขอ', to: '/portal' },
   { key: 'manual', icon: BookOpen, label: 'คู่มือการใช้งาน' },
   { key: 'faq', icon: HelpCircle, label: 'คำถามที่พบบ่อย' },
+  { key: 'about', icon: Building2, label: 'เกี่ยวกับ อบจ.ชลบุรี', to: '/about' },
 ] as const;
 
 export type ServiceMenuKey = (typeof MENU)[number]['key'];
