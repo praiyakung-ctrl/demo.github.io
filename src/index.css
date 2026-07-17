@@ -125,6 +125,31 @@ html.high-contrast .bg-gray-50,
 html.high-contrast .bg-blue-50 {
   background-color: #fff !important;
 }
+/* tinted section headers/callouts (notification channels, manual callouts) */
+html.high-contrast .bg-amber-50,
+html.high-contrast .bg-indigo-50,
+html.high-contrast .bg-green-50,
+html.high-contrast .bg-orange-50,
+html.high-contrast .bg-amber-100,
+html.high-contrast .bg-indigo-100 {
+  background-color: #fff !important;
+}
+html.high-contrast .border-amber-200,
+html.high-contrast .border-indigo-200,
+html.high-contrast .border-green-200,
+html.high-contrast .border-orange-200 {
+  border-color: #374151 !important;
+}
+html.high-contrast .text-amber-600,
+html.high-contrast .text-amber-700,
+html.high-contrast .text-indigo-600,
+html.high-contrast .text-indigo-700,
+html.high-contrast .text-green-600,
+html.high-contrast .text-green-700,
+html.high-contrast .text-orange-600,
+html.high-contrast .text-orange-700 {
+  color: #111827 !important;
+}
 
 /* Blink animation for camera icons with active events */
 @keyframes blink {

@@ -76,21 +76,10 @@ function AppRoutes() {
           <CctvRequestPage />
         </RequireAuth>
       } />
-      <Route path="/about" element={
-        <RequireAuth>
-          <AboutPage />
-        </RequireAuth>
-      } />
-      <Route path="/faq" element={
-        <RequireAuth>
-          <FaqPage />
-        </RequireAuth>
-      } />
-      <Route path="/manual" element={
-        <RequireAuth>
-          <ManualPage />
-        </RequireAuth>
-      } />
+      {/* public info pages — readable without an account, like /login and /register */}
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/faq" element={<FaqPage />} />
+      <Route path="/manual" element={<ManualPage />} />
       <Route path="/reports" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>
           <ReportsPage />

@@ -189,6 +189,15 @@ export function LoginPage() {
             </Link>
           </p>
 
+          {/* Public info pages — readable without logging in */}
+          <p className="mt-2 text-center text-lg text-gray-600">
+            <Link to="/about" className="text-navy-700 hover:text-navy-500 hover:underline">เกี่ยวกับ อบจ.ชลบุรี</Link>
+            <span className="mx-2 text-gray-300">·</span>
+            <Link to="/faq" className="text-navy-700 hover:text-navy-500 hover:underline">คำถามที่พบบ่อย</Link>
+            <span className="mx-2 text-gray-300">·</span>
+            <Link to="/manual" className="text-navy-700 hover:text-navy-500 hover:underline">คู่มือการใช้งาน</Link>
+          </p>
+
           {/* Demo credentials */}
           <div className="mt-5 p-3 bg-gray-50 rounded-lg border border-gray-100">
             <p className="text-lg font-semibold text-gray-500 mb-2">บัญชีทดสอบ (Demo)</p>

@@ -45,24 +45,20 @@ export function ServiceSidebar({ active }: { active: ServiceMenuKey }) {
       <div className="card p-0 overflow-hidden">
         <h3 className="text-2xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">บริการประชาชน</h3>
         <nav>
-          {MENU.map(({ key, icon: Icon, label, ...item }) => {
-            const cls = `w-full flex items-center gap-3 px-4 py-3 text-left text-xl transition-colors border-l-4 ${
-              key === active
-                ? 'bg-navy-50 border-navy-700 text-navy-700 font-bold'
-                : 'border-transparent text-gray-600 hover:bg-gray-50'
-            }`;
-            return 'to' in item ? (
-              <Link key={key} to={item.to} className={cls}>
-                <Icon size={24} className="flex-shrink-0" />
-                <span className="leading-tight">{label}</span>
-              </Link>
-            ) : (
-              <button key={key} className={cls}>
-                <Icon size={24} className="flex-shrink-0" />
-                <span className="leading-tight">{label}</span>
-              </button>
-            );
-          })}
+          {MENU.map(({ key, icon: Icon, label, to }) => (
+            <Link
+              key={key}
+              to={to}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-left text-xl transition-colors border-l-4 ${
+                key === active
+                  ? 'bg-navy-50 border-navy-700 text-navy-700 font-bold'
+                  : 'border-transparent text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Icon size={24} className="flex-shrink-0" />
+              <span className="leading-tight">{label}</span>
+            </Link>
+          ))}
         </nav>
       </div>
 
@@ -88,10 +84,10 @@ export function ServiceSidebar({ active }: { active: ServiceMenuKey }) {
 export function ServiceMenuChips({ active }: { active: ServiceMenuKey }) {
   return (
     <nav aria-label="บริการประชาชน" className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
-      {MENU.filter(item => 'to' in item).map(({ key, icon: Icon, label, ...item }) => (
+      {MENU.map(({ key, icon: Icon, label, to }) => (
         <Link
           key={key}
-          to={(item as { to: string }).to}
+          to={to}
           aria-current={key === active ? 'page' : undefined}
           className={`flex items-center gap-2 px-4 py-2 rounded-full text-lg font-bold whitespace-nowrap flex-shrink-0 border-2 transition-colors ${
             key === active

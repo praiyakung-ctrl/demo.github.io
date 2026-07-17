@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
@@ -126,6 +126,8 @@ export function Navbar() {
           <span className="text-lg font-bold text-white">{timeStr}</span>
         </div>
 
+        {user ? (
+          <>
         {/* Notifications */}
         <div className="relative" ref={notifRef}>
           <button
@@ -302,6 +304,17 @@ export function Navbar() {
             </div>
           )}
         </div>
+          </>
+        ) : (
+          /* Guest (public info pages): no bell, no user menu — just a login button */
+          <Link
+            to="/login"
+            className="flex items-center gap-2 bg-white text-navy-700 text-lg font-bold px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors"
+          >
+            <CircleUser size={22} />
+            เข้าสู่ระบบ
+          </Link>
+        )}
       </div>
     </header>
   );
