@@ -14,13 +14,13 @@ export const SEVERITY_LABELS: Record<SeverityLevel, string> = {
   low: 'ต่ำ',
 };
 
-export type ChannelKey = 'line' | 'email' | 'sms';
+export type ChannelKey = 'push' | 'line' | 'email';
 export const CHANNEL_LABELS: Record<ChannelKey, string> = {
+  push: 'Push Notification (ในระบบ)',
   line: 'LINE Official',
   email: 'Email (SMTP)',
-  sms: 'SMS',
 };
-export const CHANNEL_KEYS: ChannelKey[] = ['line', 'email', 'sms'];
+export const CHANNEL_KEYS: ChannelKey[] = ['push', 'line', 'email'];
 
 /* ---------- Notification settings (per event type + channels) ---------- */
 
@@ -33,9 +33,10 @@ export interface EventNotificationRule {
 }
 
 export interface ChannelConfig {
+  /* ช่องทางเริ่มต้นของระบบ (กระดิ่งในแอป) — เปิดใช้งานเสมอ */
+  push: { enabled: true };
   line: { enabled: boolean; token: string };
   email: { enabled: boolean; smtpHost: string; smtpPort: string; sender: string };
-  sms: { enabled: boolean; provider: string; senderName: string };
 }
 
 export interface NotificationSettings {
@@ -45,20 +46,26 @@ export interface NotificationSettings {
 
 export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   events: {
-    traffic: { enabled: true, severity: 'low', urgent: false, channels: ['line'] },
-    gunshot: { enabled: true, severity: 'high', urgent: true, channels: ['line', 'email', 'sms'] },
-    parking: { enabled: true, severity: 'low', urgent: false, channels: ['line'] },
-    flood: { enabled: true, severity: 'high', urgent: true, channels: ['line', 'email', 'sms'] },
-    crowd: { enabled: true, severity: 'medium', urgent: false, channels: ['line', 'email'] },
+    traffic: { enabled: true, severity: 'low', urgent: false, channels: ['push', 'line'] },
+    gunshot: { enabled: true, severity: 'high', urgent: true, channels: ['push', 'line', 'email'] },
+    parking: { enabled: true, severity: 'low', urgent: false, channels: ['push', 'line'] },
+    flood: { enabled: true, severity: 'high', urgent: true, channels: ['push', 'line', 'email'] },
+    crowd: { enabled: true, severity: 'medium', urgent: false, channels: ['push', 'line', 'email'] },
   },
   channels: {
+    push: { enabled: true },
     line: { enabled: true, token: '' },
     email: { enabled: true, smtpHost: 'smtp.chonburi.go.th', smtpPort: '587', sender: 'cctv-alert@chonburi.go.th' },
-    sms: { enabled: false, provider: '', senderName: 'CHONBURI-PAO' },
   },
 };
 
 const SETTINGS_KEY = 'notification_settings';
+
+/* drop channel keys removed in later versions (e.g. 'sms') from stored values */
+function validChannels(channels: unknown): ChannelKey[] {
+  if (!Array.isArray(channels)) return [];
+  return channels.filter((ch): ch is ChannelKey => CHANNEL_KEYS.includes(ch as ChannelKey));
+}
 
 /* merge with defaults so fields added in later versions get a value */
 export function savedNotificationSettings(): NotificationSettings {
@@ -66,10 +73,18 @@ export function savedNotificationSettings(): NotificationSettings {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return DEFAULT_NOTIFICATION_SETTINGS;
     const parsed = JSON.parse(raw) as Partial<NotificationSettings>;
-    return {
+    const merged: NotificationSettings = {
       events: { ...DEFAULT_NOTIFICATION_SETTINGS.events, ...parsed.events },
-      channels: { ...DEFAULT_NOTIFICATION_SETTINGS.channels, ...parsed.channels },
+      channels: {
+        push: { enabled: true },
+        line: { ...DEFAULT_NOTIFICATION_SETTINGS.channels.line, ...parsed.channels?.line },
+        email: { ...DEFAULT_NOTIFICATION_SETTINGS.channels.email, ...parsed.channels?.email },
+      },
     };
+    for (const type of NOTIFIABLE_EVENT_TYPES) {
+      merged.events[type] = { ...merged.events[type], channels: validChannels(merged.events[type].channels) };
+    }
+    return merged;
   } catch {
     return DEFAULT_NOTIFICATION_SETTINGS;
   }
@@ -103,7 +118,8 @@ export function savedRecipients(): NotificationRecipient[] {
     const raw = localStorage.getItem(RECIPIENTS_KEY);
     if (!raw) return RECIPIENT_SEED;
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : RECIPIENT_SEED;
+    if (!Array.isArray(parsed)) return RECIPIENT_SEED;
+    return parsed.map((r: NotificationRecipient) => ({ ...r, channels: validChannels(r.channels) }));
   } catch {
     return RECIPIENT_SEED;
   }

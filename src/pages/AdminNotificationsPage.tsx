@@ -274,6 +274,24 @@ export function AdminNotificationsPage() {
 
                 {tab === 'channels' && (
                   <>
+                    {/* Push Notification — ช่องทางเริ่มต้นของระบบ เปิดใช้งานเสมอ */}
+                    <div className="rounded-xl border-2 border-indigo-200 overflow-hidden">
+                      <div className="flex items-center justify-between px-4 py-2.5 bg-indigo-50 border-b border-indigo-200">
+                        <div className="flex items-center gap-2">
+                          <BellRing size={16} className="text-indigo-600" />
+                          <span className="text-sm font-bold text-indigo-700">Push Notification (ในระบบ)</span>
+                        </div>
+                        <span className="text-sm font-bold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-lg">
+                          ค่าเริ่มต้นของระบบ · เปิดใช้งานเสมอ
+                        </span>
+                      </div>
+                      <div className="p-4">
+                        <p className="text-lg text-gray-600">
+                          แจ้งเตือนผ่านกระดิ่งบนหน้าจอของผู้ใช้งานที่ล็อกอินอยู่ในระบบโดยอัตโนมัติ ไม่ต้องตั้งค่าเพิ่มเติม
+                        </p>
+                      </div>
+                    </div>
+
                     {/* LINE */}
                     <div className="rounded-xl border-2 border-green-200 overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-2.5 bg-green-50 border-b border-green-200">
@@ -361,49 +379,6 @@ export function AdminNotificationsPage() {
                       </div>
                     </div>
 
-                    {/* SMS */}
-                    <div className="rounded-xl border-2 border-orange-200 overflow-hidden">
-                      <div className="flex items-center justify-between px-4 py-2.5 bg-orange-50 border-b border-orange-200">
-                        <div className="flex items-center gap-2">
-                          <Send size={16} className="text-orange-600" />
-                          <span className="text-sm font-bold text-orange-700">SMS</span>
-                        </div>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={settings.channels.sms.enabled}
-                            onChange={e => setChannel('sms', { enabled: e.target.checked })}
-                            disabled={readOnly}
-                            className="w-5 h-5 accent-[#1b3a6b]"
-                          />
-                          <span className="text-sm font-bold text-orange-700">เปิดใช้งาน</span>
-                        </label>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4">
-                        <div>
-                          <label htmlFor="sms-provider" className="label">ผู้ให้บริการ SMS</label>
-                          <input
-                            id="sms-provider"
-                            value={settings.channels.sms.provider}
-                            onChange={e => setChannel('sms', { provider: e.target.value })}
-                            disabled={readOnly || !settings.channels.sms.enabled}
-                            placeholder="เช่น THSMS, ANTS"
-                            className="input-field"
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="sms-sender" className="label">ชื่อผู้ส่ง (Sender Name)</label>
-                          <input
-                            id="sms-sender"
-                            value={settings.channels.sms.senderName}
-                            onChange={e => setChannel('sms', { senderName: e.target.value })}
-                            disabled={readOnly || !settings.channels.sms.enabled}
-                            placeholder="CHONBURI-PAO"
-                            className="input-field"
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </>
                 )}
               </div>
@@ -655,7 +630,7 @@ const EMPTY_FORM: Omit<NotificationRecipient, 'id'> = {
   enabled: true,
   targetType: 'group',
   targetId: '',
-  channels: ['line'],
+  channels: ['push'],
   eventTypes: [...NOTIFIABLE_EVENT_TYPES],
 };
 

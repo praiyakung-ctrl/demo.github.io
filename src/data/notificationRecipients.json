@@ -4,7 +4,7 @@
     "enabled": true,
     "targetType": "group",
     "targetId": "grp-admin",
-    "channels": ["line", "email"],
+    "channels": ["push", "line", "email"],
     "eventTypes": ["traffic", "gunshot", "parking", "flood", "crowd"]
   },
   {
@@ -12,7 +12,7 @@
     "enabled": true,
     "targetType": "group",
     "targetId": "grp-operator",
-    "channels": ["line"],
+    "channels": ["push", "line"],
     "eventTypes": ["traffic", "gunshot", "flood", "crowd"]
   },
   {
@@ -20,7 +20,7 @@
     "enabled": true,
     "targetType": "user",
     "targetId": "3",
-    "channels": ["email"],
+    "channels": ["push", "email"],
     "eventTypes": ["gunshot", "flood"]
   },
   {
@@ -28,7 +28,7 @@
     "enabled": false,
     "targetType": "user",
     "targetId": "4",
-    "channels": ["line", "sms"],
+    "channels": ["push", "line"],
     "eventTypes": ["gunshot"]
   }
 ]
