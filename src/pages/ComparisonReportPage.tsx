@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
-import { GitCompare, Shield, AlertTriangle, Car, TrendingUp, TrendingDown } from 'lucide-react';
+import { GitCompare, Shield, AlertTriangle, Car, TrendingUp, TrendingDown, BarChart3, PieChart as PieChartIcon, ListOrdered, Grid3x3 } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { ExportButtons } from '../components/ExportButtons';
 import { exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
@@ -70,24 +70,43 @@ function periodLabel(granularity: Granularity, year: number, month?: number, qua
   return `${MONTH_NAMES[(month ?? 1) - 1]} ${beYear}`;
 }
 
-function SummaryCard({ icon: Icon, label, value, trendPct, color }: {
-  icon: React.ElementType; label: string; value: string; trendPct: number | null; color: string;
+function SummaryCard({ icon: Icon, label, value, trendPct, gradient }: {
+  icon: React.ElementType; label: string; value: string; trendPct: number | null; gradient: string;
 }) {
   return (
-    <div className="card flex flex-col gap-2">
+    <div className={`group rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300`}>
       <div className="flex items-center justify-between">
-        <p className="text-lg font-bold text-gray-500">{label}</p>
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
-          <Icon size={20} />
+        <p className="text-lg font-extrabold text-white leading-tight">{label}</p>
+        <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/20 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">
+          <Icon size={22} className="text-white" />
         </div>
       </div>
-      <p className="text-3xl font-extrabold text-navy-700 leading-none truncate">{value}</p>
+      <p className="text-3xl font-extrabold text-white leading-none truncate">{value}</p>
       {trendPct !== null && (
-        <p className={`text-base font-bold flex items-center gap-1 ${trendPct >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+        <p className="text-base font-semibold flex items-center gap-1 text-white">
           {trendPct >= 0 ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
           {trendPct >= 0 ? '+' : ''}{trendPct.toFixed(1)}% จากช่วงก่อนหน้า
         </p>
       )}
+    </div>
+  );
+}
+
+function SectionHeader({ icon: Icon, title, subtitle, action }: {
+  icon: React.ElementType; title: string; subtitle?: string; action?: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2 -mx-4 -mt-4 mb-3 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100 rounded-t-xl">
+      <div className="flex items-center gap-2.5">
+        <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <Icon size={20} className="text-white" />
+        </div>
+        <div>
+          <h3 className="font-extrabold text-navy-700 text-2xl">{title}</h3>
+          {subtitle && <p className="text-base text-gray-500 font-normal">{subtitle}</p>}
+        </div>
+      </div>
+      {action}
     </div>
   );
 }
@@ -275,31 +294,34 @@ export function ComparisonReportPage() {
 
           {/* KPI cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-            <SummaryCard icon={config.icon} label={`${config.countLabel}ทั้งหมด`} value={`${currentTotal.toLocaleString()} ครั้ง`} trendPct={overallTrend} color="#1B3A6B" />
-            <SummaryCard icon={TrendingUp} label="เฉลี่ยต่อวัน" value={`${avgPerDay.toFixed(1)} ครั้ง`} trendPct={null} color="#0E7490" />
-            <SummaryCard icon={config.icon} label={`${config.groupLabel}ที่มีการใช้งานสูงสุด`} value={groups[0]?.group ?? '-'} trendPct={null} color="#CA8A04" />
-            <SummaryCard icon={config.icon} label={`${config.categoryLabel}ที่พบบ่อยที่สุด`} value={categories[0] ? categoryLabel(topic, categories[0].category) : '-'} trendPct={null} color="#7C3AED" />
-            <SummaryCard icon={config.icon} label={`จำนวน${config.groupLabel}ที่มีการใช้งาน`} value={`${groupsTracked} จาก ${config.totalGroups}`} trendPct={null} color="#0F766E" />
+            <SummaryCard icon={config.icon} label={`${config.countLabel}ทั้งหมด`} value={`${currentTotal.toLocaleString()} ครั้ง`} trendPct={overallTrend} gradient="bg-gradient-to-br from-blue-500 to-blue-700" />
+            <SummaryCard icon={TrendingUp} label="เฉลี่ยต่อวัน" value={`${avgPerDay.toFixed(1)} ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-cyan-500 to-cyan-700" />
+            <SummaryCard icon={config.icon} label={`${config.groupLabel}ที่มีการใช้งานสูงสุด`} value={groups[0]?.group ?? '-'} trendPct={null} gradient="bg-gradient-to-br from-amber-500 to-orange-700" />
+            <SummaryCard icon={config.icon} label={`${config.categoryLabel}ที่พบบ่อยที่สุด`} value={categories[0] ? categoryLabel(topic, categories[0].category) : '-'} trendPct={null} gradient="bg-gradient-to-br from-violet-500 to-purple-700" />
+            <SummaryCard icon={config.icon} label={`จำนวน${config.groupLabel}ที่มีการใช้งาน`} value={`${groupsTracked} จาก ${config.totalGroups}`} trendPct={null} gradient="bg-gradient-to-br from-emerald-500 to-green-700" />
           </div>
 
           {/* Multi-year trend line */}
           <div className="card p-4 mb-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h3 className="font-bold text-gray-900 text-xl">แนวโน้ม{config.countLabel} เทียบปีย้อนหลัง {years.length} ปี</h3>
-              <div className="flex gap-1.5" data-html2canvas-ignore>
-                {(['month', 'quarter', 'year'] as const).map(g => (
-                  <button
-                    key={g}
-                    onClick={() => setTrendGranularity(g)}
-                    className={`text-sm font-bold px-3 py-1.5 rounded-lg border transition-colors ${
-                      trendGranularity === g ? 'bg-navy-500 text-white border-navy-500' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    {g === 'month' ? 'รายเดือน' : g === 'quarter' ? 'รายไตรมาส' : 'รายปี'}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <SectionHeader
+              icon={TrendingUp}
+              title={`แนวโน้ม${config.countLabel} เทียบปีย้อนหลัง ${years.length} ปี`}
+              action={
+                <div className="flex gap-1.5" data-html2canvas-ignore>
+                  {(['month', 'quarter', 'year'] as const).map(g => (
+                    <button
+                      key={g}
+                      onClick={() => setTrendGranularity(g)}
+                      className={`text-sm font-bold px-3 py-1.5 rounded-lg border transition-colors ${
+                        trendGranularity === g ? 'bg-navy-500 text-white border-navy-500' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      {g === 'month' ? 'รายเดือน' : g === 'quarter' ? 'รายไตรมาส' : 'รายปี'}
+                    </button>
+                  ))}
+                </div>
+              }
+            />
             <ResponsiveContainer width="100%" height={260}>
               {trendGranularity === 'year' ? (
                 <LineChart data={trendSeries} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
@@ -327,15 +349,16 @@ export function ComparisonReportPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
             {/* Yearly bar chart */}
             <div className="card p-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <h3 className="font-bold text-gray-900 text-xl">เปรียบเทียบ{config.countLabel}รายปี</h3>
-                {ytdPct !== null && (
+              <SectionHeader
+                icon={BarChart3}
+                title={`เปรียบเทียบ${config.countLabel}รายปี`}
+                action={ytdPct !== null && (
                   <span className={`inline-flex items-center gap-1 font-bold text-base px-3 py-1 rounded-full ${ytdPct >= 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                     {ytdPct >= 0 ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
                     {ytdPct >= 0 ? '+' : ''}{ytdPct.toFixed(1)}% เทียบปีก่อนหน้า (YTD)
                   </span>
                 )}
-              </div>
+              />
               <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={yearly.map(y => ({ label: String(y.year + 543), value: y.count }))} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -351,7 +374,7 @@ export function ComparisonReportPage() {
 
             {/* Category donut */}
             <div className="card p-4">
-              <h3 className="font-bold text-gray-900 text-xl mb-2">การใช้งานจำแนกตาม{config.categoryLabel}</h3>
+              <SectionHeader icon={PieChartIcon} title={`การใช้งานจำแนกตาม${config.categoryLabel}`} />
               <div className="flex items-center">
                 <ResponsiveContainer width="60%" height={200}>
                   <PieChart>
@@ -377,9 +400,14 @@ export function ComparisonReportPage() {
           </div>
 
           {/* Ranked table */}
-          <div className="card overflow-hidden mb-4">
-            <div className="flex items-center justify-between p-4 border-b border-gray-100">
-              <h3 className="font-bold text-gray-900 text-xl">{config.groupLabel}ที่มีการใช้งานสูงสุด</h3>
+          <div className="card overflow-hidden mb-4 p-0">
+            <div className="flex items-center justify-between gap-2.5 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <ListOrdered size={20} className="text-white" />
+                </div>
+                <h3 className="font-extrabold text-navy-700 text-2xl">{config.groupLabel}ที่มีการใช้งานสูงสุด</h3>
+              </div>
               {config.linkTo && (
                 <Link to={config.linkTo} className="text-navy-600 font-bold text-base hover:underline">{config.linkLabel}</Link>
               )}
@@ -418,10 +446,15 @@ export function ComparisonReportPage() {
           </div>
 
           {/* Heatmap */}
-          <div className="card overflow-hidden">
-            <div className="p-4 border-b border-gray-100">
-              <h3 className="font-bold text-gray-900 text-xl">ช่วงเวลาที่มีการใช้งานสูงสุด</h3>
-              <p className="text-base text-gray-400">{periodLabel(granularity, year, month, quarter)} — ประมาณการกระจายตามรูปแบบการใช้งานทั่วไป (ไม่ใช่ข้อมูลบันทึกเวลาระดับรายการจริง)</p>
+          <div className="card overflow-hidden p-0">
+            <div className="flex items-center gap-2.5 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100">
+              <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Grid3x3 size={20} className="text-white" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-navy-700 text-2xl">ช่วงเวลาที่มีการใช้งานสูงสุด</h3>
+                <p className="text-base text-gray-500">{periodLabel(granularity, year, month, quarter)} — ประมาณการกระจายตามรูปแบบการใช้งานทั่วไป (ไม่ใช่ข้อมูลบันทึกเวลาระดับรายการจริง)</p>
+              </div>
             </div>
             <div className="overflow-x-auto p-4">
               <table className="w-full text-base border-separate" style={{ borderSpacing: 4 }}>
