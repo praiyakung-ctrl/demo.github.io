@@ -27,7 +27,7 @@ const PURPOSES = [
 ];
 
 const MAX_REQUEST_HOURS = 6;
-const MAX_BACK_DAYS = 7;
+const MAX_BACK_DAYS = 365;
 
 interface RequestForm {
   incidentLat: number | null;
