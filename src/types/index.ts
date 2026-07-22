@@ -215,7 +215,7 @@ export interface User {
 /* ---------- Group-based permissions (RBAC) ---------- */
 
 export type MenuKey =
-  | 'map' | 'dashboard' | 'portal' | 'reports' | 'liveViewer'
+  | 'map' | 'dashboard' | 'portal' | 'reports' | 'liveViewer' | 'comparisonReport'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
   | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents';
 
@@ -236,6 +236,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'portal',       label: 'ยื่นขอกล้อง (พอร์ทัลประชาชน)' },
   { key: 'reports',      label: 'รายงาน' },
   { key: 'liveViewer',   label: 'Live Viewer (หมุนเวียนภาพกล้อง)' },
+  { key: 'comparisonReport', label: 'รายงานเปรียบเทียบ' },
   { key: 'adminCameras', label: 'จัดการกล้อง' },
   { key: 'adminUsers',   label: 'จัดการผู้ใช้' },
   { key: 'adminRepairs', label: 'กล้องรอตรวจสอบ' },

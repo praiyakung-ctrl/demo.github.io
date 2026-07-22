@@ -1,0 +1,8682 @@
+[
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1884
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 856
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 343
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 343
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1602
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 728
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 291
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 291
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1337
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 608
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 243
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 243
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1205
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 548
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 219
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 219
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1115
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 507
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 203
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 203
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1023
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 465
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 186
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 186
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 889
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 404
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 162
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 162
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 828
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 376
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 150
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 150
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 718
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 326
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 130
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 130
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 651
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 296
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 118
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 118
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1962
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 892
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 357
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 357
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1668
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 758
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 303
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 303
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1393
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 633
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 253
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 253
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1255
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 570
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 228
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 228
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1162
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 528
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 211
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 211
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1065
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 484
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 926
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 421
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 862
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 392
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 747
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 340
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 136
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 136
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 678
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1991
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 905
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 362
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 362
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1692
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 769
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1413
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 642
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 257
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 257
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1273
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 579
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 231
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 231
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1179
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 536
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 214
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 214
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1081
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 491
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 197
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 197
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 939
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 427
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 874
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 397
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 159
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 159
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 758
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 345
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 138
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 138
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 688
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 313
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 125
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 125
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1962
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 892
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 357
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 357
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1668
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 758
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 303
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 303
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1393
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 633
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 253
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 253
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1255
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 570
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 228
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 228
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1162
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 528
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 211
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 211
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1065
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 484
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 926
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 421
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 862
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 392
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 747
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 340
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 136
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 136
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 678
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1884
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 856
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 343
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 343
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1602
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 728
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 291
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 291
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1337
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 608
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 243
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 243
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1205
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 548
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 219
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 219
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1115
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 507
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 203
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 203
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1023
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 465
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 186
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 186
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 889
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 404
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 162
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 162
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 828
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 376
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 150
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 150
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 718
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 326
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 130
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 130
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 651
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 296
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 118
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 118
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1777
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 808
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 323
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 323
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1511
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 687
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 275
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 275
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1262
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 574
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 229
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 229
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1137
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 517
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 207
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 207
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1052
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 478
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 191
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 191
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 965
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 439
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 175
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 175
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 839
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 381
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 152
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 152
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 781
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 355
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 142
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 142
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 677
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 615
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 279
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 112
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 112
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1671
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 759
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 304
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 304
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1420
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 646
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 258
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 258
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1186
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 539
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 216
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 216
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1069
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 486
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 989
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 450
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 180
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 180
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 907
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 412
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 165
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 165
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 788
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 358
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 143
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 143
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 734
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 334
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 636
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 289
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 116
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 116
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 578
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 263
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 105
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 105
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1593
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 724
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 290
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 290
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1354
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 615
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1131
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 514
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 206
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 206
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1019
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 463
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 185
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 185
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 943
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 429
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 865
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 393
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 751
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 342
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 137
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 137
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 700
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 318
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 127
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 127
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 607
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 276
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 110
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 110
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 551
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 250
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 100
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 100
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1564
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 711
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 284
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 284
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1330
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 604
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 242
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 242
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1110
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 505
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 202
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 202
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1000
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 455
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 182
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 182
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 926
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 421
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 168
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 849
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 386
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 154
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 154
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 738
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 335
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 134
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 134
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 687
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 312
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 125
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 125
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 596
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 271
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 108
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 108
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 541
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 246
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 98
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 98
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1593
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 724
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 290
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 290
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1354
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 615
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1131
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 514
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 206
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 206
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1019
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 463
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 185
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 185
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 943
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 429
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 171
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 865
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 393
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 157
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 751
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 342
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 137
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 137
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 700
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 318
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 127
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 127
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 607
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 276
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 110
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 110
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 551
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 250
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 100
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 100
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1671
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 759
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 304
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 304
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1420
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 646
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 258
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 258
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1186
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 539
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 216
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 216
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1069
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 486
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 989
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 450
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 180
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 180
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 907
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 412
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 165
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 165
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 788
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 358
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 143
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 143
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 734
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 334
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 636
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 289
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 116
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 116
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 578
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 263
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 105
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 105
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1777
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 808
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 323
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 323
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1511
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 687
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 275
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 275
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1262
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 574
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 229
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 229
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1137
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 517
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 207
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 207
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1052
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 478
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 191
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 191
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 965
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 439
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 175
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 175
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 839
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 381
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 152
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 152
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 781
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 355
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 142
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 142
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 677
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 308
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 123
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 615
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 279
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 112
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 112
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2035
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 925
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 370
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 370
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1730
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 786
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 314
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 314
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1444
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 657
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 263
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 263
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1301
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 592
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 237
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 237
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1205
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 548
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 219
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 219
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1105
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 502
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 201
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 201
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 960
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 436
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 175
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 175
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 894
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 406
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 163
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 163
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 775
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 352
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 141
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 141
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 704
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 320
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 128
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 128
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2119
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 963
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 385
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 385
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1801
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 819
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1504
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 684
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 274
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 274
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1355
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 616
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1255
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 570
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 228
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 228
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1151
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 523
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 209
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 209
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1000
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 454
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 931
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 423
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 169
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 169
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 807
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 367
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 147
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 147
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 733
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 333
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2150
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 977
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 391
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 391
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1828
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 831
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 332
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 332
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1526
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 694
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 277
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 277
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1375
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 625
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 250
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 250
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1273
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 579
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 231
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 231
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1167
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 531
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 212
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 212
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1014
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 461
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 184
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 184
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 944
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 429
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 172
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 172
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 819
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 372
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 149
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 149
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 743
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 338
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 135
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 135
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2119
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 963
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 385
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 385
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1801
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 819
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1504
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 684
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 274
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 274
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1355
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 616
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1255
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 570
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 228
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 228
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1151
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 523
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 209
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 209
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1000
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 454
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 931
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 423
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 169
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 169
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 807
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 367
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 147
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 147
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 733
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 333
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2035
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 925
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 370
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 370
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1730
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 786
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 314
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 314
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1444
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 657
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 263
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 263
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1301
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 592
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 237
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 237
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1205
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 548
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 219
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 219
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1105
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 502
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 201
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 201
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 960
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 436
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 175
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 175
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 894
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 406
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 163
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 163
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 775
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 352
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 141
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 141
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 704
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 320
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 128
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 128
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1919
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 872
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 349
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 349
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1632
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 742
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 297
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 297
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1363
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 619
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 248
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 248
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1228
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 558
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 223
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 223
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1136
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 517
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 207
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 207
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1042
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 474
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 190
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 190
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 906
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 412
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 165
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 165
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 843
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 383
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 153
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 153
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 731
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 332
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 664
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 302
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 121
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 121
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1804
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 820
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1534
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 697
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 279
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 279
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1281
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 582
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 233
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 233
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1154
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 525
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 210
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 210
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1068
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 486
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 980
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 445
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 178
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 178
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 851
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 387
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 155
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 155
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 793
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 360
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 144
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 144
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 687
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 312
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 125
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 125
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 624
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 284
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 113
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 113
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1720
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 782
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 313
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 313
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1462
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 665
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 266
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 266
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1221
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 555
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 222
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 222
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1100
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 500
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 200
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 200
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1018
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 463
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 185
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 185
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 934
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 425
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 170
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 170
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 812
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 369
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 148
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 148
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 756
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 343
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 137
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 137
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 655
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 298
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 119
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 119
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 595
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 270
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 108
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 108
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1689
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 768
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 307
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 307
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1436
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 653
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 261
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 261
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1199
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 545
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 218
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 218
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1080
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 491
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 196
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 196
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1000
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 455
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 182
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 917
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 417
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 167
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 167
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 797
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 362
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 145
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 145
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 742
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 337
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 135
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 135
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 643
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 292
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 117
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 117
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 584
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 265
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 106
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 106
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1720
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 782
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 313
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 313
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1462
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 665
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 266
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 266
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1221
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 555
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 222
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 222
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1100
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 500
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 200
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 200
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1018
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 463
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 185
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 185
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 934
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 425
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 170
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 170
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 812
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 369
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 148
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 148
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 756
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 343
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 137
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 137
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 655
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 298
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 119
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 119
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 595
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 270
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 108
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 108
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1804
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 820
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 328
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1534
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 697
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 279
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 279
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1281
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 582
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 233
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 233
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1154
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 525
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 210
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 210
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1068
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 486
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 194
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 194
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 980
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 445
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 178
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 178
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 851
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 387
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 155
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 155
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 793
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 360
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 144
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 144
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 687
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 312
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 125
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 125
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 624
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 284
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 113
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 113
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1919
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 872
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 349
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 349
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1632
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 742
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 297
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 297
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1363
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 619
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 248
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 248
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1228
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 558
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 223
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 223
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1136
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 517
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 207
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 207
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1042
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 474
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 190
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 190
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 906
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 412
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 165
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 165
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 843
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 383
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 153
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 153
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 731
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 332
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 133
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 664
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 302
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 121
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 121
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2197
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 999
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 400
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 400
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1868
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 849
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 340
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 340
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1560
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 709
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 284
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 284
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1406
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 639
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 256
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 256
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1301
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 591
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 237
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 237
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1193
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 542
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 217
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 217
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1037
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 471
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 189
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 189
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 965
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 439
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 176
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 176
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 837
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 380
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 152
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 152
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 760
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 345
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 138
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 138
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2288
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 1040
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 416
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 416
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1945
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 884
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1625
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 738
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 295
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 295
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1464
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 665
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 266
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 266
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1355
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 616
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1243
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 565
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 226
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 226
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1080
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 491
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 196
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 196
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 1005
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 457
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 183
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 183
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 872
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 396
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 159
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 159
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 791
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 360
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2322
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 1055
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 422
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 422
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1974
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 897
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 359
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 359
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1648
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 749
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 300
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 300
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1485
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 675
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 270
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 270
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1375
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 625
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 250
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 250
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1261
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 573
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 229
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 229
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1095
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 498
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 199
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 199
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 1020
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 464
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 185
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 185
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 884
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 402
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 161
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 161
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 803
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 365
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 146
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 146
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2288
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 1040
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 416
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 416
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1945
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 884
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1625
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 738
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 295
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 295
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1464
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 665
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 266
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 266
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1355
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 616
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 246
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 246
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1243
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 565
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 226
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 226
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1080
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 491
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 196
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 196
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 1005
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 457
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 183
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 183
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 872
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 396
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 159
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 159
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 791
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 360
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2197
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 999
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 400
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 400
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1868
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 849
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 340
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 340
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1560
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 709
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 284
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 284
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1406
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 639
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 256
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 256
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1301
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 591
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 237
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 237
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1193
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 542
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 217
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 217
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 1037
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 471
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 189
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 189
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 965
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 439
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 176
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 176
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 837
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 380
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 152
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 152
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 760
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 345
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 138
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 138
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 2073
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 942
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 377
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 377
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1762
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 801
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 320
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 320
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1472
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 669
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 268
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 268
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1326
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 603
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 241
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 241
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1227
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 558
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 223
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 223
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1126
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 512
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 205
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 205
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 978
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 445
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 178
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 178
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 911
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 414
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 166
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 166
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 790
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 359
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 144
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 717
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 326
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 130
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 130
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถยนต์",
+    "count": 1949
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถกระบะ",
+    "count": 886
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถบรรทุก",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสุขุมวิท (บางแสน)",
+    "category": "รถจักรยานยนต์",
+    "count": 354
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถยนต์",
+    "count": 1657
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถกระบะ",
+    "count": 753
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถบรรทุก",
+    "count": 301
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาใต้",
+    "category": "รถจักรยานยนต์",
+    "count": 301
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถยนต์",
+    "count": 1383
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถกระบะ",
+    "count": 629
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถบรรทุก",
+    "count": 252
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนศรีราชา",
+    "category": "รถจักรยานยนต์",
+    "count": 252
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถยนต์",
+    "count": 1246
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถกระบะ",
+    "count": 567
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถบรรทุก",
+    "count": 227
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนสัตหีบ",
+    "category": "รถจักรยานยนต์",
+    "count": 227
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถยนต์",
+    "count": 1154
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถกระบะ",
+    "count": 524
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถบรรทุก",
+    "count": 210
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนบ้านบึง-นาเกลือ",
+    "category": "รถจักรยานยนต์",
+    "count": 210
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถยนต์",
+    "count": 1058
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถกระบะ",
+    "count": 481
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถบรรทุก",
+    "count": 192
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพัทยาเหนือ",
+    "category": "รถจักรยานยนต์",
+    "count": 192
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถยนต์",
+    "count": 919
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถกระบะ",
+    "count": 418
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถบรรทุก",
+    "count": 167
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนแหลมฉบัง",
+    "category": "รถจักรยานยนต์",
+    "count": 167
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถยนต์",
+    "count": 856
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถกระบะ",
+    "count": 389
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถบรรทุก",
+    "count": 156
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนชลบุรี-พัทยา",
+    "category": "รถจักรยานยนต์",
+    "count": 156
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถยนต์",
+    "count": 742
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถกระบะ",
+    "count": 337
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถบรรทุก",
+    "count": 135
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนอ่างศิลา",
+    "category": "รถจักรยานยนต์",
+    "count": 135
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถยนต์",
+    "count": 674
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถกระบะ",
+    "count": 306
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถบรรทุก",
+    "count": 123
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ถนนพนัสนิคม",
+    "category": "รถจักรยานยนต์",
+    "count": 123
+  }
+]

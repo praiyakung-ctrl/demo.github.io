@@ -1,0 +1,8662 @@
+[
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 672,
+    "downloads": 4
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 714,
+    "downloads": 4
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 756,
+    "downloads": 4
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 798,
+    "downloads": 4
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 570,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 570,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 630,
+    "downloads": 4
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 450,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 576,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 612,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 648,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 684,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 576,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 612,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 768,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 816,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 612,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 864,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 648,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 912,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 684,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 570,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 720,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 450,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 450,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 672,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 714,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 648,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 684,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 570,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 450,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 672,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 7,
+    "officers": 4,
+    "totalMinutes": 714,
+    "downloads": 4
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 9,
+    "officers": 5,
+    "totalMinutes": 864,
+    "downloads": 5
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 576,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 576,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 9,
+    "officers": 5,
+    "totalMinutes": 918,
+    "downloads": 5
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 612,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 612,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 9,
+    "officers": 5,
+    "totalMinutes": 972,
+    "downloads": 5
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 648,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 648,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 432,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 324,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 216,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 108,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 9,
+    "officers": 5,
+    "totalMinutes": 1026,
+    "downloads": 5
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 684,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 570,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 684,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 456,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 342,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 228,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 114,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 9,
+    "officers": 5,
+    "totalMinutes": 810,
+    "downloads": 5
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 540,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 360,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 270,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 180,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 90,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 768,
+    "downloads": 4
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 6,
+    "officers": 4,
+    "totalMinutes": 576,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 480,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 384,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.พนัสนิคม",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 288,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 192,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 96,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อุบัติเหตุจราจร",
+    "count": 8,
+    "officers": 5,
+    "totalMinutes": 816,
+    "downloads": 4
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อาชญากรรม",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทะเลาะวิวาท",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "ทรัพย์สินหาย",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.เมืองชลบุรี",
+    "category": "อื่นๆ",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 5,
+    "officers": 3,
+    "totalMinutes": 510,
+    "downloads": 3
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อาชญากรรม",
+    "count": 4,
+    "officers": 2,
+    "totalMinutes": 408,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทะเลาะวิวาท",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "ทรัพย์สินหาย",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บางละมุง",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทะเลาะวิวาท",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.ศรีราชา",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.พนัสนิคม",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อุบัติเหตุจราจร",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "อาชญากรรม",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.บ้านบึง",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อุบัติเหตุจราจร",
+    "count": 3,
+    "officers": 2,
+    "totalMinutes": 306,
+    "downloads": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อาชญากรรม",
+    "count": 2,
+    "officers": 1,
+    "totalMinutes": 204,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทะเลาะวิวาท",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "ทรัพย์สินหาย",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สภ.สัตหีบ",
+    "category": "อื่นๆ",
+    "count": 1,
+    "officers": 1,
+    "totalMinutes": 102,
+    "downloads": 1
+  }
+]

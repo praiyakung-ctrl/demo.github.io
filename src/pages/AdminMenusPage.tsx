@@ -10,7 +10,7 @@ import { Pagination } from '../components/Pagination';
 const PAGE_SIZE = 10;
 
 const MENU_PATHS: Record<string, string> = {
-  map: '/map', dashboard: '/dashboard', portal: '/portal', reports: '/reports', liveViewer: '/live-viewer',
+  map: '/map', dashboard: '/dashboard', portal: '/portal', reports: '/reports', liveViewer: '/live-viewer', comparisonReport: '/reports/comparison',
   adminCameras: '/admin/cameras', adminUsers: '/admin/users',
   adminRepairs: '/admin/repairs', adminGroups: '/admin/groups', adminMenus: '/admin/menus',
   adminAuditLog: '/admin/audit-log', adminApi: '/admin/api', adminNotifications: '/admin/notifications', adminSettings: '/admin/settings',

@@ -1,0 +1,6512 @@
+[
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 57
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 38
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 72
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 29
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 75
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 23
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 76
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 34
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 75
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 23
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 57
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 38
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 72
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 29
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 54
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 36
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 68
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 45
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 12
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 45
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 23
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 21
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 51
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 34
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 42
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 42
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 28
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 21
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 27
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 59
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 26
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 48
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 40
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 27
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 51
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 34
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 42
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 42
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 28
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 21
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 54
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 36
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 68
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 45
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 12
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 45
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 30
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 23
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 32
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 21
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 37
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 75
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 46
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 78
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 48
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 52
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 37
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 64
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 79
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 49
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 53
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 32
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 37
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 23
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 78
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 48
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 52
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 32
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 37
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 60
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 37
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 75
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 46
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 57
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 35
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 71
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 44
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 47
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 29
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 53
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 67
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 41
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 44
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 27
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 14
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 51
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 64
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 42
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 21
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 62
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 38
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 42
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 21
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 29
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 51
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 64
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 42
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 26
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 21
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 53
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 67
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 41
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 44
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 27
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 22
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 14
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 57
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 35
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 71
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 44
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 47
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 29
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 24
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 35
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 79
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 44
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 52
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 30
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 26
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 37
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 21
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 66
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 37
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 82
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 46
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 55
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 38
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 67
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 37
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 83
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 47
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 55
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 19
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 39
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 66
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 37
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 82
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 46
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 55
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 27
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 38
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 22
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 63
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 35
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 14
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 9
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 79
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 44
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 17
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 52
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 30
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 26
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 37
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 21
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 59
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 33
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 13
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 74
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 42
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 16
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 50
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 28
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 11
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 30
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 17
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 25
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 14
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 35
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 20
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "traffic",
+    "count": 56
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "parking",
+    "count": 31
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "crowd",
+    "count": 12
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "flood",
+    "count": 8
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "เมืองชลบุรี",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "traffic",
+    "count": 70
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "parking",
+    "count": 39
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "crowd",
+    "count": 15
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "flood",
+    "count": 10
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บางละมุง",
+    "category": "gunshot",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "traffic",
+    "count": 47
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "parking",
+    "count": 26
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "crowd",
+    "count": 10
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "flood",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "ศรีราชา",
+    "category": "gunshot",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "traffic",
+    "count": 28
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "parking",
+    "count": 16
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "crowd",
+    "count": 6
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "พนัสนิคม",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "traffic",
+    "count": 23
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "parking",
+    "count": 13
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "crowd",
+    "count": 5
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "flood",
+    "count": 3
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "บ้านบึง",
+    "category": "gunshot",
+    "count": 2
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "traffic",
+    "count": 33
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "parking",
+    "count": 18
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "crowd",
+    "count": 7
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "flood",
+    "count": 4
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "group": "สัตหีบ",
+    "category": "gunshot",
+    "count": 2
+  }
+]
