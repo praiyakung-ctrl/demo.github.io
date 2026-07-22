@@ -17,20 +17,20 @@ function monthLabel(month: string): string {
   return d.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' });
 }
 
-function SummaryCard({ icon: Icon, label, value, trendPct, color }: {
-  icon: React.ElementType; label: string; value: string; trendPct: number | null; color: string;
+function SummaryCard({ icon: Icon, label, value, trendPct, gradient }: {
+  icon: React.ElementType; label: string; value: string; trendPct: number | null; gradient: string;
 }) {
   return (
-    <div className="card flex flex-col gap-2">
+    <div className={`group rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300`}>
       <div className="flex items-center justify-between">
-        <p className="text-lg font-bold text-gray-500">{label}</p>
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
-          <Icon size={20} />
+        <p className="text-lg font-extrabold text-white leading-tight">{label}</p>
+        <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/20 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">
+          <Icon size={22} className="text-white" />
         </div>
       </div>
-      <p className="text-4xl font-extrabold text-navy-700 leading-none">{value}</p>
+      <p className="text-4xl font-extrabold text-white leading-none">{value}</p>
       {trendPct !== null && (
-        <p className={`text-base font-bold flex items-center gap-1 ${trendPct >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+        <p className="text-base font-semibold flex items-center gap-1 text-white">
           {trendPct >= 0 ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
           {trendPct >= 0 ? '+' : ''}{trendPct.toFixed(1)}% จากเดือนก่อนหน้า
         </p>
@@ -162,18 +162,20 @@ export function PoliceUsageReportPage() {
 
           {/* KPI cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-            <SummaryCard icon={Activity} label="จำนวนการเข้าใช้งานทั้งหมด" value={`${totalCount.toLocaleString()} ครั้ง`} trendPct={overallTrend} color="#1B3A6B" />
-            <SummaryCard icon={Users} label="จำนวนเจ้าหน้าที่ที่เข้าใช้งาน" value={`${totalOfficers.toLocaleString()} คน`} trendPct={null} color="#0E7490" />
-            <SummaryCard icon={Clock} label="ระยะเวลาการใช้งานรวม" value={`${formatHoursMinutes(totalMinutes)} ชม.`} trendPct={null} color="#7C3AED" />
-            <SummaryCard icon={Clock} label="เฉลี่ยต่อการเข้าใช้งาน" value={`${formatHoursMinutes(avgMinutes)} ชม./ครั้ง`} trendPct={null} color="#CA8A04" />
-            <SummaryCard icon={Download} label="จำนวนการดาวน์โหลด" value={`${totalDownloads.toLocaleString()} ครั้ง`} trendPct={null} color="#0F766E" />
+            <SummaryCard icon={Activity} label="จำนวนการเข้าใช้งานทั้งหมด" value={`${totalCount.toLocaleString()} ครั้ง`} trendPct={overallTrend} gradient="bg-gradient-to-br from-blue-500 to-blue-700" />
+            <SummaryCard icon={Users} label="จำนวนเจ้าหน้าที่ที่เข้าใช้งาน" value={`${totalOfficers.toLocaleString()} คน`} trendPct={null} gradient="bg-gradient-to-br from-cyan-500 to-cyan-700" />
+            <SummaryCard icon={Clock} label="ระยะเวลาการใช้งานรวม" value={`${formatHoursMinutes(totalMinutes)} ชม.`} trendPct={null} gradient="bg-gradient-to-br from-violet-500 to-purple-700" />
+            <SummaryCard icon={Clock} label="เฉลี่ยต่อการเข้าใช้งาน" value={`${formatHoursMinutes(avgMinutes)} ชม./ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-amber-500 to-orange-700" />
+            <SummaryCard icon={Download} label="จำนวนการดาวน์โหลด" value={`${totalDownloads.toLocaleString()} ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-emerald-500 to-green-700" />
           </div>
 
           {/* Ranked table */}
-          <div className="card overflow-hidden">
-            <div className="flex items-center gap-2 p-4 border-b border-gray-100">
-              <HardDrive size={22} className="text-navy-700" />
-              <h3 className="font-bold text-gray-900 text-xl">สถิติการเข้าใช้งาน จำแนกตามสถานีตำรวจ (สภ.)</h3>
+          <div className="card overflow-hidden p-0">
+            <div className="flex items-center gap-2.5 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100">
+              <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                <HardDrive size={20} className="text-white" />
+              </div>
+              <h3 className="font-extrabold text-navy-700 text-2xl">สถิติการเข้าใช้งาน จำแนกตามสถานีตำรวจ (สภ.)</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-lg">
