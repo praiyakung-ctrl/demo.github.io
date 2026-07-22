@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, Waves, Wrench, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
-import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS } from '../types';
+import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS, INCIDENT_STATUS_LABEL } from '../types';
 import eventsData from '../data/events.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
 import { pendingReports } from '../utils/cameraReports';
 import { savedNotificationSettings } from '../utils/notificationSettings';
 import { savedRequests } from '../utils/requestStorage';
+import { savedIncidentPoints } from '../utils/incidentPoints';
 
 const allEvents = eventsData as CctvEvent[];
 
@@ -29,7 +30,7 @@ const EVENT_TYPE_ICONS = {
 } as const;
 
 export function Navbar() {
-  const { user, logout, isCitizen, isAdmin } = useAuth();
+  const { user, logout, isCitizen, isAdmin, isPolice, isLocalOfficer } = useAuth();
   const navigate = useNavigate();
   const [time, setTime] = useState(new Date());
   const [showUser, setShowUser] = useState(false);
@@ -63,6 +64,10 @@ export function Navbar() {
     };
   }, [showNotif, showUser]);
 
+  // police/local officers are notified about their own incident-point + CCTV request
+  // status, not CCTV events (those belong to admin/operator monitoring the map)
+  const isFieldReporter = isPolice || isLocalOfficer;
+
   // honor per-event-type enable flags from /admin/notifications (read fresh — dropdown toggles re-render)
   const notifRules = savedNotificationSettings().events;
   const unackEvents = allEvents.filter(e =>
@@ -70,11 +75,18 @@ export function Navbar() {
   );
   // admins also see cameras reported for inspection (read fresh — dropdown toggles re-render)
   const repairReports = isAdmin ? pendingReports() : [];
-  // citizens are notified about their own CCTV request status, not CCTV events
+  // citizens and field reporters are notified about their own CCTV request status, not CCTV events
   // (read fresh — statuses change as staff review requests)
-  const myRequests = isCitizen ? savedRequests().filter(r => r.email === user?.email) : [];
+  const myRequests = (isCitizen || isFieldReporter) ? savedRequests().filter(r => r.email === user?.email) : [];
   const activeRequests = myRequests.filter(r => r.status !== 'ได้รับแล้ว' && r.status !== 'ปฏิเสธ');
-  const unackCount = isCitizen ? activeRequests.length : unackEvents.length + repairReports.length;
+  // field reporters are also notified about their own submitted incident points
+  const myIncidentPoints = isFieldReporter ? savedIncidentPoints().filter(p => p.submittedByUserId === user?.id) : [];
+  const activeIncidentPoints = myIncidentPoints.filter(p => p.status === 'pending');
+  const unackCount = isCitizen
+    ? activeRequests.length
+    : isFieldReporter
+      ? activeRequests.length + activeIncidentPoints.length
+      : unackEvents.length + repairReports.length;
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -192,7 +204,89 @@ export function Navbar() {
             </div>
           )}
 
-          {showNotif && !isCitizen && (
+          {showNotif && isFieldReporter && (
+            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl w-96 z-[1100] overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 bg-orange-50 border-b border-orange-100">
+                <div className="flex items-center gap-2">
+                  <ShieldAlert size={16} className="text-orange-500" />
+                  <span className="text-sm font-bold text-gray-900">สถานะจุดที่แจ้งเหตุ</span>
+                </div>
+                <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {activeIncidentPoints.length} รายการ
+                </span>
+              </div>
+
+              <div className="max-h-56 overflow-y-auto">
+                {myIncidentPoints.length === 0 ? (
+                  <div className="flex flex-col items-center py-6 text-gray-400">
+                    <CheckCircle size={28} className="text-green-400 mb-2" />
+                    <p className="text-sm">ยังไม่มีจุดที่แจ้ง</p>
+                  </div>
+                ) : (
+                  myIncidentPoints.map(p => (
+                    <button
+                      key={p.id}
+                      onClick={() => { setShowNotif(false); navigate('/report-incident'); }}
+                      className="w-full text-left flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="mt-0.5 flex-shrink-0">
+                        <ShieldAlert size={18} className="text-orange-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2 mb-0.5">
+                          <p className="text-sm font-semibold text-gray-900 truncate">{p.locationLabel}</p>
+                          <StatusBadge status={INCIDENT_STATUS_LABEL[p.status]} />
+                        </div>
+                        <p className="text-xs text-gray-500 truncate">{p.category}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{timeAgo(p.submittedAt)}</p>
+                      </div>
+                    </button>
+                  ))
+                )}
+              </div>
+
+              <div className="flex items-center justify-between px-4 py-3 bg-blue-50 border-y border-blue-100">
+                <div className="flex items-center gap-2">
+                  <FileSearch size={16} className="text-navy-500" />
+                  <span className="text-sm font-bold text-gray-900">สถานะคำขอดูข้อมูลกล้อง CCTV</span>
+                </div>
+                <span className="bg-navy-700 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {activeRequests.length} รายการ
+                </span>
+              </div>
+
+              <div className="max-h-56 overflow-y-auto">
+                {myRequests.length === 0 ? (
+                  <div className="flex flex-col items-center py-6 text-gray-400">
+                    <CheckCircle size={28} className="text-green-400 mb-2" />
+                    <p className="text-sm">ยังไม่มีคำขอ</p>
+                  </div>
+                ) : (
+                  myRequests.map(req => (
+                    <button
+                      key={req.id}
+                      onClick={() => { setShowNotif(false); navigate('/portal'); }}
+                      className="w-full text-left flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="mt-0.5 flex-shrink-0">
+                        <FileSearch size={18} className="text-navy-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2 mb-0.5">
+                          <p className="text-sm font-semibold text-gray-900 truncate">คำขอ {req.reqNo}</p>
+                          <StatusBadge status={req.status} />
+                        </div>
+                        <p className="text-xs text-gray-500 truncate">{req.incidentLocation}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">อัปเดตล่าสุด {timeAgo(latestActivity(req))}</p>
+                      </div>
+                    </button>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          {showNotif && !isCitizen && !isFieldReporter && (
             <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl w-80 z-[1100] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-3 bg-orange-50 border-b border-orange-100">
                 <div className="flex items-center gap-2">

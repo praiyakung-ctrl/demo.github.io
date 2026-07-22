@@ -101,6 +101,12 @@ export interface TimelineEntry {
 export type IncidentPointType = 'risk' | 'proposed';
 export type IncidentPointStatus = 'pending' | 'approved' | 'rejected';
 
+export const INCIDENT_STATUS_LABEL: Record<IncidentPointStatus, string> = {
+  pending: 'รอตรวจสอบ',
+  approved: 'อนุมัติ',
+  rejected: 'ปฏิเสธ',
+};
+
 export const INCIDENT_CATEGORY_OPTIONS = [
   'อุบัติเหตุทางถนน', 'อาชญากรรม', 'จุดเสี่ยงน้ำท่วม', 'จุดเสี่ยงไฟไหม้', 'อื่นๆ',
 ] as const;

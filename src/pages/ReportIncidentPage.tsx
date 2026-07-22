@@ -10,8 +10,8 @@ import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
-import type { Camera, IncidentPoint, IncidentPointStatus, IncidentPointType } from '../types';
-import { INCIDENT_CATEGORY_OPTIONS, INCIDENT_FREQUENCY_OPTIONS } from '../types';
+import type { Camera, IncidentPoint, IncidentPointType } from '../types';
+import { INCIDENT_CATEGORY_OPTIONS, INCIDENT_FREQUENCY_OPTIONS, INCIDENT_STATUS_LABEL } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { addIncidentPoint, savedIncidentPoints } from '../utils/incidentPoints';
 import { logAudit } from '../utils/auditLog';
@@ -35,12 +35,6 @@ function StatCard({ icon: Icon, label, value, color }: { icon: typeof ShieldAler
 }
 
 const allCameras = camerasData as Camera[];
-
-const STATUS_LABEL: Record<IncidentPointStatus, string> = {
-  pending: 'รอตรวจสอบ',
-  approved: 'อนุมัติ',
-  rejected: 'ปฏิเสธ',
-};
 
 const TYPE_LABEL: Record<IncidentPointType, string> = {
   risk: 'จุดเสี่ยงภัย',
@@ -232,7 +226,7 @@ export function ReportIncidentPage() {
         ['ประเภท', 'ตำแหน่ง', 'ประเภทเหตุการณ์', 'ความถี่', 'ผู้แจ้ง', 'วันที่แจ้ง', 'สถานะ'],
         ...feedItems.map(p => [
           TYPE_LABEL[p.type], p.locationLabel, p.category, p.frequency, p.submittedBy,
-          formatThaiDateTime(p.submittedAt), STATUS_LABEL[p.status],
+          formatThaiDateTime(p.submittedAt), INCIDENT_STATUS_LABEL[p.status],
         ]),
       ],
       'แจ้งเหตุ',
@@ -320,7 +314,7 @@ export function ReportIncidentPage() {
                             <div key={p.id} className="border-t border-gray-100 pt-2 first:border-0 first:pt-0">
                               <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
                               <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
-                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {STATUS_LABEL[p.status]}</p>
+                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {INCIDENT_STATUS_LABEL[p.status]}</p>
                             </div>
                           ))}
                         </div>
@@ -334,7 +328,7 @@ export function ReportIncidentPage() {
                         <p className="font-extrabold text-red-700 text-xl leading-tight">จุดเสี่ยงภัย</p>
                         <p className="text-lg font-bold text-gray-800">{group.items[0].locationLabel}</p>
                         <p className="text-base text-gray-600">{group.items[0].category} · {group.items[0].frequency}</p>
-                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {STATUS_LABEL[group.items[0].status]}</p>
+                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {INCIDENT_STATUS_LABEL[group.items[0].status]}</p>
                       </div>
                     </Popup>
                   </Marker>
@@ -352,7 +346,7 @@ export function ReportIncidentPage() {
                             <div key={p.id} className="border-t border-gray-100 pt-2 first:border-0 first:pt-0">
                               <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
                               <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
-                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {STATUS_LABEL[p.status]}</p>
+                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {INCIDENT_STATUS_LABEL[p.status]}</p>
                             </div>
                           ))}
                         </div>
@@ -366,7 +360,7 @@ export function ReportIncidentPage() {
                         <p className="font-extrabold text-yellow-700 text-xl leading-tight">จุดขอติดตั้งใหม่</p>
                         <p className="text-lg font-bold text-gray-800">{group.items[0].locationLabel}</p>
                         <p className="text-base text-gray-600">{group.items[0].category} · {group.items[0].frequency}</p>
-                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {STATUS_LABEL[group.items[0].status]}</p>
+                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {INCIDENT_STATUS_LABEL[group.items[0].status]}</p>
                       </div>
                     </Popup>
                   </Marker>
@@ -399,7 +393,7 @@ export function ReportIncidentPage() {
                           : p.status === 'rejected' ? 'bg-red-100 text-red-800 border-red-300'
                           : 'bg-amber-100 text-amber-800 border-amber-300'
                       }`}>
-                        {STATUS_LABEL[p.status]}
+                        {INCIDENT_STATUS_LABEL[p.status]}
                       </span>
                     </div>
                   ))}
