@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { haversineDistanceKm, nearestCameras } from './geo';
+import { clusterByProximity, haversineDistanceKm, nearestCameras } from './geo';
 import type { Camera } from '../types';
 
 const camera = (over: Partial<Camera> = {}): Camera => ({
@@ -48,5 +48,30 @@ describe('nearestCameras', () => {
     const [first] = nearestCameras(point, cameras, 0.5);
     expect(first.distanceKm).toBeGreaterThan(0);
     expect(first.distanceKm).toBeLessThan(0.5);
+  });
+});
+
+describe('clusterByProximity', () => {
+  const p = (id: string, lat: number, lng: number) => ({ id, lat, lng });
+
+  it('groups points within the radius into one cluster', () => {
+    const items = [p('a', 13.36, 100.98), p('b', 13.3605, 100.9805), p('c', 13.3602, 100.9798)];
+    const groups = clusterByProximity(items, 0.2);
+    expect(groups).toHaveLength(1);
+    expect(groups[0].items).toHaveLength(3);
+  });
+
+  it('keeps points beyond the radius in separate clusters', () => {
+    const items = [p('a', 13.36, 100.98), p('far', 13.50, 101.10)];
+    const groups = clusterByProximity(items, 0.2);
+    expect(groups).toHaveLength(2);
+    expect(groups.map(g => g.items.length)).toEqual([1, 1]);
+  });
+
+  it('returns one group per point when the list is empty or singletons', () => {
+    expect(clusterByProximity([])).toEqual([]);
+    const groups = clusterByProximity([p('a', 13.36, 100.98)]);
+    expect(groups).toHaveLength(1);
+    expect(groups[0].items[0].id).toBe('a');
   });
 });

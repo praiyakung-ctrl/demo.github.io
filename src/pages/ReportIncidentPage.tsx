@@ -16,8 +16,23 @@ import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { addIncidentPoint, savedIncidentPoints } from '../utils/incidentPoints';
 import { logAudit } from '../utils/auditLog';
 import { exportRowsToExcel, todayStamp } from '../utils/exportReport';
-import { pinIcon } from '../utils/mapPin';
+import { clusterByProximity } from '../utils/geo';
+import { clusterCountIcon, pinIcon } from '../utils/mapPin';
 import { Link } from 'react-router-dom';
+
+function StatCard({ icon: Icon, label, value, color }: { icon: typeof ShieldAlert; label: string; value: number; color: string }) {
+  return (
+    <div className="card flex items-center gap-3 py-4">
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
+        <Icon size={24} />
+      </div>
+      <div>
+        <p className="text-lg text-gray-500 leading-tight">{label}</p>
+        <p className="text-3xl font-extrabold leading-tight" style={{ color }}>{value} จุด</p>
+      </div>
+    </div>
+  );
+}
 
 const allCameras = camerasData as Camera[];
 
@@ -164,8 +179,12 @@ export function ReportIncidentPage() {
   const myType: IncidentPointType | null = isPolice ? 'risk' : isLocalOfficer ? 'proposed' : null;
   const refresh = () => setPoints(savedIncidentPoints());
 
-  const publicPoints = points.filter(p => p.status === 'approved');
-  const myPendingPoints = points.filter(p => p.submittedByUserId === user?.id && p.status !== 'approved');
+  const riskCount = points.filter(p => p.type === 'risk').length;
+  const proposedCount = points.filter(p => p.type === 'proposed').length;
+  // cluster by proximity (all statuses) so the map shows how many times each
+  // spot has been reported, not just the approved ones
+  const riskGroups = clusterByProximity(points.filter(p => p.type === 'risk'));
+  const proposedGroups = clusterByProximity(points.filter(p => p.type === 'proposed'));
 
   const inDateRange = (iso: string) => {
     const d = iso.slice(0, 10);
@@ -245,6 +264,11 @@ export function ReportIncidentPage() {
             </div>
           )}
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <StatCard icon={AlertTriangle} label="จุดเสี่ยงภัยทั้งหมด" value={riskCount} color="#DC2626" />
+            <StatCard icon={ShieldAlert} label="จุดขอติดตั้งใหม่ทั้งหมด" value={proposedCount} color="#CA8A04" />
+          </div>
+
           {myType && (
             <div>
               {!addMode ? (
@@ -285,49 +309,68 @@ export function ReportIncidentPage() {
                 )} />
               )}
 
-              {showRisk && publicPoints.filter(p => p.type === 'risk').map(p => (
-                <Marker key={p.id} position={[p.lat, p.lng]} icon={pinIcon('#EF4444')}>
-                  <Popup minWidth={220}>
-                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                      <p className="font-extrabold text-red-700 text-xl leading-tight">จุดเสี่ยงภัย</p>
-                      <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
-                      <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
-                      <p className="text-base text-gray-500 mt-1">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)}</p>
-                    </div>
-                  </Popup>
-                </Marker>
+              {showRisk && riskGroups.map(group => (
+                group.items.length > 1 ? (
+                  <Marker key={`risk-cluster-${group.lat}-${group.lng}`} position={[group.lat, group.lng]} icon={clusterCountIcon(group.items.length, '#DC2626')}>
+                    <Popup minWidth={240}>
+                      <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                        <p className="font-extrabold text-red-700 text-xl leading-tight">จุดเสี่ยงภัย — แจ้งมาแล้ว {group.items.length} ครั้ง</p>
+                        <div className="mt-2 space-y-2 max-h-48 overflow-y-auto">
+                          {group.items.map(p => (
+                            <div key={p.id} className="border-t border-gray-100 pt-2 first:border-0 first:pt-0">
+                              <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
+                              <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
+                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {STATUS_LABEL[p.status]}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Popup>
+                  </Marker>
+                ) : (
+                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon('#EF4444')}>
+                    <Popup minWidth={220}>
+                      <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                        <p className="font-extrabold text-red-700 text-xl leading-tight">จุดเสี่ยงภัย</p>
+                        <p className="text-lg font-bold text-gray-800">{group.items[0].locationLabel}</p>
+                        <p className="text-base text-gray-600">{group.items[0].category} · {group.items[0].frequency}</p>
+                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {STATUS_LABEL[group.items[0].status]}</p>
+                      </div>
+                    </Popup>
+                  </Marker>
+                )
               ))}
 
-              {showProposed && publicPoints.filter(p => p.type === 'proposed').map(p => (
-                <Marker key={p.id} position={[p.lat, p.lng]} icon={pinIcon('#EAB308')}>
-                  <Popup minWidth={220}>
-                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                      <p className="font-extrabold text-yellow-700 text-xl leading-tight">จุดขอติดตั้งใหม่</p>
-                      <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
-                      <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
-                      <p className="text-base text-gray-500 mt-1">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)}</p>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
-
-              {myPendingPoints.map(p => (
-                <Marker
-                  key={p.id}
-                  position={[p.lat, p.lng]}
-                  icon={pinIcon(p.type === 'risk' ? '#EF4444' : '#EAB308')}
-                  opacity={0.5}
-                >
-                  <Popup minWidth={200}>
-                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                      <p className="font-extrabold text-gray-700 text-xl leading-tight">{p.locationLabel}</p>
-                      <p className="text-base text-gray-600">สถานะ: {STATUS_LABEL[p.status]}</p>
-                      {p.status === 'rejected' && p.rejectionReason && (
-                        <p className="text-base text-red-600 mt-1">{p.rejectionReason}</p>
-                      )}
-                    </div>
-                  </Popup>
-                </Marker>
+              {showProposed && proposedGroups.map(group => (
+                group.items.length > 1 ? (
+                  <Marker key={`proposed-cluster-${group.lat}-${group.lng}`} position={[group.lat, group.lng]} icon={clusterCountIcon(group.items.length, '#CA8A04')}>
+                    <Popup minWidth={240}>
+                      <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                        <p className="font-extrabold text-yellow-700 text-xl leading-tight">จุดขอติดตั้งใหม่ — แจ้งมาแล้ว {group.items.length} ครั้ง</p>
+                        <div className="mt-2 space-y-2 max-h-48 overflow-y-auto">
+                          {group.items.map(p => (
+                            <div key={p.id} className="border-t border-gray-100 pt-2 first:border-0 first:pt-0">
+                              <p className="text-lg font-bold text-gray-800">{p.locationLabel}</p>
+                              <p className="text-base text-gray-600">{p.category} · {p.frequency}</p>
+                              <p className="text-base text-gray-500">แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)} · {STATUS_LABEL[p.status]}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Popup>
+                  </Marker>
+                ) : (
+                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon('#EAB308')}>
+                    <Popup minWidth={220}>
+                      <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                        <p className="font-extrabold text-yellow-700 text-xl leading-tight">จุดขอติดตั้งใหม่</p>
+                        <p className="text-lg font-bold text-gray-800">{group.items[0].locationLabel}</p>
+                        <p className="text-base text-gray-600">{group.items[0].category} · {group.items[0].frequency}</p>
+                        <p className="text-base text-gray-500 mt-1">แจ้งโดย {group.items[0].submittedBy} · {formatThaiDate(group.items[0].submittedAt)} · {STATUS_LABEL[group.items[0].status]}</p>
+                      </div>
+                    </Popup>
+                  </Marker>
+                )
               ))}
             </MapContainer>
           </div>

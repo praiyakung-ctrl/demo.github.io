@@ -25,3 +25,17 @@ export function nearestCameras(point: LatLng, cameras: Camera[], maxKm = 0.5): (
     .filter(cam => cam.distanceKm <= maxKm)
     .sort((a, b) => a.distanceKm - b.distanceKm);
 }
+
+/* Greedy proximity clustering for freeform pinned points (no shared location
+   string to group by, unlike cameras) — used to show "reported N times" on
+   the แจ้งเหตุ map. Each item joins the first existing group within radiusKm
+   of that group's seed point; otherwise it starts a new group. */
+export function clusterByProximity<T extends LatLng>(items: T[], radiusKm = 0.2): { lat: number; lng: number; items: T[] }[] {
+  const groups: { lat: number; lng: number; items: T[] }[] = [];
+  for (const item of items) {
+    const group = groups.find(g => haversineDistanceKm(g, item) <= radiusKm);
+    if (group) group.items.push(item);
+    else groups.push({ lat: item.lat, lng: item.lng, items: [item] });
+  }
+  return groups;
+}
