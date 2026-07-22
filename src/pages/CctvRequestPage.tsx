@@ -1,24 +1,19 @@
 import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import {
   Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight,
-  FileSearch, FileText, Home, Info, Lock, MapPin, Paperclip, Search,
-  ShieldCheck, Target, Trash2, Upload, User as UserIcon, Video, X,
+  FileSearch, FileText, Home, Info, Lock, MapPin, Paperclip,
+  ShieldCheck, Target, Trash2, Upload, User as UserIcon, X,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { SkipLink } from '../components/Layout';
-import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
-import { districtOf } from '../utils/cameraDisplay';
 import { useAuth } from '../context/AuthContext';
-import camerasData from '../data/cameras.json';
-import type { Camera } from '../types';
+import type { CitizenRequest } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
 import { pinIcon } from '../utils/mapPin';
-
-const cameras = camerasData as Camera[];
-const onlineCameras = cameras.filter(c => c.status === 'Online');
+import { addRequest } from '../utils/requestStorage';
 
 const WIZARD_STEPS = ['กรอกข้อมูลคำขอ', 'อัปโหลดเอกสาร', 'ตรวจสอบข้อมูล', 'ยืนยันคำขอ', 'เสร็จสิ้น'];
 
@@ -35,7 +30,8 @@ const MAX_REQUEST_HOURS = 6;
 const MAX_BACK_DAYS = 7;
 
 interface RequestForm {
-  cameraId: string;
+  incidentLat: number | null;
+  incidentLng: number | null;
   startDate: string;
   startTime: string;
   endDate: string;
@@ -48,13 +44,9 @@ interface RequestForm {
 }
 
 const EMPTY_FORM: RequestForm = {
-  cameraId: '', startDate: '', startTime: '', endDate: '', endTime: '',
+  incidentLat: null, incidentLng: null, startDate: '', startTime: '', endDate: '', endTime: '',
   purpose: '', purposeOther: '', incidentLocation: '', reason: '', contactEmail: '',
 };
-
-function findCamera(id: string): Camera | null {
-  return cameras.find(c => c.id === id) ?? null;
-}
 
 const OTHER_PURPOSE = 'อื่นๆ';
 
@@ -115,11 +107,10 @@ function formatRange(form: RequestForm): string {
 
 function SummaryCard({ form, docs }: { form: RequestForm; docs: Docs }) {
   const { user } = useAuth();
-  const selectedCam = findCamera(form.cameraId);
   const docNames = Object.values(docs).filter(Boolean);
   const items = [
     { icon: UserIcon, label: 'ผู้ยื่นคำขอ', value: user ? `${user.name}\n${user.email}` : '-' },
-    { icon: Video, label: 'กล้องที่เลือก', value: selectedCam ? `${selectedCam.id}\n${selectedCam.location}` : '-' },
+    { icon: MapPin, label: 'ตำแหน่งที่ปักหมุด', value: form.incidentLat != null && form.incidentLng != null ? `${form.incidentLat.toFixed(4)}, ${form.incidentLng.toFixed(4)}` : '-' },
     { icon: Target, label: 'วัตถุประสงค์', value: purposeText(form) || '-' },
     { icon: Calendar, label: 'วันที่และเวลา', value: formatRange(form) },
     { icon: MapPin, label: 'สถานที่เกิดเหตุ', value: form.incidentLocation || '-' },
@@ -197,6 +188,17 @@ function StepsCard({ step }: { step: number }) {
 }
 
 /* ---------- Step 1: request form ---------- */
+
+/* Blank pin-drop map — no camera data ever reaches this component. Clicking
+   anywhere moves the single incident pin; there is nothing to select or search. */
+function PinPicker({ lat, lng, onPick }: { lat: number | null; lng: number | null; onPick: (lat: number, lng: number) => void }) {
+  useMapEvents({
+    click: e => onPick(e.latlng.lat, e.latlng.lng),
+  });
+  if (lat == null || lng == null) return null;
+  return <Marker position={[lat, lng]} icon={pinIcon('#1B3A6B')} />;
+}
+
 type FormErrors = Partial<Record<keyof RequestForm | 'datetime', string>>;
 
 function Step1Form({ form, setForm, onNext, onCancel }: {
@@ -206,17 +208,10 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
   onCancel: () => void;
 }) {
   const [errors, setErrors] = useState<FormErrors>({});
-  const [pickerTab, setPickerTab] = useState<'map' | 'search'>('map');
-  const [camSearch, setCamSearch] = useState('');
-
-  const selectedCam = findCamera(form.cameraId);
-  const filteredCams = onlineCameras.filter(c =>
-    c.id.toLowerCase().includes(camSearch.toLowerCase()) || c.location.includes(camSearch)
-  );
 
   const validate = () => {
     const e: FormErrors = {};
-    if (!form.cameraId) e.cameraId = 'กรุณาเลือกกล้อง CCTV จากแผนที่หรือรายการค้นหา';
+    if (form.incidentLat == null || form.incidentLng == null) e.incidentLat = 'กรุณาปักหมุดตำแหน่งที่เกิดเหตุบนแผนที่';
     if (!form.startDate || !form.startTime || !form.endDate || !form.endTime) {
       e.datetime = 'กรุณาระบุวันที่และเวลาให้ครบถ้วน';
     } else {
@@ -248,10 +243,11 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
     setErrors(e => ({ ...e, [key]: undefined, ...(isDateTime ? { datetime: undefined } : {}) }));
   };
 
-  const tabCls = (active: boolean) =>
-    `px-6 py-2 rounded-lg text-xl font-bold border transition-colors ${
-      active ? 'bg-navy-700 text-white border-navy-700' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-    }`;
+  const setPin = (lat: number, lng: number) => {
+    setForm(f => ({ ...f, incidentLat: lat, incidentLng: lng }));
+    setErrors(e => ({ ...e, incidentLat: undefined }));
+  };
+  const clearPin = () => setForm(f => ({ ...f, incidentLat: null, incidentLng: null }));
 
   return (
     <div className="card p-6 space-y-6">
@@ -260,99 +256,43 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         <h2 className="text-3xl font-bold text-gray-800 mb-3">1. ข้อมูลคำขอ</h2>
         <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
           <CheckCircle2 size={26} className="text-green-600 flex-shrink-0" />
-          <p className="text-xl text-green-800 font-medium">ลงชื่อเข้าใช้ด้วย Google (OAuth 2.0) เรียบร้อยแล้ว</p>
+          <p className="text-xl text-green-800 font-medium">ยืนยันตัวตนด้วย ThaID เรียบร้อยแล้ว</p>
         </div>
       </section>
 
-      {/* 1.1 Camera picker */}
+      {/* 1.1 Incident pin — no camera locations are ever shown to citizens */}
       <section>
-        <h3 className="text-2xl font-bold text-gray-800 mb-3">1.1 เลือกตำแหน่งกล้อง CCTV</h3>
-        <div className="flex gap-2 mb-3">
-          <button onClick={() => setPickerTab('map')} className={tabCls(pickerTab === 'map')}>แผนที่</button>
-          <button onClick={() => setPickerTab('search')} className={tabCls(pickerTab === 'search')}>ค้นหากล้อง</button>
+        <h3 className="text-2xl font-bold text-gray-800 mb-3">1.1 ปักหมุดตำแหน่งที่เกิดเหตุ</h3>
+        <p className="text-lg text-gray-500 mb-3">คลิกบนแผนที่เพื่อปักหมุด (คลิกใหม่เพื่อย้ายหมุด) เจ้าหน้าที่จะเป็นผู้พิจารณาเลือกกล้อง CCTV ที่เกี่ยวข้องให้</p>
+
+        <div className="rounded-xl overflow-hidden border border-gray-200 h-[300px] relative z-0">
+          <MapContainer center={[13.36, 100.98]} zoom={12} className="w-full h-full">
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <PinPicker lat={form.incidentLat} lng={form.incidentLng} onPick={setPin} />
+          </MapContainer>
         </div>
 
-        {pickerTab === 'map' ? (
-          <div className="rounded-xl overflow-hidden border border-gray-200 h-[300px] relative z-0">
-            <MapContainer center={[13.05, 100.95]} zoom={9} className="w-full h-full">
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <CameraClusterMarkers cameras={onlineCameras} renderMarker={cam => (
-                <Marker
-                  key={cam.id}
-                  position={[cam.lat, cam.lng]}
-                  icon={pinIcon(cam.id === form.cameraId ? '#22C55E' : '#1B3A6B')}
-                  title={`${cam.id} ${cam.location}`}
-                  alt={`เลือกกล้อง ${cam.id} ${cam.location}`}
-                  keyboard={true}
-                  eventHandlers={{ click: () => set('cameraId', cam.id) }}
-                >
-                  <Popup minWidth={200}>
-                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                      <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
-                      <p className="text-lg font-bold text-gray-800 leading-snug">{cam.location}</p>
-                      <p className="text-base text-gray-500">ต.{districtOf(cam.location).replace(' / ', ' อ.')} จ.ชลบุรี</p>
-                    </div>
-                  </Popup>
-                </Marker>
-              )} />
-            </MapContainer>
-          </div>
-        ) : (
-          <div className="border border-gray-200 rounded-xl overflow-hidden">
-            <div className="relative p-3 border-b border-gray-100">
-              <Search size={20} className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                value={camSearch}
-                onChange={e => setCamSearch(e.target.value)}
-                placeholder="ค้นหารหัสกล้องหรือสถานที่..."
-                aria-label="ค้นหารหัสกล้องหรือสถานที่"
-                className="input-field pl-10"
-              />
-            </div>
-            <div className="max-h-[240px] overflow-y-auto">
-              {filteredCams.map(cam => (
-                <button
-                  key={cam.id}
-                  onClick={() => set('cameraId', cam.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors border-l-4 ${
-                    cam.id === form.cameraId ? 'bg-green-50 border-green-500' : 'border-transparent hover:bg-gray-50'
-                  }`}
-                >
-                  <Video size={20} className={cam.id === form.cameraId ? 'text-green-600' : 'text-navy-500'} />
-                  <span className="text-xl font-bold text-navy-700 flex-shrink-0">{cam.id}</span>
-                  <span className="text-lg text-gray-600 truncate">{cam.location}</span>
-                </button>
-              ))}
-              {filteredCams.length === 0 && <p className="text-xl text-gray-400 text-center py-6">ไม่พบกล้องที่ค้นหา</p>}
-            </div>
-          </div>
-        )}
-
         <div className="mt-3">
-          <span className="label">กล้องที่เลือก <span className="text-red-500">*</span></span>
+          <span className="label">ตำแหน่งที่ปักหมุด <span className="text-red-500">*</span></span>
           <div className="flex gap-2">
             <div className="input-field flex items-center gap-2 flex-1 min-w-0">
-              {selectedCam ? (
+              {form.incidentLat != null && form.incidentLng != null ? (
                 <>
-                  <Video size={22} className="text-navy-500 flex-shrink-0" />
-                  <span className="font-bold text-gray-800 flex-shrink-0">{selectedCam.id}</span>
-                  <span className="text-gray-600 truncate">{selectedCam.location}</span>
-                  <button onClick={() => set('cameraId', '')} title="ล้างกล้องที่เลือก" aria-label="ล้างกล้องที่เลือก" className="ml-auto text-gray-500 hover:text-red-500 flex-shrink-0">
+                  <MapPin size={22} className="text-navy-500 flex-shrink-0" />
+                  <span className="font-bold text-gray-800">{form.incidentLat.toFixed(4)}, {form.incidentLng.toFixed(4)}</span>
+                  <button onClick={clearPin} title="ล้างหมุด" aria-label="ล้างหมุด" className="ml-auto text-gray-500 hover:text-red-500 flex-shrink-0">
                     <X size={22} />
                   </button>
                 </>
               ) : (
-                <span className="text-gray-400">คลิกหมุดบนแผนที่ หรือใช้แท็บค้นหากล้อง</span>
+                <span className="text-gray-400">คลิกบนแผนที่เพื่อปักหมุด</span>
               )}
             </div>
-            <button onClick={() => { set('cameraId', ''); setPickerTab('map'); }} className="btn-secondary whitespace-nowrap">
-              เปลี่ยนกล้อง
-            </button>
           </div>
-          {errors.cameraId && <p role="alert" className="text-lg text-red-600 mt-1">{errors.cameraId}</p>}
+          {errors.incidentLat && <p role="alert" className="text-lg text-red-600 mt-1">{errors.incidentLat}</p>}
         </div>
       </section>
 
@@ -560,9 +500,8 @@ function Step3Review({ form, docs, onNext, onBack, goToStep }: {
   goToStep: (n: number) => void;
 }) {
   const { user } = useAuth();
-  const selectedCam = findCamera(form.cameraId);
   const rows: [string, string][] = [
-    ['กล้องที่เลือก', selectedCam ? `${selectedCam.id} · ${selectedCam.location}` : '-'],
+    ['ตำแหน่งที่ปักหมุด', form.incidentLat != null && form.incidentLng != null ? `${form.incidentLat.toFixed(4)}, ${form.incidentLng.toFixed(4)}` : '-'],
     ['วันที่และเวลา', formatRange(form)],
     ['วัตถุประสงค์', purposeText(form)],
     ['สถานที่เกิดเหตุ', form.incidentLocation],
@@ -585,7 +524,7 @@ function Step3Review({ form, docs, onNext, onBack, goToStep }: {
         <div className="px-4 py-3 space-y-1">
           <p className="text-2xl font-bold text-gray-800">{user?.name}</p>
           <p className="text-xl text-gray-500">{user?.email}</p>
-          <p className="text-lg text-green-700 flex items-center gap-1"><ShieldCheck size={18} /> ยืนยันตัวตนด้วยบัญชี Google (OAuth 2.0)</p>
+          <p className="text-lg text-green-700 flex items-center gap-1"><ShieldCheck size={18} /> ยืนยันตัวตนด้วย ThaID</p>
         </div>
       </section>
 
@@ -725,7 +664,35 @@ export function CctvRequestPage() {
 
   const submit = () => {
     const yearBE = new Date().getFullYear() + 543;
-    setReqNo(`REQ-${yearBE}-${String(Math.floor(1000 + Math.random() * 9000))}`);
+    const newReqNo = `REQ-${yearBE}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+    const now = new Date().toISOString();
+    const req: CitizenRequest = {
+      id: `req-${Date.now()}`,
+      reqNo: newReqNo,
+      citizenName: user?.name ?? '',
+      idCard: user?.nationalId ?? '',
+      phone: user?.phone ?? '',
+      email: form.contactEmail,
+      incidentLat: form.incidentLat ?? 0,
+      incidentLng: form.incidentLng ?? 0,
+      incidentLocation: form.incidentLocation,
+      assignedCameraIds: [],
+      startDatetime: `${form.startDate}T${form.startTime}`,
+      endDatetime: `${form.endDate}T${form.endTime}`,
+      purpose: purposeText(form),
+      description: form.reason,
+      status: 'ใหม่',
+      submittedAt: now,
+      timeline: [
+        { step: 'รับคำขอ', timestamp: now, completed: true },
+        { step: 'ตรวจสอบข้อมูล', completed: false },
+        { step: 'พิจารณาอนุมัติ', completed: false },
+        { step: 'จัดเตรียมข้อมูล', completed: false },
+        { step: 'ส่งข้อมูล', completed: false },
+      ],
+    };
+    addRequest(req);
+    setReqNo(newReqNo);
     setStep(5);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

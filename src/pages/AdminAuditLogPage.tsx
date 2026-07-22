@@ -17,6 +17,7 @@ const ACTION_BADGE: Record<AuditAction, string> = {
   edit: 'bg-amber-100 text-amber-700',
   delete: 'bg-red-100 text-red-700',
   export: 'bg-purple-100 text-purple-700',
+  download: 'bg-teal-100 text-teal-700',
 };
 
 export function AdminAuditLogPage() {

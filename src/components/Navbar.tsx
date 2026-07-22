@@ -6,19 +6,13 @@ import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
 import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS } from '../types';
 import eventsData from '../data/events.json';
-import requestsData from '../data/requests.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
 import { pendingReports } from '../utils/cameraReports';
 import { savedNotificationSettings } from '../utils/notificationSettings';
+import { savedRequests } from '../utils/requestStorage';
 
 const allEvents = eventsData as CctvEvent[];
-const allRequests = requestsData as CitizenRequest[];
-
-// same inbox selection as CitizenPortalPage, so the bell matches "คำขอของฉัน"
-const myRequests = allRequests.filter(r => r.email === 'citizen@gmail.com').concat(
-  allRequests.filter(r => r.email !== 'citizen@gmail.com').slice(0, 2)
-);
 
 function latestActivity(req: CitizenRequest): string {
   const done = req.timeline?.filter(t => t.completed && t.timestamp);
@@ -76,7 +70,9 @@ export function Navbar() {
   );
   // admins also see cameras reported for inspection (read fresh — dropdown toggles re-render)
   const repairReports = isAdmin ? pendingReports() : [];
-  // citizens are notified about their CCTV request status, not CCTV events
+  // citizens are notified about their own CCTV request status, not CCTV events
+  // (read fresh — statuses change as staff review requests)
+  const myRequests = isCitizen ? savedRequests().filter(r => r.email === user?.email) : [];
   const activeRequests = myRequests.filter(r => r.status !== 'ได้รับแล้ว' && r.status !== 'ปฏิเสธ');
   const unackCount = isCitizen ? activeRequests.length : unackEvents.length + repairReports.length;
 
@@ -179,7 +175,7 @@ export function Navbar() {
                           <p className="text-sm font-semibold text-gray-900 truncate">คำขอ {req.reqNo}</p>
                           <StatusBadge status={req.status} />
                         </div>
-                        <p className="text-xs text-gray-500 truncate">{req.cameraId} · {req.cameraLocation}</p>
+                        <p className="text-xs text-gray-500 truncate">{req.incidentLocation}</p>
                         <p className="text-xs text-gray-500 mt-0.5">อัปเดตล่าสุด {timeAgo(latestActivity(req))}</p>
                       </div>
                     </button>

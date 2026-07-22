@@ -1,6 +1,6 @@
 import auditLogData from '../data/auditLog.json';
 
-export type AuditAction = 'login' | 'logout' | 'create' | 'edit' | 'delete' | 'export';
+export type AuditAction = 'login' | 'logout' | 'create' | 'edit' | 'delete' | 'export' | 'download';
 
 export interface AuditEntry {
   id: string;
@@ -19,6 +19,7 @@ export const AUDIT_ACTION_LABELS: Record<AuditAction, string> = {
   edit: 'แก้ไขข้อมูล',
   delete: 'ลบข้อมูล',
   export: 'Export',
+  download: 'ดาวน์โหลด',
 };
 
 const LOG_KEY = 'audit_logs';

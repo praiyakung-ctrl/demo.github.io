@@ -1,18 +1,33 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, Clock, FileText, Hash, Inbox, MapPin, Plus, Search, Target, User, Activity, Camera as CameraIcon } from 'lucide-react';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import {
+  AlertTriangle, ChevronLeft, Clock, Download, FileText, Hash, Inbox, Mail, MapPin,
+  Plus, Search, Target, User, Activity, Camera as CameraIcon,
+} from 'lucide-react';
 import { Layout, SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
+import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
-import requestsData from '../data/requests.json';
-import type { CitizenRequest, RequestStatus } from '../types';
+import camerasData from '../data/cameras.json';
+import type { Camera, CitizenRequest, RequestStatus, TimelineEntry } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
+import { savedRequests, updateRequest } from '../utils/requestStorage';
+import { logAudit } from '../utils/auditLog';
+import { nearestCameras } from '../utils/geo';
+import { pinIcon } from '../utils/mapPin';
+import { savedSystemSettings } from '../utils/systemSettings';
 
-const initialRequests = requestsData as CitizenRequest[];
+const allCameras = camerasData as Camera[];
 
 const STATUS_STEPS = ['รับคำขอ', 'ตรวจสอบข้อมูล', 'พิจารณาอนุมัติ', 'จัดเตรียมข้อมูล', 'ส่งข้อมูล'];
+
+function markStep(timeline: TimelineEntry[], step: string): TimelineEntry[] {
+  const now = new Date().toISOString();
+  return timeline.map(t => (t.step === step ? { ...t, completed: true, timestamp: now } : t));
+}
 
 /* ---------- Citizen view (new theme, matches CctvRequestPage) ---------- */
 
@@ -41,7 +56,7 @@ function RequestList({ requests, onSelect }: { requests: CitizenRequest[]; onSel
               <StatusBadge status={req.status} />
             </div>
             <p className="text-2xl font-bold text-gray-800 mb-1 flex items-center gap-2">
-              <MapPin size={22} className="text-navy-500 flex-shrink-0" /> {req.cameraId} · {req.cameraLocation}
+              <MapPin size={22} className="text-navy-500 flex-shrink-0" /> {req.incidentLocation}
             </p>
             <div className="flex items-center gap-4 text-lg text-gray-500">
               <span className="flex items-center gap-1"><Clock size={17} /> ยื่นเมื่อ {formatThaiDate(req.submittedAt)}</span>
@@ -60,10 +75,50 @@ function RequestList({ requests, onSelect }: { requests: CitizenRequest[]; onSel
   );
 }
 
-function RequestDetail({ req, onBack }: { req: CitizenRequest; onBack: () => void }) {
+/* Citizens never see which camera(s) staff assigned — only whether the video
+   is ready to download, once staff have sent it and set an expiry. */
+function VideoDownloadSection({ req, onDownloaded }: { req: CitizenRequest; onDownloaded: () => void }) {
+  const { user } = useAuth();
+  const [downloading, setDownloading] = useState(false);
+
+  if ((req.status !== 'ส่งแล้ว' && req.status !== 'ได้รับแล้ว') || !req.videoFile) return null;
+
+  const expired = req.videoExpiresAt ? new Date() > new Date(req.videoExpiresAt) : false;
+
+  if (expired) {
+    return (
+      <div className="rounded-xl bg-red-50 border border-red-200 p-4 flex items-start gap-3">
+        <AlertTriangle size={22} className="text-red-600 flex-shrink-0 mt-0.5" />
+        <p className="text-lg text-red-700">ไฟล์วิดีโอหมดอายุแล้ว กรุณาติดต่อเจ้าหน้าที่</p>
+      </div>
+    );
+  }
+
+  const handleDownload = async () => {
+    setDownloading(true);
+    await new Promise(r => setTimeout(r, 600));
+    if (req.status === 'ส่งแล้ว') updateRequest(req.id, { status: 'ได้รับแล้ว' });
+    logAudit(user, 'download', 'portal', `ดาวน์โหลดวิดีโอคำขอ ${req.reqNo}`);
+    setDownloading(false);
+    onDownloaded();
+  };
+
+  return (
+    <div className="rounded-xl bg-green-50 border border-green-200 p-4 space-y-3">
+      <p className="text-xl font-bold text-green-800">
+        ไฟล์วิดีโอพร้อมดาวน์โหลด {req.videoExpiresAt && `(หมดอายุ ${formatThaiDate(req.videoExpiresAt)})`}
+      </p>
+      <button onClick={handleDownload} disabled={downloading} className="btn-primary flex items-center gap-2 disabled:opacity-60">
+        <Download size={20} /> {downloading ? 'กำลังดาวน์โหลด...' : 'ดาวน์โหลดวิดีโอ'}
+      </button>
+    </div>
+  );
+}
+
+function RequestDetail({ req, onBack, onRefresh }: { req: CitizenRequest; onBack: () => void; onRefresh: () => void }) {
   const completedSteps = req.timeline?.filter(t => t.completed).length ?? 0;
   const rows: [string, string][] = [
-    ['กล้อง', `${req.cameraId} · ${req.cameraLocation}`],
+    ['สถานที่เกิดเหตุ', req.incidentLocation],
     ['ช่วงเวลา', `${req.startDatetime} – ${req.endDatetime}`],
     ['วัตถุประสงค์', req.purpose],
     ['รายละเอียด', req.description || '-'],
@@ -82,6 +137,18 @@ function RequestDetail({ req, onBack }: { req: CitizenRequest; onBack: () => voi
         </div>
         <StatusBadge status={req.status} />
       </div>
+
+      {req.status === 'ปฏิเสธ' && req.rejectionReason && (
+        <div className="rounded-xl bg-red-50 border border-red-200 p-4 flex items-start gap-3">
+          <AlertTriangle size={22} className="text-red-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-xl font-bold text-red-800">คำขอถูกปฏิเสธ</p>
+            <p className="text-lg text-red-700">{req.rejectionReason}</p>
+          </div>
+        </div>
+      )}
+
+      <VideoDownloadSection req={req} onDownloaded={onRefresh} />
 
       <section className="border border-gray-200 rounded-xl overflow-hidden">
         <div className="bg-gray-50 px-4 py-2.5 border-b border-gray-200">
@@ -132,12 +199,12 @@ function RequestDetail({ req, onBack }: { req: CitizenRequest; onBack: () => voi
 }
 
 function CitizenView() {
-  const [selectedReq, setSelectedReq] = useState<CitizenRequest | null>(null);
-  const [requests] = useState<CitizenRequest[]>(
-    initialRequests.filter(r => r.email === 'citizen@gmail.com').concat(
-      initialRequests.filter(r => r.email !== 'citizen@gmail.com').slice(0, 2)
-    )
-  );
+  const { user } = useAuth();
+  const [requests, setRequests] = useState<CitizenRequest[]>(() => savedRequests().filter(r => r.email === user?.email));
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const refresh = () => setRequests(savedRequests().filter(r => r.email === user?.email));
+  const selected = selectedId ? requests.find(r => r.id === selectedId) ?? null : null;
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
@@ -152,9 +219,9 @@ function CitizenView() {
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none">
-          {selectedReq
-            ? <RequestDetail req={selectedReq} onBack={() => setSelectedReq(null)} />
-            : <RequestList requests={requests} onSelect={setSelectedReq} />}
+          {selected
+            ? <RequestDetail req={selected} onBack={() => setSelectedId(null)} onRefresh={refresh} />
+            : <RequestList requests={requests} onSelect={r => setSelectedId(r.id)} />}
         </main>
       </div>
 
@@ -165,11 +232,155 @@ function CitizenView() {
 
 /* ---------- Staff view (unchanged, old Layout) ---------- */
 
+function RejectModal({ isOpen, onClose, onConfirm }: { isOpen: boolean; onClose: () => void; onConfirm: (reason: string) => void }) {
+  const [reason, setReason] = useState('');
+
+  const close = () => { setReason(''); onClose(); };
+
+  return (
+    <Modal isOpen={isOpen} onClose={close} title="ปฏิเสธคำขอ" icon={<AlertTriangle size={20} className="text-white" />}>
+      <div className="space-y-4">
+        <label htmlFor="reject-reason" className="label">เหตุผลที่ปฏิเสธ (เช่น ไม่มีกล้องครอบคลุมพื้นที่) <span className="text-red-500">*</span></label>
+        <textarea
+          id="reject-reason"
+          value={reason}
+          onChange={e => setReason(e.target.value)}
+          rows={3}
+          placeholder="ไม่มีกล้อง CCTV ครอบคลุมบริเวณที่ประชาชนแจ้ง"
+          className="input-field resize-none"
+        />
+        <div className="flex gap-3 justify-end">
+          <button onClick={close} className="btn-secondary">ยกเลิก</button>
+          <button
+            onClick={() => { onConfirm(reason.trim()); setReason(''); }}
+            disabled={!reason.trim()}
+            className="btn-danger disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            ปฏิเสธคำขอ
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function SendVideoModal({ isOpen, onClose, defaultFileName, defaultExpiryDays, onConfirm }: {
+  isOpen: boolean;
+  onClose: () => void;
+  defaultFileName: string;
+  defaultExpiryDays: number;
+  onConfirm: (fileName: string, expiryDays: number) => void;
+}) {
+  const [fileName, setFileName] = useState(defaultFileName);
+  const [expiryDays, setExpiryDays] = useState(defaultExpiryDays);
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="ส่งวิดีโอให้ประชาชน" icon={<Mail size={20} className="text-white" />}>
+      <div className="space-y-4">
+        <div>
+          <label htmlFor="video-filename" className="label">ชื่อไฟล์วิดีโอ</label>
+          <input id="video-filename" value={fileName} onChange={e => setFileName(e.target.value)} className="input-field" />
+        </div>
+        <div>
+          <label htmlFor="video-expiry" className="label">ระยะเวลาที่ประชาชนดาวน์โหลดได้</label>
+          <select id="video-expiry" value={expiryDays} onChange={e => setExpiryDays(Number(e.target.value))} className="input-field">
+            {[30, 60, 90].map(d => <option key={d} value={d}>{d} วัน</option>)}
+          </select>
+        </div>
+        <p className="text-lg text-gray-500 flex items-start gap-2">
+          <Mail size={18} className="flex-shrink-0 mt-0.5" />
+          ระบบจะจำลองการส่งอีเมลแจ้งเตือนประชาชนให้เข้าสู่ระบบมาดาวน์โหลดไฟล์เอง
+        </p>
+        <div className="flex gap-3 justify-end">
+          <button onClick={onClose} className="btn-secondary">ยกเลิก</button>
+          <button onClick={() => onConfirm(fileName, expiryDays)} disabled={!fileName.trim()} className="btn-primary disabled:opacity-40">
+            ส่งและแจ้งเตือน
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+/* keyed by req.id at the call site so switching the selected request remounts
+   this with a fresh selection instead of syncing via an effect */
+function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (auditDetail: string) => void }) {
+  const [selectedCameraIds, setSelectedCameraIds] = useState<Set<string>>(() => new Set(req.assignedCameraIds));
+
+  const nearby = nearestCameras({ lat: req.incidentLat, lng: req.incidentLng }, allCameras, 0.5);
+
+  const toggleCamera = (id: string) => setSelectedCameraIds(prev => {
+    const next = new Set(prev);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    return next;
+  });
+
+  const save = () => {
+    const ids = [...selectedCameraIds];
+    updateRequest(req.id, { assignedCameraIds: ids });
+    onSaved(`มอบหมายกล้อง ${ids.join(', ') || '(ไม่มี)'} ให้คำขอ ${req.reqNo}`);
+  };
+
+  return (
+    <div className="card p-4 mb-4">
+      <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><MapPin size={22} /> มอบหมายกล้อง CCTV</h3>
+      <p className="text-xl text-navy-700 mb-3">
+        ละจิจูด {req.incidentLat.toFixed(4)}, ลองจิจูด {req.incidentLng.toFixed(4)}
+      </p>
+      <div className="rounded-xl overflow-hidden border border-gray-200 h-[260px] relative z-0 mb-3">
+        <MapContainer key={req.id} center={[req.incidentLat, req.incidentLng]} zoom={16} className="w-full h-full">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[req.incidentLat, req.incidentLng]} icon={pinIcon('#DC2626')} />
+          {nearby.map(cam => (
+            <Marker
+              key={cam.id}
+              position={[cam.lat, cam.lng]}
+              icon={pinIcon(selectedCameraIds.has(cam.id) ? '#22C55E' : '#1B3A6B')}
+              eventHandlers={{ click: () => toggleCamera(cam.id) }}
+            />
+          ))}
+        </MapContainer>
+      </div>
+      <div className="space-y-1.5 max-h-48 overflow-y-auto">
+        {nearby.map(cam => (
+          <label key={cam.id} className="flex items-center gap-2 text-xl cursor-pointer">
+            <input
+              type="checkbox"
+              checked={selectedCameraIds.has(cam.id)}
+              onChange={() => toggleCamera(cam.id)}
+              className="w-4 h-4 accent-[#1b3a6b]"
+            />
+            <span className="font-bold text-navy-700 flex-shrink-0">{cam.id}</span>
+            <span className="text-gray-600 truncate flex-1">{cam.location}</span>
+            <span className="text-gray-400 text-lg flex-shrink-0">{cam.distanceKm.toFixed(2)} กม.</span>
+          </label>
+        ))}
+        {nearby.length === 0 && (
+          <p className="text-lg text-gray-400 flex items-start gap-2">
+            <AlertTriangle size={18} className="flex-shrink-0 mt-0.5" />
+            ไม่พบกล้องในรัศมี 500 เมตรจากจุดที่ปักหมุด
+          </p>
+        )}
+      </div>
+      <button onClick={save} className="btn-primary mt-3">บันทึกกล้องที่มอบหมาย</button>
+    </div>
+  );
+}
+
 function StaffView() {
-  const [requests, setRequests] = useState<CitizenRequest[]>(initialRequests);
-  const [selected, setSelected] = useState<CitizenRequest | null>(requests[0]);
+  const { user } = useAuth();
+  const [requests, setRequests] = useState<CitizenRequest[]>(() => savedRequests());
+  const [selectedId, setSelectedId] = useState<string | null>(() => savedRequests()[0]?.id ?? null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [rejectOpen, setRejectOpen] = useState(false);
+  const [sendOpen, setSendOpen] = useState(false);
+
+  const refresh = () => setRequests(savedRequests());
+  const selected = selectedId ? requests.find(r => r.id === selectedId) ?? null : null;
 
   const filtered = requests.filter(r => {
     const matchSearch = r.reqNo.includes(search) || r.citizenName.includes(search);
@@ -177,9 +388,36 @@ function StaffView() {
     return matchSearch && matchStatus;
   });
 
-  const updateStatus = (id: string, newStatus: RequestStatus) => {
-    setRequests(prev => prev.map(r => r.id === id ? { ...r, status: newStatus } : r));
-    if (selected?.id === id) setSelected(prev => prev ? { ...prev, status: newStatus } : null);
+  const mutate = (id: string, patch: Partial<CitizenRequest>, auditDetail: string) => {
+    updateRequest(id, patch);
+    logAudit(user, 'edit', 'portal', auditDetail);
+    refresh();
+  };
+
+  const updateStatus = (id: string, newStatus: RequestStatus, timelineStep?: string) => {
+    const req = requests.find(r => r.id === id);
+    const patch: Partial<CitizenRequest> = { status: newStatus };
+    if (timelineStep && req) patch.timeline = markStep(req.timeline, timelineStep);
+    mutate(id, patch, `เปลี่ยนสถานะคำขอ ${req?.reqNo ?? id} เป็น ${newStatus}`);
+  };
+
+  const confirmReject = (reason: string) => {
+    if (!selected || !reason) return;
+    mutate(selected.id, { status: 'ปฏิเสธ', rejectionReason: reason }, `ปฏิเสธคำขอ ${selected.reqNo}: ${reason}`);
+    setRejectOpen(false);
+  };
+
+  const confirmSend = (fileName: string, expiryDays: number) => {
+    if (!selected) return;
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + expiryDays);
+    const expiresAt = expiryDate.toISOString();
+    mutate(
+      selected.id,
+      { status: 'ส่งแล้ว', videoFile: fileName, videoExpiresAt: expiresAt, timeline: markStep(selected.timeline, 'ส่งข้อมูล') },
+      `ส่งวิดีโอคำขอ ${selected.reqNo} (${fileName}) แจ้งเตือนทางอีเมลแล้ว หมดอายุ ${formatThaiDate(expiresAt)}`
+    );
+    setSendOpen(false);
   };
 
   return (
@@ -200,22 +438,22 @@ function StaffView() {
           </div>
           <select aria-label="กรองตามสถานะ" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="w-full text-2xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500">
             <option value="all">ทุกสถานะ</option>
-            {['ใหม่', 'รอดำเนินการ', 'รอภาพ', 'อนุมัติ', 'ส่งแล้ว', 'ได้รับแล้ว'].map(s => <option key={s}>{s}</option>)}
+            {['ใหม่', 'รอดำเนินการ', 'รอภาพ', 'อนุมัติ', 'ส่งแล้ว', 'ได้รับแล้ว', 'ปฏิเสธ'].map(s => <option key={s}>{s}</option>)}
           </select>
         </div>
         <div className="flex-1 overflow-y-auto">
           {filtered.map(req => (
             <button
               key={req.id}
-              onClick={() => setSelected(req)}
-              className={`w-full text-left p-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${selected?.id === req.id ? 'bg-blue-50 border-l-2 border-l-navy-700' : ''}`}
+              onClick={() => setSelectedId(req.id)}
+              className={`w-full text-left p-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${selectedId === req.id ? 'bg-blue-50 border-l-2 border-l-navy-700' : ''}`}
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="font-bold text-xl text-navy-700">{req.reqNo}</span>
                 <StatusBadge status={req.status} />
               </div>
               <p className="text-2xl text-gray-800 font-medium">{req.citizenName}</p>
-              <p className="text-xl text-navy-700 truncate">{req.cameraLocation}</p>
+              <p className="text-xl text-navy-700 truncate">{req.incidentLocation}</p>
               <p className="text-xl text-navy-700 mt-0.5">{formatThaiDate(req.submittedAt)}</p>
             </button>
           ))}
@@ -255,7 +493,7 @@ function StaffView() {
               <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><FileText size={22} /> รายละเอียดคำขอ</h3>
               <div className="space-y-2 text-2xl">
                 {[
-                  ['กล้อง', `${selected.cameraId} · ${selected.cameraLocation}`],
+                  ['สถานที่เกิดเหตุ', selected.incidentLocation],
                   ['ช่วงเวลา', `${selected.startDatetime} ถึง ${selected.endDatetime}`],
                   ['วัตถุประสงค์', selected.purpose],
                   ['รายละเอียด', selected.description],
@@ -267,6 +505,15 @@ function StaffView() {
                 ))}
               </div>
             </div>
+
+            {selected.status === 'ปฏิเสธ' ? (
+              <div className="card p-4 mb-4 bg-red-50 border-red-200">
+                <h3 className="font-bold text-red-800 mb-2 text-3xl flex items-center gap-2"><AlertTriangle size={22} /> ปฏิเสธคำขอ</h3>
+                <p className="text-2xl text-red-700">{selected.rejectionReason}</p>
+              </div>
+            ) : (
+              <CameraAssignPanel key={selected.id} req={selected} onSaved={detail => { logAudit(user, 'edit', 'portal', detail); refresh(); }} />
+            )}
 
             <div className="card p-4 mb-4">
               <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><Activity size={22} /> ความคืบหน้า</h3>
@@ -289,19 +536,19 @@ function StaffView() {
 
             <div className="flex flex-wrap gap-2">
               {selected.status === 'ใหม่' && (
-                <button onClick={() => updateStatus(selected.id, 'รอดำเนินการ')} className="btn-primary">ตรวจสอบ</button>
+                <button onClick={() => updateStatus(selected.id, 'รอดำเนินการ', 'ตรวจสอบข้อมูล')} className="btn-primary">ตรวจสอบ</button>
               )}
               {selected.status === 'รอดำเนินการ' && (
                 <>
-                  <button onClick={() => updateStatus(selected.id, 'อนุมัติ')} className="btn-primary">อนุมัติ</button>
-                  <button onClick={() => updateStatus(selected.id, 'ปฏิเสธ')} className="btn-danger">ปฏิเสธ</button>
+                  <button onClick={() => updateStatus(selected.id, 'อนุมัติ', 'พิจารณาอนุมัติ')} className="btn-primary">อนุมัติ</button>
+                  <button onClick={() => setRejectOpen(true)} className="btn-danger">ปฏิเสธ</button>
                 </>
               )}
               {selected.status === 'อนุมัติ' && (
-                <button onClick={() => updateStatus(selected.id, 'รอภาพ')} className="btn-primary">เตรียมภาพ</button>
+                <button onClick={() => updateStatus(selected.id, 'รอภาพ', 'จัดเตรียมข้อมูล')} className="btn-primary">เตรียมภาพ</button>
               )}
               {selected.status === 'รอภาพ' && (
-                <button onClick={() => updateStatus(selected.id, 'ส่งแล้ว')} className="btn-primary">ส่งข้อมูลแล้ว</button>
+                <button onClick={() => setSendOpen(true)} className="btn-primary">ส่งข้อมูลแล้ว</button>
               )}
               {selected.status === 'ส่งแล้ว' && (
                 <button onClick={() => updateStatus(selected.id, 'ได้รับแล้ว')} className="btn-secondary">ยืนยันรับข้อมูล</button>
@@ -316,6 +563,18 @@ function StaffView() {
             <p className="text-3xl">เลือกคำขอเพื่อดูรายละเอียด</p>
           </div>
         </div>
+      )}
+
+      <RejectModal isOpen={rejectOpen} onClose={() => setRejectOpen(false)} onConfirm={confirmReject} />
+      {selected && (
+        <SendVideoModal
+          key={selected.id}
+          isOpen={sendOpen}
+          onClose={() => setSendOpen(false)}
+          defaultFileName={`${selected.reqNo}.mp4`}
+          defaultExpiryDays={savedSystemSettings().videoRetentionDays}
+          onConfirm={confirmSend}
+        />
       )}
     </div>
   );

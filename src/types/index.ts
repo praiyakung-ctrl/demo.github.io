@@ -67,8 +67,12 @@ export interface CitizenRequest {
   idCard: string;
   phone: string;
   email: string;
-  cameraId: string;
-  cameraLocation: string;
+  /* citizen-pinned incident location — no camera data is ever shown to citizens */
+  incidentLat: number;
+  incidentLng: number;
+  incidentLocation: string;
+  /* populated by staff after reviewing the pin; empty until reviewed */
+  assignedCameraIds: string[];
   startDatetime: string;
   endDatetime: string;
   purpose: string;
@@ -77,6 +81,10 @@ export interface CitizenRequest {
   submittedAt: string;
   staffId?: string;
   videoFile?: string;
+  /* required when status is 'ปฏิเสธ' */
+  rejectionReason?: string;
+  /* ISO date; citizen can download the video until this expires */
+  videoExpiresAt?: string;
   timeline: TimelineEntry[];
 }
 
