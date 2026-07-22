@@ -15,7 +15,7 @@ import { Pagination } from '../components/Pagination';
 const PAGE_SIZE = 10;
 
 const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
-  map: [], dashboard: [], portal: [], reports: [],
+  map: [], dashboard: [], portal: [], reports: [], liveViewer: [],
   adminCameras: [], adminUsers: [], adminRepairs: [], adminGroups: [], adminMenus: [],
   adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [], adminIncidents: [],
 };

@@ -11,6 +11,7 @@ import type { UserRole } from './types';
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then(m => ({ default: m.RegisterPage })));
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
+const LiveViewerPage = lazy(() => import('./pages/LiveViewerPage').then(m => ({ default: m.LiveViewerPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m => ({ default: m.CitizenPortalPage })));
 const CctvRequestPage = lazy(() => import('./pages/CctvRequestPage').then(m => ({ default: m.CctvRequestPage })));
@@ -66,6 +67,11 @@ function AppRoutes() {
       <Route path="/map" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>
           <MapPage />
+        </RequireAuth>
+      } />
+      <Route path="/live-viewer" element={
+        <RequireAuth roles={['admin', 'operator', 'executive']}>
+          <LiveViewerPage />
         </RequireAuth>
       } />
       <Route path="/dashboard" element={

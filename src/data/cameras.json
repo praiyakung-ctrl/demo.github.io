@@ -14,7 +14,12 @@
     "currentEvent": "traffic",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-002",
@@ -30,7 +35,12 @@
     "lastUpdate": "09:40:55",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-003",
@@ -46,7 +56,12 @@
     "lastUpdate": "09:40:12",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-004",
@@ -63,7 +78,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ไม่มีสัญญาณ"
   },
   {
     "id": "CAM-005",
@@ -79,7 +99,12 @@
     "lastUpdate": "09:41:10",
     "currentEvent": "parking",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-006",
@@ -95,7 +120,12 @@
     "lastUpdate": "09:39:58",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-007",
@@ -111,7 +141,12 @@
     "lastUpdate": "09:41:05",
     "currentEvent": "flood",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-008",
@@ -127,7 +162,12 @@
     "lastUpdate": "09:40:44",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-009",
@@ -144,7 +184,12 @@
     "currentEvent": "crowd",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-010",
@@ -160,7 +205,12 @@
     "lastUpdate": "09:41:18",
     "currentEvent": "gunshot",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-011",
@@ -176,7 +226,12 @@
     "lastUpdate": "09:38:22",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-012",
@@ -193,7 +248,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ไม่มีสัญญาณ"
   },
   {
     "id": "CAM-013",
@@ -210,7 +270,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-014",
@@ -226,7 +291,12 @@
     "lastUpdate": "09:40:50",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-015",
@@ -242,7 +312,12 @@
     "lastUpdate": "09:39:35",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-016",
@@ -259,7 +334,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-017",
@@ -275,7 +355,12 @@
     "lastUpdate": "09:40:45",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-018",
@@ -291,7 +376,12 @@
     "lastUpdate": "09:39:50",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-019",
@@ -308,7 +398,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-020",
@@ -324,7 +419,12 @@
     "lastUpdate": "09:40:30",
     "currentEvent": "parking",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-021",
@@ -340,7 +440,12 @@
     "lastUpdate": "09:41:08",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-022",
@@ -357,7 +462,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-023",
@@ -373,7 +483,12 @@
     "lastUpdate": "09:41:20",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-024",
@@ -389,7 +504,12 @@
     "lastUpdate": "09:40:18",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-025",
@@ -406,7 +526,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-026",
@@ -422,7 +547,12 @@
     "lastUpdate": "09:41:15",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-027",
@@ -438,7 +568,12 @@
     "lastUpdate": "09:40:38",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-028",
@@ -454,7 +589,12 @@
     "lastUpdate": "09:41:00",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-029",
@@ -471,7 +611,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ไม่มีสัญญาณ"
   },
   {
     "id": "CAM-030",
@@ -487,7 +632,12 @@
     "lastUpdate": "09:41:05",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-031",
@@ -503,7 +653,12 @@
     "lastUpdate": "09:40:52",
     "currentEvent": "crowd",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-032",
@@ -520,7 +675,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-033",
@@ -536,7 +696,12 @@
     "lastUpdate": "09:40:28",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-034",
@@ -552,7 +717,12 @@
     "lastUpdate": "09:39:55",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-035",
@@ -568,7 +738,12 @@
     "lastUpdate": "09:41:12",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-036",
@@ -585,7 +760,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-037",
@@ -601,7 +781,12 @@
     "lastUpdate": "09:41:22",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-038",
@@ -617,7 +802,12 @@
     "lastUpdate": "09:40:35",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-039",
@@ -633,7 +823,12 @@
     "lastUpdate": "09:40:10",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-040",
@@ -650,7 +845,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-041",
@@ -666,7 +866,12 @@
     "lastUpdate": "09:41:05",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-042",
@@ -683,7 +888,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ไม่มีสัญญาณ"
   },
   {
     "id": "CAM-043",
@@ -699,7 +909,12 @@
     "lastUpdate": "09:40:58",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-044",
@@ -715,7 +930,12 @@
     "lastUpdate": "09:41:15",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-045",
@@ -731,7 +951,12 @@
     "lastUpdate": "09:40:25",
     "currentEvent": "flood",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-046",
@@ -748,7 +973,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2DE4A425IW-DE",
+    "resolution": "2560 x 1440 (QHD)",
+    "angle": 120,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-047",
@@ -764,7 +994,12 @@
     "lastUpdate": "09:40:42",
     "currentEvent": "parking",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-048",
@@ -780,7 +1015,12 @@
     "lastUpdate": "09:39:58",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-049",
@@ -797,7 +1037,12 @@
     "currentEvent": "normal",
     "lprMbps": 6,
     "unityMbps": 6,
-    "isPublic": true
+    "isPublic": true,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   },
   {
     "id": "CAM-050",
@@ -813,7 +1058,12 @@
     "lastUpdate": "09:40:15",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดี"
   },
   {
     "id": "CAM-051",
@@ -829,6 +1079,11 @@
     "lastUpdate": "09:41:20",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "brand": "Hikvision",
+    "model": "DS-2CD2386G2-ISU/SL",
+    "resolution": "1920 x 1080 (Full HD)",
+    "angle": 90,
+    "signalQuality": "ดีเยี่ยม"
   }
 ]

@@ -22,6 +22,13 @@ export interface Camera {
   unityMbps: number;
   /* shown on the public home page (no login required) when true; omitted/false stays internal-only */
   isPublic?: boolean;
+  /* device info shown on the Live Viewer detail panel */
+  brand?: string;
+  model?: string;
+  resolution?: string;
+  /* lens/pan angle in degrees — distinct from `direction` (compass heading) */
+  angle?: number;
+  signalQuality?: 'ดีเยี่ยม' | 'ดี' | 'พอใช้' | 'ไม่มีสัญญาณ';
 }
 
 export interface CctvEvent {
@@ -191,7 +198,7 @@ export interface User {
 /* ---------- Group-based permissions (RBAC) ---------- */
 
 export type MenuKey =
-  | 'map' | 'dashboard' | 'portal' | 'reports'
+  | 'map' | 'dashboard' | 'portal' | 'reports' | 'liveViewer'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
   | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents';
 
@@ -211,6 +218,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'dashboard',    label: 'Dashboard' },
   { key: 'portal',       label: 'ยื่นขอกล้อง (พอร์ทัลประชาชน)' },
   { key: 'reports',      label: 'รายงาน' },
+  { key: 'liveViewer',   label: 'Live Viewer (หมุนเวียนภาพกล้อง)' },
   { key: 'adminCameras', label: 'จัดการกล้อง' },
   { key: 'adminUsers',   label: 'จัดการผู้ใช้' },
   { key: 'adminRepairs', label: 'กล้องรอตรวจสอบ' },
