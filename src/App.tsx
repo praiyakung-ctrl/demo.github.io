@@ -47,10 +47,12 @@ function RequireAuth({ children, roles }: { children: React.ReactNode; roles?: U
 
 function DefaultRedirect() {
   const { user } = useAuth();
-  // guests and citizens land on the public home page (traffic cameras, no login
-  // required); staff roles keep going straight to their internal dashboards
-  if (!user || user.role === 'citizen') return <HomePage />;
-  if (user.role === 'police' || user.role === 'localOfficer') return <Navigate to="/report-incident" replace />;
+  // guests, citizens, police and local officers all land on the public home page
+  // (traffic cameras, no login required) — police/localOfficer already land on
+  // /report-incident right after login (see LoginPage.tsx), but manually
+  // navigating to "/" (e.g. the "หน้าแรก" nav link) must actually show HomePage,
+  // not bounce them back. Admin/operator/executive keep going to their dashboards.
+  if (!user || user.role === 'citizen' || user.role === 'police' || user.role === 'localOfficer') return <HomePage />;
   if (user.role === 'executive') return <Navigate to="/dashboard" replace />;
   return <Navigate to="/map" replace />;
 }
