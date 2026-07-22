@@ -251,9 +251,9 @@ export function ReportIncidentPage() {
       </CitizenHero>
 
       <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_320px] gap-5 items-start">
-        <div className="lg:hidden"><ServiceMenuChips active="reportIncident" /></div>
+        <div className="lg:hidden"><ServiceMenuChips /></div>
         <aside className="hidden lg:block">
-          <ServiceSidebar active="reportIncident" />
+          <ServiceSidebar />
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none space-y-5">

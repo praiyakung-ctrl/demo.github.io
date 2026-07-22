@@ -581,9 +581,9 @@ function StaffView() {
 }
 
 export function CitizenPortalPage() {
-  const { isCitizen } = useAuth();
+  const { isCitizen, isPolice, isLocalOfficer } = useAuth();
 
-  if (isCitizen) return <CitizenView />;
+  if (isCitizen || isPolice || isLocalOfficer) return <CitizenView />;
 
   return (
     <Layout>
