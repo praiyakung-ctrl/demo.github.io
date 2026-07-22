@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { CheckCircle2, QrCode, Smartphone } from 'lucide-react';
 import { mockThaIdVerify, DEMO_THAID_PROFILES } from '../utils/thaId';
 import type { ThaIdProfile } from '../utils/thaId';
+import { ensureDemoCitizenRegistered } from '../utils/memberStorage';
 
 interface Props {
   onVerified: (profile: ThaIdProfile) => void;
@@ -46,6 +47,7 @@ export function ThaIdLoginPanel({ onVerified, showDemoShortcuts, title, subtitle
   }, []);
 
   const runDemo = (key: keyof typeof DEMO_THAID_PROFILES) => {
+    if (key === 'citizen') ensureDemoCitizenRegistered();
     onVerified(DEMO_THAID_PROFILES[key]);
   };
 
