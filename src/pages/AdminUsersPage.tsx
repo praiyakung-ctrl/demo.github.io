@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowUp, ArrowUpDown, FileSpreadsheet, MailCheck, Plus, Pencil, Trash2, Search, KeyRound, User as UserIcon, Users } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown, FileSpreadsheet, Plus, Pencil, Trash2, Search, User as UserIcon, Users } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
 import { RoleBadge, StatusBadge } from '../components/Badge';
@@ -24,7 +24,7 @@ const ROLE_OPTIONS = [
 
 const EMPTY_FORM = {
   name: '', username: '', email: '', role: 'operator' as 'admin' | 'operator' | 'executive' | 'citizen',
-  password: '', isActive: true, groupId: '',
+  nationalId: '', isActive: true, groupId: '',
   phone: '', picture: '', department: '', note: '',
 };
 
@@ -48,8 +48,6 @@ export function AdminUsersPage() {
   const [editUser, setEditUser] = useState<User | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [resetId, setResetId] = useState<string | null>(null);
-  const [resetDoneName, setResetDoneName] = useState<string | null>(null);
 
   // every mutation persists so edits survive refresh (and new users can log in)
   const setUsers = (updater: (prev: User[]) => User[]) => {
@@ -121,7 +119,7 @@ export function AdminUsersPage() {
     setForm({
       name: user.name, username: user.username, email: user.email,
       role: user.role as 'admin' | 'operator' | 'executive' | 'citizen',
-      password: '', isActive: user.isActive, groupId: user.groupId ?? '',
+      nationalId: user.nationalId, isActive: user.isActive, groupId: user.groupId ?? '',
       phone: user.phone ?? '', picture: user.picture ?? '',
       department: user.department ?? '', note: user.note ?? '',
     });
@@ -307,11 +305,6 @@ export function AdminUsersPage() {
                               <Pencil size={13} /> แก้ไข
                             </button>
                           )}
-                          {can('adminUsers', 'edit') && (
-                            <button onClick={() => setResetId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="Reset รหัสผ่าน">
-                              <KeyRound size={13} /> Reset
-                            </button>
-                          )}
                           {can('adminUsers', 'delete') && !isSelf(user) && (
                             <button onClick={() => setDeleteId(user.id)} className="flex items-center gap-1 px-2.5 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg shadow-sm hover:shadow transition-all" title="ลบ">
                               <Trash2 size={13} /> ลบ
@@ -421,12 +414,21 @@ export function AdminUsersPage() {
               {groups.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
             </select>
           </div>
-          {!editUser && (
-            <div>
-              <label htmlFor="user-password" className="label">รหัสผ่าน<Req /></label>
-              <input id="user-password" type="password" value={form.password} onChange={e => set('password', e.target.value)} className="input-field" required />
-            </div>
-          )}
+          <div>
+            <label htmlFor="user-nationalid" className="label">เลขประจำตัวประชาชน (ThaID)<Req /></label>
+            <input
+              id="user-nationalid"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]{13}"
+              title="เลขประจำตัวประชาชน 13 หลัก"
+              value={form.nationalId}
+              onChange={e => set('nationalId', e.target.value)}
+              placeholder="เลขประจำตัวประชาชน 13 หลัก"
+              className="input-field"
+              required
+            />
+          </div>
           <div>
             <label htmlFor="user-note" className="label">หมายเหตุ</label>
             <textarea
@@ -459,35 +461,6 @@ export function AdminUsersPage() {
         danger
       />
 
-      <ConfirmDialog
-        isOpen={!!resetId}
-        onClose={() => setResetId(null)}
-        onConfirm={() => {
-          setResetDoneName(users.find(u => u.id === resetId)?.name ?? '');
-          setResetId(null);
-        }}
-        title="Reset รหัสผ่าน"
-        message="ต้องการ reset รหัสผ่านผู้ใช้นี้? ระบบจะส่งรหัสผ่านใหม่ทางอีเมล"
-        confirmLabel="Reset"
-      />
-
-      {/* Reset success */}
-      <Modal
-        isOpen={resetDoneName !== null}
-        onClose={() => setResetDoneName(null)}
-        title="Reset รหัสผ่านสำเร็จ"
-        size="sm"
-        icon={<KeyRound size={20} className="text-white" />}
-      >
-        <div className="text-center py-2">
-          <MailCheck size={48} className="text-green-600 mx-auto mb-3" aria-hidden="true" />
-          <p className="text-xl font-semibold text-gray-900 mb-1">ส่งรหัสผ่านใหม่เรียบร้อยแล้ว</p>
-          <p className="text-lg text-gray-600 mb-5">
-            ระบบส่งลิงก์ตั้งรหัสผ่านใหม่ไปยังอีเมลของ <span className="font-medium text-gray-900">{resetDoneName}</span> แล้ว
-          </p>
-          <button onClick={() => setResetDoneName(null)} className="btn-primary w-full py-2.5 text-lg">ปิด</button>
-        </div>
-      </Modal>
     </Layout>
   );
 }

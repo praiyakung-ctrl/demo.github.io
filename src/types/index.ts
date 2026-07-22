@@ -99,10 +99,10 @@ export const MEMBER_PURPOSE_OPTIONS = [
   'อื่นๆ',
 ] as const;
 
-/* Citizen who registered through Google OAuth on the register page */
+/* Citizen who registered through ThaID verification on the register page */
 export interface CitizenMember {
   id: string;
-  googleSub: string;
+  nationalId: string;
   email: string;
   name: string;
   picture?: string;
@@ -124,7 +124,8 @@ export interface User {
   role: UserRole;
   email: string;
   isActive: boolean;
-  password?: string;
+  /* 13-digit Thai national ID — the credential ThaID/DOPA verifies against */
+  nationalId: string;
   /* group-based permissions; when absent, falls back to the system group of the role */
   groupId?: string;
   phone?: string;

@@ -19,7 +19,7 @@ describe('userStorage', () => {
     const users = savedUsers();
     saveUsers([...users, {
       id: 'u-new', name: 'ผู้ใช้ใหม่', username: 'newuser', role: 'operator',
-      email: 'new@chonburi.go.th', isActive: true,
+      email: 'new@chonburi.go.th', isActive: true, nationalId: '1100200000099',
     }]);
     const reloaded = savedUsers();
     expect(reloaded).toHaveLength(users.length + 1);

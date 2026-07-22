@@ -13,11 +13,11 @@ export function savedMembers(): CitizenMember[] {
   }
 }
 
-export function findMemberBySub(googleSub: string): CitizenMember | null {
-  return savedMembers().find(m => m.googleSub === googleSub) ?? null;
+export function findMemberByNationalId(nationalId: string): CitizenMember | null {
+  return savedMembers().find(m => m.nationalId === nationalId) ?? null;
 }
 
 export function saveMember(member: CitizenMember): void {
-  const others = savedMembers().filter(m => m.googleSub !== member.googleSub);
+  const others = savedMembers().filter(m => m.nationalId !== member.nationalId);
   localStorage.setItem(MEMBERS_KEY, JSON.stringify([...others, member]));
 }

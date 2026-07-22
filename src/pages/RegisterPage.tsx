@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CheckCircle2, ChevronLeft, ShieldCheck, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
-import { signInWithGoogle } from '../utils/googleAuth';
-import type { GoogleProfile } from '../utils/googleAuth';
-import { findMemberBySub, saveMember } from '../utils/memberStorage';
+import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
+import type { ThaIdProfile } from '../utils/thaId';
+import { findMemberByNationalId, saveMember } from '../utils/memberStorage';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import type { CitizenMember, MemberType } from '../types';
 
@@ -25,9 +25,9 @@ const THAI_PROVINCES = [
 const OTHER = 'อื่นๆ';
 
 const COLLECTED_DATA = [
-  'ชื่อ-นามสกุล และรูปโปรไฟล์ (ถ้ามี) จากบัญชี Google',
-  'อีเมล และ Google Account ID',
-  'ที่อยู่ จังหวัด รหัสไปรษณีย์ และเบอร์โทรศัพท์มือถือ',
+  'ชื่อ-นามสกุล และเลขประจำตัวประชาชน 13 หลัก จากแอป ThaID',
+  'อีเมลและเบอร์โทรศัพท์ที่ท่านกรอกเพิ่มเติม',
+  'ที่อยู่ จังหวัด รหัสไปรษณีย์',
   'ประเภทผู้ใช้งาน และวัตถุประสงค์การใช้งาน',
 ];
 
@@ -38,6 +38,7 @@ function Req() {
 
 interface ProfileForm {
   name: string;
+  email: string;
   address: string;
   province: string;
   postalCode: string;
@@ -50,45 +51,41 @@ interface ProfileForm {
 }
 
 export function RegisterPage() {
-  const { loginAsGoogle } = useAuth();
+  const { loginWithThaId } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [connecting, setConnecting] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
-  const [google, setGoogle] = useState<GoogleProfile | null>(null);
+  const [thaId, setThaId] = useState<ThaIdProfile | null>(null);
   const [form, setForm] = useState<ProfileForm>({
-    name: '', address: '', province: 'ชลบุรี', postalCode: '', phone: '',
+    name: '', email: '', address: '', province: 'ชลบุรี', postalCode: '', phone: '',
     memberType: '', purpose: '', purposeOther: '',
     acceptTerms: false, acceptPdpa: false,
   });
 
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
 
-  const handleGoogleSignIn = async () => {
-    setConnecting(true);
-    const profile = await signInWithGoogle();
-    setConnecting(false);
-    if (findMemberBySub(profile.sub)) {
+  const handleThaIdVerified = (profile: ThaIdProfile) => {
+    if (findMemberByNationalId(profile.nationalId)) {
       setAlreadyRegistered(true);
       return;
     }
-    setGoogle(profile);
+    setThaId(profile);
     set({ name: profile.name });
     setStep(2);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!google || !form.memberType) return;
+    if (!thaId || !form.memberType) return;
     setSubmitting(true);
     await new Promise(r => setTimeout(r, 600));
     const member: CitizenMember = {
       id: `member-${Date.now()}`,
-      googleSub: google.sub,
-      email: google.email,
+      nationalId: thaId.nationalId,
+      email: form.email,
       name: form.name,
-      picture: google.picture,
+      picture: thaId.picture,
       address: form.address,
       province: form.province,
       postalCode: form.postalCode,
@@ -105,8 +102,8 @@ export function RegisterPage() {
   };
 
   const handleEnter = () => {
-    if (!google) return;
-    loginAsGoogle({ name: form.name, email: google.email });
+    if (!thaId) return;
+    loginWithThaId({ nationalId: thaId.nationalId, name: form.name, picture: thaId.picture });
     navigate('/portal', { replace: true });
   };
 
@@ -132,7 +129,7 @@ export function RegisterPage() {
                   <h2 className="text-3xl font-bold text-gray-900">เริ่มต้นสมัครสมาชิก</h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-4">
-                  สมัครสมาชิกด้วยการยืนยันตัวตนผ่านบัญชี Google (OAuth 2.0)
+                  สมัครสมาชิกด้วยการยืนยันตัวตนผ่านแอป ThaID (กรมการปกครอง กระทรวงมหาดไทย)
                   จากนั้นกรอกข้อมูลเพิ่มเติมเพื่อใช้บริการขอข้อมูลภาพจากกล้อง CCTV
                 </p>
                 <div className="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
@@ -143,60 +140,49 @@ export function RegisterPage() {
                     {COLLECTED_DATA.map(item => <li key={item}>{item}</li>)}
                   </ul>
                 </div>
-                <button
-                  onClick={handleGoogleSignIn}
-                  disabled={connecting}
-                  className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 text-2xl font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-60"
-                >
-                  <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden="true">
-                    <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-                    <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
-                    <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
-                    <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-                  </svg>
-                  {connecting ? 'กำลังเชื่อมต่อ Google...' : 'สมัครสมาชิกด้วย Google'}
-                </button>
+                <ThaIdLoginPanel onVerified={handleThaIdVerified} />
               </>
             )}
 
             {step === 1 && alreadyRegistered && (
               <div className="text-center py-4" role="alert">
                 <CheckCircle2 size={48} className="text-green-600 mx-auto mb-3" aria-hidden="true" />
-                <p className="text-xl font-semibold text-gray-900 mb-1">บัญชี Google นี้สมัครสมาชิกแล้ว</p>
-                <p className="text-lg text-gray-600 mb-5">ท่านสามารถเข้าสู่ระบบด้วยปุ่ม "เข้าสู่ระบบด้วย Google" ได้ทันที</p>
+                <p className="text-xl font-semibold text-gray-900 mb-1">ThaID นี้สมัครสมาชิกแล้ว</p>
+                <p className="text-lg text-gray-600 mb-5">ท่านสามารถเข้าสู่ระบบด้วยปุ่ม "เข้าสู่ระบบด้วย ThaID" ได้ทันที</p>
                 <Link to="/login" className="btn-primary inline-block w-full py-2.5 text-lg">ไปหน้าเข้าสู่ระบบ</Link>
               </div>
             )}
 
-            {step === 2 && google && (
+            {step === 2 && thaId && (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <h2 className="text-2xl font-bold text-gray-900">กรอกข้อมูลสมาชิก</h2>
 
-                {/* Google profile (readonly) */}
+                {/* ThaID profile (readonly) */}
                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-100 space-y-3">
                   <div className="flex items-center gap-3">
-                    {google.picture ? (
-                      <img src={google.picture} alt="รูปโปรไฟล์จาก Google" className="w-12 h-12 rounded-full object-cover" />
+                    {thaId.picture ? (
+                      <img src={thaId.picture} alt="รูปโปรไฟล์จาก ThaID" className="w-12 h-12 rounded-full object-cover" />
                     ) : (
                       <div className="w-12 h-12 rounded-full bg-navy-700 text-white flex items-center justify-center text-xl font-bold" aria-hidden="true">
-                        {form.name.charAt(0) || 'G'}
+                        {form.name.charAt(0) || 'T'}
                       </div>
                     )}
-                    <p className="text-lg font-semibold text-gray-700">บัญชี Google ที่ยืนยันแล้ว</p>
+                    <p className="text-lg font-semibold text-gray-700">ยืนยันตัวตนผ่าน ThaID แล้ว</p>
                   </div>
                   <div>
-                    <label htmlFor="reg-email" className="label">อีเมล (Google Email)</label>
-                    <input id="reg-email" type="email" value={google.email} readOnly className="input-field bg-gray-100 text-gray-500" />
-                  </div>
-                  <div>
-                    <label htmlFor="reg-sub" className="label">Google Account ID (sub)</label>
-                    <input id="reg-sub" type="text" value={google.sub} readOnly className="input-field bg-gray-100 text-gray-500 font-mono" />
+                    <label htmlFor="reg-nationalid" className="label">เลขประจำตัวประชาชน (จาก ThaID)</label>
+                    <input id="reg-nationalid" type="text" value={thaId.nationalId} readOnly className="input-field bg-gray-100 text-gray-500 font-mono" />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="reg-name" className="label">ชื่อ-นามสกุล<Req /></label>
                   <input id="reg-name" type="text" value={form.name} onChange={e => set({ name: e.target.value })} placeholder="กรอกชื่อ-นามสกุล" className="input-field" required />
+                </div>
+
+                <div>
+                  <label htmlFor="reg-email" className="label">อีเมล<Req /></label>
+                  <input id="reg-email" type="email" value={form.email} onChange={e => set({ email: e.target.value })} placeholder="กรอกอีเมล" className="input-field" required />
                 </div>
 
                 <div>

@@ -3,12 +3,13 @@ import type { ReactNode } from 'react';
 import type { MenuKey, PermissionAction, User, UserRole } from '../types';
 import { groupForUser, hasPermission } from '../utils/groupStorage';
 import { savedUsers } from '../utils/userStorage';
+import { findMemberByNationalId } from '../utils/memberStorage';
 import { logAudit } from '../utils/auditLog';
+import type { ThaIdProfile } from '../utils/thaId';
 
 interface AuthContextType {
   user: User | null;
-  login: (username: string, password: string) => boolean;
-  loginAsGoogle: (profile?: { name: string; email: string }) => void;
+  loginWithThaId: (profile: ThaIdProfile) => boolean;
   logout: () => void;
   isAdmin: boolean;
   isOperator: boolean;
@@ -27,32 +28,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const login = (username: string, password: string): boolean => {
-    // read through userStorage so users created/edited on /admin/users can log in
-    const found = savedUsers().find(
-      u => u.username === username && u.password === password && u.isActive
-    );
-    if (found) {
-      setUser(found);
-      localStorage.setItem('auth_user', JSON.stringify(found));
-      logAudit(found, 'login', 'ระบบ', 'เข้าสู่ระบบสำเร็จ');
-      return true;
-    }
-    return false;
+  const persistLogin = (u: User, detail: string) => {
+    setUser(u);
+    localStorage.setItem('auth_user', JSON.stringify(u));
+    logAudit(u, 'login', 'ระบบ', detail);
   };
 
-  const loginAsGoogle = (profile?: { name: string; email: string }) => {
-    const citizen: User = {
-      id: 'citizen-001',
-      name: profile?.name ?? 'ประชาชน ทดสอบ',
-      username: 'citizen',
-      role: 'citizen' as UserRole,
-      email: profile?.email ?? 'citizen@gmail.com',
-      isActive: true,
-    };
-    setUser(citizen);
-    localStorage.setItem('auth_user', JSON.stringify(citizen));
-    logAudit(citizen, 'login', 'ระบบ', 'เข้าสู่ระบบผ่าน Google');
+  // read through userStorage/memberStorage so accounts created/edited on
+  // /admin/users or via /register can log in as soon as ThaID confirms them
+  const loginWithThaId = (profile: ThaIdProfile): boolean => {
+    const staff = savedUsers().find(u => u.nationalId === profile.nationalId && u.isActive);
+    if (staff) {
+      persistLogin(staff, 'เข้าสู่ระบบด้วย ThaID');
+      return true;
+    }
+
+    const member = findMemberByNationalId(profile.nationalId);
+    if (member) {
+      const citizen: User = {
+        id: member.id,
+        name: member.name,
+        username: member.email,
+        role: 'citizen' as UserRole,
+        email: member.email,
+        isActive: true,
+        nationalId: member.nationalId,
+        picture: member.picture,
+      };
+      persistLogin(citizen, 'เข้าสู่ระบบด้วย ThaID');
+      return true;
+    }
+
+    return false;
   };
 
   const logout = () => {
@@ -73,8 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{
       user,
-      login,
-      loginAsGoogle,
+      loginWithThaId,
       logout,
       isAdmin: role === 'admin',
       isOperator: role === 'operator',

@@ -97,7 +97,10 @@ export function AdminSettingsPage() {
                   <Timer size={16} className="text-amber-600" />
                   <span className="text-sm font-bold text-amber-700">ความปลอดภัย</span>
                 </div>
-                <div className="p-4">
+                <div className="p-4 space-y-3">
+                  <p className="text-sm text-gray-600">
+                    การเข้าสู่ระบบทุกบทบาทยืนยันตัวตนผ่านแอป ThaID (กรมการปกครอง) ไม่มีการใช้รหัสผ่านในระบบนี้
+                  </p>
                   <div className="max-w-xs">
                     <label htmlFor="set-session-timeout" className="label">Session Timeout (นาที)</label>
                     <input

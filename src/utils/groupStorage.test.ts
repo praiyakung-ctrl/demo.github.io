@@ -90,8 +90,8 @@ describe('groupStorage', () => {
   it('membersOfGroup separates role-default members from assigned ones', () => {
     saveGroup(customGroup);
     const users: User[] = [
-      { id: 'u1', name: 'แอดมิน', username: 'admin', role: 'admin', email: 'a@a', isActive: true },
-      { id: 'u2', name: 'วิภา', username: 'operator', role: 'operator', email: 'b@b', isActive: true },
+      { id: 'u1', name: 'แอดมิน', username: 'admin', role: 'admin', email: 'a@a', isActive: true, nationalId: '1100200000001' },
+      { id: 'u2', name: 'วิภา', username: 'operator', role: 'operator', email: 'b@b', isActive: true, nationalId: '1100200000002' },
     ];
     assignUserToGroup('u2', 'grp-maintenance');
 
