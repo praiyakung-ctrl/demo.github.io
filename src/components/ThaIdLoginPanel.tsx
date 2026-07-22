@@ -36,7 +36,6 @@ export function ThaIdLoginPanel({ onVerified, showDemoShortcuts, title, subtitle
 
   useEffect(() => {
     let cancelled = false;
-    setStatus('scanning');
     mockThaIdVerify().then(profile => {
       if (cancelled) return;
       setStatus('confirmed');
