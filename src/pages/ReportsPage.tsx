@@ -177,7 +177,7 @@ export function ReportsPage() {
           <div className="flex items-center gap-3">
             <Wifi size={28} className="flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-xl">รายงานสถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
+              <h3 className="font-bold text-xl text-white">รายงานสถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
               <p className="text-lg text-blue-100">สรุปการขอดู Playback CCTV รายเดือน แยกตามสถานีตำรวจ (สภ.)</p>
             </div>
           </div>

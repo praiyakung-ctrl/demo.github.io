@@ -309,7 +309,7 @@ export function DashboardPage() {
           <div className="flex items-center gap-3">
             <Shield size={28} className="flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-xl">สถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
+              <h3 className="font-bold text-xl text-white">สถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
               <p className="text-lg text-blue-100">รวมคำขอดู Playback CCTV จากเจ้าหน้าที่ตำรวจทุกสถานี: {policeUsageTotal.toLocaleString()} ครั้ง</p>
             </div>
           </div>
