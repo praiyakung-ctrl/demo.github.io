@@ -18,7 +18,7 @@ export function CitizenHero({ title, children }: { title: string; children?: Rea
         <div className="flex-1 min-w-0">
           <h1 className="text-5xl font-extrabold text-white drop-shadow mb-2">{title}</h1>
           <div className="flex items-center gap-2 text-xl text-blue-100">
-            <Link to="/portal" className="hover:text-white transition-colors">หน้าหลัก</Link>
+            <span>หน้าหลัก</span>
             <ChevronRight size={18} />
             <span className="text-white font-bold">{title}</span>
           </div>
