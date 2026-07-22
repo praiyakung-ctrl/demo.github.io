@@ -59,9 +59,9 @@ export function ThaIdLoginPanel({ onVerified, showDemoShortcuts, title, subtitle
         {subtitle ?? 'เปิดแอป ThaID บนโทรศัพท์ของท่าน แล้วสแกน QR โค้ดนี้เพื่อยืนยันตัวตน'}
       </p>
 
-      <div className="w-40 h-40 mx-auto mb-4 bg-white rounded-lg border-2 border-navy-200 p-2 grid grid-cols-9 grid-rows-9 gap-px" role="img" aria-label="QR โค้ดสำหรับสแกนด้วยแอป ThaID">
+      <div className="w-40 h-40 mx-auto mb-4 bg-white rounded-lg border-2 border-navy-200 p-2 grid grid-cols-9 gap-px" role="img" aria-label="QR โค้ดสำหรับสแกนด้วยแอป ThaID">
         {QR_CELLS.map((on, i) => (
-          <div key={i} className={on ? 'bg-navy-900' : 'bg-white'} />
+          <div key={i} className={`aspect-square ${on ? 'bg-navy-700' : 'bg-white'}`} />
         ))}
       </div>
 
