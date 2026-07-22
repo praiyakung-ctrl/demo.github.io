@@ -21,7 +21,7 @@ const customGroup: UserGroup = {
   permissions: {
     map: ['view'], dashboard: [], portal: [], reports: [],
     adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [], adminMenus: [],
-    adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [],
+    adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [], adminIncidents: [],
   },
 };
 
@@ -30,8 +30,8 @@ describe('groupStorage', () => {
     localStorage.clear();
   });
 
-  it('seeds the four system groups when storage is empty or invalid', () => {
-    expect(savedGroups()).toHaveLength(4);
+  it('seeds the six system groups when storage is empty or invalid', () => {
+    expect(savedGroups()).toHaveLength(6);
     localStorage.setItem('user_groups', '{broken');
     expect(savedGroups()).toEqual(DEFAULT_GROUPS);
   });
@@ -39,23 +39,23 @@ describe('groupStorage', () => {
   it('saves a custom group alongside the system groups', () => {
     saveGroup(customGroup);
     const groups = savedGroups();
-    expect(groups).toHaveLength(5);
+    expect(groups).toHaveLength(7);
     expect(groups.find(g => g.id === 'grp-maintenance')?.name).toBe('ช่างซ่อมบำรุง');
   });
 
   it('updates an existing group in place', () => {
     saveGroup(customGroup);
     saveGroup({ ...customGroup, description: 'แก้ไขแล้ว' });
-    expect(savedGroups()).toHaveLength(5);
+    expect(savedGroups()).toHaveLength(7);
     expect(savedGroups().find(g => g.id === 'grp-maintenance')?.description).toBe('แก้ไขแล้ว');
   });
 
   it('deletes a custom group but refuses system groups', () => {
     saveGroup(customGroup);
     expect(deleteGroup('grp-maintenance')).toBe(true);
-    expect(savedGroups()).toHaveLength(4);
+    expect(savedGroups()).toHaveLength(6);
     expect(deleteGroup('grp-admin')).toBe(false);
-    expect(savedGroups()).toHaveLength(4);
+    expect(savedGroups()).toHaveLength(6);
   });
 
   it('groupForUser prefers groupId and falls back to the role group', () => {

@@ -15,6 +15,8 @@ interface AuthContextType {
   isOperator: boolean;
   isExecutive: boolean;
   isCitizen: boolean;
+  isPolice: boolean;
+  isLocalOfficer: boolean;
   canEdit: boolean;
   /* group-based permission check: may the current user perform `action` in `menu`? */
   can: (menu: MenuKey, action: PermissionAction) => boolean;
@@ -86,6 +88,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isOperator: role === 'operator',
       isExecutive: role === 'executive',
       isCitizen: role === 'citizen',
+      isPolice: role === 'police',
+      isLocalOfficer: role === 'localOfficer',
       canEdit: role === 'admin' || role === 'operator',
       can,
     }}>

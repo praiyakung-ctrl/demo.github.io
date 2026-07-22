@@ -1,7 +1,7 @@
 export type EventType = 'traffic' | 'gunshot' | 'parking' | 'flood' | 'crowd' | 'normal';
 export type CameraStatus = 'Online' | 'Offline';
 export type CameraType = 'Fixed' | 'PTZ';
-export type UserRole = 'admin' | 'operator' | 'executive' | 'citizen';
+export type UserRole = 'admin' | 'operator' | 'executive' | 'citizen' | 'police' | 'localOfficer';
 export type RequestStatus = 'ใหม่' | 'รอดำเนินการ' | 'รอภาพ' | 'อนุมัติ' | 'ส่งแล้ว' | 'ได้รับแล้ว' | 'ปฏิเสธ';
 
 export interface Camera {
@@ -96,6 +96,43 @@ export interface TimelineEntry {
   completed: boolean;
 }
 
+/* ---------- "แจ้งเหตุ" — police risk points / local-officer proposed install points ---------- */
+
+export type IncidentPointType = 'risk' | 'proposed';
+export type IncidentPointStatus = 'pending' | 'approved' | 'rejected';
+
+export const INCIDENT_CATEGORY_OPTIONS = [
+  'อุบัติเหตุทางถนน', 'อาชญากรรม', 'จุดเสี่ยงน้ำท่วม', 'จุดเสี่ยงไฟไหม้', 'อื่นๆ',
+] as const;
+
+export const INCIDENT_FREQUENCY_OPTIONS = [
+  'ครั้งแรก', 'เป็นครั้งคราว (1-2 ครั้ง/เดือน)', 'บ่อย (มากกว่า 3 ครั้ง/เดือน)',
+] as const;
+
+export interface IncidentPoint {
+  id: string;
+  /* 'risk' = จุดเสี่ยงภัย ปักโดยตำรวจ (แดง); 'proposed' = จุดขอติดตั้งใหม่ ปักโดยเจ้าหน้าที่ท้องถิ่น (เหลือง) */
+  type: IncidentPointType;
+  lat: number;
+  lng: number;
+  locationLabel: string;
+  category: string;
+  frequency: string;
+  description: string;
+  /* required when type === 'proposed' */
+  installReason?: string;
+  /* photo as data-URI (demo), optional */
+  photo?: string;
+  submittedBy: string;
+  submittedByUserId: string;
+  submittedAt: string;
+  status: IncidentPointStatus;
+  reviewedBy?: string;
+  reviewedAt?: string;
+  /* required when status === 'rejected' */
+  rejectionReason?: string;
+}
+
 export type MemberType = 'ประชาชน' | 'นิติบุคคล' | 'หน่วยงานราชการ' | 'บริษัทประกัน' | 'ทนายความ' | 'อื่นๆ';
 
 export const MEMBER_TYPE_OPTIONS: MemberType[] = [
@@ -150,7 +187,7 @@ export interface User {
 export type MenuKey =
   | 'map' | 'dashboard' | 'portal' | 'reports'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
-  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings';
+  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents';
 
 export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
 
@@ -177,6 +214,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'adminApi',      label: 'จัดการการเชื่อมต่อ API' },
   { key: 'adminNotifications', label: 'จัดการการแจ้งเตือน' },
   { key: 'adminSettings', label: 'ตั้งค่าระบบ' },
+  { key: 'adminIncidents', label: 'ตรวจสอบจุดแจ้งเหตุ' },
 ];
 
 /* Per-menu presentation settings managed on /admin/menus */
@@ -228,4 +266,6 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   operator: 'เจ้าหน้าที่ควบคุม',
   executive: 'ผู้บริหาร',
   citizen: 'ประชาชน',
+  police: 'ตำรวจ',
+  localOfficer: 'เจ้าหน้าที่ท้องถิ่น',
 };

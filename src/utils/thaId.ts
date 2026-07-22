@@ -34,9 +34,11 @@ export function mockThaIdVerify(hint?: Partial<ThaIdProfile>): Promise<ThaIdProf
   });
 }
 
-export const DEMO_THAID_PROFILES: Record<'admin' | 'operator' | 'executive' | 'citizen', ThaIdProfile> = {
+export const DEMO_THAID_PROFILES: Record<'admin' | 'operator' | 'executive' | 'citizen' | 'police' | 'localOfficer', ThaIdProfile> = {
   admin: { nationalId: '1100200000001', name: 'สมศักดิ์ ผู้ดูแล' },
   operator: { nationalId: '1100200000002', name: 'วิภา ควบคุม' },
   executive: { nationalId: '1100200000003', name: 'ธนา บริหาร' },
   citizen: { nationalId: '3100100000001', name: 'ประชาชน ทดสอบ ThaID' },
+  police: { nationalId: '1100200000011', name: 'ประยุทธ์ ตำรวจ' },
+  localOfficer: { nationalId: '1100200000012', name: 'สมหญิง ท้องถิ่น' },
 };

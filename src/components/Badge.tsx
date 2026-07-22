@@ -29,6 +29,7 @@ const STATUS_STYLES: Record<string, string> = {
   'Offline':      'bg-gray-200 text-gray-700 border-gray-300',
   'ใหม่':         'bg-emerald-100 text-emerald-800 border-emerald-300',
   'รอดำเนินการ': 'bg-amber-100 text-amber-800 border-amber-300',
+  'รอตรวจสอบ':   'bg-amber-100 text-amber-800 border-amber-300',
   'รอภาพ':        'bg-blue-100 text-blue-800 border-blue-300',
   'อนุมัติ':      'bg-indigo-100 text-indigo-800 border-indigo-300',
   'ส่งแล้ว':      'bg-slate-200 text-slate-700 border-slate-300',
@@ -56,6 +57,8 @@ const ROLE_LABELS: Record<string, string> = {
   operator: 'เจ้าหน้าที่',
   executive: 'ผู้บริหาร',
   citizen: 'ประชาชน',
+  police: 'ตำรวจ',
+  localOfficer: 'เจ้าหน้าที่ท้องถิ่น',
 };
 
 const ROLE_STYLES: Record<string, string> = {
@@ -63,6 +66,8 @@ const ROLE_STYLES: Record<string, string> = {
   operator: 'bg-blue-100 text-blue-700',
   executive: 'bg-amber-100 text-amber-700',
   citizen: 'bg-green-100 text-green-700',
+  police: 'bg-red-100 text-red-700',
+  localOfficer: 'bg-yellow-100 text-yellow-700',
 };
 
 export function RoleBadge({ role }: RoleBadgeProps) {

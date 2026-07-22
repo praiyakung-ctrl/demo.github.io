@@ -16,7 +16,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: ALL, adminUsers: ALL, adminRepairs: ALL, adminGroups: ALL, adminMenus: ALL,
-      adminAuditLog: ALL, adminApi: ALL, adminNotifications: ALL, adminSettings: ALL,
+      adminAuditLog: ALL, adminApi: ALL, adminNotifications: ALL, adminSettings: ALL, adminIncidents: ALL,
     },
   },
   {
@@ -28,6 +28,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
+      adminIncidents: ['view', 'edit'],
     },
   },
   {
@@ -38,7 +39,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
-      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
     },
   },
   {
@@ -49,7 +50,29 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     permissions: {
       map: NONE, dashboard: NONE, portal: ALL, reports: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
-      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
+    },
+  },
+  {
+    id: 'grp-police',
+    name: 'ตำรวจ',
+    description: 'ปักหมุดจุดเสี่ยงภัยผ่านหน้าแจ้งเหตุ',
+    isSystem: true,
+    permissions: {
+      map: NONE, dashboard: NONE, portal: NONE, reports: NONE,
+      adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
+    },
+  },
+  {
+    id: 'grp-localOfficer',
+    name: 'เจ้าหน้าที่ท้องถิ่น',
+    description: 'ปักหมุดจุดขอติดตั้งกล้องใหม่ผ่านหน้าแจ้งเหตุ',
+    isSystem: true,
+    permissions: {
+      map: NONE, dashboard: NONE, portal: NONE, reports: NONE,
+      adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
+      adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
     },
   },
 ];
@@ -59,6 +82,8 @@ const ROLE_GROUP: Record<UserRole, string> = {
   operator: 'grp-operator',
   executive: 'grp-executive',
   citizen: 'grp-citizen',
+  police: 'grp-police',
+  localOfficer: 'grp-localOfficer',
 };
 
 export function savedGroups(): UserGroup[] {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, BellRing, Camera, Users, ChevronDown, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, BellRing, Camera, Users, ChevronDown, ChevronLeft, ChevronRight, ListTree, Plug, ScrollText, Settings, ShieldAlert, ShieldCheck, SlidersHorizontal, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { savedMenuSettings } from '../utils/menuStorage';
 import type { MenuKey } from '../types';
@@ -17,6 +17,7 @@ const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: st
   adminCameras: { to: '/admin/cameras',  icon: Camera,          iconColor: 'text-pink-500',   section: 'admin' },
   adminUsers:   { to: '/admin/users',    icon: Users,           iconColor: 'text-purple-500', section: 'admin' },
   adminRepairs: { to: '/admin/repairs',  icon: Wrench,          iconColor: 'text-orange-500', section: 'admin' },
+  adminIncidents: { to: '/admin/incidents', icon: ShieldAlert,  iconColor: 'text-red-500',    section: 'admin' },
   adminGroups:  { to: '/admin/groups',   icon: ShieldCheck,     iconColor: 'text-teal-600',   section: 'admin' },
   adminMenus:   { to: '/admin/menus',    icon: ListTree,        iconColor: 'text-indigo-500', section: 'admin' },
   adminAuditLog: { to: '/admin/audit-log', icon: ScrollText,    iconColor: 'text-rose-500',   section: 'backend' },

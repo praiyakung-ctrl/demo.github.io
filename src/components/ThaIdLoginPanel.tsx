@@ -30,6 +30,8 @@ const DEMO_ROLE_LABELS: { key: keyof typeof DEMO_THAID_PROFILES; label: string }
   { key: 'operator', label: 'เจ้าหน้าที่' },
   { key: 'executive', label: 'ผู้บริหาร' },
   { key: 'citizen', label: 'ประชาชน' },
+  { key: 'police', label: 'ตำรวจ' },
+  { key: 'localOfficer', label: 'เจ้าหน้าที่ท้องถิ่น' },
 ];
 
 export function ThaIdLoginPanel({ onVerified, showDemoShortcuts, title, subtitle }: Props) {

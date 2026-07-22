@@ -118,5 +118,27 @@
     "department": "ศูนย์เทคโนโลยีสารสนเทศ อบจ.ชลบุรี",
     "picture": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjQTE2MjA3Ii8+PHRleHQgeD0iMzIiIHk9IjQyIiBmb250LXNpemU9IjMwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuC4njwvdGV4dD48L3N2Zz4=",
     "nationalId": "1100200000010"
+  },
+  {
+    "id": "11",
+    "name": "ประยุทธ์ ตำรวจ",
+    "username": "police1",
+    "role": "police",
+    "email": "prayut.police@chonburi.go.th",
+    "isActive": true,
+    "phone": "0812350000",
+    "department": "สถานีตำรวจภูธรเมืองชลบุรี",
+    "nationalId": "1100200000011"
+  },
+  {
+    "id": "12",
+    "name": "สมหญิง ท้องถิ่น",
+    "username": "localofficer1",
+    "role": "localOfficer",
+    "email": "somying.local@chonburi.go.th",
+    "isActive": true,
+    "phone": "0812351111",
+    "department": "กองช่าง อบจ.ชลบุรี",
+    "nationalId": "1100200000012"
   }
 ]

@@ -22,6 +22,8 @@ const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage').then(m => ({ 
 const AdminRepairsPage = lazy(() => import('./pages/AdminRepairsPage').then(m => ({ default: m.AdminRepairsPage })));
 const AdminGroupsPage = lazy(() => import('./pages/AdminGroupsPage').then(m => ({ default: m.AdminGroupsPage })));
 const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ default: m.AdminMenusPage })));
+const ReportIncidentPage = lazy(() => import('./pages/ReportIncidentPage').then(m => ({ default: m.ReportIncidentPage })));
+const AdminIncidentsPage = lazy(() => import('./pages/AdminIncidentsPage').then(m => ({ default: m.AdminIncidentsPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const AdminAuditLogPage = lazy(() => import('./pages/AdminAuditLogPage').then(m => ({ default: m.AdminAuditLogPage })));
 const AdminApiPage = lazy(() => import('./pages/AdminApiPage').then(m => ({ default: m.AdminApiPage })));
@@ -48,6 +50,7 @@ function DefaultRedirect() {
   // guests and citizens land on the public home page (traffic cameras, no login
   // required); staff roles keep going straight to their internal dashboards
   if (!user || user.role === 'citizen') return <HomePage />;
+  if (user.role === 'police' || user.role === 'localOfficer') return <Navigate to="/report-incident" replace />;
   if (user.role === 'executive') return <Navigate to="/dashboard" replace />;
   return <Navigate to="/map" replace />;
 }
@@ -78,6 +81,11 @@ function AppRoutes() {
           <CctvRequestPage />
         </RequireAuth>
       } />
+      <Route path="/report-incident" element={
+        <RequireAuth roles={['police', 'localOfficer', 'admin', 'operator']}>
+          <ReportIncidentPage />
+        </RequireAuth>
+      } />
       {/* public info pages — readable without an account, like /login and /register */}
       <Route path="/about" element={<AboutPage />} />
       <Route path="/faq" element={<FaqPage />} />
@@ -100,6 +108,11 @@ function AppRoutes() {
       <Route path="/admin/repairs" element={
         <RequireAuth roles={['admin']}>
           <AdminRepairsPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/incidents" element={
+        <RequireAuth roles={['admin', 'operator']}>
+          <AdminIncidentsPage />
         </RequireAuth>
       } />
       <Route path="/admin/groups" element={

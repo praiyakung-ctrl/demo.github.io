@@ -4,7 +4,7 @@ import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
 import { RoleBadge, StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
-import type { User } from '../types';
+import type { User, UserRole } from '../types';
 import { ROLE_LABELS } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { assignUserToGroup, groupForUser, removeAssignment, savedGroups } from '../utils/groupStorage';
@@ -20,10 +20,12 @@ const ROLE_OPTIONS = [
   { value: 'admin', label: 'ผู้ดูแลระบบ' },
   { value: 'operator', label: 'เจ้าหน้าที่' },
   { value: 'executive', label: 'ผู้บริหาร' },
+  { value: 'police', label: 'ตำรวจ' },
+  { value: 'localOfficer', label: 'เจ้าหน้าที่ท้องถิ่น' },
 ];
 
 const EMPTY_FORM = {
-  name: '', username: '', email: '', role: 'operator' as 'admin' | 'operator' | 'executive' | 'citizen',
+  name: '', username: '', email: '', role: 'operator' as UserRole,
   nationalId: '', isActive: true, groupId: '',
   phone: '', picture: '', department: '', note: '',
 };
@@ -118,7 +120,7 @@ export function AdminUsersPage() {
     setEditUser(user);
     setForm({
       name: user.name, username: user.username, email: user.email,
-      role: user.role as 'admin' | 'operator' | 'executive' | 'citizen',
+      role: user.role as UserRole,
       nationalId: user.nationalId, isActive: user.isActive, groupId: user.groupId ?? '',
       phone: user.phone ?? '', picture: user.picture ?? '',
       department: user.department ?? '', note: user.note ?? '',

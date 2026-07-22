@@ -15,7 +15,10 @@ export function LoginPage() {
   const [showPdpa, setShowPdpa] = useState(() => !hasPdpaConsent());
 
   if (user) {
-    const redirect = user.role === 'executive' ? '/dashboard' : user.role === 'citizen' ? '/portal' : '/map';
+    const redirect = user.role === 'executive' ? '/dashboard'
+      : user.role === 'citizen' ? '/portal'
+      : (user.role === 'police' || user.role === 'localOfficer') ? '/report-incident'
+      : '/map';
     return <Navigate to={redirect} replace />;
   }
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Home, Phone, Video } from 'lucide-react';
+import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video } from 'lucide-react';
 import { ORG_INFO } from '../data/orgInfo';
 
 /* Shared UI for citizen-facing pages (CctvRequestPage, CitizenPortalPage):
@@ -32,6 +32,7 @@ export function CitizenHero({ title, children }: { title: string; children?: Rea
 const MENU = [
   { key: 'home', icon: Home, label: 'หน้าแรก (กล้องจราจรสาธารณะ)', to: '/' },
   { key: 'request', icon: Video, label: 'ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV', to: '/portal/request' },
+  { key: 'reportIncident', icon: ShieldAlert, label: 'แจ้งเหตุ (จุดเสี่ยงภัย/จุดขอติดตั้ง)', to: '/report-incident' },
   { key: 'status', icon: FileSearch, label: 'ตรวจสอบสถานะคำขอ', to: '/portal' },
   { key: 'manual', icon: BookOpen, label: 'คู่มือการใช้งาน', to: '/manual' },
   { key: 'faq', icon: HelpCircle, label: 'คำถามที่พบบ่อย', to: '/faq' },
