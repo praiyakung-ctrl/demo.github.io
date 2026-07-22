@@ -13,7 +13,8 @@
     "lastUpdate": "09:41:21",
     "currentEvent": "traffic",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-002",
@@ -61,7 +62,8 @@
     "lastUpdate": "07:15:30",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-005",
@@ -141,7 +143,8 @@
     "lastUpdate": "09:41:15",
     "currentEvent": "crowd",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-010",
@@ -189,7 +192,8 @@
     "lastUpdate": "06:30:10",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-013",
@@ -205,7 +209,8 @@
     "lastUpdate": "09:41:00",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-014",
@@ -253,7 +258,8 @@
     "lastUpdate": "09:41:10",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-017",
@@ -301,7 +307,8 @@
     "lastUpdate": "09:41:02",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-020",
@@ -349,7 +356,8 @@
     "lastUpdate": "09:40:55",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-023",
@@ -397,7 +405,8 @@
     "lastUpdate": "09:39:45",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-026",
@@ -461,7 +470,8 @@
     "lastUpdate": "05:45:20",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-030",
@@ -509,7 +519,8 @@
     "lastUpdate": "09:41:18",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-033",
@@ -573,7 +584,8 @@
     "lastUpdate": "09:40:40",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-037",
@@ -637,7 +649,8 @@
     "lastUpdate": "09:39:48",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-041",
@@ -669,7 +682,8 @@
     "lastUpdate": "08:10:15",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-043",
@@ -733,7 +747,8 @@
     "lastUpdate": "09:41:18",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-047",
@@ -781,7 +796,8 @@
     "lastUpdate": "09:41:08",
     "currentEvent": "normal",
     "lprMbps": 6,
-    "unityMbps": 6
+    "unityMbps": 6,
+    "isPublic": true
   },
   {
     "id": "CAM-050",

@@ -17,7 +17,7 @@ const EMPTY: Omit<Camera, 'id'> = {
   name: '', location: '', lat: 13.36, lng: 100.98,
   type: 'Fixed', organization: '', rtspUrl: '', status: 'Online',
   direction: '', lastUpdate: new Date().toISOString(), currentEvent: 'normal',
-  lprMbps: 6, unityMbps: 6,
+  lprMbps: 6, unityMbps: 6, isPublic: false,
 };
 
 export function AdminCamerasPage() {
@@ -74,7 +74,7 @@ export function AdminCamerasPage() {
     setDeleteId(null);
   };
 
-  const set = (key: keyof typeof form, val: string | number) => setForm(f => ({ ...f, [key]: val }));
+  const set = (key: keyof typeof form, val: string | number | boolean) => setForm(f => ({ ...f, [key]: val }));
 
   return (
     <Layout>
@@ -142,7 +142,12 @@ export function AdminCamerasPage() {
                       </td>
                       {/* Name / Location */}
                       <td className="px-4 py-3">
-                        <p className="font-bold text-navy-700 text-xl">{cam.name}</p>
+                        <div className="flex items-center gap-1.5">
+                          <p className="font-bold text-navy-700 text-xl">{cam.name}</p>
+                          {cam.isPublic && (
+                            <span className="text-xs font-bold px-1.5 py-0.5 rounded bg-green-100 text-green-700 border border-green-300">สาธารณะ</span>
+                          )}
+                        </div>
                         <div className="flex items-center gap-1 mt-0.5">
                           <MapPin size={16} className="text-blue-500 flex-shrink-0" />
                           <p className="text-lg text-gray-900 truncate max-w-[240px]">{cam.location}</p>
@@ -293,6 +298,18 @@ export function AdminCamerasPage() {
                   <option>Online</option>
                   <option>Offline</option>
                 </select>
+              </div>
+              <div className="col-span-2 flex items-center gap-2">
+                <input
+                  id="cam-public"
+                  type="checkbox"
+                  checked={form.isPublic ?? false}
+                  onChange={e => set('isPublic', e.target.checked)}
+                  className="w-4 h-4 rounded accent-[#1b3a6b]"
+                />
+                <label htmlFor="cam-public" className="text-sm font-bold text-navy-700">
+                  เปิดเผยต่อสาธารณะ (แสดงในหน้าแรกสำหรับประชาชนทั่วไป โดยไม่ต้องเข้าสู่ระบบ)
+                </label>
               </div>
             </div>
           </div>

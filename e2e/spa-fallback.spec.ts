@@ -16,6 +16,9 @@ test.describe('SPA deep-link fallback', () => {
 
   test('404.html redirect chain ends inside the app', async ({ page }) => {
     await page.goto('404.html');
-    await page.waitForURL('**/login');
+    // no deep-link path to decode → lands on "/", which now renders the
+    // public home page for guests instead of redirecting to /login
+    await page.waitForURL(url => url.pathname.endsWith('/demo.github.io/') || url.pathname.endsWith('/demo.github.io'));
+    await expect(page.getByRole('heading', { name: 'กล้องจราจรสาธารณะ' })).toBeVisible();
   });
 });

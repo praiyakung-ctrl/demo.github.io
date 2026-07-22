@@ -9,6 +9,7 @@ import type { UserRole } from './types';
    so the initial bundle stays small. LoginPage stays eager — it is the first
    page every user sees. */
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then(m => ({ default: m.RegisterPage })));
+const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const CitizenPortalPage = lazy(() => import('./pages/CitizenPortalPage').then(m => ({ default: m.CitizenPortalPage })));
@@ -44,8 +45,9 @@ function RequireAuth({ children, roles }: { children: React.ReactNode; roles?: U
 
 function DefaultRedirect() {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
-  if (user.role === 'citizen') return <Navigate to="/portal" replace />;
+  // guests and citizens land on the public home page (traffic cameras, no login
+  // required); staff roles keep going straight to their internal dashboards
+  if (!user || user.role === 'citizen') return <HomePage />;
   if (user.role === 'executive') return <Navigate to="/dashboard" replace />;
   return <Navigate to="/map" replace />;
 }

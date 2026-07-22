@@ -20,6 +20,8 @@ export interface Camera {
   /* NT MPLS link bandwidth per camera */
   lprMbps: number;
   unityMbps: number;
+  /* shown on the public home page (no login required) when true; omitted/false stays internal-only */
+  isPublic?: boolean;
 }
 
 export interface CctvEvent {
