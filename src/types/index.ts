@@ -103,6 +103,23 @@ export interface TimelineEntry {
   completed: boolean;
 }
 
+/* ---------- Police stations (สภ.) — for the police-usage KPI report ---------- */
+
+export const POLICE_STATION_OPTIONS = [
+  'สภ.เมืองชลบุรี', 'สภ.บางละมุง', 'สภ.ศรีราชา', 'สภ.พนัสนิคม', 'สภ.บ้านบึง', 'สภ.สัตหีบ',
+] as const;
+
+export const POLICE_AREA_GROUPS = ['เขตเมือง', 'เขตชายฝั่งทะเล', 'เขตอุตสาหกรรม'] as const;
+
+export const POLICE_STATION_AREA: Record<string, string> = {
+  'สภ.เมืองชลบุรี': 'เขตเมือง',
+  'สภ.พนัสนิคม': 'เขตเมือง',
+  'สภ.บ้านบึง': 'เขตเมือง',
+  'สภ.บางละมุง': 'เขตชายฝั่งทะเล',
+  'สภ.สัตหีบ': 'เขตชายฝั่งทะเล',
+  'สภ.ศรีราชา': 'เขตอุตสาหกรรม',
+};
+
 /* ---------- "แจ้งเหตุ" — police risk points / local-officer proposed install points ---------- */
 
 export type IncidentPointType = 'risk' | 'proposed';

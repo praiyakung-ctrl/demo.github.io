@@ -5,7 +5,7 @@ import { Pagination } from '../components/Pagination';
 import { RoleBadge, StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
 import type { User, UserRole } from '../types';
-import { ROLE_LABELS } from '../types';
+import { ROLE_LABELS, POLICE_STATION_OPTIONS } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { assignUserToGroup, groupForUser, removeAssignment, savedGroups } from '../utils/groupStorage';
 import { savedUsers, saveUsers } from '../utils/userStorage';
@@ -395,13 +395,27 @@ export function AdminUsersPage() {
           </div>
           <div>
             <label htmlFor="user-department" className="label">แผนก/หน่วยงาน/สังกัด</label>
-            <input
-              id="user-department"
-              value={form.department}
-              onChange={e => set('department', e.target.value)}
-              placeholder="เช่น กองสาธารณสุขและสิ่งแวดล้อม อบจ.ชลบุรี"
-              className="input-field"
-            />
+            {form.role === 'police' ? (
+              <select
+                id="user-department"
+                value={form.department}
+                onChange={e => set('department', e.target.value)}
+                className="input-field"
+              >
+                <option value="">เลือกสถานีตำรวจ</option>
+                {POLICE_STATION_OPTIONS.map(station => (
+                  <option key={station} value={station}>{station}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                id="user-department"
+                value={form.department}
+                onChange={e => set('department', e.target.value)}
+                placeholder="เช่น กองสาธารณสุขและสิ่งแวดล้อม อบจ.ชลบุรี"
+                className="input-field"
+              />
+            )}
           </div>
           <div>
             <label htmlFor="user-role" className="label">บทบาท</label>

@@ -127,7 +127,7 @@
     "email": "prayut.police@chonburi.go.th",
     "isActive": true,
     "phone": "0812350000",
-    "department": "สถานีตำรวจภูธรเมืองชลบุรี",
+    "department": "สภ.เมืองชลบุรี",
     "nationalId": "1100200000011"
   },
   {
@@ -140,5 +140,38 @@
     "phone": "0812351111",
     "department": "กองช่าง อบจ.ชลบุรี",
     "nationalId": "1100200000012"
+  },
+  {
+    "id": "13",
+    "name": "วิชัย บางละมุง",
+    "username": "police2",
+    "role": "police",
+    "email": "wichai.police@chonburi.go.th",
+    "isActive": true,
+    "phone": "0812352222",
+    "department": "สภ.บางละมุง",
+    "nationalId": "1100200000013"
+  },
+  {
+    "id": "14",
+    "name": "สมพงษ์ ศรีราชา",
+    "username": "police3",
+    "role": "police",
+    "email": "sompong.police@chonburi.go.th",
+    "isActive": true,
+    "phone": "0812353333",
+    "department": "สภ.ศรีราชา",
+    "nationalId": "1100200000014"
+  },
+  {
+    "id": "15",
+    "name": "อนุชา พนัสนิคม",
+    "username": "police4",
+    "role": "police",
+    "email": "anucha.police@chonburi.go.th",
+    "isActive": true,
+    "phone": "0812354444",
+    "department": "สภ.พนัสนิคม",
+    "nationalId": "1100200000015"
   }
 ]

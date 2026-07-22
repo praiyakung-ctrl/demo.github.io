@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { Camera, AlertTriangle, Users, Car, TrendingUp, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Camera, AlertTriangle, Users, Car, TrendingUp, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell, Shield } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line,
@@ -14,6 +15,9 @@ import requestsData from '../data/requests.json';
 import type { CctvEvent, MonthlyEventData, LprRoad, CitizenRequest, Camera as CameraType } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { formatThaiDateTime } from '../utils/formatDate';
+import { savedUsers } from '../utils/userStorage';
+import { savedRequests } from '../utils/requestStorage';
+import { policeUsageByStation } from '../utils/policeUsageStats';
 import { ExportButtons } from '../components/ExportButtons';
 import {
   exportChartWithTableToExcel, exportChartWithTableToPdf,
@@ -122,6 +126,8 @@ export function DashboardPage() {
   const offlineCount = cameras.filter(c => c.status === 'Offline').length;
   const todayEvents = events.filter(e => e.timestamp.startsWith('2026-05-20'));
   const pendingRequests = requests.filter(r => ['ใหม่', 'รอดำเนินการ'].includes(r.status));
+  const policeUsageTotal = policeUsageByStation(savedRequests(), savedUsers(), 'all', 'all')
+    .reduce((sum, r) => sum + r.count, 0);
 
   const monthly = lprData.monthly as MonthlyEventData[];
   const roads = lprData.roads as LprRoad[];
@@ -296,6 +302,20 @@ export function DashboardPage() {
             iconBg="bg-white/20"
             sub={<span className="flex items-center gap-1 font-semibold text-white"><TrendingUp size={13} /> +5.2% จากเมื่อวาน</span>}
           />
+        </div>
+
+        {/* Entry point: police usage KPI report */}
+        <div className="card flex flex-wrap items-center justify-between gap-3 bg-navy-700 text-white">
+          <div className="flex items-center gap-3">
+            <Shield size={28} className="flex-shrink-0" />
+            <div>
+              <h3 className="font-bold text-xl">สถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
+              <p className="text-lg text-blue-100">รวมคำขอดู Playback CCTV จากเจ้าหน้าที่ตำรวจทุกสถานี: {policeUsageTotal.toLocaleString()} ครั้ง</p>
+            </div>
+          </div>
+          <Link to="/reports/police-usage" className="bg-white text-navy-700 font-bold text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap">
+            ดูรายงานฉบับเต็ม
+          </Link>
         </div>
 
         {/* Charts row 1 */}
