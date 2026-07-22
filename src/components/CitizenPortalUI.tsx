@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Home, Phone, Video } from 'lucide-react';
+import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video } from 'lucide-react';
 import { ORG_INFO } from '../data/orgInfo';
+import { useAuth } from '../context/AuthContext';
 
 /* Shared UI for citizen-facing pages (CctvRequestPage, CitizenPortalPage):
    navy hero banner, service sidebar, footer — keeps both pages on one theme. */
@@ -29,7 +30,7 @@ export function CitizenHero({ title, children }: { title: string; children?: Rea
   );
 }
 
-const MENU = [
+const BASE_MENU = [
   { key: 'home', icon: Home, label: 'หน้าแรก (กล้องจราจรสาธารณะ)', to: '/' },
   { key: 'request', icon: Video, label: 'ยื่นคำขอเข้าดูข้อมูลกล้อง CCTV', to: '/portal/request' },
   { key: 'status', icon: FileSearch, label: 'ตรวจสอบสถานะคำขอ', to: '/portal' },
@@ -38,15 +39,26 @@ const MENU = [
   { key: 'about', icon: Building2, label: 'เกี่ยวกับ อบจ.ชลบุรี', to: '/about' },
 ] as const;
 
-export type ServiceMenuKey = (typeof MENU)[number]['key'];
+const REPORT_INCIDENT_ITEM = { key: 'reportIncident', icon: ShieldAlert, label: 'แจ้งเหตุ (จุดเสี่ยงภัย/จุดขอติดตั้ง)', to: '/report-incident' } as const;
+
+export type ServiceMenuKey = (typeof BASE_MENU)[number]['key'] | typeof REPORT_INCIDENT_ITEM.key;
+
+function useServiceMenu() {
+  const { isPolice, isLocalOfficer, isAdmin, isOperator } = useAuth();
+  const canSeeReportIncident = isPolice || isLocalOfficer || isAdmin || isOperator;
+  return canSeeReportIncident
+    ? [BASE_MENU[0], BASE_MENU[1], REPORT_INCIDENT_ITEM, ...BASE_MENU.slice(2)]
+    : BASE_MENU;
+}
 
 export function ServiceSidebar({ active }: { active?: ServiceMenuKey }) {
+  const menu = useServiceMenu();
   return (
     <div className="space-y-4">
       <div className="card p-0 overflow-hidden">
         <h3 className="text-2xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">บริการประชาชน</h3>
         <nav>
-          {MENU.map(({ key, icon: Icon, label, to }) => (
+          {menu.map(({ key, icon: Icon, label, to }) => (
             <Link
               key={key}
               to={to}
@@ -83,9 +95,10 @@ export function ServiceSidebar({ active }: { active?: ServiceMenuKey }) {
 /* Mobile replacement for ServiceSidebar (which is hidden below lg):
    a horizontally scrollable chip bar so every citizen page stays reachable. */
 export function ServiceMenuChips({ active }: { active?: ServiceMenuKey }) {
+  const menu = useServiceMenu();
   return (
     <nav aria-label="บริการประชาชน" className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
-      {MENU.map(({ key, icon: Icon, label, to }) => (
+      {menu.map(({ key, icon: Icon, label, to }) => (
         <Link
           key={key}
           to={to}
