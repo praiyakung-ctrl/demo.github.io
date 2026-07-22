@@ -1,20 +1,20 @@
 import { expect, test } from '@playwright/test';
 import { seedPdpa } from './helpers';
 
-test('citizen registration via simulated Google OAuth', async ({ page }) => {
+test('citizen registration via simulated ThaID verification', async ({ page }) => {
   await seedPdpa(page);
   await page.goto('register');
   await expect(page.getByText('เริ่มต้นสมัครสมาชิก')).toBeVisible();
 
-  await page.getByRole('button', { name: 'สมัครสมาชิกด้วย Google' }).click();
-  await expect(page.getByText('กรอกข้อมูลสมาชิก')).toBeVisible();
+  // ThaID mock verification runs automatically on mount and advances after ~3s
+  await expect(page.getByText('กรอกข้อมูลสมาชิก')).toBeVisible({ timeout: 10000 });
 
-  // Google fields are prefilled and readonly
-  await expect(page.locator('#reg-email')).toHaveValue(/@gmail\.com$/);
-  await expect(page.locator('#reg-email')).toHaveAttribute('readonly', '');
-  await expect(page.locator('#reg-sub')).toHaveValue(/^\d+$/);
+  // ThaID national ID is prefilled and readonly
+  await expect(page.locator('#reg-nationalid')).toHaveValue(/^\d{13}$/);
+  await expect(page.locator('#reg-nationalid')).toHaveAttribute('readonly', '');
 
   await page.fill('#reg-name', 'สมชาย ใจดี');
+  await page.fill('#reg-email', 'somchai@example.com');
   await page.fill('#reg-address', '99 หมู่ 1 ต.บ้านสวน อ.เมืองชลบุรี');
   await page.selectOption('#reg-province', 'ชลบุรี');
   await page.fill('#reg-postal', '20000');

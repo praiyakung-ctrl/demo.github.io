@@ -22,9 +22,7 @@ test.describe('login page', () => {
   test('admin login lands on the map', async ({ page }) => {
     await seedPdpa(page);
     await page.goto('login');
-    await page.fill('#login-username', 'admin');
-    await page.fill('#login-password', 'admin1234');
-    await page.click('button[type="submit"]');
+    await page.getByRole('button', { name: 'ผู้ดูแลระบบ' }).click();
     await page.waitForURL('**/map');
     await expect(page.locator('.leaflet-container')).toBeVisible();
   });

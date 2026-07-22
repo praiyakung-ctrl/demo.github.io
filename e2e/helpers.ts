@@ -12,6 +12,7 @@ export async function seedAuth(page: Page, role: 'admin' | 'operator' | 'executi
   await page.addInitScript(r => {
     localStorage.setItem('auth_user', JSON.stringify({
       id: 'e2e-user', name: 'ผู้ทดสอบ E2E', username: r, role: r, email: 'e2e@test.local', isActive: true,
+      nationalId: '1100200009999',
     }));
   }, role);
 }
