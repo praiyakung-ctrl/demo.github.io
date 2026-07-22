@@ -163,7 +163,7 @@ export function HomePage() {
       </div>
 
       <CitizenFooter />
-      <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} />
+      <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} hideCaptureControls />
     </div>
   );
 }

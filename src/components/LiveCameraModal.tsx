@@ -14,7 +14,7 @@ function overlayClock(d: Date): string {
   return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
 
-export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; onClose: () => void }) {
+export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }: { camera: Camera | null; onClose: () => void; hideCaptureControls?: boolean }) {
   const [now, setNow] = useState(new Date());
   const [playing, setPlaying] = useState(true);
   const [recording, setRecording] = useState(false);
@@ -74,10 +74,14 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
 
   const actions = [
     { icon: Maximize, label: 'ดูภาพเต็มจอ', onClick: goFullscreen, disabled: !online },
-    { icon: CameraIcon, label: 'บันทึกภาพ', onClick: downloadSnapshot, disabled: !online },
-    { icon: Video, label: recording ? 'กำลังบันทึก...' : 'บันทึกวิดีโอ', onClick: mockRecord, disabled: !online, active: recording },
+    ...(hideCaptureControls ? [] : [
+      { icon: CameraIcon, label: 'บันทึกภาพ', onClick: downloadSnapshot, disabled: !online },
+      { icon: Video, label: recording ? 'กำลังบันทึก...' : 'บันทึกวิดีโอ', onClick: mockRecord, disabled: !online, active: recording },
+    ]),
     { icon: linkCopied ? Check : Link2, label: linkCopied ? 'คัดลอกแล้ว' : 'แชร์ลิงก์', onClick: shareLink, disabled: false, active: linkCopied },
-    { icon: Download, label: 'ดาวน์โหลด', onClick: downloadSnapshot, disabled: !online },
+    ...(hideCaptureControls ? [] : [
+      { icon: Download, label: 'ดาวน์โหลด', onClick: downloadSnapshot, disabled: !online },
+    ]),
   ];
 
   const meta = [
@@ -146,7 +150,9 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
                 </span>
                 <div className="flex-1" />
                 <button className="text-white hover:text-gray-200" aria-label="เสียง"><Volume2 size={20} /></button>
-                <button onClick={downloadSnapshot} className="text-white hover:text-gray-200" aria-label="ถ่ายภาพ"><CameraIcon size={20} /></button>
+                {!hideCaptureControls && (
+                  <button onClick={downloadSnapshot} className="text-white hover:text-gray-200" aria-label="ถ่ายภาพ"><CameraIcon size={20} /></button>
+                )}
                 <button onClick={goFullscreen} className="text-white hover:text-gray-200" aria-label="เต็มจอ"><Maximize size={20} /></button>
               </div>
             </>
