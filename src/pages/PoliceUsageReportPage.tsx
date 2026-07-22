@@ -69,15 +69,14 @@ export function PoliceUsageReportPage() {
   const totalDownloads = rows.reduce((s, r) => s + r.downloads, 0);
   const avgMinutes = totalCount > 0 ? totalMinutes / totalCount : 0;
 
-  const overallTrend = useMemo(() => {
-    if (month === 'all') return null;
+  let overallTrend: number | null = null;
+  if (month !== 'all') {
     const prevRows = policeUsageByStation(requests, users, prevMonthKey(month), purpose)
       .filter(r => station === 'all' || r.station === station)
       .filter(r => area === 'all' || r.area === area);
     const prevCount = prevRows.reduce((s, r) => s + r.count, 0);
-    if (prevCount === 0) return totalCount > 0 ? 100 : 0;
-    return ((totalCount - prevCount) / prevCount) * 100;
-  }, [requests, users, month, purpose, station, area, totalCount]);
+    overallTrend = prevCount === 0 ? (totalCount > 0 ? 100 : 0) : ((totalCount - prevCount) / prevCount) * 100;
+  }
 
   const exportRows: (string | number)[][] = [
     ['ลำดับ', 'สถานีตำรวจ', 'กลุ่มพื้นที่', 'จำนวนการเข้าใช้งาน (ครั้ง)', 'ระยะเวลารวม (ชม.)', 'เฉลี่ยต่อครั้ง (ชม.)', 'จำนวนเจ้าหน้าที่', 'จำนวนดาวน์โหลด', 'แนวโน้ม (%)'],

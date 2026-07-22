@@ -39,8 +39,6 @@ export function LiveViewerPage() {
   const sortedCameras = useMemo(() => sortCameras(cameras, sortOrder), [sortOrder]);
   const totalPages = Math.max(1, Math.ceil(sortedCameras.length / layoutCount));
 
-  useEffect(() => { setPage(0); }, [sortOrder, layoutCount]);
-
   useEffect(() => {
     if (!rotating) return;
     const timer = setInterval(() => setPage(p => (p + 1) % totalPages), intervalSec * 1000);
@@ -170,7 +168,7 @@ export function LiveViewerPage() {
             ]).map(opt => (
               <button
                 key={opt.value}
-                onClick={() => setSortOrder(opt.value)}
+                onClick={() => { setSortOrder(opt.value); setPage(0); }}
                 className={`text-sm font-bold px-2.5 py-1.5 rounded-lg border transition-colors ${
                   sortOrder === opt.value ? 'bg-navy-500 text-white border-navy-500' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                 }`}
@@ -186,7 +184,7 @@ export function LiveViewerPage() {
               return (
                 <button
                   key={count}
-                  onClick={() => setLayoutCount(count)}
+                  onClick={() => { setLayoutCount(count); setPage(0); }}
                   className={`flex items-center gap-1.5 text-sm font-bold px-2.5 py-2 rounded-lg border transition-colors ${
                     layoutCount === count ? 'bg-navy-500 text-white border-navy-500' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
