@@ -381,10 +381,10 @@ export function DashboardPage() {
           <div ref={lprChartRef} className="card p-4">
             <SectionHeader
               icon={Route}
-              title="LPR Top 10 ถนน (คัน/วัน)"
-              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(lprChartRef, lprRows, 'LPR-Top10-ถนน', 'pdf')} onExcel={() => exportChart(lprChartRef, lprRows, 'LPR Top 10 ถนน', 'excel')} />}
+              title="LPR แยกตามจุดติดตั้ง (คัน/วัน)"
+              action={<ExportButtons disabled={exporting} onPdf={() => exportChart(lprChartRef, lprRows, 'LPR-จุดติดตั้ง', 'pdf')} onExcel={() => exportChart(lprChartRef, lprRows, 'LPR จุดติดตั้ง', 'excel')} />}
             />
-            <div role="img" aria-label={`กราฟแท่งแนวนอน LPR สิบอันดับถนน: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
+            <div role="img" aria-label={`กราฟแท่งแนวนอน LPR แยกตามจุดติดตั้ง: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={roads} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" horizontal={false} />

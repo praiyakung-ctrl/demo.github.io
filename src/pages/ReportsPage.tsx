@@ -370,7 +370,7 @@ export function ReportsPage() {
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <BarChart2 size={24} className="text-navy-700" />
-              <h3 className="font-bold text-gray-900 text-xl">รายงาน LPR แยกถนน Top 10</h3>
+              <h3 className="font-bold text-gray-900 text-xl">รายงาน LPR แยกตามจุดติดตั้ง</h3>
             </div>
             <ExportButtons disabled={exporting} onPdf={() => handleExport('LPR', 'PDF')} onExcel={() => handleExport('LPR', 'Excel')} />
           </div>

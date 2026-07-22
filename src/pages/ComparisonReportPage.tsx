@@ -46,8 +46,8 @@ const TOPIC_CONFIG: Record<Topic, {
     totalGroups: 6,
   },
   lpr: {
-    label: 'LPR รายถนน', icon: Car, data: lprRoadsData as UsageRecord[],
-    groupLabel: 'ถนน', categoryLabel: 'ประเภทรถ', countLabel: 'จำนวนการอ่านป้ายทะเบียน',
+    label: 'LPR รายจุดติดตั้ง', icon: Car, data: lprRoadsData as UsageRecord[],
+    groupLabel: 'จุดติดตั้ง', categoryLabel: 'ประเภทรถ', countLabel: 'จำนวนการอ่านป้ายทะเบียน',
     totalGroups: 10,
   },
 };
