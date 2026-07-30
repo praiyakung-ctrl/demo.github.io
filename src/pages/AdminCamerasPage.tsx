@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Pencil, Trash2, Search, Camera as CameraIcon, MapPin, Settings, Wifi, Save, XCircle, Building2, Compass, Video } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Camera as CameraIcon, MapPin, Settings, Wifi, Save, XCircle, Building2, Video } from 'lucide-react';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { Layout } from '../components/Layout';
 import { StatusBadge } from '../components/Badge';
@@ -16,7 +16,7 @@ const PAGE_SIZE = 10;
 const EMPTY: Omit<Camera, 'id'> = {
   name: '', location: '', lat: 13.36, lng: 100.98,
   type: 'Fixed', organization: '', rtspUrl: '', status: 'Online',
-  direction: '', lastUpdate: new Date().toISOString(), currentEvent: 'normal',
+  lastUpdate: new Date().toISOString(), currentEvent: 'normal',
   lprMbps: 6, unityMbps: 6, isPublic: false,
 };
 
@@ -126,7 +126,7 @@ export function AdminCamerasPage() {
               <table className="w-full text-xl">
                 <thead>
                   <tr className="bg-blue-200">
-                    {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ทิศทาง', 'โครงข่าย NT MPLS', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
+                    {['Camera ID', 'ชื่อ / สถานที่', 'ประเภท', 'หน่วยงาน', 'ตำแหน่ง', 'โครงข่าย NT MPLS', 'สถานะ', 'เหตุการณ์', 'ดำเนินการ'].map(h => (
                       <th key={h} scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-3">{h}</th>
                     ))}
                   </tr>
@@ -170,15 +170,14 @@ export function AdminCamerasPage() {
                           <span className="text-gray-700 text-lg truncate max-w-[180px]">{cam.organization}</span>
                         </div>
                       </td>
-                      {/* Direction + coordinates */}
+                      {/* Coordinates */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1.5">
-                          <Compass size={19} className="text-gray-400 flex-shrink-0" />
-                          <span className="text-gray-700 text-lg">{cam.direction || '—'}</span>
+                          <MapPin size={19} className="text-gray-400 flex-shrink-0" />
+                          <span className="text-gray-700 text-lg font-mono whitespace-nowrap" title="ละติจูด, ลองจิจูด">
+                            {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}
+                          </span>
                         </div>
-                        <p className="text-sm text-gray-500 font-mono mt-0.5 whitespace-nowrap" title="ละติจูด, ลองจิจูด">
-                          {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}
-                        </p>
                       </td>
                       {/* NT MPLS link */}
                       <td className="px-4 py-3">
@@ -287,10 +286,6 @@ export function AdminCamerasPage() {
                   <Building2 size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input id="cam-org" value={form.organization} onChange={e => set('organization', e.target.value)} className="input-field pl-8" placeholder="เช่น อบจ.ชลบุรี" />
                 </div>
-              </div>
-              <div>
-                <label htmlFor="cam-direction" className="text-sm font-bold text-navy-700 mb-1 block">ทิศทาง</label>
-                <input id="cam-direction" value={form.direction} onChange={e => set('direction', e.target.value)} className="input-field" placeholder="เช่น เหนือ-ใต้" />
               </div>
               <div>
                 <label htmlFor="cam-status" className="text-sm font-bold text-navy-700 mb-1 block">สถานะ</label>

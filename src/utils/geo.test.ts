@@ -5,7 +5,7 @@ import type { Camera } from '../types';
 const camera = (over: Partial<Camera> = {}): Camera => ({
   id: 'CAM-X', name: 'CAM-X', location: 'ทดสอบ', lat: 0, lng: 0,
   type: 'Fixed', organization: 'ทดสอบ', rtspUrl: '', status: 'Online',
-  direction: 'ทิศเหนือ', lastUpdate: '', currentEvent: 'normal',
+  lastUpdate: '', currentEvent: 'normal',
   lprMbps: 0, unityMbps: 0,
   ...over,
 });

@@ -14,7 +14,6 @@ export interface Camera {
   organization: string;
   rtspUrl: string;
   status: CameraStatus;
-  direction: string;
   lastUpdate: string;
   currentEvent: EventType;
   /* NT MPLS link bandwidth per camera */
@@ -26,7 +25,7 @@ export interface Camera {
   brand?: string;
   model?: string;
   resolution?: string;
-  /* lens/pan angle in degrees — distinct from `direction` (compass heading) */
+  /* lens/pan angle in degrees */
   angle?: number;
   signalQuality?: 'ดีเยี่ยม' | 'ดี' | 'พอใช้' | 'ไม่มีสัญญาณ';
 }
