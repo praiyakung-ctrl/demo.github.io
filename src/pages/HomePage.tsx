@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
-  Camera as CameraIcon, Compass, Link2, Check, Locate, Maximize,
+  Camera as CameraIcon, Compass, Locate, Maximize,
   MapPin, Navigation, Search, Video, VideoOff, Wifi,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
@@ -12,7 +12,7 @@ import { LiveCameraModal } from '../components/LiveCameraModal';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import camerasData from '../data/cameras.json';
 import type { Camera, CameraType } from '../types';
-import { cameraImage, districtOf, overlayClock, downloadCameraSnapshot, copyCameraShareLink } from '../utils/cameraDisplay';
+import { cameraImage, districtOf, overlayClock } from '../utils/cameraDisplay';
 import { formatLastUpdate } from '../utils/formatDate';
 import { nearestCameras } from '../utils/geo';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
@@ -107,7 +107,6 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
 
 function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => void }) {
   const [now, setNow] = useState(new Date());
-  const [linkCopied, setLinkCopied] = useState(false);
   const online = cam.status === 'Online';
 
   useEffect(() => {
@@ -119,13 +118,6 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
     nearestCameras(cam, publicCameras.filter(c => c.id !== cam.id), 5).slice(0, 3),
     [cam]
   );
-
-  const shareLink = async () => {
-    if (await copyCameraShareLink(cam)) {
-      setLinkCopied(true);
-      setTimeout(() => setLinkCopied(false), 2000);
-    }
-  };
 
   return (
     <div className="space-y-4">
@@ -169,27 +161,12 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
           )}
         </div>
 
-        <div className="p-3 grid grid-cols-3 gap-2">
+        <div className="p-3">
           <button
             onClick={onExpand}
-            className="flex flex-col items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
+            className="w-full flex items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
           >
             <Maximize size={18} /> ภาพเต็มจอ
-          </button>
-          <button
-            onClick={() => downloadCameraSnapshot(cam)}
-            disabled={!online}
-            className="flex flex-col items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            <CameraIcon size={18} /> บันทึกภาพ
-          </button>
-          <button
-            onClick={shareLink}
-            className={`flex flex-col items-center justify-center gap-1 border rounded-xl px-2 py-2.5 text-base font-bold transition-colors ${
-              linkCopied ? 'border-red-300 bg-red-50 text-red-600' : 'border-gray-200 text-navy-700 hover:bg-navy-50 hover:border-navy-500'
-            }`}
-          >
-            {linkCopied ? <Check size={18} /> : <Link2 size={18} />} {linkCopied ? 'คัดลอกแล้ว' : 'แชร์'}
           </button>
         </div>
       </div>
@@ -408,7 +385,7 @@ export function HomePage() {
                           <div>
                             <p className="font-extrabold text-navy-700 text-lg leading-tight">{cam.id}</p>
                             <div className="flex items-center gap-1 text-gray-400 text-sm">
-                              <Compass size={12} /> {cam.type} · {cam.direction}
+                              <Compass size={12} /> {cam.type} · {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}
                             </div>
                           </div>
                         </div>
@@ -451,7 +428,7 @@ export function HomePage() {
       </div>
 
       <CitizenFooter />
-      <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} hideCaptureControls={false} />
+      <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} />
     </div>
   );
 }

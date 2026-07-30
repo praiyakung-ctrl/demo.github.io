@@ -1,19 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  Camera as CameraIcon, Check, Download, Link2, Maximize, Pause, Play,
-  Video, VideoOff, Volume2, X,
-} from 'lucide-react';
+import { Maximize, Pause, Play, VideoOff, Volume2, X } from 'lucide-react';
 import type { Camera } from '../types';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { formatLastUpdate } from '../utils/formatDate';
 import { useDialog } from '../hooks/useDialog';
-import { cameraImage, districtOf, overlayClock, downloadCameraSnapshot, copyCameraShareLink } from '../utils/cameraDisplay';
+import { cameraImage, districtOf, overlayClock } from '../utils/cameraDisplay';
 
-export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }: { camera: Camera | null; onClose: () => void; hideCaptureControls?: boolean }) {
+export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; onClose: () => void }) {
   const [now, setNow] = useState(new Date());
   const [playing, setPlaying] = useState(true);
-  const [recording, setRecording] = useState(false);
-  const [linkCopied, setLinkCopied] = useState(false);
   const [prevCameraId, setPrevCameraId] = useState<string | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
   const dialogRef = useDialog(camera !== null, onClose);
@@ -22,8 +17,6 @@ export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }
   if (camera && camera.id !== prevCameraId) {
     setPrevCameraId(camera.id);
     setPlaying(true);
-    setRecording(false);
-    setLinkCopied(false);
   }
   if (!camera && prevCameraId !== null) {
     setPrevCameraId(null);
@@ -45,37 +38,16 @@ export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }
 
   const goFullscreen = () => playerRef.current?.requestFullscreen?.();
 
-  const downloadSnapshot = () => downloadCameraSnapshot(camera);
-
-  const shareLink = async () => {
-    if (await copyCameraShareLink(camera)) {
-      setLinkCopied(true);
-      setTimeout(() => setLinkCopied(false), 2000);
-    }
-  };
-
-  const mockRecord = () => {
-    setRecording(true);
-    setTimeout(() => setRecording(false), 3000);
-  };
-
   const actions = [
     { icon: Maximize, label: 'ดูภาพเต็มจอ', onClick: goFullscreen, disabled: !online },
-    ...(hideCaptureControls ? [] : [
-      { icon: CameraIcon, label: 'บันทึกภาพ', onClick: downloadSnapshot, disabled: !online },
-      { icon: Video, label: recording ? 'กำลังบันทึก...' : 'บันทึกวิดีโอ', onClick: mockRecord, disabled: !online, active: recording },
-    ]),
-    { icon: linkCopied ? Check : Link2, label: linkCopied ? 'คัดลอกแล้ว' : 'แชร์ลิงก์', onClick: shareLink, disabled: false, active: linkCopied },
-    ...(hideCaptureControls ? [] : [
-      { icon: Download, label: 'ดาวน์โหลด', onClick: downloadSnapshot, disabled: !online },
-    ]),
   ];
 
   const meta = [
     ['สถานที่', camera.location],
     ['ตำบล/อำเภอ', districtOf(camera.location)],
     ['ประเภทกล้อง', `${camera.type} Camera`],
-    ['ทิศทาง', camera.direction],
+    ['ละติจูด', camera.lat.toFixed(6)],
+    ['ลองจิจูด', camera.lng.toFixed(6)],
     ['ผู้ดูแล', camera.organization],
     ['อัปเดตล่าสุด', camera.lastUpdate ? formatLastUpdate(camera.lastUpdate) : '—'],
   ];
@@ -137,9 +109,6 @@ export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }
                 </span>
                 <div className="flex-1" />
                 <button className="text-white hover:text-gray-200" aria-label="เสียง"><Volume2 size={20} /></button>
-                {!hideCaptureControls && (
-                  <button onClick={downloadSnapshot} className="text-white hover:text-gray-200" aria-label="ถ่ายภาพ"><CameraIcon size={20} /></button>
-                )}
                 <button onClick={goFullscreen} className="text-white hover:text-gray-200" aria-label="เต็มจอ"><Maximize size={20} /></button>
               </div>
             </>
@@ -153,18 +122,14 @@ export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }
         </div>
 
         {/* Action buttons */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
+        <div className="grid grid-cols-1 gap-2 mb-4">
           {/* eslint-disable-next-line react-hooks/refs -- playerRef is only read inside click handlers, never during render */}
-          {actions.map(({ icon: Icon, label, onClick, disabled, active }) => (
+          {actions.map(({ icon: Icon, label, onClick, disabled }) => (
             <button
               key={label}
               onClick={onClick}
               disabled={disabled}
-              className={`flex items-center justify-center gap-2 border rounded-xl px-3 py-2.5 text-lg font-bold transition-colors ${
-                active
-                  ? 'border-red-300 bg-red-50 text-red-600'
-                  : 'border-gray-200 text-navy-700 hover:bg-navy-50 hover:border-navy-500'
-              } disabled:opacity-40 disabled:cursor-not-allowed`}
+              className="flex items-center justify-center gap-2 border rounded-xl px-3 py-2.5 text-lg font-bold transition-colors border-gray-200 text-navy-700 hover:bg-navy-50 hover:border-navy-500 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Icon size={20} className="flex-shrink-0" />
               <span className="whitespace-nowrap">{label}</span>

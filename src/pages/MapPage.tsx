@@ -311,7 +311,7 @@ export function MapPage() {
                         <p className="font-extrabold text-navy-700 text-2xl leading-tight">{cam.id}</p>
                         <div className="flex items-center gap-1 text-gray-400 text-sm">
                           <Compass size={13} />
-                          <span>{cam.type} · {cam.direction}</span>
+                          <span>{cam.type} · {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}</span>
                         </div>
                       </div>
                     </div>
