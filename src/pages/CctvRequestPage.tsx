@@ -1,19 +1,24 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import type { Map as LeafletMap } from 'leaflet';
 import {
   Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight,
-  FileSearch, FileText, Home, Info, Lock, MapPin, Paperclip,
-  ShieldCheck, Target, Trash2, Upload, User as UserIcon, X,
+  FileSearch, FileText, Home, Info, Locate, Lock, MapPin, Paperclip,
+  Search, ShieldCheck, Target, Trash2, Upload, User as UserIcon, X,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { SkipLink } from '../components/Layout';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { useAuth } from '../context/AuthContext';
-import type { CitizenRequest } from '../types';
+import camerasData from '../data/cameras.json';
+import type { Camera, CitizenRequest } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
-import { pinIcon } from '../utils/mapPin';
+import { pinIcon, userLocationIcon } from '../utils/mapPin';
 import { addRequest } from '../utils/requestStorage';
+
+const publicCameras = (camerasData as Camera[]).filter(c => c.isPublic);
 
 const WIZARD_STEPS = ['กรอกข้อมูลคำขอ', 'อัปโหลดเอกสาร', 'ตรวจสอบข้อมูล', 'ยืนยันคำขอ', 'เสร็จสิ้น'];
 
@@ -189,14 +194,21 @@ function StepsCard({ step }: { step: number }) {
 
 /* ---------- Step 1: request form ---------- */
 
-/* Blank pin-drop map — no camera data ever reaches this component. Clicking
-   anywhere moves the single incident pin; there is nothing to select or search. */
+/* Clicking anywhere on the map moves the single incident pin. */
 function PinPicker({ lat, lng, onPick }: { lat: number | null; lng: number | null; onPick: (lat: number, lng: number) => void }) {
   useMapEvents({
     click: e => onPick(e.latlng.lat, e.latlng.lng),
   });
   if (lat == null || lng == null) return null;
   return <Marker position={[lat, lng]} icon={pinIcon('#1B3A6B')} />;
+}
+
+/* Hands the Leaflet map instance up to Step1Form (via useMap(), only available
+   inside <MapContainer>) so the overlay buttons outside it can call flyTo(). */
+function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void }) {
+  const map = useMap();
+  useEffect(() => { onReady(map); }, [map, onReady]);
+  return null;
 }
 
 type FormErrors = Partial<Record<keyof RequestForm | 'datetime', string>>;
@@ -208,6 +220,36 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
   onCancel: () => void;
 }) {
   const [errors, setErrors] = useState<FormErrors>({});
+  const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoError, setGeoError] = useState(false);
+  const [showCameras, setShowCameras] = useState(true);
+
+  const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
+    if (!navigator.geolocation) { setGeoError(true); return; }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPos(next);
+        setGeoError(false);
+        onSuccess?.(next);
+      },
+      () => setGeoError(true)
+    );
+  };
+
+  const handleLocateMe = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
+  };
+
+  const handleSearchNearby = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 13, { duration: 0.8 }));
+  };
+
+  const handleCameraSearch = (value: string) => {
+    const match = publicCameras.find(cam => `${cam.id} : ${cam.location}` === value);
+    if (match) leafletMap?.flyTo([match.lat, match.lng], 16, { duration: 0.8 });
+  };
 
   const validate = () => {
     const e: FormErrors = {};
@@ -260,20 +302,86 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         </div>
       </section>
 
-      {/* 1.1 Incident pin — no camera locations are ever shown to citizens */}
+      {/* 1.1 Incident pin */}
       <section>
         <h3 className="text-2xl font-bold text-gray-800 mb-3">1.1 ปักหมุดตำแหน่งที่เกิดเหตุ</h3>
         <p className="text-lg text-gray-500 mb-3">คลิกบนแผนที่เพื่อปักหมุด (คลิกใหม่เพื่อย้ายหมุด) เจ้าหน้าที่จะเป็นผู้พิจารณาเลือกกล้อง CCTV ที่เกี่ยวข้องให้</p>
 
-        <div className="rounded-xl overflow-hidden border border-gray-200 h-[300px] relative z-0">
+        <div className="flex flex-wrap gap-3 items-end mb-3">
+          <div className="flex-1 min-w-[220px]">
+            <label htmlFor="req-cam-search" className="label">ค้นหากล้อง CCTV บนแผนที่</label>
+            <input
+              id="req-cam-search"
+              list="request-camera-options"
+              placeholder="พิมพ์รหัสกล้องหรือชื่อสถานที่..."
+              className="input-field"
+              onChange={e => handleCameraSearch(e.target.value)}
+            />
+            <datalist id="request-camera-options">
+              {publicCameras.map(cam => (
+                <option key={cam.id} value={`${cam.id} : ${cam.location}`} />
+              ))}
+            </datalist>
+          </div>
+          <label className="flex items-center gap-2 text-lg text-gray-700 font-medium pb-3">
+            <input
+              type="checkbox"
+              checked={showCameras}
+              onChange={e => setShowCameras(e.target.checked)}
+              className="accent-[#1b3a6b] w-5 h-5"
+            />
+            แสดงกล้องจราจรบนแผนที่ ({publicCameras.length} ตัว)
+          </label>
+        </div>
+
+        <div className="rounded-xl overflow-hidden border border-gray-200 h-[480px] relative z-0">
           <MapContainer center={[13.36, 100.98]} zoom={12} className="w-full h-full">
+            <MapInstanceCapture onReady={setLeafletMap} />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <PinPicker lat={form.incidentLat} lng={form.incidentLng} onPick={setPin} />
+            {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
+            {showCameras && (
+              <CameraClusterMarkers cameras={publicCameras} renderMarker={cam => (
+                <Marker
+                  key={cam.id}
+                  position={[cam.lat, cam.lng]}
+                  icon={pinIcon(cam.status === 'Online' ? '#16A34A' : '#9CA3AF')}
+                  title={`${cam.id} ${cam.location}`}
+                  alt={`กล้อง ${cam.id} ${cam.location}`}
+                >
+                  <Popup minWidth={200}>
+                    <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
+                      <p className="font-extrabold text-navy-700 text-lg">{cam.id}</p>
+                      <p className="text-base text-gray-700">{cam.location}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+              )} />
+            )}
           </MapContainer>
+          <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={handleLocateMe}
+              className="flex items-center gap-1.5 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200"
+            >
+              <Locate size={16} className="flex-shrink-0" /> ตำแหน่งของฉัน
+            </button>
+            <button
+              type="button"
+              onClick={handleSearchNearby}
+              className="flex items-center gap-1.5 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200"
+            >
+              <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
+            </button>
+          </div>
         </div>
+        {geoError && (
+          <p className="text-lg text-red-600 mt-2">ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์</p>
+        )}
 
         <div className="mt-3">
           <span className="label">ตำแหน่งที่ปักหมุด <span className="text-red-500">*</span></span>
@@ -726,7 +834,7 @@ export function CctvRequestPage() {
         <WizardStepper step={step} />
       </CitizenHero>
 
-      <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_320px] gap-5 items-start">
+      <div className="flex-1 w-full max-w-[1900px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)_300px] gap-5 items-start">
         <div className="lg:hidden"><ServiceMenuChips active="request" /></div>
         <aside className="hidden lg:block">
           <ServiceSidebar active="request" />
