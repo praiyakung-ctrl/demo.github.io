@@ -51,7 +51,7 @@ function useServiceMenu() {
     : BASE_MENU;
 }
 
-export function ServiceSidebar({ active }: { active?: ServiceMenuKey }) {
+export function ServiceSidebar({ active, children }: { active?: ServiceMenuKey; children?: ReactNode }) {
   const menu = useServiceMenu();
   return (
     <div className="space-y-4">
@@ -74,6 +74,8 @@ export function ServiceSidebar({ active }: { active?: ServiceMenuKey }) {
           ))}
         </nav>
       </div>
+
+      {children}
 
       <div className="card">
         <h3 className="text-2xl font-bold text-navy-700 mb-1">ต้องการความช่วยเหลือ?</h3>

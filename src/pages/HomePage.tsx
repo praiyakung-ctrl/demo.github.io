@@ -64,6 +64,38 @@ function CameraListItem({ cam, active, distanceKm, onSelect }: { cam: Camera; ac
   );
 }
 
+function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
+  sorted: Camera[];
+  selectedCam: Camera | null;
+  sortMode: SortMode;
+  now: Date;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div className="card p-0 overflow-hidden">
+      <div className="px-4 py-3 border-b border-gray-100">
+        <h2 className="text-xl font-bold text-navy-700">
+          รายการกล้องทั้งหมด <span className="text-navy-500">{sorted.length}</span>
+        </h2>
+        <p className="text-base text-gray-400">อัปเดตล่าสุด {overlayClock(now).split(' ')[1]}</p>
+      </div>
+      <div className="max-h-[420px] overflow-y-auto p-2 space-y-1">
+        {sorted.length === 0 ? (
+          <p className="text-lg text-gray-400 text-center py-8">ไม่พบกล้องที่ค้นหา</p>
+        ) : sorted.map(cam => (
+          <CameraListItem
+            key={cam.id}
+            cam={cam}
+            active={cam.id === selectedCam?.id}
+            distanceKm={sortMode === 'near' && 'distanceKm' in cam ? (cam as Camera & { distanceKm: number }).distanceKm : undefined}
+            onSelect={() => onSelect(cam.id)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => void }) {
   const [now, setNow] = useState(new Date());
   const [linkCopied, setLinkCopied] = useState(false);
@@ -234,10 +266,12 @@ export function HomePage() {
         </p>
       </CitizenHero>
 
-      <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
+      <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
         <div className="lg:hidden"><ServiceMenuChips active="home" /></div>
         <aside className="hidden lg:block">
-          <ServiceSidebar active="home" />
+          <ServiceSidebar active="home">
+            <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={setSelectedId} />
+          </ServiceSidebar>
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none space-y-5">
@@ -284,33 +318,15 @@ export function HomePage() {
             </p>
           )}
 
-          {/* map + list + detail */}
-          <div className="grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)_340px] gap-4 items-start">
-            {/* left: camera list */}
-            <div className="card p-0 overflow-hidden order-2 lg:order-1">
-              <div className="px-4 py-3 border-b border-gray-100">
-                <h2 className="text-xl font-bold text-navy-700">
-                  รายการกล้องทั้งหมด <span className="text-navy-500">{sorted.length}</span>
-                </h2>
-                <p className="text-base text-gray-400">อัปเดตล่าสุด {overlayClock(now).split(' ')[1]}</p>
-              </div>
-              <div className="max-h-[520px] overflow-y-auto p-2 space-y-1">
-                {sorted.length === 0 ? (
-                  <p className="text-lg text-gray-400 text-center py-8">ไม่พบกล้องที่ค้นหา</p>
-                ) : sorted.map(cam => (
-                  <CameraListItem
-                    key={cam.id}
-                    cam={cam}
-                    active={cam.id === selectedCam?.id}
-                    distanceKm={sortMode === 'near' && 'distanceKm' in cam ? (cam as Camera & { distanceKm: number }).distanceKm : undefined}
-                    onSelect={() => setSelectedId(cam.id)}
-                  />
-                ))}
-              </div>
+          {/* map + detail (camera list lives in the sidebar on desktop, see ServiceSidebar children) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-4 items-start">
+            {/* mobile-only: camera list (desktop shows it in the left sidebar instead) */}
+            <div className="lg:hidden order-2">
+              <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={setSelectedId} />
             </div>
 
-            {/* center: map */}
-            <div className="card p-0 overflow-hidden order-1 lg:order-2" style={{ height: 560 }}>
+            {/* map */}
+            <div className="card p-0 overflow-hidden order-1" style={{ height: 640 }}>
               <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full" zoomControl={true}>
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
