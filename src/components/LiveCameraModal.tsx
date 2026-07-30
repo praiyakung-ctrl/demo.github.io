@@ -7,12 +7,7 @@ import type { Camera } from '../types';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { formatLastUpdate } from '../utils/formatDate';
 import { useDialog } from '../hooks/useDialog';
-import { cameraImage, districtOf } from '../utils/cameraDisplay';
-
-function overlayClock(d: Date): string {
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
-}
+import { cameraImage, districtOf, overlayClock, downloadCameraSnapshot, copyCameraShareLink } from '../utils/cameraDisplay';
 
 export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }: { camera: Camera | null; onClose: () => void; hideCaptureControls?: boolean }) {
   const [now, setNow] = useState(new Date());
@@ -50,20 +45,12 @@ export function LiveCameraModal({ camera, onClose, hideCaptureControls = false }
 
   const goFullscreen = () => playerRef.current?.requestFullscreen?.();
 
-  const downloadSnapshot = () => {
-    const a = document.createElement('a');
-    a.href = imgSrc;
-    a.download = `${camera.id}-snapshot.jpg`;
-    a.click();
-  };
+  const downloadSnapshot = () => downloadCameraSnapshot(camera);
 
   const shareLink = async () => {
-    try {
-      await navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${camera.id}`);
+    if (await copyCameraShareLink(camera)) {
       setLinkCopied(true);
       setTimeout(() => setLinkCopied(false), 2000);
-    } catch {
-      /* clipboard unavailable (e.g. insecure context) — ignore */
     }
   };
 

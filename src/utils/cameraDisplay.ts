@@ -39,3 +39,25 @@ export function districtOf(location: string): string {
   const hit = DISTRICTS.find(([key]) => location.includes(key));
   return hit ? hit[1] : 'จังหวัดชลบุรี';
 }
+
+export function overlayClock(d: Date): string {
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
+export function downloadCameraSnapshot(cam: Camera): void {
+  const a = document.createElement('a');
+  a.href = cameraImage(cam);
+  a.download = `${cam.id}-snapshot.jpg`;
+  a.click();
+}
+
+export async function copyCameraShareLink(cam: Camera): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${cam.id}`);
+    return true;
+  } catch {
+    /* clipboard unavailable (e.g. insecure context) */
+    return false;
+  }
+}
