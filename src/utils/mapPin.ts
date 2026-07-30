@@ -26,6 +26,26 @@ export function pinIcon(color: string, width = 20, height = 27): L.DivIcon {
   return icon;
 }
 
+/* "My location" blue-dot marker (Google-Maps style: pulsing ring + solid dot) —
+   used for the citizen map's own-position marker, distinct from camera pins. */
+let userLocationIconCache: L.DivIcon | null = null;
+
+export function userLocationIcon(): L.DivIcon {
+  if (!userLocationIconCache) {
+    userLocationIconCache = L.divIcon({
+      html: `<div style="position: relative; width: 22px; height: 22px;">
+        <div style="position: absolute; inset: 0; border-radius: 9999px; background: #2563EB33; animation: pulse-ring 2s ease-out infinite;"></div>
+        <div style="position: absolute; inset: 5px; border-radius: 9999px; background: #2563EB; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.4);"></div>
+      </div>`,
+      className: '',
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
+      popupAnchor: [0, -11],
+    });
+  }
+  return userLocationIconCache;
+}
+
 /* Numbered circle badge for a cluster of freeform pinned points at the same
    spot (e.g. "reported 3 times") — same visual language as the camera
    cluster badges (CameraClusterMarkers.tsx) but color-parameterized. */

@@ -163,6 +163,12 @@ html.high-contrast .text-orange-700 {
   }
 }
 
+/* Pulsing ring for the "my location" map marker (see utils/mapPin.ts) */
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
 /* Leaflet map fix */
 .leaflet-container {
   width: 100%;

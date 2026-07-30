@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import type { Map as LeafletMap } from 'leaflet';
 import {
-  Camera as CameraIcon, Compass, Link2, Check, Maximize,
+  Camera as CameraIcon, Compass, Link2, Check, Locate, Maximize,
   MapPin, Navigation, Search, Video, VideoOff, Wifi,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
@@ -14,7 +15,7 @@ import type { Camera, CameraType } from '../types';
 import { cameraImage, districtOf, overlayClock, downloadCameraSnapshot, copyCameraShareLink } from '../utils/cameraDisplay';
 import { formatLastUpdate } from '../utils/formatDate';
 import { nearestCameras } from '../utils/geo';
-import { pinIcon } from '../utils/mapPin';
+import { pinIcon, userLocationIcon } from '../utils/mapPin';
 
 const publicCameras = (camerasData as Camera[]).filter(c => c.isPublic);
 const MAP_CENTER: [number, number] = [13.22, 101.02];
@@ -23,6 +24,14 @@ type SortMode = 'near' | 'name' | 'status';
 
 function markerColor(cam: Camera): string {
   return cam.status === 'Online' ? '#16A34A' : '#9CA3AF';
+}
+
+/* Hands the Leaflet map instance up to HomePage (via useMap(), only available
+   inside <MapContainer>) so the overlay buttons outside it can call flyTo(). */
+function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void }) {
+  const map = useMap();
+  useEffect(() => { onReady(map); }, [map, onReady]);
+  return null;
 }
 
 function StatCard({ icon: Icon, label, value, color }: { icon: typeof Video; label: string; value: number; color: string }) {
@@ -218,6 +227,7 @@ export function HomePage() {
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
   const [now, setNow] = useState(new Date());
+  const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
@@ -226,14 +236,35 @@ export function HomePage() {
 
   const online = publicCameras.filter(c => c.status === 'Online').length;
 
+  /* shared geolocation getter — used by the "เรียงตาม: ใกล้ฉัน" dropdown and
+     by the map's "ตำแหน่งของฉัน" / "ค้นหากล้องใกล้ฉัน" buttons */
+  const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
+    if (!navigator.geolocation) { setGeoError(true); return; }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPos(next);
+        setGeoError(false);
+        onSuccess?.(next);
+      },
+      () => setGeoError(true)
+    );
+  };
+
   const handleSortChange = (mode: SortMode) => {
     setSortMode(mode);
-    if (mode === 'near' && !userPos && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        pos => { setUserPos({ lat: pos.coords.latitude, lng: pos.coords.longitude }); setGeoError(false); },
-        () => setGeoError(true)
-      );
-    }
+    if (mode === 'near' && !userPos) requestLocation();
+  };
+
+  const handleLocateMe = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
+  };
+
+  const handleSearchNearby = () => {
+    requestLocation(pos => {
+      leafletMap?.flyTo([pos.lat, pos.lng], 13, { duration: 0.8 });
+      setSortMode('near');
+    });
   };
 
   const filtered = useMemo(() => publicCameras.filter(c =>
@@ -255,6 +286,11 @@ export function HomePage() {
   }, [filtered, sortMode, userPos]);
 
   const selectedCam = sorted.find(c => c.id === selectedId) ?? publicCameras.find(c => c.id === selectedId) ?? sorted[0] ?? null;
+
+  const nearbyCount = useMemo(() =>
+    userPos ? nearestCameras(userPos, publicCameras, 5).length : null,
+    [userPos]
+  );
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
@@ -312,9 +348,14 @@ export function HomePage() {
               </select>
             </div>
           </div>
-          {sortMode === 'near' && geoError && (
+          {geoError && (
             <p className="text-lg text-red-600 flex items-center gap-1.5 -mt-3">
               <Navigation size={16} /> ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
+            </p>
+          )}
+          {!geoError && sortMode === 'near' && nearbyCount != null && (
+            <p className="text-lg text-navy-700 flex items-center gap-1.5 -mt-3">
+              <MapPin size={16} /> พบกล้อง {nearbyCount} ตัวในระยะ 5 กม. จากตำแหน่งของคุณ
             </p>
           )}
 
@@ -326,12 +367,30 @@ export function HomePage() {
             </div>
 
             {/* map */}
-            <div className="card p-0 overflow-hidden order-1" style={{ height: 640 }}>
+            <div className="card p-0 overflow-hidden order-1 relative" style={{ height: 640 }}>
+              {/* on-map controls: locate me / search nearby cameras (paired with the zoom +/- control) */}
+              <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
+                <button
+                  onClick={handleLocateMe}
+                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <Locate size={16} className="flex-shrink-0" /> ตำแหน่งของฉัน
+                </button>
+                <button
+                  onClick={handleSearchNearby}
+                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
+                </button>
+              </div>
+
               <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full" zoomControl={true}>
+                <MapInstanceCapture onReady={setLeafletMap} />
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
                 <CameraClusterMarkers cameras={filtered} renderMarker={cam => (
                   <Marker
                     key={cam.id}
