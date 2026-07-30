@@ -19,6 +19,6 @@ test.describe('SPA deep-link fallback', () => {
     // no deep-link path to decode → lands on "/", which now renders the
     // public home page for guests instead of redirecting to /login
     await page.waitForURL(url => url.pathname.endsWith('/demo.github.io/') || url.pathname.endsWith('/demo.github.io'));
-    await expect(page.getByRole('heading', { name: 'กล้องจราจรสาธารณะ' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'แผนที่กล้อง CCTV สาธารณะ' })).toBeVisible();
   });
 });
