@@ -292,6 +292,8 @@ export function AdminCamerasPage() {
                 <select id="cam-status" value={form.status} onChange={e => set('status', e.target.value)} className="input-field">
                   <option>Online</option>
                   <option>Offline</option>
+                  <option>Maintenance</option>
+                  <option>Unknown</option>
                 </select>
               </div>
               <div className="col-span-2 flex items-center gap-2">

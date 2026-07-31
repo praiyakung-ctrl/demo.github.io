@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Building2, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video } from 'lucide-react';
+import { BookOpen, Building2, ChevronLeft, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video } from 'lucide-react';
 import { ORG_INFO } from '../data/orgInfo';
 import { useAuth } from '../context/AuthContext';
 
@@ -51,17 +51,41 @@ function useServiceMenu() {
     : BASE_MENU;
 }
 
-export function ServiceSidebar({ active, children }: { active?: ServiceMenuKey; children?: ReactNode }) {
+export function ServiceSidebar({ active, children, collapsible = false, collapsed: collapsedProp, onCollapsedChange }: {
+  active?: ServiceMenuKey;
+  children?: ReactNode;
+  collapsible?: boolean;
+  collapsed?: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
+}) {
   const menu = useServiceMenu();
+  const [collapsedState, setCollapsedState] = useState(false);
+  const collapsed = collapsible && (collapsedProp ?? collapsedState);
+  const toggleCollapsed = () => (onCollapsedChange ?? setCollapsedState)(!collapsed);
+
   return (
     <div className="space-y-4">
       <div className="card p-0 overflow-hidden">
-        <h3 className="text-2xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">บริการประชาชน</h3>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+          {!collapsed && <h3 className="text-2xl font-bold text-navy-700">บริการประชาชน</h3>}
+          {collapsible && (
+            <button
+              onClick={toggleCollapsed}
+              className="p-1.5 rounded-lg text-navy-500 hover:text-navy-700 hover:bg-gray-100 transition-colors flex-shrink-0 ml-auto"
+              title={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
+              aria-label={collapsed ? 'ขยายเมนู' : 'ย่อเมนู'}
+              aria-expanded={!collapsed}
+            >
+              {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+            </button>
+          )}
+        </div>
         <nav>
           {menu.map(({ key, icon: Icon, label, to }) => (
             <Link
               key={key}
               to={to}
+              title={collapsed ? label : undefined}
               className={`w-full flex items-center gap-3 px-4 py-3 text-left text-xl transition-colors border-l-4 ${
                 key === active
                   ? 'bg-navy-50 border-navy-700 text-navy-700 font-bold'
@@ -69,25 +93,31 @@ export function ServiceSidebar({ active, children }: { active?: ServiceMenuKey; 
               }`}
             >
               <Icon size={24} className="flex-shrink-0" />
-              <span className="leading-tight">{label}</span>
+              {!collapsed && <span className="leading-tight">{label}</span>}
             </Link>
           ))}
         </nav>
       </div>
 
-      {children}
+      {!collapsed && children}
 
       <div className="card">
-        <h3 className="text-2xl font-bold text-navy-700 mb-1">ต้องการความช่วยเหลือ?</h3>
-        <p className="text-lg text-gray-500 mb-3">ติดต่อเจ้าหน้าที่</p>
+        {!collapsed && (
+          <>
+            <h3 className="text-2xl font-bold text-navy-700 mb-1">ต้องการความช่วยเหลือ?</h3>
+            <p className="text-lg text-gray-500 mb-3">ติดต่อเจ้าหน้าที่</p>
+          </>
+        )}
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-navy-50 text-navy-700 flex items-center justify-center flex-shrink-0">
             <Phone size={24} />
           </div>
-          <div>
-            <p className="text-2xl font-extrabold text-navy-700 leading-tight">{ORG_INFO.hotline}</p>
-            <p className="text-lg text-gray-500 leading-tight">{ORG_INFO.officeHours}</p>
-          </div>
+          {!collapsed && (
+            <div>
+              <p className="text-2xl font-extrabold text-navy-700 leading-tight">{ORG_INFO.hotline}</p>
+              <p className="text-lg text-gray-500 leading-tight">{ORG_INFO.officeHours}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

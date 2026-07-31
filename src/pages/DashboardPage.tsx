@@ -124,6 +124,7 @@ export function DashboardPage() {
 
   const onlineCount = cameras.filter(c => c.status === 'Online').length;
   const offlineCount = cameras.filter(c => c.status === 'Offline').length;
+  const notReadyCount = cameras.filter(c => c.status === 'Maintenance' || c.status === 'Unknown').length;
   const todayEvents = events.filter(e => e.timestamp.startsWith('2026-05-20'));
   const pendingRequests = requests.filter(r => ['ใหม่', 'รอดำเนินการ'].includes(r.status));
   const policeUsageTotal = policeUsageByStation(savedRequests(), savedUsers(), 'all', 'all')
@@ -264,6 +265,8 @@ export function DashboardPage() {
               <span className="font-semibold text-white">{onlineCount} Online</span>
               <span className="mx-1 text-white/50">·</span>
               <span className="text-white/70">{offlineCount} Offline</span>
+              <span className="mx-1 text-white/50">·</span>
+              <span className="text-white/70">{notReadyCount} บำรุงรักษา/ไม่ทราบสถานะ</span>
             </>}
           />
           <SummaryCard

@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
-import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
+import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS, STATUS_COLORS } from '../types';
 import { formatLastUpdate, formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
 import { pinIcon, pinSvg } from '../utils/mapPin';
 import { useDialog } from '../hooks/useDialog';
@@ -38,7 +38,7 @@ const EVENT_TYPE_ICONS = {
 } as const;
 
 function getMarkerColor(cam: Camera): string {
-  if (cam.status === 'Offline') return MARKER_COLORS.offline;
+  if (cam.status !== 'Online') return STATUS_COLORS[cam.status];
   if (cam.currentEvent && cam.currentEvent !== 'normal') return MARKER_COLORS[cam.currentEvent] ?? MARKER_COLORS.normal;
   return MARKER_COLORS.normal;
 }

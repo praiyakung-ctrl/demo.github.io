@@ -3,16 +3,17 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
   Camera as CameraIcon, Compass, Locate, Maximize,
-  MapPin, Navigation, RotateCcw, Search, Video, VideoOff, Wifi,
+  MapPin, Navigation, Navigation2, RotateCcw, Search, Share2, Video, VideoOff, Wifi, Wrench,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
-import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CitizenFooter, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { LiveCameraModal } from '../components/LiveCameraModal';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import camerasData from '../data/cameras.json';
-import type { Camera, CameraType } from '../types';
-import { cameraImage, districtOf, overlayClock } from '../utils/cameraDisplay';
+import type { Camera, CameraStatus, CameraType } from '../types';
+import { STATUS_COLORS, STATUS_LABELS } from '../types';
+import { cameraImage, copyCameraShareLink, districtOf, overlayClock } from '../utils/cameraDisplay';
 import { formatLastUpdate } from '../utils/formatDate';
 import { nearestCameras } from '../utils/geo';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
@@ -20,10 +21,18 @@ import { pinIcon, userLocationIcon } from '../utils/mapPin';
 const publicCameras = (camerasData as Camera[]).filter(c => c.isPublic);
 const MAP_CENTER: [number, number] = [13.22, 101.02];
 
+const STATUS_SORT_ORDER: CameraStatus[] = ['Online', 'Maintenance', 'Unknown', 'Offline'];
+
+const STATUS_COUNTS: Record<CameraStatus, number> = { Online: 0, Offline: 0, Maintenance: 0, Unknown: 0 };
+publicCameras.forEach(c => { STATUS_COUNTS[c.status]++; });
+
+const ORG_OPTIONS = [...new Set(publicCameras.map(c => c.organization))].sort((a, b) => a.localeCompare(b, 'th'));
+const DISTRICT_OPTIONS = [...new Set(publicCameras.map(c => districtOf(c.location)))].sort((a, b) => a.localeCompare(b, 'th'));
+
 type SortMode = 'near' | 'name' | 'status';
 
 function markerColor(cam: Camera): string {
-  return cam.status === 'Online' ? '#16A34A' : '#9CA3AF';
+  return STATUS_COLORS[cam.status];
 }
 
 /* Hands the Leaflet map instance up to HomePage (via useMap(), only available
@@ -67,7 +76,7 @@ function CameraListItem({ cam, active, distanceKm, onSelect }: { cam: Camera; ac
       <p className="text-base text-gray-600 truncate ml-[26px]">{cam.location}</p>
       <p className="text-base ml-[26px] flex items-center gap-1 font-bold" style={{ color: markerColor(cam) }}>
         <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: markerColor(cam) }} />
-        {online ? 'LIVE' : 'ออฟไลน์'}
+        {online ? 'LIVE' : STATUS_LABELS[cam.status]}
       </p>
     </button>
   );
@@ -107,12 +116,20 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
 
 function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => void }) {
   const [now, setNow] = useState(new Date());
+  const [shareState, setShareState] = useState<'idle' | 'copied' | 'error'>('idle');
   const online = cam.status === 'Online';
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleShare = async () => {
+    const ok = await copyCameraShareLink(cam);
+    setShareState(ok ? 'copied' : 'error');
+    setTimeout(() => setShareState('idle'), 2000);
+  };
+  const navigateUrl = `https://www.google.com/maps/search/?api=1&query=${cam.lat},${cam.lng}`;
 
   const nearby = useMemo(() =>
     nearestCameras(cam, publicCameras.filter(c => c.id !== cam.id), 5).slice(0, 3),
@@ -156,18 +173,32 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 gap-2">
               <VideoOff size={36} />
-              <span className="text-lg font-bold">กล้องออฟไลน์</span>
+              <span className="text-lg font-bold">{STATUS_LABELS[cam.status]}</span>
             </div>
           )}
         </div>
 
-        <div className="p-3">
+        <div className="p-3 grid grid-cols-3 gap-2">
           <button
             onClick={onExpand}
-            className="w-full flex items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
+            className="flex items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
           >
             <Maximize size={18} /> ภาพเต็มจอ
           </button>
+          <button
+            onClick={handleShare}
+            className="flex items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
+          >
+            <Share2 size={18} /> {shareState === 'copied' ? 'คัดลอกแล้ว' : shareState === 'error' ? 'คัดลอกไม่ได้' : 'แชร์'}
+          </button>
+          <a
+            href={navigateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1 border border-gray-200 rounded-xl px-2 py-2.5 text-navy-700 text-base font-bold hover:bg-navy-50 hover:border-navy-500 transition-colors"
+          >
+            <Navigation2 size={18} /> นำทาง
+          </a>
         </div>
       </div>
 
@@ -196,7 +227,11 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
 export function HomePage() {
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState<'all' | CameraType>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | CameraStatus>('all');
+  const [orgFilter, setOrgFilter] = useState<'all' | string>('all');
+  const [districtFilter, setDistrictFilter] = useState<'all' | string>('all');
   const [sortMode, setSortMode] = useState<SortMode>('status');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(
     publicCameras.find(c => c.status === 'Online')?.id ?? publicCameras[0]?.id ?? null
   );
@@ -234,7 +269,15 @@ export function HomePage() {
     };
   }, []);
 
-  const online = publicCameras.filter(c => c.status === 'Online').length;
+  /* Leaflet caches its container size — must be told to re-measure whenever the map
+     wrapper's box changes (e.g. sidebar collapse toggling the grid column width),
+     otherwise tiles/markers render at stale positions. */
+  useEffect(() => {
+    if (!mapWrapperRef.current || !leafletMap) return;
+    const observer = new ResizeObserver(() => leafletMap.invalidateSize());
+    observer.observe(mapWrapperRef.current);
+    return () => observer.disconnect();
+  }, [leafletMap]);
 
   /* shared geolocation getter — used by the "เรียงตาม: ใกล้ฉัน" dropdown and
      by the map's "ตำแหน่งของฉัน" / "ค้นหากล้องใกล้ฉัน" buttons */
@@ -269,8 +312,11 @@ export function HomePage() {
 
   const filtered = useMemo(() => publicCameras.filter(c =>
     (search === '' || c.id.toLowerCase().includes(search.toLowerCase()) || c.location.includes(search)) &&
-    (typeFilter === 'all' || c.type === typeFilter)
-  ), [search, typeFilter]);
+    (typeFilter === 'all' || c.type === typeFilter) &&
+    (statusFilter === 'all' || c.status === statusFilter) &&
+    (orgFilter === 'all' || c.organization === orgFilter) &&
+    (districtFilter === 'all' || districtOf(c.location) === districtFilter)
+  ), [search, typeFilter, statusFilter, orgFilter, districtFilter]);
 
   const sorted = useMemo(() => {
     const list = [...filtered];
@@ -281,8 +327,8 @@ export function HomePage() {
       const withDist = nearestCameras(userPos, list, 999999);
       return withDist;
     }
-    // status: online first
-    return list.sort((a, b) => (a.status === 'Online' ? 0 : 1) - (b.status === 'Online' ? 0 : 1));
+    // status: online first, then maintenance, unknown, offline
+    return list.sort((a, b) => STATUS_SORT_ORDER.indexOf(a.status) - STATUS_SORT_ORDER.indexOf(b.status));
   }, [filtered, sortMode, userPos]);
 
   const selectedCam = sorted.find(c => c.id === selectedId) ?? publicCameras.find(c => c.id === selectedId) ?? sorted[0] ?? null;
@@ -306,26 +352,22 @@ export function HomePage() {
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
       <SkipLink />
       <Navbar />
-      <CitizenHero title="แผนที่กล้อง CCTV สาธารณะ">
-        <p className="text-xl text-blue-100 max-w-xl">
-          ดูตำแหน่งและภาพกล้องวงจรปิดจราจรแบบเรียลไทม์บนแผนที่จังหวัดชลบุรี เปิดให้บริการประชาชนทุกท่านโดยไม่ต้องเข้าสู่ระบบ
-        </p>
-      </CitizenHero>
 
-      <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
+      <div className={`flex-1 w-full max-w-[1800px] mx-auto px-4 py-6 grid grid-cols-1 gap-5 items-start ${sidebarCollapsed ? 'lg:grid-cols-[64px_minmax(0,1fr)]' : 'lg:grid-cols-[280px_minmax(0,1fr)]'}`}>
         <div className="lg:hidden"><ServiceMenuChips active="home" /></div>
         <aside ref={asideRef} className="hidden lg:block">
-          <ServiceSidebar active="home">
+          <ServiceSidebar active="home" collapsible collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed}>
             <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={handleSelectCamera} />
           </ServiceSidebar>
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none space-y-5">
           {/* stat bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard icon={CameraIcon} label="กล้องทั้งหมด" value={publicCameras.length} color="#1B3A6B" />
-            <StatCard icon={Wifi} label="ออนไลน์" value={online} color="#16A34A" />
-            <StatCard icon={VideoOff} label="ออฟไลน์" value={publicCameras.length - online} color="#6B7280" />
+            <StatCard icon={Wifi} label="ออนไลน์" value={STATUS_COUNTS.Online} color={STATUS_COLORS.Online} />
+            <StatCard icon={VideoOff} label="ออฟไลน์" value={STATUS_COUNTS.Offline} color={STATUS_COLORS.Offline} />
+            <StatCard icon={Wrench} label="อยู่ระหว่างบำรุงรักษา" value={STATUS_COUNTS.Maintenance} color={STATUS_COLORS.Maintenance} />
           </div>
 
           {/* search + filters */}
@@ -347,6 +389,29 @@ export function HomePage() {
                 <option value="all">ทั้งหมด</option>
                 <option value="Fixed">Fixed</option>
                 <option value="PTZ">PTZ</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="home-status" className="label">สถานะ</label>
+              <select id="home-status" value={statusFilter} onChange={e => setStatusFilter(e.target.value as 'all' | CameraStatus)} className="input-field w-auto">
+                <option value="all">ทั้งหมด</option>
+                {(['Online', 'Offline', 'Maintenance', 'Unknown'] as CameraStatus[]).map(s => (
+                  <option key={s} value={s}>{STATUS_LABELS[s]}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="home-org" className="label">หน่วยงาน</label>
+              <select id="home-org" value={orgFilter} onChange={e => setOrgFilter(e.target.value)} className="input-field w-auto">
+                <option value="all">ทั้งหมด</option>
+                {ORG_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="home-district" className="label">อำเภอ</label>
+              <select id="home-district" value={districtFilter} onChange={e => setDistrictFilter(e.target.value)} className="input-field w-auto">
+                <option value="all">ทั้งหมด</option>
+                {DISTRICT_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
             <div>
@@ -378,14 +443,18 @@ export function HomePage() {
 
             {/* map */}
             <div ref={mapWrapperRef} className="card p-0 overflow-hidden order-1 relative" style={{ height: mapHeight }}>
-              {/* on-map controls: locate me / search nearby cameras (paired with the zoom +/- control) */}
+              {/* locate-me: small circular button paired just under the Leaflet zoom control (top-left) */}
+              <button
+                onClick={handleLocateMe}
+                aria-label="ตำแหน่งของฉัน"
+                title="ตำแหน่งของฉัน"
+                className="absolute top-20 left-3 z-[500] w-9 h-9 flex items-center justify-center bg-white hover:bg-navy-50 text-navy-700 rounded-lg shadow-lg border border-gray-200 transition-colors"
+              >
+                <Locate size={18} />
+              </button>
+
+              {/* search nearby / reset view (top-right) */}
               <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
-                <button
-                  onClick={handleLocateMe}
-                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
-                >
-                  <Locate size={16} className="flex-shrink-0" /> ตำแหน่งของฉัน
-                </button>
                 <button
                   onClick={handleSearchNearby}
                   className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
@@ -398,6 +467,19 @@ export function HomePage() {
                 >
                   <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
                 </button>
+              </div>
+
+              {/* status legend (bottom-left, clear of Leaflet's default bottom-right attribution) */}
+              <div className="absolute bottom-3 left-3 z-[500] pointer-events-none">
+                <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-gray-700">
+                  <span className="text-gray-500">สถานะกล้อง:</span>
+                  {(['Online', 'Offline', 'Maintenance', 'Unknown'] as CameraStatus[]).map(s => (
+                    <span key={s} className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[s] }} />
+                      {STATUS_LABELS[s]}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full" zoomControl={true}>
@@ -441,7 +523,7 @@ export function HomePage() {
                           </button>
                         ) : (
                           <div className="flex items-center gap-2 bg-gray-100 text-gray-600 text-sm font-bold px-3 py-2 rounded-lg">
-                            <VideoOff size={16} /> กล้องออฟไลน์
+                            <VideoOff size={16} /> {STATUS_LABELS[cam.status]}
                           </div>
                         )}
                       </div>

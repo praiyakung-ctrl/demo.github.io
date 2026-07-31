@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Maximize, Pause, Play, VideoOff, Volume2, X } from 'lucide-react';
 import type { Camera } from '../types';
-import { EVENT_COLORS, EVENT_LABELS } from '../types';
+import { EVENT_COLORS, EVENT_LABELS, STATUS_COLORS, STATUS_LABELS } from '../types';
 import { formatLastUpdate } from '../utils/formatDate';
 import { useDialog } from '../hooks/useDialog';
 import { cameraImage, districtOf, overlayClock } from '../utils/cameraDisplay';
@@ -32,8 +32,8 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
 
   const online = camera.status === 'Online';
   const hasEvent = online && camera.currentEvent !== 'normal';
-  const statusColor = !online ? '#9CA3AF' : hasEvent ? EVENT_COLORS[camera.currentEvent] : '#22C55E';
-  const statusLabel = !online ? 'ออฟไลน์' : hasEvent ? EVENT_LABELS[camera.currentEvent] : 'ปกติ';
+  const statusColor = !online ? STATUS_COLORS[camera.status] : hasEvent ? EVENT_COLORS[camera.currentEvent] : '#22C55E';
+  const statusLabel = !online ? STATUS_LABELS[camera.status] : hasEvent ? EVENT_LABELS[camera.currentEvent] : 'ปกติ';
   const imgSrc = cameraImage(camera);
 
   const goFullscreen = () => playerRef.current?.requestFullscreen?.();
@@ -115,7 +115,7 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 gap-3">
               <VideoOff size={56} />
-              <p className="text-2xl font-bold">กล้องออฟไลน์</p>
+              <p className="text-2xl font-bold">{STATUS_LABELS[camera.status]}</p>
               <p className="text-lg">ไม่สามารถแสดงภาพสดได้ในขณะนี้</p>
             </div>
           )}

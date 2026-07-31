@@ -15,6 +15,7 @@ import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import { ORG_INFO } from '../data/orgInfo';
 import type { Camera, CitizenRequest } from '../types';
+import { STATUS_COLORS } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
 import { addRequest } from '../utils/requestStorage';
@@ -349,7 +350,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                 <Marker
                   key={cam.id}
                   position={[cam.lat, cam.lng]}
-                  icon={pinIcon(cam.status === 'Online' ? '#16A34A' : '#9CA3AF')}
+                  icon={pinIcon(STATUS_COLORS[cam.status])}
                   title={`${cam.id} ${cam.location}`}
                   alt={`กล้อง ${cam.id} ${cam.location}`}
                 >

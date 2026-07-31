@@ -1,5 +1,5 @@
 export type EventType = 'traffic' | 'gunshot' | 'parking' | 'flood' | 'crowd' | 'normal';
-export type CameraStatus = 'Online' | 'Offline';
+export type CameraStatus = 'Online' | 'Offline' | 'Maintenance' | 'Unknown';
 export type CameraType = 'Fixed' | 'PTZ';
 export type UserRole = 'admin' | 'operator' | 'executive' | 'citizen' | 'police' | 'localOfficer';
 export type RequestStatus = 'ใหม่' | 'รอดำเนินการ' | 'รอภาพ' | 'อนุมัติ' | 'ส่งแล้ว' | 'ได้รับแล้ว' | 'ปฏิเสธ';
@@ -289,6 +289,28 @@ export const EVENT_TEXT_COLORS: Record<EventType, string> = {
   flood: '#1D4ED8',
   crowd: '#A16207',
   normal: '#15803D',
+};
+
+export const STATUS_LABELS: Record<CameraStatus, string> = {
+  Online: 'ออนไลน์',
+  Offline: 'ออฟไลน์',
+  Maintenance: 'อยู่ระหว่างบำรุงรักษา',
+  Unknown: 'ไม่ทราบสถานะ',
+};
+
+export const STATUS_COLORS: Record<CameraStatus, string> = {
+  Online: '#16A34A',
+  Offline: '#9CA3AF',
+  Maintenance: '#F59E0B',
+  Unknown: '#6B7280',
+};
+
+/* Darker shades that pass WCAG AA (>= 4.5:1) when used as text on white */
+export const STATUS_TEXT_COLORS: Record<CameraStatus, string> = {
+  Online: '#166534',
+  Offline: '#374151',
+  Maintenance: '#B45309',
+  Unknown: '#1F2937',
 };
 
 export const ROLE_LABELS: Record<UserRole, string> = {
