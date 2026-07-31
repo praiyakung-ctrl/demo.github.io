@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
@@ -206,9 +206,32 @@ export function HomePage() {
   const [now, setNow] = useState(new Date());
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
 
+  const asideRef = useRef<HTMLElement>(null);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+  const [mapHeight, setMapHeight] = useState(640);
+
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  /* keeps the map's bottom edge aligned with the sidebar's ("ต้องการความช่วยเหลือ?" box) —
+     the sidebar's height is content-driven, so it's measured rather than assumed */
+  useLayoutEffect(() => {
+    const recalc = () => {
+      if (window.innerWidth < 1024 || !asideRef.current || !mapWrapperRef.current) return;
+      const asideBottom = asideRef.current.getBoundingClientRect().bottom;
+      const mapTop = mapWrapperRef.current.getBoundingClientRect().top;
+      setMapHeight(Math.max(420, Math.round(asideBottom - mapTop)));
+    };
+    recalc();
+    const observer = new ResizeObserver(recalc);
+    if (asideRef.current) observer.observe(asideRef.current);
+    window.addEventListener('resize', recalc);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', recalc);
+    };
   }, []);
 
   const online = publicCameras.filter(c => c.status === 'Online').length;
@@ -281,7 +304,7 @@ export function HomePage() {
 
       <div className="flex-1 w-full max-w-[1800px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-5 items-start">
         <div className="lg:hidden"><ServiceMenuChips active="home" /></div>
-        <aside className="hidden lg:block">
+        <aside ref={asideRef} className="hidden lg:block">
           <ServiceSidebar active="home">
             <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={setSelectedId} />
           </ServiceSidebar>
@@ -344,7 +367,7 @@ export function HomePage() {
             </div>
 
             {/* map */}
-            <div className="card p-0 overflow-hidden order-1 relative" style={{ height: 640 }}>
+            <div ref={mapWrapperRef} className="card p-0 overflow-hidden order-1 relative" style={{ height: mapHeight }}>
               {/* on-map controls: locate me / search nearby cameras (paired with the zoom +/- control) */}
               <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
                 <button
