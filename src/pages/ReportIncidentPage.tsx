@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import type { Map as LeafletMap } from 'leaflet';
 import {
-  AlertTriangle, Camera as CameraIcon, FileSpreadsheet, MapPin, Plus, ShieldAlert, Upload, X,
+  AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin, Plus,
+  RotateCcw, ShieldAlert, Upload, X,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
-import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
+import { CitizenFooter, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
@@ -17,8 +19,11 @@ import { addIncidentPoint, savedIncidentPoints } from '../utils/incidentPoints';
 import { logAudit } from '../utils/auditLog';
 import { exportRowsToExcel, todayStamp } from '../utils/exportReport';
 import { clusterByProximity } from '../utils/geo';
-import { clusterCountIcon, pinIcon } from '../utils/mapPin';
+import { clusterCountIcon, pinIcon, userLocationIcon } from '../utils/mapPin';
 import { Link } from 'react-router-dom';
+
+const MAP_CENTER: [number, number] = [13.36, 100.98];
+const POINT_COLORS = { camera: '#22C55E', risk: '#EF4444', proposed: '#EAB308' } as const;
 
 function StatCard({ icon: Icon, label, value, color }: { icon: typeof ShieldAlert; label: string; value: number; color: string }) {
   return (
@@ -40,6 +45,14 @@ const TYPE_LABEL: Record<IncidentPointType, string> = {
   risk: 'จุดเสี่ยงภัย',
   proposed: 'จุดขอติดตั้งใหม่',
 };
+
+/* Hands the Leaflet map instance up to the page (via useMap(), only available
+   inside <MapContainer>) so the overlay buttons outside it can call flyTo(). */
+function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void }) {
+  const map = useMap();
+  useEffect(() => { onReady(map); }, [map, onReady]);
+  return null;
+}
 
 /* Arms click-to-place mode on the map; only active while `active` is true */
 function AddPinCapture({ active, onPick }: { active: boolean; onPick: (lat: number, lng: number) => void }) {
@@ -169,6 +182,70 @@ export function ReportIncidentPage() {
   const [showProposed, setShowProposed] = useState(true);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [legendVisible, setLegendVisible] = useState(true);
+  const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoError, setGeoError] = useState(false);
+  const [mapHeight, setMapHeight] = useState(420);
+
+  const asideRef = useRef<HTMLElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+
+  /* keeps the map's bottom edge aligned with whichever side column is taller —
+     the left sidebar or the right filter/list column — both are content-driven */
+  useLayoutEffect(() => {
+    const recalc = () => {
+      if (window.innerWidth < 1024 || !mapWrapperRef.current) return;
+      const mapTop = mapWrapperRef.current.getBoundingClientRect().top;
+      const asideBottom = asideRef.current?.getBoundingClientRect().bottom ?? 0;
+      const rightPanelBottom = rightPanelRef.current?.getBoundingClientRect().bottom ?? 0;
+      const bottom = Math.max(asideBottom, rightPanelBottom);
+      if (bottom === 0) return;
+      setMapHeight(Math.max(420, Math.round(bottom - mapTop)));
+    };
+    recalc();
+    const observer = new ResizeObserver(recalc);
+    if (asideRef.current) observer.observe(asideRef.current);
+    if (rightPanelRef.current) observer.observe(rightPanelRef.current);
+    window.addEventListener('resize', recalc);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', recalc);
+    };
+  }, []);
+
+  /* Leaflet caches its container size — must be told to re-measure whenever the map
+     wrapper's box changes (e.g. sidebar collapse toggling the grid column width). */
+  useEffect(() => {
+    if (!mapWrapperRef.current || !leafletMap) return;
+    const observer = new ResizeObserver(() => leafletMap.invalidateSize());
+    observer.observe(mapWrapperRef.current);
+    return () => observer.disconnect();
+  }, [leafletMap]);
+
+  /* shared geolocation getter — used by both the "ตำแหน่งของฉัน" button and its marker */
+  const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
+    if (!navigator.geolocation) { setGeoError(true); return; }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPos(next);
+        setGeoError(false);
+        onSuccess?.(next);
+      },
+      () => setGeoError(true)
+    );
+  };
+
+  const handleLocateMe = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
+  };
+
+  const handleResetView = () => {
+    leafletMap?.flyTo(MAP_CENTER, 11, { duration: 0.8 });
+  };
 
   const myType: IncidentPointType | null = isPolice ? 'risk' : isLocalOfficer ? 'proposed' : null;
   const refresh = () => setPoints(savedIncidentPoints());
@@ -238,16 +315,12 @@ export function ReportIncidentPage() {
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
       <SkipLink />
       <Navbar />
-      <CitizenHero title="แจ้งเหตุ (จุดเสี่ยงภัย/จุดขอติดตั้ง)">
-        <p className="text-xl text-blue-100 max-w-xl">
-          ตำรวจปักหมุดจุดเสี่ยงภัย และเจ้าหน้าที่ท้องถิ่นปักหมุดขอติดตั้งกล้อง CCTV ใหม่ เพื่อให้เจ้าหน้าที่ อบจ. พิจารณาดำเนินการ
-        </p>
-      </CitizenHero>
+      <h1 className="sr-only">แจ้งเหตุ (จุดเสี่ยงภัย/จุดขอติดตั้ง)</h1>
 
-      <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)_320px] gap-5 items-start">
+      <div className={`flex-1 w-full max-w-[1400px] mx-auto px-4 py-6 grid grid-cols-1 gap-5 items-start ${sidebarCollapsed ? 'lg:grid-cols-[64px_minmax(0,1fr)_320px]' : 'lg:grid-cols-[280px_minmax(0,1fr)_320px]'}`}>
         <div className="lg:hidden"><ServiceMenuChips active="reportIncident" /></div>
-        <aside className="hidden lg:block">
-          <ServiceSidebar active="reportIncident" />
+        <aside ref={asideRef} className="hidden lg:block">
+          <ServiceSidebar active="reportIncident" collapsible collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} />
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none space-y-5">
@@ -281,18 +354,88 @@ export function ReportIncidentPage() {
               )}
             </div>
           )}
+          {geoError && (
+            <p className="text-lg text-red-600 flex items-center gap-1.5 -mt-3">
+              <MapPin size={16} /> ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
+            </p>
+          )}
 
-          <div className="rounded-xl overflow-hidden border border-gray-200 h-[420px] relative z-0">
-            <MapContainer center={[13.36, 100.98]} zoom={11} className="w-full h-full">
+          <div ref={mapWrapperRef} className="rounded-xl overflow-hidden border border-gray-200 relative z-0" style={{ height: mapHeight }}>
+            {/* locate-me: small circular button paired just under the Leaflet zoom control (top-left) */}
+            <div className="absolute top-20 left-3 z-[500] group">
+              <button
+                onClick={handleLocateMe}
+                aria-label="ตำแหน่งของฉัน"
+                title="ตำแหน่งของฉัน"
+                className="w-9 h-9 flex items-center justify-center bg-white hover:bg-navy-50 text-navy-700 rounded-lg shadow-lg border border-gray-200 transition-colors"
+              >
+                <Locate size={18} />
+              </button>
+              <span className="pointer-events-none absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                ตำแหน่งของฉัน
+              </span>
+            </div>
+
+            {/* reset view (top-right) */}
+            <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
+              <button
+                onClick={handleResetView}
+                className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+              >
+                <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
+              </button>
+            </div>
+
+            {/* point-type legend (bottom-left) — can be hidden */}
+            <div className="absolute bottom-3 left-3 z-[500] pointer-events-none">
+              {legendVisible ? (
+                <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-gray-700">
+                  <span className="text-gray-500">สัญลักษณ์:</span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: POINT_COLORS.camera }} />
+                    กล้อง CCTV (ติดตั้งแล้ว)
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: POINT_COLORS.risk }} />
+                    จุดเสี่ยงภัย
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: POINT_COLORS.proposed }} />
+                    จุดขอติดตั้งใหม่
+                  </span>
+                  <button
+                    onClick={() => setLegendVisible(false)}
+                    aria-label="ซ่อนสัญลักษณ์"
+                    title="ซ่อนสัญลักษณ์"
+                    className="pointer-events-auto text-gray-400 hover:text-gray-600 flex-shrink-0"
+                  >
+                    <EyeOff size={16} />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setLegendVisible(true)}
+                  aria-label="แสดงสัญลักษณ์"
+                  title="แสดงสัญลักษณ์"
+                  className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-sm hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <Eye size={16} /> สัญลักษณ์
+                </button>
+              )}
+            </div>
+
+            <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full">
+              <MapInstanceCapture onReady={setLeafletMap} />
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
+              {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
               <AddPinCapture active={addMode} onPick={handlePick} />
 
               {showCameras && (
                 <CameraClusterMarkers cameras={allCameras} renderMarker={cam => (
-                  <Marker key={cam.id} position={[cam.lat, cam.lng]} icon={pinIcon('#22C55E')}>
+                  <Marker key={cam.id} position={[cam.lat, cam.lng]} icon={pinIcon(POINT_COLORS.camera)}>
                     <Popup minWidth={200}>
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                         <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
@@ -322,7 +465,7 @@ export function ReportIncidentPage() {
                     </Popup>
                   </Marker>
                 ) : (
-                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon('#EF4444')}>
+                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon(POINT_COLORS.risk)}>
                     <Popup minWidth={220}>
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                         <p className="font-extrabold text-red-700 text-xl leading-tight">จุดเสี่ยงภัย</p>
@@ -354,7 +497,7 @@ export function ReportIncidentPage() {
                     </Popup>
                   </Marker>
                 ) : (
-                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon('#EAB308')}>
+                  <Marker key={group.items[0].id} position={[group.lat, group.lng]} icon={pinIcon(POINT_COLORS.proposed)}>
                     <Popup minWidth={220}>
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                         <p className="font-extrabold text-yellow-700 text-xl leading-tight">จุดขอติดตั้งใหม่</p>
@@ -367,6 +510,33 @@ export function ReportIncidentPage() {
                 )
               ))}
             </MapContainer>
+          </div>
+        </main>
+
+        <aside ref={rightPanelRef} className="space-y-4">
+          <div className="card">
+            <h3 className="text-2xl font-bold text-navy-700 mb-3">ตัวกรองข้อมูล</h3>
+            <p className="label mb-2">ประเภทจุด</p>
+            <div className="space-y-2 mb-4">
+              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
+                <input type="checkbox" checked={showCameras} onChange={e => setShowCameras(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
+                <CameraIcon size={16} className="text-green-600" /> กล้อง CCTV (ติดตั้งแล้ว)
+              </label>
+              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
+                <input type="checkbox" checked={showRisk} onChange={e => setShowRisk(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
+                <AlertTriangle size={16} className="text-red-600" /> จุดเสี่ยงภัย (Police Risk Points)
+              </label>
+              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
+                <input type="checkbox" checked={showProposed} onChange={e => setShowProposed(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
+                <ShieldAlert size={16} className="text-yellow-600" /> จุดขอติดตั้งใหม่ (Proposed Points)
+              </label>
+            </div>
+            <p className="label mb-2">ช่วงวันที่</p>
+            <div className="flex items-center gap-2">
+              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="input-field text-sm" />
+              <span className="text-gray-400">-</span>
+              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="input-field text-sm" />
+            </div>
           </div>
 
           <div>
@@ -399,33 +569,6 @@ export function ReportIncidentPage() {
                   ))}
                 </div>
               )}
-            </div>
-          </div>
-        </main>
-
-        <aside className="space-y-4">
-          <div className="card">
-            <h3 className="text-2xl font-bold text-navy-700 mb-3">ตัวกรองข้อมูล</h3>
-            <p className="label mb-2">ประเภทจุด</p>
-            <div className="space-y-2 mb-4">
-              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
-                <input type="checkbox" checked={showCameras} onChange={e => setShowCameras(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
-                <CameraIcon size={16} className="text-green-600" /> กล้อง CCTV (ติดตั้งแล้ว)
-              </label>
-              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
-                <input type="checkbox" checked={showRisk} onChange={e => setShowRisk(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
-                <AlertTriangle size={16} className="text-red-600" /> จุดเสี่ยงภัย (Police Risk Points)
-              </label>
-              <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
-                <input type="checkbox" checked={showProposed} onChange={e => setShowProposed(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
-                <ShieldAlert size={16} className="text-yellow-600" /> จุดขอติดตั้งใหม่ (Proposed Points)
-              </label>
-            </div>
-            <p className="label mb-2">ช่วงวันที่</p>
-            <div className="flex items-center gap-2">
-              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="input-field text-sm" />
-              <span className="text-gray-400">-</span>
-              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="input-field text-sm" />
             </div>
           </div>
         </aside>
