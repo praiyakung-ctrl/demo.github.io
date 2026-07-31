@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
   AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin, Plus,
@@ -10,6 +10,8 @@ import { Navbar } from '../components/Navbar';
 import { CitizenFooter, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
+import { BaseTileLayer } from '../components/BaseTileLayer';
+import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -196,6 +198,7 @@ export function ReportIncidentPage() {
   const [geoError, setGeoError] = useState(false);
   const [mapHeight, setMapHeight] = useState(420);
   const [viewingCam, setViewingCam] = useState<Camera | null>(null);
+  const [satellite, setSatellite] = useState(false);
   const [cameraSearch, setCameraSearch] = useState('');
   const [cameraStatusFilter, setCameraStatusFilter] = useState<CameraStatus | 'all'>('all');
   const [cameraDistrictFilter, setCameraDistrictFilter] = useState('all');
@@ -459,10 +462,7 @@ export function ReportIncidentPage() {
 
             <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full">
               <MapInstanceCapture onReady={setLeafletMap} />
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+              <BaseTileLayer satellite={satellite} />
               {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
               <AddPinCapture active={addMode} onPick={handlePick} />
 
@@ -555,6 +555,7 @@ export function ReportIncidentPage() {
                 )
               ))}
             </MapContainer>
+            <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
           </div>
         </main>
 

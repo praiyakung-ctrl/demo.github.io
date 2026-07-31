@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
   Camera as CameraIcon, Compass, Eye, EyeOff, Locate, Maximize,
@@ -10,6 +10,8 @@ import { Navbar } from '../components/Navbar';
 import { CitizenFooter, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { LiveCameraModal } from '../components/LiveCameraModal';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
+import { BaseTileLayer } from '../components/BaseTileLayer';
+import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import camerasData from '../data/cameras.json';
 import type { Camera, CameraStatus, CameraType } from '../types';
 import { STATUS_COLORS, STATUS_LABELS } from '../types';
@@ -241,6 +243,7 @@ export function HomePage() {
   const [geoError, setGeoError] = useState(false);
   const [now, setNow] = useState(new Date());
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [satellite, setSatellite] = useState(false);
 
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -518,10 +521,7 @@ export function HomePage() {
 
               <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full" zoomControl={true}>
                 <MapInstanceCapture onReady={setLeafletMap} />
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                <BaseTileLayer satellite={satellite} />
                 {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
                 <CameraClusterMarkers cameras={filtered} renderMarker={cam => (
                   <Marker
@@ -565,6 +565,7 @@ export function HomePage() {
                   </Marker>
                 )} />
               </MapContainer>
+              <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
             </div>
 
             {/* right: selected camera detail */}

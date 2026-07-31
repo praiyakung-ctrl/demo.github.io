@@ -1,9 +1,11 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
+import { BaseTileLayer } from '../components/BaseTileLayer';
+import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
 import { findPendingReport, pendingReports, saveReport } from '../utils/cameraReports';
 import { useAuth } from '../context/AuthContext';
@@ -64,6 +66,7 @@ export function MapPage() {
   const [eventFilters, setEventFilters] = useState<Set<EventType>>(new Set());
   const [selectedCam, setSelectedCam] = useState<Camera | null>(null);
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
+  const [satellite, setSatellite] = useState(false);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [reportCam, setReportCam] = useState<Camera | null>(null);
   const [reportNote, setReportNote] = useState('');
@@ -287,10 +290,7 @@ export function MapPage() {
             className="w-full h-full"
             zoomControl={true}
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            <BaseTileLayer satellite={satellite} />
             <CameraClusterMarkers cameras={cameras} renderMarker={cam => (
               <Marker
                 key={cam.id}
@@ -385,6 +385,7 @@ export function MapPage() {
               </Marker>
             )} />
           </MapContainer>
+          <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
 
           {/* Legend */}
           <div className="absolute bottom-6 left-2 bg-white rounded-lg shadow-lg p-2 z-[400] text-xs">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import {
   AlertTriangle, ChevronLeft, Clock, Download, FileText, Hash, Inbox, Mail, MapPin,
   Plus, Search, Target, User, Activity, Camera as CameraIcon,
@@ -9,6 +9,8 @@ import { Layout, SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
+import { BaseTileLayer } from '../components/BaseTileLayer';
+import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -306,6 +308,7 @@ function SendVideoModal({ isOpen, onClose, defaultFileName, defaultExpiryDays, o
    this with a fresh selection instead of syncing via an effect */
 function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (auditDetail: string) => void }) {
   const [selectedCameraIds, setSelectedCameraIds] = useState<Set<string>>(() => new Set(req.assignedCameraIds));
+  const [satellite, setSatellite] = useState(false);
 
   const nearby = nearestCameras({ lat: req.incidentLat, lng: req.incidentLng }, allCameras, 0.5);
 
@@ -329,10 +332,7 @@ function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (au
       </p>
       <div className="rounded-xl overflow-hidden border border-gray-200 h-[260px] relative z-0 mb-3">
         <MapContainer key={req.id} center={[req.incidentLat, req.incidentLng]} zoom={16} className="w-full h-full">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+          <BaseTileLayer satellite={satellite} />
           <Marker position={[req.incidentLat, req.incidentLng]} icon={pinIcon('#DC2626')} />
           {nearby.map(cam => (
             <Marker
@@ -343,6 +343,7 @@ function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (au
             />
           ))}
         </MapContainer>
+        <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} className="absolute bottom-2 right-2 z-[500]" />
       </div>
       <div className="space-y-1.5 max-h-48 overflow-y-auto">
         {nearby.map(cam => (

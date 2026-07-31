@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
   Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight,
@@ -11,6 +11,8 @@ import { Navbar } from '../components/Navbar';
 import { SkipLink } from '../components/Layout';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
+import { BaseTileLayer } from '../components/BaseTileLayer';
+import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import { ORG_INFO } from '../data/orgInfo';
@@ -223,6 +225,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
 }) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [satellite, setSatellite] = useState(false);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
   const [showCameras, setShowCameras] = useState(true);
@@ -339,10 +342,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
         <div className="rounded-xl overflow-hidden border border-gray-200 h-[480px] relative z-0">
           <MapContainer center={[13.36, 100.98]} zoom={12} className="w-full h-full">
             <MapInstanceCapture onReady={setLeafletMap} />
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            <BaseTileLayer satellite={satellite} />
             <PinPicker lat={form.incidentLat} lng={form.incidentLng} onPick={setPin} />
             {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
             {showCameras && (
@@ -364,6 +364,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
               )} />
             )}
           </MapContainer>
+          <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
           <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
             <button
               type="button"
