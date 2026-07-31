@@ -343,29 +343,27 @@ export function ReportIncidentPage() {
             <StatCard icon={Wrench} label="อยู่ระหว่างบำรุงรักษา" value={CAMERA_STATUS_COUNTS.Maintenance} color={STATUS_COLORS.Maintenance} unit="ตัว" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <StatCard icon={AlertTriangle} label="จุดเสี่ยงภัยทั้งหมด" value={riskCount} color="#DC2626" />
-            <StatCard icon={ShieldAlert} label="จุดขอติดตั้งใหม่ทั้งหมด" value={proposedCount} color="#CA8A04" />
-          </div>
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch">
+            <div className="flex-1"><StatCard icon={AlertTriangle} label="จุดเสี่ยงภัยทั้งหมด" value={riskCount} color="#DC2626" /></div>
+            <div className="flex-1"><StatCard icon={ShieldAlert} label="จุดขอติดตั้งใหม่ทั้งหมด" value={proposedCount} color="#CA8A04" /></div>
 
-          {myType && (
-            <div>
-              {!addMode ? (
+            {myType && (
+              !addMode ? (
                 <button
                   onClick={() => setAddMode(true)}
-                  className={`btn-primary flex items-center gap-2 ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
+                  className={`btn-primary flex items-center justify-center gap-2 whitespace-nowrap ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
                 >
                   <Plus size={20} /> {myType === 'risk' ? 'ปักหมุดจุดเสี่ยงภัย' : 'ปักหมุดจุดขอติดตั้งใหม่'}
                 </button>
               ) : (
-                <div className="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
+                <div className="flex-1 flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
                   <MapPin size={22} className="text-navy-700 flex-shrink-0" />
                   <p className="text-lg text-navy-700 flex-1">คลิกบนแผนที่เพื่อปักหมุดตำแหน่ง</p>
                   <button onClick={() => setAddMode(false)} className="text-gray-500 hover:text-red-500"><X size={20} /></button>
                 </div>
-              )}
-            </div>
-          )}
+              )
+            )}
+          </div>
           {geoError && (
             <p className="text-lg text-red-600 flex items-center gap-1.5 -mt-3">
               <MapPin size={16} /> ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
