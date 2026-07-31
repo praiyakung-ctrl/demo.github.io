@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
-  Camera as CameraIcon, Compass, Locate, Maximize,
+  Camera as CameraIcon, Compass, Eye, EyeOff, Locate, Maximize,
   MapPin, Navigation, Navigation2, RotateCcw, Search, Share2, Video, VideoOff, Wifi, Wrench,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
@@ -232,6 +232,7 @@ export function HomePage() {
   const [districtFilter, setDistrictFilter] = useState<'all' | string>('all');
   const [sortMode, setSortMode] = useState<SortMode>('status');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [legendVisible, setLegendVisible] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(
     publicCameras.find(c => c.status === 'Online')?.id ?? publicCameras[0]?.id ?? null
   );
@@ -242,6 +243,7 @@ export function HomePage() {
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
 
   const asideRef = useRef<HTMLElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
   const [mapHeight, setMapHeight] = useState(640);
 
@@ -250,18 +252,23 @@ export function HomePage() {
     return () => clearInterval(timer);
   }, []);
 
-  /* keeps the map's bottom edge aligned with the sidebar's ("ต้องการความช่วยเหลือ?" box) —
-     the sidebar's height is content-driven, so it's measured rather than assumed */
+  /* keeps the map's bottom edge aligned with whichever side column is taller —
+     the left sidebar ("ต้องการความช่วยเหลือ?" box) or the right detail panel
+     ("กล้องใกล้เคียง" card) — both are content-driven, so they're measured rather than assumed */
   useLayoutEffect(() => {
     const recalc = () => {
-      if (window.innerWidth < 1024 || !asideRef.current || !mapWrapperRef.current) return;
-      const asideBottom = asideRef.current.getBoundingClientRect().bottom;
+      if (window.innerWidth < 1024 || !mapWrapperRef.current) return;
       const mapTop = mapWrapperRef.current.getBoundingClientRect().top;
-      setMapHeight(Math.max(420, Math.round(asideBottom - mapTop)));
+      const asideBottom = asideRef.current?.getBoundingClientRect().bottom ?? 0;
+      const rightPanelBottom = rightPanelRef.current?.getBoundingClientRect().bottom ?? 0;
+      const bottom = Math.max(asideBottom, rightPanelBottom);
+      if (bottom === 0) return;
+      setMapHeight(Math.max(420, Math.round(bottom - mapTop)));
     };
     recalc();
     const observer = new ResizeObserver(recalc);
     if (asideRef.current) observer.observe(asideRef.current);
+    if (rightPanelRef.current) observer.observe(rightPanelRef.current);
     window.addEventListener('resize', recalc);
     return () => {
       observer.disconnect();
@@ -447,14 +454,19 @@ export function HomePage() {
             {/* map */}
             <div ref={mapWrapperRef} className="card p-0 overflow-hidden order-1 relative" style={{ height: mapHeight }}>
               {/* locate-me: small circular button paired just under the Leaflet zoom control (top-left) */}
-              <button
-                onClick={handleLocateMe}
-                aria-label="ตำแหน่งของฉัน"
-                title="ตำแหน่งของฉัน"
-                className="absolute top-20 left-3 z-[500] w-9 h-9 flex items-center justify-center bg-white hover:bg-navy-50 text-navy-700 rounded-lg shadow-lg border border-gray-200 transition-colors"
-              >
-                <Locate size={18} />
-              </button>
+              <div className="absolute top-20 left-3 z-[500] group">
+                <button
+                  onClick={handleLocateMe}
+                  aria-label="ตำแหน่งของฉัน"
+                  title="ตำแหน่งของฉัน"
+                  className="w-9 h-9 flex items-center justify-center bg-white hover:bg-navy-50 text-navy-700 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <Locate size={18} />
+                </button>
+                <span className="pointer-events-none absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                  ตำแหน่งของฉัน
+                </span>
+              </div>
 
               {/* search nearby / reset view (top-right) */}
               <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
@@ -472,17 +484,36 @@ export function HomePage() {
                 </button>
               </div>
 
-              {/* status legend (bottom-left, clear of Leaflet's default bottom-right attribution) */}
+              {/* status legend (bottom-left, clear of Leaflet's default bottom-right attribution) — can be hidden */}
               <div className="absolute bottom-3 left-3 z-[500] pointer-events-none">
-                <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-gray-700">
-                  <span className="text-gray-500">สถานะกล้อง:</span>
-                  {(['Online', 'Offline', 'Maintenance', 'Unknown'] as CameraStatus[]).map(s => (
-                    <span key={s} className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[s] }} />
-                      {STATUS_LABELS[s]}
-                    </span>
-                  ))}
-                </div>
+                {legendVisible ? (
+                  <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-gray-700">
+                    <span className="text-gray-500">สถานะกล้อง:</span>
+                    {(['Online', 'Offline', 'Maintenance', 'Unknown'] as CameraStatus[]).map(s => (
+                      <span key={s} className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[s] }} />
+                        {STATUS_LABELS[s]}
+                      </span>
+                    ))}
+                    <button
+                      onClick={() => setLegendVisible(false)}
+                      aria-label="ซ่อนสถานะกล้อง"
+                      title="ซ่อนสถานะกล้อง"
+                      className="pointer-events-auto text-gray-400 hover:text-gray-600 flex-shrink-0"
+                    >
+                      <EyeOff size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setLegendVisible(true)}
+                    aria-label="แสดงสถานะกล้อง"
+                    title="แสดงสถานะกล้อง"
+                    className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-sm hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                  >
+                    <Eye size={16} /> สถานะกล้อง
+                  </button>
+                )}
               </div>
 
               <MapContainer center={MAP_CENTER} zoom={11} className="w-full h-full" zoomControl={true}>
@@ -537,7 +568,7 @@ export function HomePage() {
             </div>
 
             {/* right: selected camera detail */}
-            <div className="order-3">
+            <div ref={rightPanelRef} className="order-3">
               {selectedCam ? (
                 <SelectedCameraPanel cam={selectedCam} onExpand={() => setViewingCam(selectedCam)} />
               ) : (
