@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
   Camera as CameraIcon, Compass, Locate, Maximize,
-  MapPin, Navigation, Search, Video, VideoOff, Wifi,
+  MapPin, Navigation, RotateCcw, Search, Video, VideoOff, Wifi,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
@@ -292,6 +292,16 @@ export function HomePage() {
     [userPos]
   );
 
+  const handleSelectCamera = (id: string) => {
+    setSelectedId(id);
+    const cam = sorted.find(c => c.id === id) ?? publicCameras.find(c => c.id === id);
+    if (cam) leafletMap?.flyTo([cam.lat, cam.lng], 15, { duration: 0.8 });
+  };
+
+  const handleResetView = () => {
+    leafletMap?.flyTo(MAP_CENTER, 11, { duration: 0.8 });
+  };
+
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
       <SkipLink />
@@ -306,7 +316,7 @@ export function HomePage() {
         <div className="lg:hidden"><ServiceMenuChips active="home" /></div>
         <aside ref={asideRef} className="hidden lg:block">
           <ServiceSidebar active="home">
-            <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={setSelectedId} />
+            <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={handleSelectCamera} />
           </ServiceSidebar>
         </aside>
 
@@ -363,7 +373,7 @@ export function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-4 items-start">
             {/* mobile-only: camera list (desktop shows it in the left sidebar instead) */}
             <div className="lg:hidden order-2">
-              <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={setSelectedId} />
+              <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={handleSelectCamera} />
             </div>
 
             {/* map */}
@@ -381,6 +391,12 @@ export function HomePage() {
                   className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
                 >
                   <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
+                </button>
+                <button
+                  onClick={handleResetView}
+                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
                 </button>
               </div>
 
