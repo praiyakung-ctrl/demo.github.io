@@ -3,17 +3,18 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 're
 import type { Map as LeafletMap } from 'leaflet';
 import {
   AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin, Plus,
-  RotateCcw, ShieldAlert, Upload, X,
+  RotateCcw, ShieldAlert, Upload, Video, VideoOff, Wifi, Wrench, X,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
+import { LiveCameraModal } from '../components/LiveCameraModal';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
-import type { Camera, IncidentPoint, IncidentPointType } from '../types';
-import { INCIDENT_CATEGORY_OPTIONS, INCIDENT_FREQUENCY_OPTIONS, INCIDENT_STATUS_LABEL } from '../types';
+import type { Camera, CameraStatus, IncidentPoint, IncidentPointType } from '../types';
+import { INCIDENT_CATEGORY_OPTIONS, INCIDENT_FREQUENCY_OPTIONS, INCIDENT_STATUS_LABEL, STATUS_COLORS, STATUS_LABELS } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { addIncidentPoint, savedIncidentPoints } from '../utils/incidentPoints';
 import { logAudit } from '../utils/auditLog';
@@ -25,7 +26,7 @@ import { Link } from 'react-router-dom';
 const MAP_CENTER: [number, number] = [13.36, 100.98];
 const POINT_COLORS = { camera: '#22C55E', risk: '#EF4444', proposed: '#EAB308' } as const;
 
-function StatCard({ icon: Icon, label, value, color }: { icon: typeof ShieldAlert; label: string; value: number; color: string }) {
+function StatCard({ icon: Icon, label, value, color, unit = 'จุด' }: { icon: typeof ShieldAlert; label: string; value: number; color: string; unit?: string }) {
   return (
     <div className="card flex items-center gap-3 py-4">
       <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
@@ -33,13 +34,16 @@ function StatCard({ icon: Icon, label, value, color }: { icon: typeof ShieldAler
       </div>
       <div>
         <p className="text-lg text-gray-500 leading-tight">{label}</p>
-        <p className="text-3xl font-extrabold leading-tight" style={{ color }}>{value} จุด</p>
+        <p className="text-3xl font-extrabold leading-tight" style={{ color }}>{value} {unit}</p>
       </div>
     </div>
   );
 }
 
 const allCameras = camerasData as Camera[];
+
+const CAMERA_STATUS_COUNTS: Record<CameraStatus, number> = { Online: 0, Offline: 0, Maintenance: 0, Unknown: 0 };
+allCameras.forEach(c => { CAMERA_STATUS_COUNTS[c.status]++; });
 
 const TYPE_LABEL: Record<IncidentPointType, string> = {
   risk: 'จุดเสี่ยงภัย',
@@ -188,6 +192,7 @@ export function ReportIncidentPage() {
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
   const [mapHeight, setMapHeight] = useState(420);
+  const [viewingCam, setViewingCam] = useState<Camera | null>(null);
 
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -331,6 +336,13 @@ export function ReportIncidentPage() {
             </div>
           )}
 
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <StatCard icon={Video} label="กล้องทั้งหมด" value={allCameras.length} color="#1B3A6B" unit="ตัว" />
+            <StatCard icon={Wifi} label="ออนไลน์" value={CAMERA_STATUS_COUNTS.Online} color={STATUS_COLORS.Online} unit="ตัว" />
+            <StatCard icon={VideoOff} label="ออฟไลน์" value={CAMERA_STATUS_COUNTS.Offline} color={STATUS_COLORS.Offline} unit="ตัว" />
+            <StatCard icon={Wrench} label="อยู่ระหว่างบำรุงรักษา" value={CAMERA_STATUS_COUNTS.Maintenance} color={STATUS_COLORS.Maintenance} unit="ตัว" />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <StatCard icon={AlertTriangle} label="จุดเสี่ยงภัยทั้งหมด" value={riskCount} color="#DC2626" />
             <StatCard icon={ShieldAlert} label="จุดขอติดตั้งใหม่ทั้งหมด" value={proposedCount} color="#CA8A04" />
@@ -440,6 +452,16 @@ export function ReportIncidentPage() {
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                         <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
                         <p className="text-lg text-gray-800">{cam.location}</p>
+                        {cam.status === 'Online' ? (
+                          <button
+                            onClick={() => setViewingCam(cam)}
+                            className="mt-2 w-full bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2 rounded-lg flex items-center justify-center gap-2"
+                          >
+                            <Video size={16} /> ดู Live
+                          </button>
+                        ) : (
+                          <p className="mt-1 text-base font-bold" style={{ color: STATUS_COLORS[cam.status] }}>{STATUS_LABELS[cam.status]}</p>
+                        )}
                       </div>
                     </Popup>
                   </Marker>
@@ -575,6 +597,8 @@ export function ReportIncidentPage() {
       </div>
 
       <CitizenFooter />
+
+      <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} />
 
       <IncidentFormModal
         isOpen={formOpen}
