@@ -352,6 +352,9 @@ export function HomePage() {
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">
       <SkipLink />
       <Navbar />
+      {/* visually hidden — the compact layout has no visible page title, but the page still
+          needs exactly one <h1> for screen readers/document structure */}
+      <h1 className="sr-only">แผนที่กล้อง CCTV สาธารณะ</h1>
 
       <div className={`flex-1 w-full max-w-[1800px] mx-auto px-4 py-6 grid grid-cols-1 gap-5 items-start ${sidebarCollapsed ? 'lg:grid-cols-[64px_minmax(0,1fr)]' : 'lg:grid-cols-[280px_minmax(0,1fr)]'}`}>
         <div className="lg:hidden"><ServiceMenuChips active="home" /></div>
