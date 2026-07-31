@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
@@ -21,10 +21,11 @@ import { logAudit } from '../utils/auditLog';
 import { exportRowsToExcel, todayStamp } from '../utils/exportReport';
 import { clusterByProximity } from '../utils/geo';
 import { clusterCountIcon, pinIcon, userLocationIcon } from '../utils/mapPin';
+import { districtOf } from '../utils/cameraDisplay';
 import { Link } from 'react-router-dom';
 
 const MAP_CENTER: [number, number] = [13.36, 100.98];
-const POINT_COLORS = { camera: '#22C55E', risk: '#EF4444', proposed: '#EAB308' } as const;
+const POINT_COLORS = { risk: '#EF4444', proposed: '#EAB308' } as const;
 
 function StatCard({ icon: Icon, label, value, color, unit = 'จุด' }: { icon: typeof ShieldAlert; label: string; value: number; color: string; unit?: string }) {
   return (
@@ -44,6 +45,8 @@ const allCameras = camerasData as Camera[];
 
 const CAMERA_STATUS_COUNTS: Record<CameraStatus, number> = { Online: 0, Offline: 0, Maintenance: 0, Unknown: 0 };
 allCameras.forEach(c => { CAMERA_STATUS_COUNTS[c.status]++; });
+
+const CAMERA_DISTRICT_OPTIONS = [...new Set(allCameras.map(c => districtOf(c.location)))].sort((a, b) => a.localeCompare(b, 'th'));
 
 const TYPE_LABEL: Record<IncidentPointType, string> = {
   risk: 'จุดเสี่ยงภัย',
@@ -193,6 +196,9 @@ export function ReportIncidentPage() {
   const [geoError, setGeoError] = useState(false);
   const [mapHeight, setMapHeight] = useState(420);
   const [viewingCam, setViewingCam] = useState<Camera | null>(null);
+  const [cameraSearch, setCameraSearch] = useState('');
+  const [cameraStatusFilter, setCameraStatusFilter] = useState<CameraStatus | 'all'>('all');
+  const [cameraDistrictFilter, setCameraDistrictFilter] = useState('all');
 
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -254,6 +260,15 @@ export function ReportIncidentPage() {
 
   const myType: IncidentPointType | null = isPolice ? 'risk' : isLocalOfficer ? 'proposed' : null;
   const refresh = () => setPoints(savedIncidentPoints());
+
+  const filteredCameras = useMemo(() => {
+    const q = cameraSearch.trim().toLowerCase();
+    return allCameras.filter(cam =>
+      (!q || cam.id.toLowerCase().includes(q) || cam.location.toLowerCase().includes(q)) &&
+      (cameraStatusFilter === 'all' || cam.status === cameraStatusFilter) &&
+      (cameraDistrictFilter === 'all' || districtOf(cam.location) === cameraDistrictFilter)
+    );
+  }, [cameraSearch, cameraStatusFilter, cameraDistrictFilter]);
 
   const riskCount = points.filter(p => p.type === 'risk').length;
   const proposedCount = points.filter(p => p.type === 'proposed').length;
@@ -402,8 +417,16 @@ export function ReportIncidentPage() {
                 <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-bold text-gray-700">
                   <span className="text-gray-500">สัญลักษณ์:</span>
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: POINT_COLORS.camera }} />
-                    กล้อง CCTV (ติดตั้งแล้ว)
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS.Online }} />
+                    กล้อง CCTV: {STATUS_LABELS.Online}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS.Offline }} />
+                    {STATUS_LABELS.Offline}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS.Maintenance }} />
+                    {STATUS_LABELS.Maintenance}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: POINT_COLORS.risk }} />
@@ -444,21 +467,23 @@ export function ReportIncidentPage() {
               <AddPinCapture active={addMode} onPick={handlePick} />
 
               {showCameras && (
-                <CameraClusterMarkers cameras={allCameras} renderMarker={cam => (
-                  <Marker key={cam.id} position={[cam.lat, cam.lng]} icon={pinIcon(POINT_COLORS.camera)}>
+                <CameraClusterMarkers cameras={filteredCameras} renderMarker={cam => (
+                  <Marker key={cam.id} position={[cam.lat, cam.lng]} icon={pinIcon(STATUS_COLORS[cam.status])}>
                     <Popup minWidth={200}>
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
                         <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
                         <p className="text-lg text-gray-800">{cam.location}</p>
-                        {cam.status === 'Online' ? (
+                        <p className="mt-1 text-base font-bold flex items-center gap-1.5" style={{ color: STATUS_COLORS[cam.status] }}>
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[cam.status] }} />
+                          {STATUS_LABELS[cam.status]}
+                        </p>
+                        {cam.status === 'Online' && (
                           <button
                             onClick={() => setViewingCam(cam)}
                             className="mt-2 w-full bg-navy-700 hover:bg-navy-600 text-white text-base font-bold py-2 rounded-lg flex items-center justify-center gap-2"
                           >
                             <Video size={16} /> ดู Live
                           </button>
-                        ) : (
-                          <p className="mt-1 text-base font-bold" style={{ color: STATUS_COLORS[cam.status] }}>{STATUS_LABELS[cam.status]}</p>
                         )}
                       </div>
                     </Popup>
@@ -536,11 +561,32 @@ export function ReportIncidentPage() {
         <aside ref={rightPanelRef} className="space-y-4">
           <div className="card">
             <h3 className="text-2xl font-bold text-navy-700 mb-3">ตัวกรองข้อมูล</h3>
+            <p className="label mb-2">ค้นหากล้อง CCTV</p>
+            <input
+              value={cameraSearch}
+              onChange={e => setCameraSearch(e.target.value)}
+              placeholder="ค้นหารหัสกล้อง/สถานที่..."
+              className="input-field mb-2"
+            />
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              <select value={cameraStatusFilter} onChange={e => setCameraStatusFilter(e.target.value as CameraStatus | 'all')} className="input-field text-sm">
+                <option value="all">สถานะ: ทั้งหมด</option>
+                <option value="Online">{STATUS_LABELS.Online}</option>
+                <option value="Offline">{STATUS_LABELS.Offline}</option>
+                <option value="Maintenance">{STATUS_LABELS.Maintenance}</option>
+                <option value="Unknown">{STATUS_LABELS.Unknown}</option>
+              </select>
+              <select value={cameraDistrictFilter} onChange={e => setCameraDistrictFilter(e.target.value)} className="input-field text-sm">
+                <option value="all">อำเภอ: ทั้งหมด</option>
+                {CAMERA_DISTRICT_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            </div>
+
             <p className="label mb-2">ประเภทจุด</p>
             <div className="space-y-2 mb-4">
               <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
                 <input type="checkbox" checked={showCameras} onChange={e => setShowCameras(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
-                <CameraIcon size={16} className="text-green-600" /> กล้อง CCTV (ติดตั้งแล้ว)
+                <CameraIcon size={16} className="text-green-600" /> กล้อง CCTV (ติดตั้งแล้ว) — พบ {filteredCameras.length} ตัว
               </label>
               <label className="flex items-center gap-2 text-lg text-gray-700 cursor-pointer">
                 <input type="checkbox" checked={showRisk} onChange={e => setShowRisk(e.target.checked)} className="w-4 h-4 accent-[#1b3a6b]" />
