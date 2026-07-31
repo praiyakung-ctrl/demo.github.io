@@ -366,9 +366,9 @@ export function ReportIncidentPage() {
               !addMode ? (
                 <button
                   onClick={() => setAddMode(true)}
-                  className={`btn-primary flex items-center justify-center gap-2 whitespace-nowrap ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
+                  className={`btn-primary flex items-center justify-center gap-1.5 whitespace-nowrap text-base px-2.5 py-1 ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
                 >
-                  <Plus size={20} /> {myType === 'risk' ? 'ปักหมุดจุดเสี่ยงภัย' : 'ปักหมุดจุดขอติดตั้งใหม่'}
+                  <Plus size={14} /> {myType === 'risk' ? 'ปักหมุดจุดเสี่ยงภัย' : 'ปักหมุดจุดขอติดตั้งใหม่'}
                 </button>
               ) : (
                 <div className="flex-1 flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
