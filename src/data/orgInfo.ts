@@ -10,4 +10,5 @@ export const ORG_INFO = {
   hotline: '038-398-333',
   officeHours: 'จันทร์ - ศุกร์ 08:30 - 16:30 น.',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('องค์การบริหารส่วนจังหวัดชลบุรี'),
+  pdpaPolicyUrl: 'https://www.chon.go.th/public/list/data/detail/id/22636/menu/1700/page/1',
 } as const;

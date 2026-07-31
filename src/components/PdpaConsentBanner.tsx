@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Cookie, ShieldCheck } from 'lucide-react';
 import { Modal } from './Modal';
+import { ORG_INFO } from '../data/orgInfo';
 
 interface PdpaConsentBannerProps {
   isOpen: boolean;
@@ -32,7 +33,11 @@ export function PdpaConsentBanner({ isOpen, onAccept }: PdpaConsentBannerProps) 
                   ระบบนี้มีการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของท่าน ได้แก่
                   ข้อมูลสำหรับการเข้าใช้งานระบบ และข้อมูลจากการเชื่อมโยง/แลกเปลี่ยนข้อมูลระหว่างระบบ
                   (Data Integration) เพื่อวัตถุประสงค์ในการให้บริการ ตรวจสอบสิทธิ์การเข้าถึง
-                  และปฏิบัติตามกฎหมายที่เกี่ยวข้อง ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+                  และปฏิบัติตามกฎหมายที่เกี่ยวข้อง ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) และ{' '}
+                  <a href={ORG_INFO.pdpaPolicyUrl} target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-navy-500">
+                    นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+                  </a>{' '}
+                  ขององค์การบริหารส่วนจังหวัดชลบุรี
                 </p>
               </div>
             </div>
@@ -79,7 +84,11 @@ export function PdpaConsentBanner({ isOpen, onAccept }: PdpaConsentBannerProps) 
           </ul>
           <p>
             ท่านสามารถศึกษารายละเอียดเพิ่มเติมเกี่ยวกับการคุ้มครองข้อมูลส่วนบุคคลได้ตาม
-            พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+            พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) และ{' '}
+            <a href={ORG_INFO.pdpaPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-navy-700 underline font-medium hover:text-navy-500">
+              นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+            </a>{' '}
+            ขององค์การบริหารส่วนจังหวัดชลบุรี
           </p>
           <button onClick={() => setShowPolicy(false)} className="btn-primary w-full py-2.5 text-lg">
             ปิด

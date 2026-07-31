@@ -13,6 +13,7 @@ import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '..
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
+import { ORG_INFO } from '../data/orgInfo';
 import type { Camera, CitizenRequest } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
@@ -696,10 +697,16 @@ function Step4Confirm({ onSubmit, onBack }: { onSubmit: () => void; onBack: () =
       <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xl text-gray-600 leading-relaxed space-y-2">
         <p className="font-bold text-gray-800 flex items-center gap-2"><ShieldCheck size={22} className="text-navy-700" /> ข้อตกลงและเงื่อนไขการขอข้อมูลกล้อง CCTV</p>
         <ul className="list-disc pl-6 space-y-1">
-          <li>ข้อมูลภาพจากกล้อง CCTV จะถูกเปิดเผยเฉพาะส่วนที่เกี่ยวข้องกับเหตุการณ์ตามคำขอเท่านั้น</li>
-          <li>ผู้ยื่นคำขอต้องไม่นำข้อมูลไปเผยแพร่ ทำซ้ำ หรือใช้เพื่อวัตถุประสงค์อื่นนอกเหนือจากที่ระบุไว้</li>
-          <li>การเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลเป็นไปตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</li>
-          <li>เจ้าหน้าที่จะดำเนินการพิจารณาคำขอภายใน 3-5 วันทำการ และแจ้งผลผ่านอีเมลที่ลงทะเบียน</li>
+          <li>ข้อมูลภาพจากกล้อง CCTV จะถูกเปิดเผยเฉพาะส่วนที่เกี่ยวข้องกับเหตุการณ์ตามคำขอเท่านั้น โดยหน่วยงานขอสงวนสิทธิ์ในการทำภาพเบลอ (Blur) หรือปกปิดข้อมูลของบุคคลที่สามที่ไม่เกี่ยวข้อง เพื่อคุ้มครองสิทธิส่วนบุคคล</li>
+          <li>ผู้ยื่นคำขอต้องไม่นำข้อมูลไปเผยแพร่ (เช่น โพสต์ลงสื่อสังคมออนไลน์) ทำซ้ำ หรือใช้เพื่อวัตถุประสงค์อื่นนอกเหนือจากที่แจ้งความประสงค์ไว้ หากเกิดความเสียหายจากการนำข้อมูลไปใช้โดยมิชอบ ผู้ยื่นคำขอจะต้องรับผิดชอบตามกฎหมายแต่เพียงผู้เดียว</li>
+          <li>
+            การเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของผู้ยื่นคำขอ จะเป็นไปตาม{' '}
+            <a href={ORG_INFO.pdpaPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-navy-700 underline font-medium hover:text-navy-500">
+              นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+            </a>{' '}
+            ขององค์การบริหารส่วนจังหวัดชลบุรี
+          </li>
+          <li>เจ้าหน้าที่จะดำเนินการพิจารณาคำขอภายใน 3-5 วันทำการ และแจ้งผลผ่านอีเมลที่ลงทะเบียนไว้</li>
         </ul>
       </div>
 
@@ -707,13 +714,17 @@ function Step4Confirm({ onSubmit, onBack }: { onSubmit: () => void; onBack: () =
         <label className="flex items-start gap-3 cursor-pointer">
           <input type="checkbox" checked={consentPdpa} onChange={e => setConsentPdpa(e.target.checked)} className="mt-1.5 w-5 h-5 accent-navy-700" />
           <span className="text-xl text-gray-700">
-            ข้าพเจ้ายินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลเพื่อการดำเนินการตามคำขอนี้ ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+            ข้าพเจ้าได้อ่านและทำความเข้าใจ{' '}
+            <a href={ORG_INFO.pdpaPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-navy-700 underline font-medium hover:text-navy-500">
+              นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+            </a>{' '}
+            และยินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลเพื่อการดำเนินการตามคำขอนี้ ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
           </span>
         </label>
         <label className="flex items-start gap-3 cursor-pointer">
           <input type="checkbox" checked={consentTruth} onChange={e => setConsentTruth(e.target.checked)} className="mt-1.5 w-5 h-5 accent-navy-700" />
           <span className="text-xl text-gray-700">
-            ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกทั้งหมดเป็นความจริงทุกประการ และยอมรับข้อตกลงเงื่อนไขการขอข้อมูลข้างต้น
+            ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกทั้งหมดเป็นความจริงทุกประการ และยอมรับข้อตกลงเงื่อนไขการขอข้อมูลข้างต้น โดยข้าพเจ้าเข้าใจดีว่าการนำภาพไปใช้ผิดวัตถุประสงค์อาจมีความผิดตามกฎหมาย
           </span>
         </label>
       </div>

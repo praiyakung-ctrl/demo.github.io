@@ -8,6 +8,7 @@ import type { ThaIdProfile } from '../utils/thaId';
 import { findMemberByNationalId, saveMember } from '../utils/memberStorage';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import type { CitizenMember, MemberType } from '../types';
+import { ORG_INFO } from '../data/orgInfo';
 
 const THAI_PROVINCES = [
   'กรุงเทพมหานคร', 'กระบี่', 'กาญจนบุรี', 'กาฬสินธุ์', 'กำแพงเพชร', 'ขอนแก่น', 'จันทบุรี',
@@ -253,7 +254,11 @@ export function RegisterPage() {
                     />
                     <span>
                       ข้าพเจ้ายินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
-                      ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)<Req />
+                      ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) และ{' '}
+                      <a href={ORG_INFO.pdpaPolicyUrl} target="_blank" rel="noopener noreferrer" className="text-navy-700 underline font-medium hover:text-navy-500">
+                        นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+                      </a>{' '}
+                      ขององค์การบริหารส่วนจังหวัดชลบุรี<Req />
                     </span>
                   </label>
                 </div>
