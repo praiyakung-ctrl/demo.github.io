@@ -28,18 +28,18 @@ test('citizen registration via simulated ThaID verification', async ({ page }) =
 
   for (const box of await page.locator('input[type="checkbox"]').all()) await box.check();
   await page.click('button[type="submit"]');
-  await expect(page.getByText('สมัครสมาชิกเรียบร้อยแล้ว')).toBeVisible();
+  await expect(page.getByText('ส่งใบสมัครเรียบร้อยแล้ว')).toBeVisible();
 
   const members = await page.evaluate(() => JSON.parse(localStorage.getItem('registered_members') || '[]'));
   expect(members).toHaveLength(1);
   expect(members[0].name).toBe('สมชาย ใจดี');
   expect(members[0].acceptedTerms).toBe(true);
   expect(members[0].acceptedPdpa).toBe(true);
+  expect(members[0].status).toBe('pending');
 
-  // enter the system → auto-login as citizen → portal
-  await page.getByRole('button', { name: 'เข้าสู่ระบบ' }).click();
-  await page.waitForURL('**/portal');
-  const auth = await page.evaluate(() => JSON.parse(localStorage.getItem('auth_user')!));
-  expect(auth.role).toBe('citizen');
-  expect(auth.name).toBe('สมชาย ใจดี');
+  // pending applications cannot log in yet — the confirmation screen only
+  // links back to /login, it no longer auto-logs the new member in
+  await page.getByRole('link', { name: 'ไปหน้าเข้าสู่ระบบ' }).click();
+  await page.waitForURL('**/login');
+  await expect(page.evaluate(() => localStorage.getItem('auth_user'))).resolves.toBeNull();
 });
