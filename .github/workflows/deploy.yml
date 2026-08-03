@@ -21,6 +21,11 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+        env:
+          # Not secret — just the public Worker URL from worker/README.md.
+          # Leave unset until the Worker is deployed; emailApi.ts skips
+          # sending (instead of failing) when this is empty.
+          VITE_EMAIL_WORKER_URL: ${{ vars.VITE_EMAIL_WORKER_URL }}
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3

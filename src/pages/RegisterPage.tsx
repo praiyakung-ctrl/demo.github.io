@@ -6,6 +6,8 @@ import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
 import type { ThaIdProfile } from '../utils/thaId';
 import { findMemberByNationalId, saveMember } from '../utils/memberStorage';
+import { checkEmailDomain } from '../utils/emailDomain';
+import type { DomainCheckResult } from '../utils/emailDomain';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import type { CitizenMember, MemberType } from '../types';
 import { ORG_INFO } from '../data/orgInfo';
@@ -63,8 +65,15 @@ export function RegisterPage() {
     memberType: '', purpose: '', purposeOther: '',
     acceptTerms: false, acceptPdpa: false,
   });
+  const [emailDomainStatus, setEmailDomainStatus] = useState<DomainCheckResult | 'checking' | 'idle'>('idle');
 
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
+
+  const handleEmailBlur = async () => {
+    if (!form.email.includes('@')) return;
+    setEmailDomainStatus('checking');
+    setEmailDomainStatus(await checkEmailDomain(form.email));
+  };
 
   const handleThaIdVerified = (profile: ThaIdProfile) => {
     if (findMemberByNationalId(profile.nationalId)) {
@@ -78,7 +87,7 @@ export function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!thaId || !form.memberType) return;
+    if (!thaId || !form.memberType || emailDomainStatus === 'invalid') return;
     setSubmitting(true);
     await new Promise(r => setTimeout(r, 600));
     const member: CitizenMember = {
@@ -183,7 +192,14 @@ export function RegisterPage() {
 
                 <div>
                   <label htmlFor="reg-email" className="label">อีเมล<Req /></label>
-                  <input id="reg-email" type="email" value={form.email} onChange={e => set({ email: e.target.value })} placeholder="กรอกอีเมล" className="input-field" required />
+                  <input
+                    id="reg-email" type="email" value={form.email}
+                    onChange={e => { set({ email: e.target.value }); setEmailDomainStatus('idle'); }}
+                    onBlur={handleEmailBlur}
+                    placeholder="กรอกอีเมล" className="input-field" required
+                  />
+                  {emailDomainStatus === 'checking' && <p className="text-base text-gray-500 mt-1">กำลังตรวจสอบโดเมนอีเมล...</p>}
+                  {emailDomainStatus === 'invalid' && <p role="alert" className="text-base text-red-600 mt-1">ไม่พบโดเมนอีเมลนี้ กรุณาตรวจสอบอีกครั้ง</p>}
                 </div>
 
                 <div>
@@ -263,7 +279,7 @@ export function RegisterPage() {
                   </label>
                 </div>
 
-                <button type="submit" disabled={submitting} className="btn-primary w-full py-3 text-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                <button type="submit" disabled={submitting || emailDomainStatus === 'invalid'} className="btn-primary w-full py-3 text-xl disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? 'กำลังบันทึกข้อมูล...' : 'สมัครสมาชิก'}
                 </button>
               </form>

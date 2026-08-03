@@ -8,6 +8,6 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    exclude: ['node_modules/**', 'e2e/**'], // e2e/*.spec.ts belongs to Playwright, not Vitest
+    exclude: ['**/node_modules/**', 'e2e/**', 'worker/**'], // e2e/*.spec.ts belongs to Playwright, not Vitest; worker/ is a separate Cloudflare Worker project
   },
 })

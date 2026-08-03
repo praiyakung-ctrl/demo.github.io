@@ -1,0 +1,14 @@
+name = "chonburi-cctv-email-api"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+# Public, non-secret config. Change ALLOWED_ORIGIN to match your deployed
+# GitHub Pages origin (no trailing slash).
+[vars]
+ALLOWED_ORIGIN = "https://praiyakung-ctrl.github.io"
+BREVO_SENDER_EMAIL = "noreply@example.org"
+BREVO_SENDER_NAME = "อบจ.ชลบุรี - ระบบฐานข้อมูลเพื่อการเข้าถึง"
+
+# BREVO_API_KEY is a secret — never put it here.
+# Set it after `wrangler login` with:
+#   wrangler secret put BREVO_API_KEY
