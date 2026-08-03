@@ -1,5 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { findMemberByNationalId, savedMembers, saveMember } from './memberStorage';
+import {
+  ensureDemoCitizenRegistered,
+  ensureDemoForeignerRegistered,
+  findMemberByEmail,
+  findMemberById,
+  findMemberByNationalId,
+  pendingMembers,
+  savedMembers,
+  saveMember,
+  updateMember,
+} from './memberStorage';
 import type { CitizenMember } from '../types';
 
 const member = (over: Partial<CitizenMember> = {}): CitizenMember => ({
@@ -60,5 +70,88 @@ describe('memberStorage', () => {
     saveMember(member());
     saveMember(member({ id: 'member-2', nationalId: '3100100000010' }));
     expect(savedMembers()).toHaveLength(2);
+  });
+
+  it('treats a legacy record with no status field as already approved', () => {
+    // records saved before the member-review workflow existed have no
+    // `status` key at all — write one directly, bypassing saveMember, to
+    // simulate that legacy shape
+    const legacy = member();
+    delete (legacy as Partial<CitizenMember>).status;
+    localStorage.setItem('registered_members', JSON.stringify([legacy]));
+    expect(savedMembers()[0].status).toBe('approved');
+  });
+
+  it('does not override an explicit status when normalizing', () => {
+    saveMember(member({ status: 'pending' }));
+    expect(savedMembers()[0].status).toBe('pending');
+  });
+
+  it('finds a Google-authenticated member by email but not a ThaID member', () => {
+    saveMember(member({ authType: 'google', nationalId: undefined, email: 'foreigner@gmail.com' }));
+    expect(findMemberByEmail('foreigner@gmail.com')?.authType).toBe('google');
+    saveMember(member({ id: 'member-2', email: 'thai@example.com' })); // authType 'thaid' (default)
+    expect(findMemberByEmail('thai@example.com')).toBeNull();
+  });
+
+  it('finds a member by id', () => {
+    saveMember(member());
+    expect(findMemberById('member-1')?.nationalId).toBe('3100100000009');
+    expect(findMemberById('missing')).toBeNull();
+  });
+
+  describe('pendingMembers', () => {
+    it('returns only members with status pending', () => {
+      saveMember(member({ id: 'm-pending', nationalId: '3100100000001', status: 'pending' }));
+      saveMember(member({ id: 'm-approved', nationalId: '3100100000002', status: 'approved' }));
+      saveMember(member({ id: 'm-rejected', nationalId: '3100100000003', status: 'rejected' }));
+      expect(pendingMembers().map(m => m.id)).toEqual(['m-pending']);
+    });
+
+    it('returns an empty list when there are no pending members', () => {
+      saveMember(member({ status: 'approved' }));
+      expect(pendingMembers()).toEqual([]);
+    });
+  });
+
+  describe('updateMember', () => {
+    it('patches an existing member in place, preserving the rest of the record', () => {
+      saveMember(member({ status: 'pending' }));
+      updateMember('member-1', { status: 'approved', reviewedBy: 'admin', mustChangePassword: true });
+      const updated = findMemberById('member-1')!;
+      expect(updated.status).toBe('approved');
+      expect(updated.reviewedBy).toBe('admin');
+      expect(updated.mustChangePassword).toBe(true);
+      expect(updated.name).toBe('สมชาย ใจดี'); // untouched fields survive
+      expect(savedMembers()).toHaveLength(1); // no duplicate created
+    });
+
+    it('is a no-op for an unknown id', () => {
+      saveMember(member());
+      updateMember('missing', { status: 'approved' });
+      expect(savedMembers()).toHaveLength(1);
+      expect(savedMembers()[0].status).toBe('approved'); // normalized default, not from the patch
+    });
+  });
+
+  describe('ensureDemoCitizenRegistered', () => {
+    it('seeds a demo citizen member once, and is idempotent on repeated calls', () => {
+      ensureDemoCitizenRegistered();
+      ensureDemoCitizenRegistered();
+      expect(savedMembers().filter(m => m.id === 'demo-citizen')).toHaveLength(1);
+      expect(findMemberByNationalId('3100100000001')?.status).toBe('approved');
+    });
+  });
+
+  describe('ensureDemoForeignerRegistered', () => {
+    it('seeds an already-approved demo foreign member once, and is idempotent', () => {
+      ensureDemoForeignerRegistered();
+      ensureDemoForeignerRegistered();
+      const demo = savedMembers().filter(m => m.id === 'demo-foreigner');
+      expect(demo).toHaveLength(1);
+      expect(demo[0].status).toBe('approved');
+      expect(demo[0].authType).toBe('google');
+      expect(findMemberByEmail('zhang.san.demo@gmail.com')?.name).toBe('ZHANG SAN');
+    });
   });
 });
