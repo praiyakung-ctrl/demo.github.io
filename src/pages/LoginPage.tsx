@@ -76,7 +76,7 @@ export function LoginPage() {
 
           {mode === 'thaid' ? (
             <div className="mt-3">
-              <p className="text-center text-base text-gray-500 mb-2">สำหรับชาวต่างชาติ</p>
+              <p className="text-center text-xl font-bold text-gray-500 mb-2">สำหรับชาวต่างชาติ</p>
               <button
                 type="button"
                 onClick={() => { setMode('google'); setError(''); }}
@@ -96,7 +96,7 @@ export function LoginPage() {
           )}
 
           <div className="mt-3">
-            <p className="text-center text-base text-gray-500 mb-2">ยังไม่มีบัญชี?</p>
+            <p className="text-center text-xl font-bold text-gray-500 mb-2">ยังไม่มีบัญชี?</p>
             <div className="space-y-2">
               <Link to="/register" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
                 <UserPlus size={18} aria-hidden="true" /> สมัครสมาชิกสำหรับประชาชน
