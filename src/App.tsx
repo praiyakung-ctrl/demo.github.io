@@ -10,6 +10,7 @@ import type { UserRole } from './types';
    page every user sees. */
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then(m => ({ default: m.RegisterPage })));
 const ForeignerRegisterPage = lazy(() => import('./pages/ForeignerRegisterPage').then(m => ({ default: m.ForeignerRegisterPage })));
+const ProfilePage = lazy(() => import('./pages/ProfilePage').then(m => ({ default: m.ProfilePage })));
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
@@ -75,6 +76,11 @@ function AppRoutes() {
       <Route path="/dashboard" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>
           <DashboardPage />
+        </RequireAuth>
+      } />
+      <Route path="/profile" element={
+        <RequireAuth>
+          <ProfilePage />
         </RequireAuth>
       } />
       <Route path="/portal" element={

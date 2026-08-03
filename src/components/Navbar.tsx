@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, Waves, Wrench, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
@@ -384,6 +384,14 @@ export function Navbar() {
                 <p className="text-sm font-medium text-gray-900">{user?.name}</p>
                 <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
+              <Link
+                to="/profile"
+                onClick={() => setShowUser(false)}
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <UserCog size={16} />
+                โปรไฟล์
+              </Link>
               <button
                 onClick={() => { logout(); setShowUser(false); }}
                 className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"

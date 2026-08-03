@@ -12,6 +12,9 @@ interface AuthContextType {
   user: User | null;
   loginWithThaId: (profile: ThaIdProfile) => boolean;
   loginWithGoogle: (profile: GoogleProfile) => boolean;
+  /* patches the current session (e.g. after editing /profile) — does not touch
+     the persisted user/member store, callers must save that separately */
+  updateUser: (u: User) => void;
   logout: () => void;
   isAdmin: boolean;
   isOperator: boolean;
@@ -88,6 +91,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  const updateUser = (u: User) => {
+    setUser(u);
+    localStorage.setItem('auth_user', JSON.stringify(u));
+  };
+
   const logout = () => {
     if (user) logAudit(user, 'logout', 'ระบบ', 'ออกจากระบบ');
     setUser(null);
@@ -108,6 +116,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       loginWithThaId,
       loginWithGoogle,
+      updateUser,
       logout,
       isAdmin: role === 'admin',
       isOperator: role === 'operator',
