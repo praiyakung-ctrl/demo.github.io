@@ -18,8 +18,16 @@ export function findMemberByNationalId(nationalId: string): CitizenMember | null
   return savedMembers().find(m => m.nationalId === nationalId) ?? null;
 }
 
+/* foreign nationals registered via Google OAuth have no nationalId, so they
+   are looked up by email instead */
+export function findMemberByEmail(email: string): CitizenMember | null {
+  return savedMembers().find(m => m.authType === 'google' && m.email === email) ?? null;
+}
+
 export function saveMember(member: CitizenMember): void {
-  const others = savedMembers().filter(m => m.nationalId !== member.nationalId);
+  const others = savedMembers().filter(m =>
+    member.authType === 'google' ? m.email !== member.email : m.nationalId !== member.nationalId
+  );
   localStorage.setItem(MEMBERS_KEY, JSON.stringify([...others, member]));
 }
 

@@ -9,6 +9,7 @@ import type { UserRole } from './types';
    so the initial bundle stays small. LoginPage stays eager — it is the first
    page every user sees. */
 const RegisterPage = lazy(() => import('./pages/RegisterPage').then(m => ({ default: m.RegisterPage })));
+const ForeignerRegisterPage = lazy(() => import('./pages/ForeignerRegisterPage').then(m => ({ default: m.ForeignerRegisterPage })));
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
@@ -64,6 +65,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/register/foreigner" element={<ForeignerRegisterPage />} />
       <Route path="/" element={<DefaultRedirect />} />
       <Route path="/map" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>

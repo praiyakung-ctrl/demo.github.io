@@ -3,15 +3,18 @@ import { Link, Navigate } from 'react-router-dom';
 import { Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
+import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { PdpaConsentBanner } from '../components/PdpaConsentBanner';
 import { hasPdpaConsent, savePdpaConsent } from '../utils/pdpaConsent';
 import type { ThaIdProfile } from '../utils/thaId';
+import type { GoogleProfile } from '../utils/googleAuth';
 
 export function LoginPage() {
-  const { loginWithThaId, user } = useAuth();
+  const { loginWithThaId, loginWithGoogle, user } = useAuth();
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const [mode, setMode] = useState<'thaid' | 'google'>('thaid');
   const [showPdpa, setShowPdpa] = useState(() => !hasPdpaConsent());
 
   if (user) {
@@ -27,6 +30,14 @@ export function LoginPage() {
     if (!ok) {
       setError('ไม่พบบัญชีที่ผูกกับ ThaID นี้ กรุณาสมัครสมาชิกก่อนเข้าใช้งาน');
       setAttempt(a => a + 1); // remounts the panel so it can scan again
+    }
+  };
+
+  const handleGoogleVerified = (profile: GoogleProfile) => {
+    const ok = loginWithGoogle(profile);
+    if (!ok) {
+      setError('ไม่พบบัญชีที่ผูกกับ Google นี้ กรุณาสมัครสมาชิกสำหรับชาวต่างชาติก่อนเข้าใช้งาน');
+      setAttempt(a => a + 1); // remounts the panel so it can connect again
     }
   };
 
@@ -52,17 +63,43 @@ export function LoginPage() {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Shield size={40} className="text-navy-700" />
-            <h2 className="text-4xl font-bold text-gray-900">เข้าสู่ระบบด้วย ThaID</h2>
+            <h2 className="text-4xl font-bold text-gray-900">{mode === 'thaid' ? 'เข้าสู่ระบบด้วย ThaID' : 'เข้าสู่ระบบด้วย Google'}</h2>
           </div>
 
           {error && <p role="alert" className="text-lg text-red-600 bg-red-50 px-3 py-2 rounded-lg mb-4">{error}</p>}
 
-          <ThaIdLoginPanel key={attempt} showDemoShortcuts onVerified={handleVerified} />
+          {mode === 'thaid' ? (
+            <ThaIdLoginPanel key={attempt} showDemoShortcuts onVerified={handleVerified} />
+          ) : (
+            <GoogleLoginPanel key={attempt} showDemoShortcut onVerified={handleGoogleVerified} />
+          )}
 
           <p className="mt-4 text-center text-lg text-gray-600">
+            {mode === 'thaid' ? (
+              <>
+                ชาวต่างชาติ?{' '}
+                <button type="button" onClick={() => { setMode('google'); setError(''); }} className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                  เข้าสู่ระบบด้วย Google
+                </button>
+              </>
+            ) : (
+              <>
+                มีบัตรประชาชนไทย?{' '}
+                <button type="button" onClick={() => { setMode('thaid'); setError(''); }} className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                  เข้าสู่ระบบด้วย ThaID
+                </button>
+              </>
+            )}
+          </p>
+
+          <p className="mt-2 text-center text-lg text-gray-600">
             ยังไม่มีบัญชี?{' '}
             <Link to="/register" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
               สมัครสมาชิกสำหรับประชาชน
+            </Link>
+            <span className="mx-2 text-gray-300">·</span>
+            <Link to="/register/foreigner" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+              สมัครสมาชิกสำหรับชาวต่างชาติ
             </Link>
           </p>
 

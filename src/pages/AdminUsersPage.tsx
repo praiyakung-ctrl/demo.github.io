@@ -121,7 +121,7 @@ export function AdminUsersPage() {
     setForm({
       name: user.name, username: user.username, email: user.email,
       role: user.role as UserRole,
-      nationalId: user.nationalId, isActive: user.isActive, groupId: user.groupId ?? '',
+      nationalId: user.nationalId ?? '', isActive: user.isActive, groupId: user.groupId ?? '',
       phone: user.phone ?? '', picture: user.picture ?? '',
       department: user.department ?? '', note: user.note ?? '',
     });

@@ -3,13 +3,15 @@ import type { ReactNode } from 'react';
 import type { MenuKey, PermissionAction, User, UserRole } from '../types';
 import { groupForUser, hasPermission } from '../utils/groupStorage';
 import { savedUsers } from '../utils/userStorage';
-import { findMemberByNationalId } from '../utils/memberStorage';
+import { findMemberByNationalId, findMemberByEmail } from '../utils/memberStorage';
 import { logAudit } from '../utils/auditLog';
 import type { ThaIdProfile } from '../utils/thaId';
+import type { GoogleProfile } from '../utils/googleAuth';
 
 interface AuthContextType {
   user: User | null;
   loginWithThaId: (profile: ThaIdProfile) => boolean;
+  loginWithGoogle: (profile: GoogleProfile) => boolean;
   logout: () => void;
   isAdmin: boolean;
   isOperator: boolean;
@@ -64,6 +66,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  // foreign nationals have no Thai national ID — they verify with Google
+  // OAuth instead, matched to their registered CitizenMember by email
+  const loginWithGoogle = (profile: GoogleProfile): boolean => {
+    const member = findMemberByEmail(profile.email);
+    if (member) {
+      const citizen: User = {
+        id: member.id,
+        name: member.name,
+        username: member.email,
+        role: 'citizen' as UserRole,
+        email: member.email,
+        isActive: true,
+        passportNumber: member.passportNumber,
+        picture: member.picture,
+      };
+      persistLogin(citizen, 'เข้าสู่ระบบด้วย Google (ชาวต่างชาติ)');
+      return true;
+    }
+
+    return false;
+  };
+
   const logout = () => {
     if (user) logAudit(user, 'logout', 'ระบบ', 'ออกจากระบบ');
     setUser(null);
@@ -83,6 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider value={{
       user,
       loginWithThaId,
+      loginWithGoogle,
       logout,
       isAdmin: role === 'admin',
       isOperator: role === 'operator',

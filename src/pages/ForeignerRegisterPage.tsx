@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CheckCircle2, ChevronLeft, ShieldCheck, UserPlus } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ShieldCheck, Upload, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
-import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
-import type { ThaIdProfile } from '../utils/thaId';
-import { findMemberByNationalId, saveMember } from '../utils/memberStorage';
+import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
+import type { GoogleProfile } from '../utils/googleAuth';
+import { findMemberByEmail, saveMember } from '../utils/memberStorage';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import type { CitizenMember, MemberType } from '../types';
 import { ORG_INFO } from '../data/orgInfo';
@@ -26,9 +26,10 @@ const THAI_PROVINCES = [
 const OTHER = 'อื่นๆ';
 
 const COLLECTED_DATA = [
-  'ชื่อ-นามสกุล และเลขประจำตัวประชาชน 13 หลัก จากแอป ThaID',
-  'อีเมลและเบอร์โทรศัพท์ที่ท่านกรอกเพิ่มเติม',
-  'ที่อยู่ จังหวัด รหัสไปรษณีย์',
+  'ชื่อ-นามสกุล และอีเมล จากบัญชี Google',
+  'เลขที่หนังสือเดินทาง (พาสปอร์ต) และสัญชาติ',
+  'ภาพสแกนหนังสือเดินทาง',
+  'ที่อยู่ จังหวัด รหัสไปรษณีย์ และเบอร์โทรศัพท์ที่ท่านกรอกเพิ่มเติม',
   'ประเภทผู้ใช้งาน และวัตถุประสงค์การใช้งาน',
 ];
 
@@ -40,6 +41,8 @@ function Req() {
 interface ProfileForm {
   name: string;
   email: string;
+  passportNumber: string;
+  nationality: string;
   address: string;
   province: string;
   postalCode: string;
@@ -51,42 +54,55 @@ interface ProfileForm {
   acceptPdpa: boolean;
 }
 
-export function RegisterPage() {
-  const { loginWithThaId } = useAuth();
+export function ForeignerRegisterPage() {
+  const { loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [submitting, setSubmitting] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
-  const [thaId, setThaId] = useState<ThaIdProfile | null>(null);
+  const [google, setGoogle] = useState<GoogleProfile | null>(null);
+  const [passportScan, setPassportScan] = useState('');
   const [form, setForm] = useState<ProfileForm>({
-    name: '', email: '', address: '', province: 'ชลบุรี', postalCode: '', phone: '',
+    name: '', email: '', passportNumber: '', nationality: '',
+    address: '', province: 'ชลบุรี', postalCode: '', phone: '',
     memberType: '', purpose: '', purposeOther: '',
     acceptTerms: false, acceptPdpa: false,
   });
 
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
 
-  const handleThaIdVerified = (profile: ThaIdProfile) => {
-    if (findMemberByNationalId(profile.nationalId)) {
+  const handleGoogleVerified = (profile: GoogleProfile) => {
+    if (findMemberByEmail(profile.email)) {
       setAlreadyRegistered(true);
       return;
     }
-    setThaId(profile);
-    set({ name: profile.name });
-    setStep(2);
+    setGoogle(profile);
+    set({ name: profile.name, email: profile.email });
   };
+
+  const handlePassportScan = (file: File | undefined) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setPassportScan(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const canContinue = Boolean(google) && Boolean(passportScan);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!thaId || !form.memberType) return;
+    if (!google || !passportScan || !form.memberType) return;
     setSubmitting(true);
     await new Promise(r => setTimeout(r, 600));
     const member: CitizenMember = {
       id: `member-${Date.now()}`,
-      nationalId: thaId.nationalId,
+      authType: 'google',
       email: form.email,
       name: form.name,
-      picture: thaId.picture,
+      picture: google.picture,
+      passportNumber: form.passportNumber,
+      nationality: form.nationality,
+      passportScan,
       address: form.address,
       province: form.province,
       postalCode: form.postalCode,
@@ -103,8 +119,8 @@ export function RegisterPage() {
   };
 
   const handleEnter = () => {
-    if (!thaId) return;
-    loginWithThaId({ nationalId: thaId.nationalId, name: form.name, picture: thaId.picture });
+    if (!google) return;
+    loginWithGoogle(google);
     navigate('/portal', { replace: true });
   };
 
@@ -118,8 +134,8 @@ export function RegisterPage() {
         <div className="w-full max-w-xl">
           <div className="text-center mb-6">
             <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="อบจ.ชลบุรี" className="h-24 w-24 mx-auto mb-3 object-contain" />
-            <h1 className="text-white text-4xl font-bold">สมัครสมาชิกสำหรับประชาชน</h1>
-            <p className="text-blue-200 text-2xl">ระบบฐานข้อมูลเพื่อการเข้าถึง Data Integration and End Users</p>
+            <h1 className="text-white text-4xl font-bold">สมัครสมาชิกสำหรับชาวต่างชาติ</h1>
+            <p className="text-blue-200 text-2xl">Registration for Foreign Nationals (Passport Holders)</p>
           </div>
 
           <div className="bg-white rounded-2xl shadow-2xl p-8">
@@ -130,7 +146,7 @@ export function RegisterPage() {
                   <h2 className="text-3xl font-bold text-gray-900">เริ่มต้นสมัครสมาชิก</h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-4">
-                  สมัครสมาชิกด้วยการยืนยันตัวตนผ่านแอป ThaID (กรมการปกครอง กระทรวงมหาดไทย)
+                  ยืนยันตัวตนด้วยบัญชี Google (Gmail) ผ่าน OAuth 2.0 พร้อมแนบสแกนหนังสือเดินทาง (พาสปอร์ต)
                   จากนั้นกรอกข้อมูลเพิ่มเติมเพื่อใช้บริการขอข้อมูลภาพจากกล้อง CCTV
                 </p>
                 <div className="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
@@ -141,49 +157,84 @@ export function RegisterPage() {
                     {COLLECTED_DATA.map(item => <li key={item}>{item}</li>)}
                   </ul>
                 </div>
-                <ThaIdLoginPanel onVerified={handleThaIdVerified} />
+
+                <GoogleLoginPanel showDemoShortcut onVerified={handleGoogleVerified} />
+
+                <div className="mt-4">
+                  <label className="label">แนบสแกนหนังสือเดินทาง (พาสปอร์ต)<Req /></label>
+                  {passportScan ? (
+                    <div className="flex items-center gap-3">
+                      <img src={passportScan} alt="สแกนหนังสือเดินทาง" className="w-28 h-28 rounded-lg object-cover border border-gray-200" />
+                      <button type="button" onClick={() => setPassportScan('')} className="text-base text-red-600 hover:underline font-medium">นำไฟล์ออก</button>
+                    </div>
+                  ) : (
+                    <label className="flex items-center gap-2 border-2 border-dashed border-gray-300 hover:border-navy-500 rounded-xl px-4 py-3 cursor-pointer text-navy-700 font-bold w-fit">
+                      <Upload size={20} aria-hidden="true" /> แนบไฟล์สแกนพาสปอร์ต
+                      <input type="file" accept="image/*" className="hidden" onChange={e => handlePassportScan(e.target.files?.[0])} />
+                    </label>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  disabled={!canContinue}
+                  onClick={() => setStep(2)}
+                  className="btn-primary w-full py-3 text-xl mt-5 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  ถัดไป
+                </button>
               </>
             )}
 
             {step === 1 && alreadyRegistered && (
               <div className="text-center py-4" role="alert">
                 <CheckCircle2 size={48} className="text-green-600 mx-auto mb-3" aria-hidden="true" />
-                <p className="text-xl font-semibold text-gray-900 mb-1">ThaID นี้สมัครสมาชิกแล้ว</p>
-                <p className="text-lg text-gray-600 mb-5">ท่านสามารถเข้าสู่ระบบด้วยปุ่ม "เข้าสู่ระบบด้วย ThaID" ได้ทันที</p>
+                <p className="text-xl font-semibold text-gray-900 mb-1">บัญชี Google นี้สมัครสมาชิกแล้ว</p>
+                <p className="text-lg text-gray-600 mb-5">ท่านสามารถเข้าสู่ระบบด้วยปุ่ม "เข้าสู่ระบบด้วย Google" ได้ทันที</p>
                 <Link to="/login" className="btn-primary inline-block w-full py-2.5 text-lg">ไปหน้าเข้าสู่ระบบ</Link>
               </div>
             )}
 
-            {step === 2 && thaId && (
+            {step === 2 && google && (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <h2 className="text-2xl font-bold text-gray-900">กรอกข้อมูลสมาชิก</h2>
 
-                {/* ThaID profile (readonly) */}
+                {/* Google profile (readonly) */}
                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-100 space-y-3">
                   <div className="flex items-center gap-3">
-                    {thaId.picture ? (
-                      <img src={thaId.picture} alt="รูปโปรไฟล์จาก ThaID" className="w-12 h-12 rounded-full object-cover" />
+                    {google.picture ? (
+                      <img src={google.picture} alt="รูปโปรไฟล์จาก Google" className="w-12 h-12 rounded-full object-cover" />
                     ) : (
                       <div className="w-12 h-12 rounded-full bg-navy-700 text-white flex items-center justify-center text-xl font-bold" aria-hidden="true">
-                        {form.name.charAt(0) || 'T'}
+                        {form.name.charAt(0) || 'G'}
                       </div>
                     )}
-                    <p className="text-lg font-semibold text-gray-700">ยืนยันตัวตนผ่าน ThaID แล้ว</p>
+                    <p className="text-lg font-semibold text-gray-700">ยืนยันตัวตนผ่าน Google แล้ว</p>
                   </div>
                   <div>
-                    <label htmlFor="reg-nationalid" className="label">เลขประจำตัวประชาชน (จาก ThaID)</label>
-                    <input id="reg-nationalid" type="text" value={thaId.nationalId} readOnly className="input-field bg-gray-100 text-gray-500 font-mono" />
+                    <label htmlFor="reg-email-ro" className="label">อีเมล (จาก Google)</label>
+                    <input id="reg-email-ro" type="text" value={google.email} readOnly className="input-field bg-gray-100 text-gray-500" />
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <img src={passportScan} alt="สแกนหนังสือเดินทาง" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
+                    <p className="text-base text-gray-600">แนบสแกนหนังสือเดินทางแล้ว</p>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="reg-name" className="label">ชื่อ-นามสกุล<Req /></label>
-                  <input id="reg-name" type="text" value={form.name} onChange={e => set({ name: e.target.value })} placeholder="กรอกชื่อ-นามสกุล" className="input-field" required />
+                  <label htmlFor="reg-name" className="label">ชื่อ-นามสกุล (ตามหนังสือเดินทาง)<Req /></label>
+                  <input id="reg-name" type="text" value={form.name} onChange={e => set({ name: e.target.value })} placeholder="Full name as in passport" className="input-field" required />
                 </div>
 
-                <div>
-                  <label htmlFor="reg-email" className="label">อีเมล<Req /></label>
-                  <input id="reg-email" type="email" value={form.email} onChange={e => set({ email: e.target.value })} placeholder="กรอกอีเมล" className="input-field" required />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="reg-passport" className="label">เลขที่หนังสือเดินทาง<Req /></label>
+                    <input id="reg-passport" type="text" value={form.passportNumber} onChange={e => set({ passportNumber: e.target.value })} placeholder="Passport No." className="input-field" required />
+                  </div>
+                  <div>
+                    <label htmlFor="reg-nationality" className="label">สัญชาติ<Req /></label>
+                    <input id="reg-nationality" type="text" value={form.nationality} onChange={e => set({ nationality: e.target.value })} placeholder="Nationality" className="input-field" required />
+                  </div>
                 </div>
 
                 <div>
@@ -206,7 +257,7 @@ export function RegisterPage() {
 
                 <div>
                   <label htmlFor="reg-phone" className="label">เบอร์โทรศัพท์มือถือ<Req /></label>
-                  <input id="reg-phone" type="tel" inputMode="numeric" pattern="0[0-9]{9}" title="เบอร์มือถือ 10 หลัก ขึ้นต้นด้วย 0" value={form.phone} onChange={e => set({ phone: e.target.value })} placeholder="เช่น 0812345678" className="input-field" required />
+                  <input id="reg-phone" type="tel" value={form.phone} onChange={e => set({ phone: e.target.value })} placeholder="Mobile phone number" className="input-field" required />
                 </div>
 
                 <div>
@@ -279,15 +330,6 @@ export function RegisterPage() {
                 </p>
                 <button onClick={handleEnter} className="btn-primary w-full py-3 text-xl">เข้าสู่ระบบ</button>
               </div>
-            )}
-
-            {step === 1 && !alreadyRegistered && (
-              <p className="mt-4 text-center text-lg text-gray-600">
-                ชาวต่างชาติ?{' '}
-                <Link to="/register/foreigner" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-                  สมัครสมาชิกสำหรับชาวต่างชาติ
-                </Link>
-              </p>
             )}
 
             {step !== 3 && (

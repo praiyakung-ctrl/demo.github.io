@@ -175,10 +175,12 @@ export const MEMBER_PURPOSE_OPTIONS = [
   'อื่นๆ',
 ] as const;
 
-/* Citizen who registered through ThaID verification on the register page */
+/* Citizen who registered through ThaID verification on the register page,
+   or a foreign national who registered via Google OAuth + passport scan */
 export interface CitizenMember {
   id: string;
-  nationalId: string;
+  /* required for authType 'thaid'; absent for 'google' */
+  nationalId?: string;
   email: string;
   name: string;
   picture?: string;
@@ -191,6 +193,13 @@ export interface CitizenMember {
   acceptedTerms: boolean;
   acceptedPdpa: boolean;
   registeredAt: string;
+  /* how identity was verified at registration; absent on legacy records means 'thaid' */
+  authType?: 'thaid' | 'google';
+  /* required for authType 'google' (foreign nationals) */
+  passportNumber?: string;
+  nationality?: string;
+  /* passport scan as data-URI (demo), required for authType 'google' */
+  passportScan?: string;
 }
 
 export interface User {
@@ -200,8 +209,11 @@ export interface User {
   role: UserRole;
   email: string;
   isActive: boolean;
-  /* 13-digit Thai national ID — the credential ThaID/DOPA verifies against */
-  nationalId: string;
+  /* 13-digit Thai national ID — the credential ThaID/DOPA verifies against;
+     absent for foreign nationals who verified via passport + Google OAuth instead */
+  nationalId?: string;
+  /* foreign nationals only — passport number used in place of nationalId */
+  passportNumber?: string;
   /* group-based permissions; when absent, falls back to the system group of the role */
   groupId?: string;
   phone?: string;
