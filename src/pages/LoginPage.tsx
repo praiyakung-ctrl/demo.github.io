@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Mail, Shield } from 'lucide-react';
+import { Globe, Mail, Shield, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
 import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
@@ -75,15 +75,15 @@ export function LoginPage() {
           )}
 
           {mode === 'thaid' ? (
-            <div className="mt-5 pt-5 border-t border-gray-100">
-              <p className="text-center text-base text-gray-500 mb-3">สำหรับชาวต่างชาติ</p>
+            <div className="mt-3">
+              <p className="text-center text-base text-gray-500 mb-2">สำหรับชาวต่างชาติ</p>
               <button
                 type="button"
                 onClick={() => { setMode('google'); setError(''); }}
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-gray-300 bg-white text-gray-700 text-xl font-semibold shadow-sm hover:bg-gray-50 hover:shadow transition-all"
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-blue-200 bg-blue-50 text-navy-700 text-xl font-semibold shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
               >
-                <Mail size={22} className="text-navy-700" aria-hidden="true" />
-                เข้าสู่ระบบด้วย Google
+                <Mail size={22} aria-hidden="true" />
+                Foreign Nationals log in using Gmail
               </button>
             </div>
           ) : (
@@ -95,16 +95,17 @@ export function LoginPage() {
             </p>
           )}
 
-          <p className="mt-2 text-center text-lg text-gray-600">
-            ยังไม่มีบัญชี?{' '}
-            <Link to="/register" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-              สมัครสมาชิกสำหรับประชาชน
-            </Link>
-            <span className="mx-2 text-gray-300">·</span>
-            <Link to="/register/foreigner" className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-              สมัครสมาชิกสำหรับชาวต่างชาติ
-            </Link>
-          </p>
+          <div className="mt-3">
+            <p className="text-center text-base text-gray-500 mb-2">ยังไม่มีบัญชี?</p>
+            <div className="space-y-2">
+              <Link to="/register" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                <UserPlus size={18} aria-hidden="true" /> สมัครสมาชิกสำหรับประชาชน
+              </Link>
+              <Link to="/register/foreigner" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                <Globe size={18} aria-hidden="true" /> Membership registration for foreigners
+              </Link>
+            </div>
+          </div>
 
           {/* Public info pages — readable without logging in */}
           <p className="mt-2 text-center text-lg text-gray-600">
