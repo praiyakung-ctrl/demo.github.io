@@ -161,7 +161,7 @@ export function ForeignerRegisterPage() {
                 <GoogleLoginPanel showDemoShortcut onVerified={handleGoogleVerified} />
 
                 <div className="mt-4">
-                  <label className="label">แนบสแกนหนังสือเดินทาง (พาสปอร์ต)<Req /></label>
+                  <label htmlFor="passport-scan-input" className="label">แนบสแกนหนังสือเดินทาง (พาสปอร์ต)<Req /></label>
                   {passportScan ? (
                     <div className="flex items-center gap-3">
                       <img src={passportScan} alt="สแกนหนังสือเดินทาง" className="w-28 h-28 rounded-lg object-cover border border-gray-200" />
@@ -170,7 +170,7 @@ export function ForeignerRegisterPage() {
                   ) : (
                     <label className="flex items-center gap-2 border-2 border-dashed border-gray-300 hover:border-navy-500 rounded-xl px-4 py-3 cursor-pointer text-navy-700 font-bold w-fit">
                       <Upload size={20} aria-hidden="true" /> แนบไฟล์สแกนพาสปอร์ต
-                      <input type="file" accept="image/*" className="hidden" onChange={e => handlePassportScan(e.target.files?.[0])} />
+                      <input id="passport-scan-input" type="file" accept="image/*" className="hidden" onChange={e => handlePassportScan(e.target.files?.[0])} />
                     </label>
                   )}
                 </div>
