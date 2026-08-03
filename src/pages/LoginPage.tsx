@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Shield } from 'lucide-react';
+import { Mail, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
 import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
@@ -74,23 +74,26 @@ export function LoginPage() {
             <GoogleLoginPanel key={attempt} showDemoShortcut onVerified={handleGoogleVerified} />
           )}
 
-          <p className="mt-4 text-center text-lg text-gray-600">
-            {mode === 'thaid' ? (
-              <>
-                ชาวต่างชาติ?{' '}
-                <button type="button" onClick={() => { setMode('google'); setError(''); }} className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-                  เข้าสู่ระบบด้วย Google
-                </button>
-              </>
-            ) : (
-              <>
-                มีบัตรประชาชนไทย?{' '}
-                <button type="button" onClick={() => { setMode('thaid'); setError(''); }} className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-                  เข้าสู่ระบบด้วย ThaID
-                </button>
-              </>
-            )}
-          </p>
+          {mode === 'thaid' ? (
+            <div className="mt-5 pt-5 border-t border-gray-100">
+              <p className="text-center text-base text-gray-500 mb-3">สำหรับชาวต่างชาติ</p>
+              <button
+                type="button"
+                onClick={() => { setMode('google'); setError(''); }}
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-gray-300 bg-white text-gray-700 text-xl font-semibold shadow-sm hover:bg-gray-50 hover:shadow transition-all"
+              >
+                <Mail size={22} className="text-navy-700" aria-hidden="true" />
+                เข้าสู่ระบบด้วย Google
+              </button>
+            </div>
+          ) : (
+            <p className="mt-4 text-center text-lg text-gray-600">
+              มีบัตรประชาชนไทย?{' '}
+              <button type="button" onClick={() => { setMode('thaid'); setError(''); }} className="text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                เข้าสู่ระบบด้วย ThaID
+              </button>
+            </p>
+          )}
 
           <p className="mt-2 text-center text-lg text-gray-600">
             ยังไม่มีบัญชี?{' '}
