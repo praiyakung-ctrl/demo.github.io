@@ -32,6 +32,6 @@ export function mockGoogleVerify(hint?: Partial<GoogleProfile>): Promise<GoogleP
 }
 
 export const DEMO_GOOGLE_PROFILE: GoogleProfile = {
-  email: 'foreign.visitor.demo@gmail.com',
-  name: 'John Visitor',
+  email: 'zhang.san.demo@gmail.com',
+  name: 'ZHANG SAN',
 };

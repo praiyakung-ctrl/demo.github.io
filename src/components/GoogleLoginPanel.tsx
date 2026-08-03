@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { CheckCircle2, Mail } from 'lucide-react';
 import { mockGoogleVerify, DEMO_GOOGLE_PROFILE } from '../utils/googleAuth';
 import type { GoogleProfile } from '../utils/googleAuth';
+import { ensureDemoForeignerRegistered } from '../utils/memberStorage';
 
 interface Props {
   onVerified: (profile: GoogleProfile) => void;
@@ -66,7 +67,7 @@ export function GoogleLoginPanel({ onVerified, showDemoShortcut, title, subtitle
           <p className="text-base font-semibold text-gray-500 mb-2">จำลองบัญชี Google (Demo)</p>
           <button
             type="button"
-            onClick={() => start(DEMO_GOOGLE_PROFILE)}
+            onClick={() => { ensureDemoForeignerRegistered(); start(DEMO_GOOGLE_PROFILE); }}
             className="text-lg px-3 py-1.5 rounded-md font-medium bg-gray-100 text-navy-700 hover:opacity-80 transition-opacity"
           >
             {DEMO_GOOGLE_PROFILE.name} ({DEMO_GOOGLE_PROFILE.email})

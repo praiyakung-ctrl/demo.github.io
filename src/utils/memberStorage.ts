@@ -1,5 +1,6 @@
 import type { CitizenMember } from '../types';
 import { DEMO_THAID_PROFILES } from './thaId';
+import { DEMO_GOOGLE_PROFILE } from './googleAuth';
 
 const MEMBERS_KEY = 'registered_members';
 
@@ -69,5 +70,33 @@ export function ensureDemoCitizenRegistered(): void {
     acceptedTerms: true,
     acceptedPdpa: true,
     registeredAt: new Date(0).toISOString(),
+  });
+}
+
+/* The "จำลองบัญชี Google (Demo)" shortcut on /login logs in as this email,
+   but a foreign national would only be findable here after completing
+   /register/foreigner — seed an already-approved member on first use, same
+   as ensureDemoCitizenRegistered() above, so the demo shortcut can log in
+   immediately without going through the admin approval queue. */
+export function ensureDemoForeignerRegistered(): void {
+  const { email, name } = DEMO_GOOGLE_PROFILE;
+  if (findMemberByEmail(email)) return;
+  saveMember({
+    id: 'demo-foreigner',
+    authType: 'google',
+    email,
+    name,
+    passportNumber: 'E88888888',
+    nationality: 'จีน',
+    address: 'โรงแรมในจังหวัดชลบุรี (ที่พักชั่วคราว)',
+    province: 'ชลบุรี',
+    postalCode: '20000',
+    phone: '0899999999',
+    memberType: 'ประชาชน',
+    purpose: 'ขอภาพเพื่อดำเนินคดี',
+    acceptedTerms: true,
+    acceptedPdpa: true,
+    registeredAt: new Date(0).toISOString(),
+    status: 'approved',
   });
 }
