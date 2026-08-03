@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { loadA11ySettings } from './utils/a11ySettings';
 import { LoginPage } from './pages/LoginPage';
@@ -26,6 +26,8 @@ const AdminGroupsPage = lazy(() => import('./pages/AdminGroupsPage').then(m => (
 const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ default: m.AdminMenusPage })));
 const ReportIncidentPage = lazy(() => import('./pages/ReportIncidentPage').then(m => ({ default: m.ReportIncidentPage })));
 const AdminIncidentsPage = lazy(() => import('./pages/AdminIncidentsPage').then(m => ({ default: m.AdminIncidentsPage })));
+const AdminMemberReviewPage = lazy(() => import('./pages/AdminMemberReviewPage').then(m => ({ default: m.AdminMemberReviewPage })));
+const SetPasswordPage = lazy(() => import('./pages/SetPasswordPage').then(m => ({ default: m.SetPasswordPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const PoliceUsageReportPage = lazy(() => import('./pages/PoliceUsageReportPage').then(m => ({ default: m.PoliceUsageReportPage })));
 const ComparisonReportPage = lazy(() => import('./pages/ComparisonReportPage').then(m => ({ default: m.ComparisonReportPage })));
@@ -44,7 +46,10 @@ function PageLoading() {
 
 function RequireAuth({ children, roles }: { children: React.ReactNode; roles?: UserRole[] }) {
   const { user } = useAuth();
+  const { pathname } = useLocation();
   if (!user) return <Navigate to="/login" replace />;
+  // newly-approved members must set a password before reaching any other page
+  if (user.mustChangePassword && pathname !== '/set-password') return <Navigate to="/set-password" replace />;
   if (roles && !roles.includes(user.role)) return <Navigate to="/dashboard" replace />;
   return <>{children}</>;
 }
@@ -135,6 +140,16 @@ function AppRoutes() {
       <Route path="/admin/incidents" element={
         <RequireAuth roles={['admin', 'operator']}>
           <AdminIncidentsPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/member-review" element={
+        <RequireAuth roles={['admin']}>
+          <AdminMemberReviewPage />
+        </RequireAuth>
+      } />
+      <Route path="/set-password" element={
+        <RequireAuth>
+          <SetPasswordPage />
         </RequireAuth>
       } />
       <Route path="/admin/groups" element={

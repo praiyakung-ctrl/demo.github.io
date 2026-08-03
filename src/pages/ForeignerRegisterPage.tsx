@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CheckCircle2, ChevronLeft, ShieldCheck, Upload, UserPlus } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
 import type { GoogleProfile } from '../utils/googleAuth';
@@ -55,8 +54,6 @@ interface ProfileForm {
 }
 
 export function ForeignerRegisterPage() {
-  const { loginWithGoogle } = useAuth();
-  const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [submitting, setSubmitting] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
@@ -72,7 +69,10 @@ export function ForeignerRegisterPage() {
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
 
   const handleGoogleVerified = (profile: GoogleProfile) => {
-    if (findMemberByEmail(profile.email)) {
+    const existing = findMemberByEmail(profile.email);
+    // a rejected applicant may resubmit with corrected info/documents;
+    // pending/approved members are already registered
+    if (existing && existing.status !== 'rejected') {
       setAlreadyRegistered(true);
       return;
     }
@@ -112,16 +112,11 @@ export function ForeignerRegisterPage() {
       acceptedTerms: form.acceptTerms,
       acceptedPdpa: form.acceptPdpa,
       registeredAt: new Date().toISOString(),
+      status: 'pending',
     };
     saveMember(member);
     setSubmitting(false);
     setStep(3);
-  };
-
-  const handleEnter = () => {
-    if (!google) return;
-    loginWithGoogle(google);
-    navigate('/portal', { replace: true });
   };
 
   return (
@@ -323,12 +318,12 @@ export function ForeignerRegisterPage() {
             {step === 3 && (
               <div className="text-center py-4" role="status">
                 <CheckCircle2 size={56} className="text-green-600 mx-auto mb-3" aria-hidden="true" />
-                <p className="text-2xl font-bold text-gray-900 mb-1">สมัครสมาชิกเรียบร้อยแล้ว</p>
+                <p className="text-2xl font-bold text-gray-900 mb-1">ส่งใบสมัครเรียบร้อยแล้ว</p>
                 <p className="text-lg text-gray-600 mb-5">
-                  ยินดีต้อนรับ <span className="font-semibold text-gray-900">{form.name}</span> ท่านสามารถเข้าใช้งานพอร์ทัลประชาชน
-                  เพื่อยื่นคำขอข้อมูลภาพจากกล้อง CCTV ได้ทันที
+                  ยินดีต้อนรับ <span className="font-semibold text-gray-900">{form.name}</span> ใบสมัครของท่านอยู่ระหว่างการตรวจสอบโดยเจ้าหน้าที่
+                  เมื่อได้รับการอนุมัติ ระบบจะส่งอีเมลแจ้งไปที่ {form.email} และท่านจะสามารถเข้าสู่ระบบด้วย Google ได้ทันที
                 </p>
-                <button onClick={handleEnter} className="btn-primary w-full py-3 text-xl">เข้าสู่ระบบ</button>
+                <Link to="/login" className="btn-primary inline-block w-full py-3 text-xl">ไปหน้าเข้าสู่ระบบ</Link>
               </div>
             )}
 

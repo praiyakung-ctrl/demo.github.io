@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, Waves, Wrench, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, UserCheck, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
@@ -9,6 +9,7 @@ import eventsData from '../data/events.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
 import { pendingReports } from '../utils/cameraReports';
+import { pendingMembers } from '../utils/memberStorage';
 import { savedNotificationSettings } from '../utils/notificationSettings';
 import { savedRequests } from '../utils/requestStorage';
 import { savedIncidentPoints } from '../utils/incidentPoints';
@@ -75,6 +76,8 @@ export function Navbar() {
   );
   // admins also see cameras reported for inspection (read fresh — dropdown toggles re-render)
   const repairReports = isAdmin ? pendingReports() : [];
+  // admins also see new member registrations awaiting review
+  const pendingMemberApplications = isAdmin ? pendingMembers() : [];
   // citizens and field reporters are notified about their own CCTV request status, not CCTV events
   // (read fresh — statuses change as staff review requests)
   const myRequests = (isCitizen || isFieldReporter) ? savedRequests().filter(r => r.email === user?.email) : [];
@@ -86,7 +89,7 @@ export function Navbar() {
     ? activeRequests.length
     : isFieldReporter
       ? activeRequests.length + activeIncidentPoints.length
-      : unackEvents.length + repairReports.length;
+      : unackEvents.length + repairReports.length + pendingMemberApplications.length;
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -317,6 +320,29 @@ export function Navbar() {
                           {rep.cameraId} — {rep.note || 'ไม่ระบุอาการ'}
                         </p>
                         <p className="text-xs text-gray-500 mt-0.5">แจ้งโดย {rep.reportedBy} · {timeAgo(rep.reportedAt)}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* New member registrations awaiting review (admin only) */}
+              {pendingMemberApplications.length > 0 && (
+                <div className="border-b border-teal-100">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-teal-50">
+                    <UserCheck size={14} className="text-teal-600" />
+                    <span className="text-xs font-bold text-teal-700">ผู้สมัครสมาชิกใหม่รอตรวจสอบ ({pendingMemberApplications.length})</span>
+                  </div>
+                  {pendingMemberApplications.slice(0, 5).map(m => (
+                    <button
+                      key={m.id}
+                      onClick={() => { setShowNotif(false); navigate('/admin/member-review'); }}
+                      className="w-full text-left flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-teal-50/60 transition-colors"
+                    >
+                      <UserCheck size={18} className="mt-0.5 flex-shrink-0 text-teal-500" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-900">{m.name} — {m.memberType}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{timeAgo(m.registeredAt)}</p>
                       </div>
                     </button>
                   ))}

@@ -8,7 +8,11 @@ export function savedMembers(): CitizenMember[] {
     const raw = localStorage.getItem(MEMBERS_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    // records saved before the member-review workflow existed have no status
+    // field — treat them as already approved so they aren't retroactively
+    // locked out of login
+    return parsed.map((m: CitizenMember) => ({ ...m, status: m.status ?? 'approved' }));
   } catch {
     return [];
   }
@@ -33,6 +37,15 @@ export function saveMember(member: CitizenMember): void {
     member.authType === 'google' ? m.email !== member.email : m.nationalId !== member.nationalId
   );
   localStorage.setItem(MEMBERS_KEY, JSON.stringify([...others, member]));
+}
+
+export function pendingMembers(): CitizenMember[] {
+  return savedMembers().filter(m => m.status === 'pending');
+}
+
+export function updateMember(id: string, patch: Partial<CitizenMember>): void {
+  const target = savedMembers().find(m => m.id === id);
+  if (target) saveMember({ ...target, ...patch });
 }
 
 /* The "จำลองโปรไฟล์ ThaID: ประชาชน" shortcut on /login logs in as this

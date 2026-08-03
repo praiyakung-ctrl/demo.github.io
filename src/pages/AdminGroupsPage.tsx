@@ -18,6 +18,7 @@ const EMPTY_PERMISSIONS: Record<MenuKey, PermissionAction[]> = {
   map: [], dashboard: [], portal: [], reports: [], comparisonReport: [],
   adminCameras: [], adminUsers: [], adminRepairs: [], adminGroups: [], adminMenus: [],
   adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [], adminIncidents: [],
+  adminMemberReview: [],
 };
 
 export function AdminGroupsPage() {

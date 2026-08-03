@@ -175,6 +175,14 @@ export const MEMBER_PURPOSE_OPTIONS = [
   'อื่นๆ',
 ] as const;
 
+export type MemberStatus = 'pending' | 'approved' | 'rejected';
+
+export const MEMBER_STATUS_LABEL: Record<MemberStatus, string> = {
+  pending: 'รอตรวจสอบ',
+  approved: 'อนุมัติ',
+  rejected: 'ปฏิเสธ',
+};
+
 /* Citizen who registered through ThaID verification on the register page,
    or a foreign national who registered via Google OAuth + passport scan */
 export interface CitizenMember {
@@ -200,6 +208,14 @@ export interface CitizenMember {
   nationality?: string;
   /* passport scan as data-URI (demo), required for authType 'google' */
   passportScan?: string;
+  /* back-office review workflow; absent on legacy records means 'approved' (see savedMembers()) */
+  status?: MemberStatus;
+  reviewedBy?: string;
+  reviewedAt?: string;
+  /* required when status === 'rejected' */
+  rejectionReason?: string;
+  /* set true on admin approval; forces /set-password before the member can use the rest of the app */
+  mustChangePassword?: boolean;
 }
 
 export interface User {
@@ -221,6 +237,8 @@ export interface User {
   picture?: string;
   department?: string;
   note?: string;
+  /* citizen members only — set true right after admin approval, forces /set-password on next login */
+  mustChangePassword?: boolean;
 }
 
 /* ---------- Group-based permissions (RBAC) ---------- */
@@ -228,7 +246,7 @@ export interface User {
 export type MenuKey =
   | 'map' | 'dashboard' | 'portal' | 'reports' | 'comparisonReport'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
-  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents';
+  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents' | 'adminMemberReview';
 
 export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
 
@@ -257,6 +275,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'adminNotifications', label: 'จัดการการแจ้งเตือน' },
   { key: 'adminSettings', label: 'ตั้งค่าระบบ' },
   { key: 'adminIncidents', label: 'ตรวจสอบจุดแจ้งเหตุ' },
+  { key: 'adminMemberReview', label: 'ตรวจสอบสมาชิกใหม่' },
 ];
 
 /* Per-menu presentation settings managed on /admin/menus */

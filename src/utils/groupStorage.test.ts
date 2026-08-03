@@ -22,6 +22,7 @@ const customGroup: UserGroup = {
     map: ['view'], dashboard: [], portal: [], reports: [], comparisonReport: [],
     adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [], adminMenus: [],
     adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [], adminIncidents: [],
+    adminMemberReview: [],
   },
 };
 

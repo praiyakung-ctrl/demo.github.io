@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const member = findMemberByNationalId(profile.nationalId);
-    if (member) {
+    if (member && member.status === 'approved') {
       const citizen: User = {
         id: member.id,
         name: member.name,
@@ -61,6 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isActive: true,
         nationalId: member.nationalId,
         picture: member.picture,
+        mustChangePassword: member.mustChangePassword,
       };
       persistLogin(citizen, 'เข้าสู่ระบบด้วย ThaID');
       return true;
@@ -73,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // OAuth instead, matched to their registered CitizenMember by email
   const loginWithGoogle = (profile: GoogleProfile): boolean => {
     const member = findMemberByEmail(profile.email);
-    if (member) {
+    if (member && member.status === 'approved') {
       const citizen: User = {
         id: member.id,
         name: member.name,
@@ -83,6 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isActive: true,
         passportNumber: member.passportNumber,
         picture: member.picture,
+        mustChangePassword: member.mustChangePassword,
       };
       persistLogin(citizen, 'เข้าสู่ระบบด้วย Google (ชาวต่างชาติ)');
       return true;
