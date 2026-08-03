@@ -8,6 +8,7 @@ compatibility_date = "2026-01-01"
 ALLOWED_ORIGIN = "https://praiyakung-ctrl.github.io"
 BREVO_SENDER_EMAIL = "praiyakung@gmail.com"
 BREVO_SENDER_NAME = "อบจ.ชลบุรี - ระบบฐานข้อมูลเพื่อการเข้าถึง"
+APP_LOGIN_URL = "https://praiyakung-ctrl.github.io/demo.github.io/login"
 
 # BREVO_API_KEY is a secret — never put it here.
 # Set it after `wrangler login` with:

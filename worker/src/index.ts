@@ -10,6 +10,7 @@ export interface Env {
   BREVO_SENDER_EMAIL: string;
   BREVO_SENDER_NAME: string;
   BREVO_API_KEY: string;
+  APP_LOGIN_URL: string;
 }
 
 type EmailRequest =
@@ -34,7 +35,7 @@ function json(body: unknown, status: number, origin: string): Response {
   });
 }
 
-function buildEmail(req: EmailRequest): { subject: string; html: string } {
+function buildEmail(req: EmailRequest, env: Env): { subject: string; html: string } {
   if (req.type === 'member-approved') {
     return {
       subject: 'บัญชีสมาชิกของท่านได้รับการอนุมัติแล้ว',
@@ -42,6 +43,9 @@ function buildEmail(req: EmailRequest): { subject: string; html: string } {
         <p>เรียน คุณ${escapeHtml(req.name)}</p>
         <p>ใบสมัครสมาชิกของท่านได้รับการตรวจสอบและอนุมัติเรียบร้อยแล้ว ท่านสามารถเข้าสู่ระบบเพื่อใช้งานได้ทันที</p>
         <p>ในการเข้าสู่ระบบครั้งแรก ระบบจะให้ท่านตั้งรหัสผ่านสำหรับใช้งานครั้งต่อไป</p>
+        <p style="text-align:center;margin:24px 0;">
+          <a href="${env.APP_LOGIN_URL}" style="background:#1b3a6b;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">คลิกที่นี่เพื่อเข้าสู่ระบบ</a>
+        </p>
         <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
       `.trim(),
     };
@@ -101,7 +105,7 @@ export default {
       return json({ ok: false, error: 'invalid request fields' }, 400, origin);
     }
 
-    const { subject, html } = buildEmail(body);
+    const { subject, html } = buildEmail(body, env);
 
     const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
