@@ -13,6 +13,7 @@ import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '..
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
+import { MapFabMenu } from '../components/MapFabMenu';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import { ORG_INFO } from '../data/orgInfo';
@@ -364,8 +365,7 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
               )} />
             )}
           </MapContainer>
-          <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
-          <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
+          <MapFabMenu>
             <button
               type="button"
               onClick={handleLocateMe}
@@ -380,7 +380,8 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
             >
               <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
             </button>
-          </div>
+            <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} className="" />
+          </MapFabMenu>
         </div>
         {geoError && (
           <p className="text-lg text-red-600 mt-2">ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์</p>

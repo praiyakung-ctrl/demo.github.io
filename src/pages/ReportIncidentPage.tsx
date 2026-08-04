@@ -12,6 +12,7 @@ import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
+import { MapFabMenu } from '../components/MapFabMenu';
 import { Modal } from '../components/Modal';
 import { PinIcon } from '../components/PinIcon';
 import { useAuth } from '../context/AuthContext';
@@ -486,15 +487,6 @@ export function ReportIncidentPage() {
               </span>
             </div>
 
-            {/* reset view (top-right) */}
-            <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
-              <button
-                onClick={handleResetView}
-                className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
-              >
-                <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
-              </button>
-            </div>
 
             {/* point-type legend (bottom-left) — can be hidden */}
             <div className="absolute bottom-3 left-3 z-[500] pointer-events-none">
@@ -637,7 +629,15 @@ export function ReportIncidentPage() {
                 )
               ))}
             </MapContainer>
-            <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
+            <MapFabMenu>
+              <button
+                onClick={handleResetView}
+                className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+              >
+                <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
+              </button>
+              <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} className="" />
+            </MapFabMenu>
           </div>
         </main>
 

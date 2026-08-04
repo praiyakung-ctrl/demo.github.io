@@ -12,6 +12,7 @@ import { LiveCameraModal } from '../components/LiveCameraModal';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
+import { MapFabMenu } from '../components/MapFabMenu';
 import camerasData from '../data/cameras.json';
 import type { Camera, CameraStatus, CameraType } from '../types';
 import { STATUS_COLORS, STATUS_LABELS } from '../types';
@@ -471,22 +472,6 @@ export function HomePage() {
                 </span>
               </div>
 
-              {/* search nearby / reset view (top-right) */}
-              <div className="absolute top-3 right-3 z-[500] flex flex-col gap-2">
-                <button
-                  onClick={handleSearchNearby}
-                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
-                >
-                  <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
-                </button>
-                <button
-                  onClick={handleResetView}
-                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
-                >
-                  <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
-                </button>
-              </div>
-
               {/* status legend (bottom-left, clear of Leaflet's default bottom-right attribution) — can be hidden */}
               <div className="absolute bottom-3 left-3 z-[500] pointer-events-none">
                 {legendVisible ? (
@@ -565,7 +550,21 @@ export function HomePage() {
                   </Marker>
                 )} />
               </MapContainer>
-              <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
+              <MapFabMenu>
+                <button
+                  onClick={handleSearchNearby}
+                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
+                </button>
+                <button
+                  onClick={handleResetView}
+                  className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+                >
+                  <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
+                </button>
+                <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} className="" />
+              </MapFabMenu>
             </div>
 
             {/* right: selected camera detail */}
