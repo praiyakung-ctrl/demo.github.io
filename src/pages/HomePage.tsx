@@ -31,6 +31,7 @@ publicCameras.forEach(c => { STATUS_COUNTS[c.status]++; });
 
 const ORG_OPTIONS = [...new Set(publicCameras.map(c => c.organization))].sort((a, b) => a.localeCompare(b, 'th'));
 const DISTRICT_OPTIONS = [...new Set(publicCameras.map(c => districtOf(c.location)))].sort((a, b) => a.localeCompare(b, 'th'));
+const LOCATION_SUGGESTIONS = [...new Set(publicCameras.map(c => c.location))].sort((a, b) => a.localeCompare(b, 'th'));
 
 type SortMode = 'near' | 'name' | 'status';
 
@@ -44,20 +45,6 @@ function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void })
   const map = useMap();
   useEffect(() => { onReady(map); }, [map, onReady]);
   return null;
-}
-
-function StatCard({ icon: Icon, label, value, color }: { icon: typeof Video; label: string; value: number; color: string }) {
-  return (
-    <div className="card flex items-center gap-3 py-4">
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
-        <Icon size={24} />
-      </div>
-      <div>
-        <p className="text-lg text-gray-500 leading-tight">{label}</p>
-        <p className="text-3xl font-extrabold leading-tight" style={{ color }}>{value} ตัว</p>
-      </div>
-    </div>
-  );
 }
 
 function CameraListItem({ cam, active, distanceKm, onSelect }: { cam: Camera; active: boolean; distanceKm?: number; onSelect: () => void }) {
@@ -112,6 +99,31 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
             onSelect={() => onSelect(cam.id)}
           />
         ))}
+      </div>
+    </div>
+  );
+}
+
+function CameraStatusSummaryCard() {
+  return (
+    <div className="card p-3">
+      <div className="grid grid-cols-4 gap-2 text-center">
+        <div>
+          <p className="text-2xl font-extrabold text-navy-700 leading-tight">{publicCameras.length}</p>
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><CameraIcon size={12} /> ทั้งหมด</p>
+        </div>
+        <div>
+          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Online }}>{STATUS_COUNTS.Online}</p>
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><Wifi size={12} /> ออนไลน์</p>
+        </div>
+        <div>
+          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Offline }}>{STATUS_COUNTS.Offline}</p>
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><VideoOff size={12} /> ออฟไลน์</p>
+        </div>
+        <div>
+          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Maintenance }}>{STATUS_COUNTS.Maintenance}</p>
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><Wrench size={12} /> ซ่อมบำรุง</p>
+        </div>
       </div>
     </div>
   );
@@ -205,6 +217,8 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
         </div>
       </div>
 
+      <CameraStatusSummaryCard />
+
       <div className="card p-0 overflow-hidden">
         <h3 className="text-xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">กล้องใกล้เคียง</h3>
         {nearby.length === 0 ? (
@@ -234,7 +248,7 @@ export function HomePage() {
   const [orgFilter, setOrgFilter] = useState<'all' | string>('all');
   const [districtFilter, setDistrictFilter] = useState<'all' | string>('all');
   const [sortMode, setSortMode] = useState<SortMode>('status');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [legendVisible, setLegendVisible] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(
     publicCameras.find(c => c.status === 'Online')?.id ?? publicCameras[0]?.id ?? null
@@ -245,11 +259,27 @@ export function HomePage() {
   const [now, setNow] = useState(new Date());
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
   const [satellite, setSatellite] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
   const [mapHeight, setMapHeight] = useState(640);
+
+  /* closes the search-suggestions dropdown on outside click — same
+     composedPath() pattern as MapFabMenu (see that file for why e.target
+     is unreliable here) so clicking a suggestion doesn't self-close before
+     its own onClick runs */
+  useEffect(() => {
+    if (!showSuggestions) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (searchWrapRef.current && e.composedPath().includes(searchWrapRef.current)) return;
+      setShowSuggestions(false);
+    };
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
+  }, [showSuggestions]);
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
@@ -321,6 +351,18 @@ export function HomePage() {
     });
   };
 
+  const placeSuggestions = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return [];
+    return LOCATION_SUGGESTIONS.filter(loc => loc.toLowerCase().includes(q)).slice(0, 5);
+  }, [search]);
+
+  const cameraSuggestions = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return [];
+    return publicCameras.filter(c => c.id.toLowerCase().includes(q) || c.location.toLowerCase().includes(q)).slice(0, 5);
+  }, [search]);
+
   const filtered = useMemo(() => publicCameras.filter(c =>
     (search === '' || c.id.toLowerCase().includes(search.toLowerCase()) || c.location.includes(search)) &&
     (typeFilter === 'all' || c.type === typeFilter) &&
@@ -376,27 +418,64 @@ export function HomePage() {
         </aside>
 
         <main id="main-content" tabIndex={-1} className="min-w-0 focus:outline-none space-y-5">
-          {/* stat bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatCard icon={CameraIcon} label="กล้องทั้งหมด" value={publicCameras.length} color="#1B3A6B" />
-            <StatCard icon={Wifi} label="ออนไลน์" value={STATUS_COUNTS.Online} color={STATUS_COLORS.Online} />
-            <StatCard icon={VideoOff} label="ออฟไลน์" value={STATUS_COUNTS.Offline} color={STATUS_COLORS.Offline} />
-            <StatCard icon={Wrench} label="อยู่ระหว่างบำรุงรักษา" value={STATUS_COUNTS.Maintenance} color={STATUS_COLORS.Maintenance} />
-          </div>
-
-          {/* search + filters */}
-          <div className="card p-4 flex flex-wrap gap-3 items-end">
-            <div className="relative flex-1 min-w-[220px]">
-              <label htmlFor="home-search" className="label">ค้นหากล้อง</label>
-              <Search size={18} className="absolute left-3 top-[42px] text-gray-400" />
+          {/* central search: type-ahead over locations + cameras, no extra clicks needed */}
+          <div ref={searchWrapRef} className="relative">
+            <div className="card p-2 flex items-center gap-2">
+              <Search size={20} className="ml-2 text-gray-400 flex-shrink-0" />
               <input
                 id="home-search"
                 value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="ค้นหาชื่อสถานที่หรือรหัสกล้อง..."
-                className="input-field pl-9"
+                onChange={e => { setSearch(e.target.value); setShowSuggestions(true); }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="ค้นหาสถานที่ ถนน หมู่บ้าน หรือกล้อง"
+                autoComplete="off"
+                aria-label="ค้นหาสถานที่ ถนน หมู่บ้าน หรือกล้อง"
+                className="flex-1 min-w-0 border-0 focus:ring-0 text-xl py-2 bg-transparent"
               />
             </div>
+            {showSuggestions && search.trim() !== '' && (
+              <div className="absolute z-[600] top-full left-0 right-0 mt-1 card p-0 overflow-hidden shadow-2xl grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                <div className="max-h-72 overflow-y-auto">
+                  <p className="px-4 py-2 text-base font-bold text-gray-500 bg-gray-50 sticky top-0">แนะนำสถานที่</p>
+                  {placeSuggestions.length === 0 ? (
+                    <p className="px-4 py-4 text-lg text-gray-400">ไม่พบผลลัพธ์</p>
+                  ) : placeSuggestions.map(loc => (
+                    <button
+                      key={loc}
+                      onClick={() => { setSearch(loc); setShowSuggestions(false); }}
+                      className="w-full text-left px-4 py-2.5 hover:bg-navy-50 flex items-center gap-2"
+                    >
+                      <MapPin size={16} className="text-navy-500 flex-shrink-0" />
+                      <span className="text-lg text-gray-800 truncate">{loc}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="max-h-72 overflow-y-auto">
+                  <p className="px-4 py-2 text-base font-bold text-gray-500 bg-gray-50 sticky top-0">กล้อง CCTV</p>
+                  {cameraSuggestions.length === 0 ? (
+                    <p className="px-4 py-4 text-lg text-gray-400">ไม่พบผลลัพธ์</p>
+                  ) : cameraSuggestions.map(cam => (
+                    <button
+                      key={cam.id}
+                      onClick={() => { handleSelectCamera(cam.id); setSearch(''); setShowSuggestions(false); }}
+                      className="w-full text-left px-4 py-2.5 hover:bg-navy-50 flex items-center gap-2"
+                    >
+                      <CameraIcon size={16} className="flex-shrink-0" style={{ color: markerColor(cam) }} />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-lg font-bold text-navy-700 truncate">{cam.id} <span className="font-normal text-gray-600">{cam.location}</span></span>
+                      </span>
+                      <span className="text-sm font-bold flex-shrink-0" style={{ color: markerColor(cam) }}>
+                        {cam.status === 'Online' ? 'ออนไลน์' : STATUS_LABELS[cam.status]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* secondary filters */}
+          <div className="card p-3 flex flex-wrap gap-3 items-end">
             <div>
               <label htmlFor="home-type" className="label">ประเภทกล้อง</label>
               <select id="home-type" value={typeFilter} onChange={e => setTypeFilter(e.target.value as 'all' | CameraType)} className="input-field w-auto">
@@ -449,7 +528,7 @@ export function HomePage() {
           )}
 
           {/* map + detail (camera list lives in the sidebar on desktop, see ServiceSidebar children) */}
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-4 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-4 items-start">
             {/* mobile-only: camera list (desktop shows it in the left sidebar instead) */}
             <div className="lg:hidden order-2">
               <CameraListCard sorted={sorted} selectedCam={selectedCam} sortMode={sortMode} now={now} onSelect={handleSelectCamera} />
