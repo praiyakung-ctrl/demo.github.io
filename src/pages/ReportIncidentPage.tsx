@@ -13,6 +13,7 @@ import { LiveCameraModal } from '../components/LiveCameraModal';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
+import { PinIcon } from '../components/PinIcon';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import type { Camera, CameraStatus, IncidentPoint, IncidentPointType } from '../types';
@@ -448,7 +449,7 @@ export function ReportIncidentPage() {
                   title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
                   className="flex items-center gap-2.5 whitespace-nowrap bg-white hover:bg-gray-50 border border-gray-200 shadow-lg rounded-xl px-3 py-1.5 text-left transition-colors"
                 >
-                  <MapPin size={22} className="text-red-600 flex-shrink-0" fill="currentColor" />
+                  <PinIcon color="#DC2626" size={22} className="flex-shrink-0" />
                   <span className="min-w-0">
                     <span className="block text-base font-bold text-navy-700 leading-tight">แจ้งจุดเสี่ยงภัย</span>
                     <span className="block text-xs text-gray-500 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
@@ -701,7 +702,7 @@ export function ReportIncidentPage() {
                 <div className="divide-y divide-gray-100">
                   {feedItems.map(p => (
                     <div key={p.id} className="flex items-start gap-3 px-4 py-3">
-                      <span className={`w-3 h-3 rounded-full mt-2 flex-shrink-0 ${p.type === 'risk' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+                      <PinIcon color={p.type === 'risk' ? '#DC2626' : '#F97316'} size={14} className="mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-xl font-bold text-gray-800">{p.locationLabel}</p>
                         <p className="text-lg text-gray-500">{p.category} · แจ้งโดย {p.submittedBy} · {formatThaiDate(p.submittedAt)}</p>
