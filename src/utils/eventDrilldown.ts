@@ -50,6 +50,20 @@ function distribute(total: number, count: number, rng: () => number): number[] {
   return result;
 }
 
+export interface DailyTotalRow {
+  day: number;
+  count: number;
+}
+
+/* Generic single-series version of the same seeded daily split — used by
+   reports whose monthly chart is a single aggregate number per period
+   (e.g. the multi-year comparison trend) rather than a per-category stack. */
+export function distributeTotalAcrossDays(total: number, monthIndex: number, yearBE: number, seed: number): DailyTotalRow[] {
+  const dayCount = daysInMonth(monthIndex, yearBE);
+  const values = distribute(total, dayCount, mulberry32(seed));
+  return values.map((count, i) => ({ day: i + 1, count }));
+}
+
 /* No per-day incident dataset exists in this demo (only pre-aggregated
    monthly totals) — this fabricates a plausible, stable daily split of each
    month's totals per category, seeded by month index so it is identical on

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FileText, BarChart2, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi } from 'lucide-react';
 import { ExportButtons } from '../components/ExportButtons';
 import {
@@ -100,6 +100,7 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
 }
 
 export function ReportsPage() {
+  const navigate = useNavigate();
   const [selectedMonth, setSelectedMonth] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
 
@@ -114,6 +115,12 @@ export function ReportsPage() {
   const filteredMonthly = selectedMonth === 'all'
     ? monthly
     : monthly.filter((_r, i) => String(i + 1) === selectedMonth);
+
+  const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
+    if (!bar.payload) return;
+    const index = monthly.findIndex(m => m.month === bar.payload!.month);
+    if (index >= 0) navigate(`/reports/daily-events?month=${index + 1}`);
+  };
 
   const eventsRef = useRef<HTMLDivElement>(null);
   const mplsRef = useRef<HTMLDivElement>(null);
@@ -299,7 +306,7 @@ export function ReportsPage() {
           <div
             className="p-4 border-t border-gray-100"
             role="img"
-            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านบน"
+            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านบน คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน"
           >
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
@@ -309,7 +316,7 @@ export function ReportsPage() {
                 <Tooltip content={<ChartTooltip />} />
                 <Legend content={<ChartLegend />} />
                 {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                  <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} />
+                  <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
                 ))}
               </BarChart>
             </ResponsiveContainer>

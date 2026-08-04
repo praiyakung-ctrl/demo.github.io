@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dailyBreakdownForMonth, daysInMonth, EVENT_CATEGORY_KEYS } from './eventDrilldown';
+import { dailyBreakdownForMonth, daysInMonth, distributeTotalAcrossDays, EVENT_CATEGORY_KEYS } from './eventDrilldown';
 import type { MonthlyEventData } from '../types';
 
 const monthRow: MonthlyEventData = {
@@ -41,5 +41,31 @@ describe('dailyBreakdownForMonth', () => {
   it('handles a zero-count category without producing negative or NaN values', () => {
     const rows = dailyBreakdownForMonth(0, { ...monthRow, gunshot: 0 }, 2568);
     expect(rows.every(r => r.gunshot === 0)).toBe(true);
+  });
+});
+
+describe('distributeTotalAcrossDays', () => {
+  it('produces one row per day of the month, summing back to exactly the total', () => {
+    const rows = distributeTotalAcrossDays(217, 1, 2568, 42);
+    expect(rows).toHaveLength(28);
+    expect(rows.reduce((s, r) => s + r.count, 0)).toBe(217);
+  });
+
+  it('is deterministic for a given seed', () => {
+    const first = distributeTotalAcrossDays(217, 1, 2568, 42);
+    const second = distributeTotalAcrossDays(217, 1, 2568, 42);
+    expect(second).toEqual(first);
+  });
+
+  it('produces a different split for a different seed, same total', () => {
+    const a = distributeTotalAcrossDays(217, 1, 2568, 1);
+    const b = distributeTotalAcrossDays(217, 1, 2568, 2);
+    expect(a).not.toEqual(b);
+    expect(b.reduce((s, r) => s + r.count, 0)).toBe(217);
+  });
+
+  it('returns all zeros for a total of zero', () => {
+    const rows = distributeTotalAcrossDays(0, 0, 2568, 7);
+    expect(rows.every(r => r.count === 0)).toBe(true);
   });
 });

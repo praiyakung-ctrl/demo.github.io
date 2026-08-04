@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
-  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Dot,
 } from 'recharts';
+import type { DotItemDotProps } from 'recharts';
 import { GitCompare, Shield, AlertTriangle, Car, TrendingUp, TrendingDown, BarChart3, PieChart as PieChartIcon, ListOrdered, Grid3x3 } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { ExportButtons } from '../components/ExportButtons';
@@ -112,6 +113,7 @@ function SectionHeader({ icon: Icon, title, subtitle, action }: {
 }
 
 export function ComparisonReportPage() {
+  const navigate = useNavigate();
   const [topic, setTopic] = useState<Topic>('police');
   const [granularity, setGranularity] = useState<Granularity>('month');
   const [trendGranularity, setTrendGranularity] = useState<'month' | 'quarter' | 'year'>('month');
@@ -166,6 +168,34 @@ export function ComparisonReportPage() {
   const trendSeries = trendGranularity === 'year'
     ? yearly.map(y => ({ label: String(y.year + 543), value: y.count }))
     : seriesByYear(scopedRows, years, trendGranularity);
+
+  /* Only the monthly view can drill down to a day-level page — trendSeries
+     has exactly 12 entries in month order in that mode, so the dot's index
+     maps 1:1 to a month number.
+
+     Recharts' `activeDot.onClick` calls back with the activeDot config object
+     itself (not the point data), so it can't carry `index`/`payload` — instead
+     use the regular per-point `dot` render prop, which recharts calls with the
+     full merged point props (cx/cy/index/payload) even though that extra data
+     isn't part of the declared DotProps type. */
+  const goToComparisonDaily = (clickedYear: number) => (dotProps: DotItemDotProps) => {
+    const { index, cx, cy } = dotProps;
+    if (cx == null || cy == null) return <></>;
+    const month = index + 1;
+    return (
+      <Dot
+        cx={cx} cy={cy} r={5} fill={YEAR_COLORS[years.indexOf(clickedYear) % YEAR_COLORS.length]}
+        stroke="#fff" strokeWidth={2} style={{ cursor: 'pointer' }}
+        onClick={() => {
+          const params = new URLSearchParams({
+            topic, year: String(clickedYear), month: String(month),
+            group: groupFilter, category: categoryFilter,
+          });
+          navigate(`/reports/comparison-daily?${params.toString()}`);
+        }}
+      />
+    );
+  };
 
   const days = daysInPeriod(granularity, year, month, quarter);
   const avgPerDay = days > 0 ? currentTotal / days : 0;
@@ -339,7 +369,11 @@ export function ComparisonReportPage() {
                   <Tooltip />
                   <Legend />
                   {years.map((y, i) => (
-                    <Line key={y} type="monotone" dataKey={String(y)} name={String(y + 543)} stroke={YEAR_COLORS[i % YEAR_COLORS.length]} strokeWidth={2} dot={{ r: 3 }} />
+                    <Line
+                      key={y} type="monotone" dataKey={String(y)} name={String(y + 543)}
+                      stroke={YEAR_COLORS[i % YEAR_COLORS.length]} strokeWidth={2}
+                      dot={trendGranularity === 'month' ? goToComparisonDaily(y) : { r: 3 }}
+                    />
                   ))}
                 </LineChart>
               )}
