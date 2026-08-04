@@ -192,10 +192,10 @@ export interface IncidentPoint {
   rejectionReason?: string;
 }
 
-export type MemberType = 'ประชาชน' | 'นิติบุคคล' | 'หน่วยงานราชการ' | 'บริษัทประกัน' | 'ทนายความ' | 'อื่นๆ';
+export type MemberType = 'ประชาชน' | 'ชาวต่างชาติ' | 'นิติบุคคล' | 'หน่วยงานราชการ' | 'บริษัทประกัน' | 'ทนายความ' | 'อื่นๆ';
 
 export const MEMBER_TYPE_OPTIONS: MemberType[] = [
-  'ประชาชน', 'นิติบุคคล', 'หน่วยงานราชการ', 'บริษัทประกัน', 'ทนายความ', 'อื่นๆ',
+  'ประชาชน', 'ชาวต่างชาติ', 'นิติบุคคล', 'หน่วยงานราชการ', 'บริษัทประกัน', 'ทนายความ', 'อื่นๆ',
 ];
 
 export const MEMBER_PURPOSE_OPTIONS = [

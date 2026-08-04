@@ -93,11 +93,11 @@ export function ensureDemoForeignerRegistered(): void {
     province: 'ชลบุรี',
     postalCode: '20000',
     phone: '0899999999',
-    memberType: 'ประชาชน',
+    memberType: 'ชาวต่างชาติ',
     purpose: 'ขอภาพเพื่อดำเนินคดี',
     acceptedTerms: true,
     acceptedPdpa: true,
-    registeredAt: new Date(0).toISOString(),
+    registeredAt: new Date('2026-06-01').toISOString(),
     status: 'approved',
   });
 }
