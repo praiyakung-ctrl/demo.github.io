@@ -6,7 +6,7 @@ import { StatusBadge } from '../components/Badge';
 import { Pagination } from '../components/Pagination';
 import { useAuth } from '../context/AuthContext';
 import { logAudit } from '../utils/auditLog';
-import { savedMembers, updateMember } from '../utils/memberStorage';
+import { ensureDemoPendingMembers, savedMembers, updateMember } from '../utils/memberStorage';
 import { sendApprovalEmail, sendRejectionEmail } from '../utils/emailApi';
 import { formatThaiDateTime } from '../utils/formatDate';
 import { MEMBER_STATUS_LABEL } from '../types';
@@ -62,7 +62,10 @@ function DetailRow({ label, value }: { label: string; value: string }) {
 
 export function AdminMemberReviewPage() {
   const { user, can } = useAuth();
-  const [members, setMembers] = useState<CitizenMember[]>(() => sortMembers(savedMembers()));
+  const [members, setMembers] = useState<CitizenMember[]>(() => {
+    ensureDemoPendingMembers();
+    return sortMembers(savedMembers());
+  });
   const [statusFilter, setStatusFilter] = useState<MemberStatus | 'all'>('pending');
   const [search, setSearch] = useState('');
   const [detailId, setDetailId] = useState<string | null>(null);

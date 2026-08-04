@@ -1,4 +1,5 @@
 import type { CitizenMember } from '../types';
+import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import { DEMO_THAID_PROFILES } from './thaId';
 import { DEMO_GOOGLE_PROFILE } from './googleAuth';
 
@@ -98,5 +99,70 @@ export function ensureDemoForeignerRegistered(): void {
     acceptedPdpa: true,
     registeredAt: new Date(0).toISOString(),
     status: 'approved',
+  });
+}
+
+const DAY_MS = 86_400_000;
+
+/* Demo-only: the "ตรวจสอบสมาชิกใหม่" back-office page has nothing to show
+   until real citizens register, so seed a handful of pending applications
+   (mix of ThaID citizens and Google-verified foreign nationals) the first
+   time the page loads, so the approve/reject workflow can be demonstrated. */
+export function ensureDemoPendingMembers(): void {
+  if (findMemberById('demo-pending-1')) return;
+
+  const thaidApplicants = [
+    { name: 'มานพ ใจดี', nationalId: '3100100000101' },
+    { name: 'สุนีย์ รักเรียน', nationalId: '3100100000102' },
+    { name: 'ประเสริฐ ตั้งมั่น', nationalId: '3100100000103' },
+    { name: 'วิไล ศรีสุข', nationalId: '3100100000104' },
+    { name: 'ธีระ พงษ์พันธ์', nationalId: '3100100000105' },
+    { name: 'อรุณี แสงทอง', nationalId: '3100100000106' },
+  ];
+
+  const googleApplicants = [
+    { name: 'John Smith', email: 'john.smith.demo@example.com', passportNumber: 'K12345678', nationality: 'อังกฤษ' },
+    { name: 'Li Wei', email: 'li.wei.demo@example.com', passportNumber: 'E99887766', nationality: 'จีน' },
+  ];
+
+  thaidApplicants.forEach((applicant, idx) => {
+    saveMember({
+      id: `demo-pending-${idx + 1}`,
+      nationalId: applicant.nationalId,
+      email: `pending${idx + 1}.demo@example.com`,
+      name: applicant.name,
+      address: '99 ถนนสุขุมวิท ต.บางปลาสร้อย อ.เมืองชลบุรี',
+      province: 'ชลบุรี',
+      postalCode: '20000',
+      phone: `08${(10000000 + idx).toString().padStart(8, '0')}`,
+      memberType: MEMBER_TYPE_OPTIONS[idx % MEMBER_TYPE_OPTIONS.length],
+      purpose: MEMBER_PURPOSE_OPTIONS[idx % MEMBER_PURPOSE_OPTIONS.length],
+      acceptedTerms: true,
+      acceptedPdpa: true,
+      registeredAt: new Date(Date.now() - (idx + 1) * 1.7 * DAY_MS).toISOString(),
+      status: 'pending',
+    });
+  });
+
+  googleApplicants.forEach((applicant, idx) => {
+    const seq = thaidApplicants.length + idx + 1;
+    saveMember({
+      id: `demo-pending-${seq}`,
+      authType: 'google',
+      email: applicant.email,
+      name: applicant.name,
+      passportNumber: applicant.passportNumber,
+      nationality: applicant.nationality,
+      address: 'โรงแรมในจังหวัดชลบุรี (ที่พักชั่วคราว)',
+      province: 'ชลบุรี',
+      postalCode: '20000',
+      phone: `09${(90000000 + idx).toString().padStart(8, '0')}`,
+      memberType: MEMBER_TYPE_OPTIONS[seq % MEMBER_TYPE_OPTIONS.length],
+      purpose: MEMBER_PURPOSE_OPTIONS[seq % MEMBER_PURPOSE_OPTIONS.length],
+      acceptedTerms: true,
+      acceptedPdpa: true,
+      registeredAt: new Date(Date.now() - (seq + 1) * 1.7 * DAY_MS).toISOString(),
+      status: 'pending',
+    });
   });
 }
