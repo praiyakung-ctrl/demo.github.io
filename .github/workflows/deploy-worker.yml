@@ -28,3 +28,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           workingDirectory: worker
+          # without this, the action defaults to an old pinned wrangler
+          # (3.90.0) instead of the ^4.0.0 in worker/package.json, which
+          # conflicts with @cloudflare/workers-types@^5.x and fails npm install
+          wranglerVersion: '4'
