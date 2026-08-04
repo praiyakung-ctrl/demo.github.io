@@ -71,7 +71,7 @@ export function policeUsageByStation(
     const count = stationReqs.length;
     const officers = new Set(stationReqs.map(r => r.email)).size;
     const totalMinutes = stationReqs.reduce((sum, r) => sum + requestMinutes(r), 0);
-    const downloads = stationReqs.filter(r => !!r.videoFile).length;
+    const downloads = stationReqs.filter(r => (r.videoLinks?.length ?? 0) > 0).length;
 
     let trendPct: number | null = null;
     if (prevMonth) {

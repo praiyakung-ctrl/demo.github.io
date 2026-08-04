@@ -148,8 +148,6 @@
     "description": "ถูกขโมยกระเป๋า",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-05-17T18:00:00",
-    "videoFile": "REQ-2026-004.mp4",
-    "videoExpiresAt": "2026-08-21T18:00:00",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -176,6 +174,16 @@
         "timestamp": "2026-05-19T09:00:00",
         "completed": true
       }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-4-1",
+        "fileName": "REQ-2026-004.mp4",
+        "fileSizeBytes": 15728640,
+        "expiresAt": "2026-08-21T18:00:00",
+        "uploadedAt": "2026-05-17T18:00:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
+      }
     ]
   },
   {
@@ -197,8 +205,6 @@
     "description": "ต้องการหลักฐานเพื่อประกันภัย",
     "status": "ได้รับแล้ว",
     "submittedAt": "2026-05-16T22:00:00",
-    "videoFile": "REQ-2026-005.mp4",
-    "videoExpiresAt": "2026-06-15T22:00:00",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -224,6 +230,16 @@
         "step": "ส่งข้อมูล",
         "timestamp": "2026-05-18T09:00:00",
         "completed": true
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-5-1",
+        "fileName": "REQ-2026-005.mp4",
+        "fileSizeBytes": 22020096,
+        "expiresAt": "2026-06-15T22:00:00",
+        "uploadedAt": "2026-05-16T22:00:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -375,8 +391,6 @@
     "description": "ต้องการยืนยันการมาถึงท่าเรือ",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-05-12T13:00:00",
-    "videoFile": "REQ-2026-009.mp4",
-    "videoExpiresAt": "2026-08-11T13:00:00",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -403,6 +417,16 @@
         "timestamp": "2026-05-13T14:00:00",
         "completed": true
       }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-9-1",
+        "fileName": "REQ-2026-009.mp4",
+        "fileSizeBytes": 29360128,
+        "expiresAt": "2026-08-11T13:00:00",
+        "uploadedAt": "2026-05-12T13:00:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
+      }
     ]
   },
   {
@@ -424,8 +448,6 @@
     "description": "ต้องการหลักฐานเพื่อเคลมประกัน",
     "status": "ได้รับแล้ว",
     "submittedAt": "2026-05-11T18:30:00",
-    "videoFile": "REQ-2026-010.mp4",
-    "videoExpiresAt": "2026-06-10T18:30:00",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -452,6 +474,16 @@
         "timestamp": "2026-05-13T09:00:00",
         "completed": true
       }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-10-1",
+        "fileName": "REQ-2026-010.mp4",
+        "fileSizeBytes": 27262976,
+        "expiresAt": "2026-06-10T18:30:00",
+        "uploadedAt": "2026-05-11T18:30:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
+      }
     ]
   },
   {
@@ -473,7 +505,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ใหม่",
     "submittedAt": "2026-05-03T09:10:00",
-    "videoFile": "REQ-2026-011.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -495,6 +526,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-11-1",
+        "fileName": "REQ-2026-011.mp4",
+        "fileSizeBytes": 18874368,
+        "expiresAt": "2026-08-01T02:10:00.000Z",
+        "uploadedAt": "2026-05-03T09:10:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -561,7 +602,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "รอภาพ",
     "submittedAt": "2026-05-13T09:12:00",
-    "videoFile": "REQ-2026-013.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -585,6 +625,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-13-1",
+        "fileName": "REQ-2026-013.mp4",
+        "fileSizeBytes": 19922944,
+        "expiresAt": "2026-08-11T02:12:00.000Z",
+        "uploadedAt": "2026-05-13T09:12:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -652,7 +702,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-05-23T09:14:00",
-    "videoFile": "REQ-2026-015.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -678,6 +727,16 @@
         "step": "ส่งข้อมูล",
         "timestamp": "2026-05-23T09:14:00",
         "completed": true
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-15-1",
+        "fileName": "REQ-2026-015.mp4",
+        "fileSizeBytes": 39845888,
+        "expiresAt": "2026-08-21T02:14:00.000Z",
+        "uploadedAt": "2026-05-23T09:14:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -747,7 +806,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ใหม่",
     "submittedAt": "2026-05-09T09:16:00",
-    "videoFile": "REQ-2026-017.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -769,6 +827,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-17-1",
+        "fileName": "REQ-2026-017.mp4",
+        "fileSizeBytes": 36700160,
+        "expiresAt": "2026-08-07T02:16:00.000Z",
+        "uploadedAt": "2026-05-09T09:16:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -835,7 +903,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "รอภาพ",
     "submittedAt": "2026-06-19T09:18:00",
-    "videoFile": "REQ-2026-019.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -859,6 +926,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-19-1",
+        "fileName": "REQ-2026-019.mp4",
+        "fileSizeBytes": 40894464,
+        "expiresAt": "2026-09-17T02:18:00.000Z",
+        "uploadedAt": "2026-06-19T09:18:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -926,7 +1003,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-06-05T09:20:00",
-    "videoFile": "REQ-2026-021.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -952,6 +1028,16 @@
         "step": "ส่งข้อมูล",
         "timestamp": "2026-06-05T09:20:00",
         "completed": true
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-21-1",
+        "fileName": "REQ-2026-021.mp4",
+        "fileSizeBytes": 15728640,
+        "expiresAt": "2026-09-03T02:20:00.000Z",
+        "uploadedAt": "2026-06-05T09:20:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1021,7 +1107,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ใหม่",
     "submittedAt": "2026-06-15T09:22:00",
-    "videoFile": "REQ-2026-023.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1043,6 +1128,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-23-1",
+        "fileName": "REQ-2026-023.mp4",
+        "fileSizeBytes": 30408704,
+        "expiresAt": "2026-09-13T02:22:00.000Z",
+        "uploadedAt": "2026-06-15T09:22:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1109,7 +1204,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "รอภาพ",
     "submittedAt": "2026-06-25T09:24:00",
-    "videoFile": "REQ-2026-025.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1133,6 +1227,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-25-1",
+        "fileName": "REQ-2026-025.mp4",
+        "fileSizeBytes": 23068672,
+        "expiresAt": "2026-09-23T02:24:00.000Z",
+        "uploadedAt": "2026-06-25T09:24:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1200,7 +1304,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-06-11T09:26:00",
-    "videoFile": "REQ-2026-027.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1226,6 +1329,16 @@
         "step": "ส่งข้อมูล",
         "timestamp": "2026-06-11T09:26:00",
         "completed": true
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-27-1",
+        "fileName": "REQ-2026-027.mp4",
+        "fileSizeBytes": 28311552,
+        "expiresAt": "2026-09-09T02:26:00.000Z",
+        "uploadedAt": "2026-06-11T09:26:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1295,7 +1408,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ใหม่",
     "submittedAt": "2026-06-21T09:28:00",
-    "videoFile": "REQ-2026-029.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1317,6 +1429,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-29-1",
+        "fileName": "REQ-2026-029.mp4",
+        "fileSizeBytes": 38797312,
+        "expiresAt": "2026-09-19T02:28:00.000Z",
+        "uploadedAt": "2026-06-21T09:28:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1383,7 +1505,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "รอภาพ",
     "submittedAt": "2026-07-07T09:30:00",
-    "videoFile": "REQ-2026-031.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1407,6 +1528,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-31-1",
+        "fileName": "REQ-2026-031.mp4",
+        "fileSizeBytes": 27262976,
+        "expiresAt": "2026-10-05T02:30:00.000Z",
+        "uploadedAt": "2026-07-07T09:30:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1474,7 +1605,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ส่งแล้ว",
     "submittedAt": "2026-07-17T09:32:00",
-    "videoFile": "REQ-2026-033.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1500,6 +1630,16 @@
         "step": "ส่งข้อมูล",
         "timestamp": "2026-07-17T09:32:00",
         "completed": true
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-33-1",
+        "fileName": "REQ-2026-033.mp4",
+        "fileSizeBytes": 37748736,
+        "expiresAt": "2026-10-15T02:32:00.000Z",
+        "uploadedAt": "2026-07-17T09:32:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   },
@@ -1569,7 +1709,6 @@
     "description": "คำขอดูภาพย้อนหลัง (playback) กล้อง CCTV โดยเจ้าหน้าที่ตำรวจ",
     "status": "ใหม่",
     "submittedAt": "2026-07-03T09:34:00",
-    "videoFile": "REQ-2026-035.mp4",
     "timeline": [
       {
         "step": "รับคำขอ",
@@ -1591,6 +1730,16 @@
       {
         "step": "ส่งข้อมูล",
         "completed": false
+      }
+    ],
+    "videoLinks": [
+      {
+        "id": "vl-35-1",
+        "fileName": "REQ-2026-035.mp4",
+        "fileSizeBytes": 39845888,
+        "expiresAt": "2026-10-01T02:34:00.000Z",
+        "uploadedAt": "2026-07-03T09:34:00",
+        "uploadedBy": "เจ้าหน้าที่ระบบ"
       }
     ]
   }

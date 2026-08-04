@@ -37,3 +37,14 @@ export function generateReqNo(): string {
   const todayCount = savedRequests().filter(r => r.reqNo.startsWith(`REQ-${datePart}-`)).length;
   return `REQ-${datePart}-${String(todayCount + 1).padStart(4, '0')}`;
 }
+
+/* Magic-link token for the "เข้าสู่ระบบอัตโนมัติ" video-ready email button.
+   Client-side only, same trust model as the rest of this no-backend demo's
+   mocked ThaID/Google/OTP flows — not a cryptographically signed credential. */
+export function generateDownloadToken(): string {
+  return `vt-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function findRequestByDownloadToken(token: string): CitizenRequest | null {
+  return savedRequests().find(r => r.downloadToken === token) ?? null;
+}

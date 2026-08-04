@@ -5,6 +5,7 @@ import { groupForUser, hasPermission } from '../utils/groupStorage';
 import { savedUsers } from '../utils/userStorage';
 import { findMemberByNationalId, findMemberByEmail } from '../utils/memberStorage';
 import { logAudit } from '../utils/auditLog';
+import { findRequestByDownloadToken } from '../utils/requestStorage';
 import type { ThaIdProfile } from '../utils/thaId';
 import type { GoogleProfile } from '../utils/googleAuth';
 
@@ -12,6 +13,10 @@ interface AuthContextType {
   user: User | null;
   loginWithThaId: (profile: ThaIdProfile) => boolean;
   loginWithGoogle: (profile: GoogleProfile) => boolean;
+  /* "เข้าสู่ระบบอัตโนมัติ" link from the video-ready email — client-side
+     convenience token only (no backend to sign/verify it), same trust model
+     as the mocked ThaID/Google/OTP flows already in this demo */
+  loginWithVideoToken: (token: string) => boolean;
   /* patches the current session (e.g. after editing /profile) — does not touch
      the persisted user/member store, callers must save that separately */
   updateUser: (u: User) => void;
@@ -93,6 +98,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  const loginWithVideoToken = (token: string): boolean => {
+    const req = findRequestByDownloadToken(token);
+    if (!req) return false;
+
+    const member = findMemberByNationalId(req.idCard) ?? findMemberByEmail(req.email);
+    if (member && member.status === 'approved') {
+      const citizen: User = {
+        id: member.id,
+        name: member.name,
+        username: member.email,
+        role: 'citizen' as UserRole,
+        email: member.email,
+        isActive: true,
+        nationalId: member.nationalId,
+        passportNumber: member.passportNumber,
+        picture: member.picture,
+        mustChangePassword: member.mustChangePassword,
+      };
+      persistLogin(citizen, 'เข้าสู่ระบบผ่านลิงก์ดาวน์โหลดวิดีโอ (อีเมล)');
+      return true;
+    }
+
+    // no matching registered member — build a minimal session from the request itself
+    const citizen: User = {
+      id: `req-${req.id}`,
+      name: req.citizenName,
+      username: req.email,
+      role: 'citizen' as UserRole,
+      email: req.email,
+      isActive: true,
+      nationalId: req.idCard || undefined,
+    };
+    persistLogin(citizen, 'เข้าสู่ระบบผ่านลิงก์ดาวน์โหลดวิดีโอ (อีเมล)');
+    return true;
+  };
+
   const updateUser = (u: User) => {
     setUser(u);
     localStorage.setItem('auth_user', JSON.stringify(u));
@@ -118,6 +159,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       loginWithThaId,
       loginWithGoogle,
+      loginWithVideoToken,
       updateUser,
       logout,
       isAdmin: role === 'admin',

@@ -3,6 +3,30 @@ import { act, renderHook } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { AuthProvider, useAuth } from './AuthContext';
 import { saveMember } from '../utils/memberStorage';
+import { addRequest } from '../utils/requestStorage';
+import type { CitizenRequest } from '../types';
+
+const baseRequest = (over: Partial<CitizenRequest> = {}): CitizenRequest => ({
+  id: 'req-1',
+  reqNo: 'REQ-260101-0001',
+  citizenName: 'ทดสอบ ดาวน์โหลด',
+  idCard: '3100100000099',
+  phone: '0812345678',
+  email: 'video.test@example.com',
+  incidentLat: 13.36,
+  incidentLng: 100.98,
+  incidentLocation: 'ทดสอบสถานที่',
+  assignedCameraIds: [],
+  startDatetime: '2026-05-20T12:00:00',
+  endDatetime: '2026-05-20T13:00:00',
+  purpose: 'อุบัติเหตุ',
+  description: 'ทดสอบ',
+  status: 'ส่งแล้ว',
+  submittedAt: '2026-05-20T10:15:00',
+  timeline: [{ step: 'รับคำขอ', timestamp: '2026-05-20T10:15:00', completed: true }],
+  downloadToken: 'vt-test-token',
+  ...over,
+});
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <AuthProvider>{children}</AuthProvider>
@@ -225,6 +249,57 @@ describe('AuthContext', () => {
     });
     expect(ok).toBe(false);
     expect(result.current.user).toBeNull();
+  });
+
+  it('loginWithVideoToken fails for an unknown token', () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    let ok = true;
+    act(() => {
+      ok = result.current.loginWithVideoToken('vt-does-not-exist');
+    });
+    expect(ok).toBe(false);
+    expect(result.current.user).toBeNull();
+  });
+
+  it('loginWithVideoToken logs in as the matching registered member when one exists', () => {
+    saveMember({
+      id: 'member-video',
+      nationalId: '3100100000099',
+      email: 'video.test@example.com',
+      name: 'ทดสอบ ดาวน์โหลด',
+      address: '99 หมู่ 1 ต.บ้านสวน อ.เมืองชลบุรี',
+      province: 'ชลบุรี',
+      postalCode: '20000',
+      phone: '0812345678',
+      memberType: 'ประชาชน',
+      purpose: 'ขอภาพเพื่อดำเนินคดี',
+      acceptedTerms: true,
+      acceptedPdpa: true,
+      registeredAt: '2026-07-15T10:00:00.000Z',
+      status: 'approved',
+    });
+    addRequest(baseRequest());
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    let ok = false;
+    act(() => {
+      ok = result.current.loginWithVideoToken('vt-test-token');
+    });
+    expect(ok).toBe(true);
+    expect(result.current.user?.id).toBe('member-video');
+    expect(result.current.isCitizen).toBe(true);
+  });
+
+  it('loginWithVideoToken falls back to a minimal session built from the request when no member matches', () => {
+    addRequest(baseRequest({ id: 'req-no-member', downloadToken: 'vt-no-member' }));
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    let ok = false;
+    act(() => {
+      ok = result.current.loginWithVideoToken('vt-no-member');
+    });
+    expect(ok).toBe(true);
+    expect(result.current.user?.name).toBe('ทดสอบ ดาวน์โหลด');
+    expect(result.current.user?.email).toBe('video.test@example.com');
+    expect(result.current.isCitizen).toBe(true);
   });
 
   it('logout clears the user and localStorage', () => {

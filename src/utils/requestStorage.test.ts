@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { addRequest, generateReqNo, savedRequests, updateRequest } from './requestStorage';
+import { addRequest, findRequestByDownloadToken, generateDownloadToken, generateReqNo, savedRequests, updateRequest } from './requestStorage';
 import type { CitizenRequest } from '../types';
 
 const request = (over: Partial<CitizenRequest> = {}): CitizenRequest => ({
@@ -68,5 +68,18 @@ describe('requestStorage', () => {
     addRequest(request({ id: 'req-today-2', reqNo: second }));
     const third = generateReqNo();
     expect(third).toBe(`REQ-${datePart}-0003`);
+  });
+
+  it('generateDownloadToken produces unique-looking tokens', () => {
+    const a = generateDownloadToken();
+    const b = generateDownloadToken();
+    expect(a).toMatch(/^vt-/);
+    expect(a).not.toBe(b);
+  });
+
+  it('findRequestByDownloadToken finds the matching request, or null', () => {
+    addRequest(request({ id: 'req-token-1', downloadToken: 'vt-abc123' }));
+    expect(findRequestByDownloadToken('vt-abc123')?.id).toBe('req-token-1');
+    expect(findRequestByDownloadToken('vt-does-not-exist')).toBeNull();
   });
 });

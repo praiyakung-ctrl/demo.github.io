@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, Marker } from 'react-leaflet';
 import {
@@ -14,15 +14,14 @@ import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
-import type { ApprovalLevel, Camera, CitizenRequest, RequestApproval, RequestStatus, TimelineEntry } from '../types';
+import type { ApprovalLevel, Camera, CitizenRequest, RequestApproval, RequestStatus, TimelineEntry, VideoLink } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
-import { savedRequests, updateRequest } from '../utils/requestStorage';
+import { generateDownloadToken, savedRequests, updateRequest } from '../utils/requestStorage';
 import { logAudit } from '../utils/auditLog';
 import { nearestCameras } from '../utils/geo';
 import { pinIcon } from '../utils/mapPin';
-import { savedSystemSettings } from '../utils/systemSettings';
 import { APPROVAL_LEVEL_LABEL, NEXT_APPROVAL_STATUS, approverNamesAtLevel, currentApprovalLevelOf, isApproverAtLevel } from '../utils/cctvApprovers';
-import { sendCctvApprovalPendingEmail, sendCctvRequestApprovedEmail, sendCctvRequestRejectedEmail } from '../utils/emailApi';
+import { sendCctvApprovalPendingEmail, sendCctvRequestApprovedEmail, sendCctvRequestRejectedEmail, sendCctvVideoReadyEmail } from '../utils/emailApi';
 
 const allCameras = camerasData as Camera[];
 
@@ -103,38 +102,49 @@ function RequestList({ requests, onSelect }: { requests: CitizenRequest[]; onSel
    is ready to download, once staff have sent it and set an expiry. */
 function VideoDownloadSection({ req, onDownloaded }: { req: CitizenRequest; onDownloaded: () => void }) {
   const { user } = useAuth();
-  const [downloading, setDownloading] = useState(false);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
-  if ((req.status !== 'ส่งแล้ว' && req.status !== 'ได้รับแล้ว') || !req.videoFile) return null;
+  const links = req.videoLinks ?? [];
+  if ((req.status !== 'ส่งแล้ว' && req.status !== 'ได้รับแล้ว') || links.length === 0) return null;
 
-  const expired = req.videoExpiresAt ? new Date() > new Date(req.videoExpiresAt) : false;
-
-  if (expired) {
-    return (
-      <div className="rounded-xl bg-red-50 border border-red-200 p-4 flex items-start gap-3">
-        <AlertTriangle size={22} className="text-red-600 flex-shrink-0 mt-0.5" />
-        <p className="text-lg text-red-700">ไฟล์วิดีโอหมดอายุแล้ว กรุณาติดต่อเจ้าหน้าที่</p>
-      </div>
-    );
-  }
-
-  const handleDownload = async () => {
-    setDownloading(true);
+  const handleDownload = async (link: VideoLink) => {
+    setDownloadingId(link.id);
     await new Promise(r => setTimeout(r, 600));
     if (req.status === 'ส่งแล้ว') updateRequest(req.id, { status: 'ได้รับแล้ว' });
-    logAudit(user, 'download', 'portal', `ดาวน์โหลดวิดีโอคำขอ ${req.reqNo}`);
-    setDownloading(false);
+    logAudit(user, 'download', 'portal', `ดาวน์โหลดไฟล์วิดีโอ ${link.fileName} คำขอ ${req.reqNo}`);
+    setDownloadingId(null);
     onDownloaded();
   };
 
   return (
     <div className="rounded-xl bg-green-50 border border-green-200 p-4 space-y-3">
-      <p className="text-xl font-bold text-green-800">
-        ไฟล์วิดีโอพร้อมดาวน์โหลด {req.videoExpiresAt && `(หมดอายุ ${formatThaiDate(req.videoExpiresAt)})`}
-      </p>
-      <button onClick={handleDownload} disabled={downloading} className="btn-primary flex items-center gap-2 disabled:opacity-60">
-        <Download size={20} /> {downloading ? 'กำลังดาวน์โหลด...' : 'ดาวน์โหลดวิดีโอ'}
-      </button>
+      <p className="text-xl font-bold text-green-800">ไฟล์วิดีโอพร้อมดาวน์โหลด ({links.length} ไฟล์)</p>
+      <div className="space-y-2">
+        {links.map(link => {
+          const expired = new Date() > new Date(link.expiresAt);
+          return (
+            <div key={link.id} className="flex items-center justify-between gap-3 bg-white rounded-lg border border-green-100 px-3 py-2">
+              <div className="min-w-0">
+                <p className="text-lg font-bold text-gray-800 truncate">{link.fileName}</p>
+                <p className="text-sm text-gray-500">
+                  {(link.fileSizeBytes / (1024 * 1024)).toFixed(1)} MB · {expired ? 'หมดอายุแล้ว' : `หมดอายุ ${formatThaiDate(link.expiresAt)}`}
+                </p>
+              </div>
+              {expired ? (
+                <span className="text-sm font-bold text-red-600 flex-shrink-0">หมดอายุ</span>
+              ) : (
+                <button
+                  onClick={() => handleDownload(link)}
+                  disabled={downloadingId === link.id}
+                  className="btn-primary flex items-center gap-1.5 text-base py-1.5 px-3 flex-shrink-0 disabled:opacity-60"
+                >
+                  <Download size={16} /> {downloadingId === link.id ? 'กำลังดาวน์โหลด...' : 'ดาวน์โหลด'}
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -299,37 +309,106 @@ function RejectModal({ isOpen, onClose, onConfirm }: { isOpen: boolean; onClose:
   );
 }
 
-function SendVideoModal({ isOpen, onClose, defaultFileName, defaultExpiryDays, onConfirm }: {
+const MAX_VIDEO_BYTES = 45 * 1024 * 1024;
+const VIDEO_EXPIRY_OPTIONS = [
+  { label: '90 วัน', days: 90 },
+  { label: '1 ปี', days: 365 },
+];
+
+/* re-mounted via `key` each time it opens (see openVideoModal in StaffView) so
+   this local state always starts from the request's current videoLinks —
+   avoids syncing props into state via an effect */
+function VideoLinksModal({ isOpen, onClose, existingLinks, uploadedBy, onConfirm }: {
   isOpen: boolean;
   onClose: () => void;
-  defaultFileName: string;
-  defaultExpiryDays: number;
-  onConfirm: (fileName: string, expiryDays: number) => void;
+  existingLinks: VideoLink[];
+  uploadedBy: string;
+  onConfirm: (links: VideoLink[]) => void;
 }) {
-  const [fileName, setFileName] = useState(defaultFileName);
-  const [expiryDays, setExpiryDays] = useState(defaultExpiryDays);
+  const [links, setLinks] = useState<VideoLink[]>(existingLinks);
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [expiryDays, setExpiryDays] = useState(90);
+  const [error, setError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handlePickFile = (file: File | undefined) => {
+    setError('');
+    if (!file) { setPendingFile(null); return; }
+    if (file.size > MAX_VIDEO_BYTES) {
+      setError('ไฟล์มีขนาดเกิน 45MB กรุณาเลือกไฟล์อื่น');
+      setPendingFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+    setPendingFile(file);
+  };
+
+  const addLink = () => {
+    if (!pendingFile) return;
+    const expiresAt = new Date(Date.now() + expiryDays * 86_400_000).toISOString();
+    setLinks(ls => [...ls, {
+      id: `vl-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      fileName: pendingFile.name,
+      fileSizeBytes: pendingFile.size,
+      expiresAt,
+      uploadedAt: new Date().toISOString(),
+      uploadedBy,
+    }]);
+    setPendingFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const removeLink = (id: string) => setLinks(ls => ls.filter(l => l.id !== id));
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="ส่งวิดีโอให้ประชาชน" icon={<Mail size={20} className="text-white" />}>
+    <Modal isOpen={isOpen} onClose={onClose} title="จัดการลิงก์วิดีโอ" icon={<Mail size={20} className="text-white" />} size="lg">
       <div className="space-y-4">
-        <div>
-          <label htmlFor="video-filename" className="label">ชื่อไฟล์วิดีโอ</label>
-          <input id="video-filename" value={fileName} onChange={e => setFileName(e.target.value)} className="input-field" />
+        {links.length > 0 && (
+          <div className="space-y-1.5">
+            {links.map(link => (
+              <div key={link.id} className="flex items-center justify-between gap-3 border border-gray-200 rounded-lg px-3 py-2">
+                <div className="min-w-0">
+                  <p className="text-lg font-bold text-gray-800 truncate">{link.fileName}</p>
+                  <p className="text-sm text-gray-500">
+                    {(link.fileSizeBytes / (1024 * 1024)).toFixed(1)} MB · หมดอายุ {formatThaiDate(link.expiresAt)}
+                  </p>
+                </div>
+                <button type="button" onClick={() => removeLink(link.id)} className="text-sm text-red-600 hover:underline flex-shrink-0">ลบ</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="p-4 bg-blue-50 border border-blue-100 rounded-xl space-y-3">
+          <p className="text-lg font-bold text-navy-700">เพิ่มลิงก์วิดีโอ</p>
+          <div>
+            <label htmlFor="video-file-input" className="label">ไฟล์วิดีโอที่ตัดแล้ว (ไม่เกิน 45MB)</label>
+            <input
+              id="video-file-input" ref={fileInputRef} type="file" accept="video/*"
+              onChange={e => handlePickFile(e.target.files?.[0])}
+              className="block w-full text-lg text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-navy-700 file:text-white file:font-bold"
+            />
+            {error && <p role="alert" className="text-base text-red-600 mt-1">{error}</p>}
+          </div>
+          <div>
+            <label htmlFor="video-expiry" className="label">ระยะเวลาที่ประชาชนดาวน์โหลดได้</label>
+            <select id="video-expiry" value={expiryDays} onChange={e => setExpiryDays(Number(e.target.value))} className="input-field">
+              {VIDEO_EXPIRY_OPTIONS.map(o => <option key={o.days} value={o.days}>{o.label}</option>)}
+            </select>
+          </div>
+          <button type="button" onClick={addLink} disabled={!pendingFile} className="btn-secondary disabled:opacity-40 disabled:cursor-not-allowed">
+            เพิ่มลิงก์
+          </button>
         </div>
-        <div>
-          <label htmlFor="video-expiry" className="label">ระยะเวลาที่ประชาชนดาวน์โหลดได้</label>
-          <select id="video-expiry" value={expiryDays} onChange={e => setExpiryDays(Number(e.target.value))} className="input-field">
-            {[30, 60, 90].map(d => <option key={d} value={d}>{d} วัน</option>)}
-          </select>
-        </div>
+
         <p className="text-lg text-gray-500 flex items-start gap-2">
           <Mail size={18} className="flex-shrink-0 mt-0.5" />
-          ระบบจะจำลองการส่งอีเมลแจ้งเตือนประชาชนให้เข้าสู่ระบบมาดาวน์โหลดไฟล์เอง
+          ระบบจะส่งอีเมลแจ้งเตือนประชาชนพร้อมลิงก์เข้าสู่ระบบอัตโนมัติให้เข้ามาดาวน์โหลดไฟล์เอง
         </p>
         <div className="flex gap-3 justify-end">
           <button onClick={onClose} className="btn-secondary">ยกเลิก</button>
-          <button onClick={() => onConfirm(fileName, expiryDays)} disabled={!fileName.trim()} className="btn-primary disabled:opacity-40">
-            ส่งและแจ้งเตือน
+          <button onClick={() => onConfirm(links)} disabled={links.length === 0} className="btn-primary disabled:opacity-40">
+            บันทึกและแจ้งเตือนผู้ร้องขอ
           </button>
         </div>
       </div>
@@ -411,7 +490,8 @@ function StaffView() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [rejectOpen, setRejectOpen] = useState(false);
-  const [sendOpen, setSendOpen] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [videoModalKey, setVideoModalKey] = useState(0);
 
   const refresh = () => setRequests(savedRequests());
   const selected = selectedId ? requests.find(r => r.id === selectedId) ?? null : null;
@@ -476,17 +556,24 @@ function StaffView() {
     setRejectOpen(false);
   };
 
-  const confirmSend = (fileName: string, expiryDays: number) => {
-    if (!selected) return;
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + expiryDays);
-    const expiresAt = expiryDate.toISOString();
-    mutate(
-      selected.id,
-      { status: 'ส่งแล้ว', videoFile: fileName, videoExpiresAt: expiresAt, timeline: markStep(selected.timeline, 'ส่งข้อมูล') },
-      `ส่งวิดีโอคำขอ ${selected.reqNo} (${fileName}) แจ้งเตือนทางอีเมลแล้ว หมดอายุ ${formatThaiDate(expiresAt)}`
-    );
-    setSendOpen(false);
+  const openVideoModal = () => {
+    setVideoModalKey(k => k + 1);
+    setVideoModalOpen(true);
+  };
+
+  const confirmVideoLinks = (links: VideoLink[]) => {
+    if (!selected || !user) return;
+    const token = selected.downloadToken ?? generateDownloadToken();
+    const patch: Partial<CitizenRequest> = { videoLinks: links, downloadToken: token };
+    if (selected.status === 'รอภาพ') {
+      patch.status = 'ส่งแล้ว';
+      patch.timeline = markStep(selected.timeline, 'ส่งข้อมูล');
+    }
+    mutate(selected.id, patch, `บันทึกลิงก์วิดีโอคำขอ ${selected.reqNo} (${links.length} ไฟล์) แจ้งเตือนทางอีเมลแล้ว`);
+
+    const magicLink = `${window.location.origin}${import.meta.env.BASE_URL}video-access?token=${token}`;
+    sendCctvVideoReadyEmail(selected.email, selected.citizenName, selected.reqNo, magicLink, links.length);
+    setVideoModalOpen(false);
   };
 
   return (
@@ -629,8 +716,10 @@ function StaffView() {
               {selected.status === 'อนุมัติ' && (
                 <button onClick={() => updateStatus(selected.id, 'รอภาพ', 'จัดเตรียมข้อมูล')} className="btn-primary">เตรียมภาพ</button>
               )}
-              {selected.status === 'รอภาพ' && (
-                <button onClick={() => setSendOpen(true)} className="btn-primary">ส่งข้อมูลแล้ว</button>
+              {(selected.status === 'รอภาพ' || selected.status === 'ส่งแล้ว' || selected.status === 'ได้รับแล้ว') && (
+                <button onClick={openVideoModal} className="btn-primary">
+                  {selected.status === 'รอภาพ' ? 'ส่งข้อมูลแล้ว' : 'จัดการลิงก์วิดีโอ'}
+                </button>
               )}
               {selected.status === 'ส่งแล้ว' && (
                 <button onClick={() => updateStatus(selected.id, 'ได้รับแล้ว')} className="btn-secondary">ยืนยันรับข้อมูล</button>
@@ -648,14 +737,14 @@ function StaffView() {
       )}
 
       <RejectModal isOpen={rejectOpen} onClose={() => setRejectOpen(false)} onConfirm={confirmReject} />
-      {selected && (
-        <SendVideoModal
-          key={selected.id}
-          isOpen={sendOpen}
-          onClose={() => setSendOpen(false)}
-          defaultFileName={`${selected.reqNo}.mp4`}
-          defaultExpiryDays={savedSystemSettings().videoRetentionDays}
-          onConfirm={confirmSend}
+      {selected && user && (
+        <VideoLinksModal
+          key={videoModalKey}
+          isOpen={videoModalOpen}
+          onClose={() => setVideoModalOpen(false)}
+          existingLinks={selected.videoLinks ?? []}
+          uploadedBy={user.name}
+          onConfirm={confirmVideoLinks}
         />
       )}
     </div>

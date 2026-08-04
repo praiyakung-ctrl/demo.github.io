@@ -28,6 +28,7 @@ const ReportIncidentPage = lazy(() => import('./pages/ReportIncidentPage').then(
 const AdminIncidentsPage = lazy(() => import('./pages/AdminIncidentsPage').then(m => ({ default: m.AdminIncidentsPage })));
 const AdminMemberReviewPage = lazy(() => import('./pages/AdminMemberReviewPage').then(m => ({ default: m.AdminMemberReviewPage })));
 const AdminCctvApproversPage = lazy(() => import('./pages/AdminCctvApproversPage').then(m => ({ default: m.AdminCctvApproversPage })));
+const VideoAccessPage = lazy(() => import('./pages/VideoAccessPage').then(m => ({ default: m.VideoAccessPage })));
 const SetPasswordPage = lazy(() => import('./pages/SetPasswordPage').then(m => ({ default: m.SetPasswordPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const PoliceUsageReportPage = lazy(() => import('./pages/PoliceUsageReportPage').then(m => ({ default: m.PoliceUsageReportPage })));
@@ -71,6 +72,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/video-access" element={<VideoAccessPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/register/foreigner" element={<ForeignerRegisterPage />} />
       <Route path="/" element={<DefaultRedirect />} />

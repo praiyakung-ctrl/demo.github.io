@@ -48,3 +48,7 @@ export function sendCctvRequestApprovedEmail(to: string, name: string, reqNo: st
 export function sendCctvRequestRejectedEmail(to: string, name: string, reason: string): Promise<boolean> {
   return send({ type: 'cctv-request-rejected', to, name, reason });
 }
+
+export function sendCctvVideoReadyEmail(to: string, name: string, reqNo: string, magicLink: string, fileCount: number): Promise<boolean> {
+  return send({ type: 'cctv-video-ready', to, name, reqNo, magicLink, fileCount });
+}

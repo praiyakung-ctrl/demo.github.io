@@ -104,11 +104,12 @@ export interface CitizenRequest {
   status: RequestStatus;
   submittedAt: string;
   staffId?: string;
-  videoFile?: string;
   /* required when status is 'ปฏิเสธ' */
   rejectionReason?: string;
-  /* ISO date; citizen can download the video until this expires */
-  videoExpiresAt?: string;
+  /* cut/edited footage staff have made available for download — can be more than one file */
+  videoLinks?: VideoLink[];
+  /* magic-link token for the "เข้าสู่ระบบอัตโนมัติ" email button; generated the first time a video link is added */
+  downloadToken?: string;
   timeline: TimelineEntry[];
   /* history of the 3-level approval chain, one entry per level acted on so far */
   approvals?: RequestApproval[];
@@ -118,6 +119,16 @@ export interface TimelineEntry {
   step: string;
   timestamp?: string;
   completed: boolean;
+}
+
+export interface VideoLink {
+  id: string;
+  fileName: string;
+  fileSizeBytes: number;
+  /* ISO date; citizen can download this file until it expires */
+  expiresAt: string;
+  uploadedAt: string;
+  uploadedBy: string;
 }
 
 /* ---------- Police stations (สภ.) — for the police-usage KPI report ---------- */

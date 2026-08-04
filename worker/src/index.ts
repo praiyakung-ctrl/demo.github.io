@@ -20,10 +20,12 @@ type EmailRequest =
   | { type: 'otp'; to: string; code: string }
   | { type: 'cctv-approval-pending'; to: string; name: string; reqNo: string; level: 1 | 2 | 3 }
   | { type: 'cctv-request-approved'; to: string; name: string; reqNo: string }
-  | { type: 'cctv-request-rejected'; to: string; name: string; reason: string };
+  | { type: 'cctv-request-rejected'; to: string; name: string; reason: string }
+  | { type: 'cctv-video-ready'; to: string; name: string; reqNo: string; magicLink: string; fileCount: number };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const OTP_RE = /^[0-9]{6}$/;
+const HTTP_URL_RE = /^https?:\/\//;
 const APPROVAL_LEVEL_LABEL: Record<1 | 2 | 3, string> = { 1: 'เจ้าหน้าที่ผู้รับเรื่อง', 2: 'หัวหน้างาน', 3: 'ผู้บริหาร' };
 
 function corsHeaders(origin: string): Record<string, string> {
@@ -123,6 +125,19 @@ function buildEmail(req: EmailRequest, env: Env): { subject: string; html: strin
           <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
         `.trim(),
       };
+    case 'cctv-video-ready':
+      return {
+        subject: `ไฟล์วิดีโอคำขอ ${req.reqNo} พร้อมดาวน์โหลดแล้ว`,
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>ไฟล์วิดีโอ CCTV ที่ตัดต่อตามคำขอเลขที่ <strong>${escapeHtml(req.reqNo)}</strong> ของท่านพร้อมให้ดาวน์โหลดแล้ว จำนวน ${req.fileCount} ไฟล์</p>
+          <p>กรุณากดปุ่มด้านล่างเพื่อเข้าสู่ระบบโดยอัตโนมัติ แล้วกดดาวน์โหลดไฟล์แต่ละไฟล์จากหน้าเว็บของระบบ</p>
+          <p style="text-align:center;margin:24px 0;">
+            <a href="${escapeHtml(req.magicLink)}" style="background:#1b3a6b;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">เข้าสู่ระบบเพื่อดาวน์โหลด</a>
+          </p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
   }
 }
 
@@ -142,6 +157,11 @@ function isValidRequest(body: unknown): body is EmailRequest {
   if (b.type === 'cctv-approval-pending') return typeof b.reqNo === 'string' && Boolean(b.reqNo.trim()) && (b.level === 1 || b.level === 2 || b.level === 3);
   if (b.type === 'cctv-request-approved') return typeof b.reqNo === 'string' && Boolean(b.reqNo.trim());
   if (b.type === 'cctv-request-rejected') return typeof b.reason === 'string' && Boolean(b.reason.trim());
+  if (b.type === 'cctv-video-ready') {
+    return typeof b.reqNo === 'string' && Boolean(b.reqNo.trim())
+      && typeof b.magicLink === 'string' && HTTP_URL_RE.test(b.magicLink)
+      && typeof b.fileCount === 'number' && b.fileCount > 0;
+  }
   return false;
 }
 
