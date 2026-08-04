@@ -13,12 +13,19 @@ import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { exportChartWithTableToExcel, exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
 
 const monthly = lprData.monthly as MonthlyEventData[];
+const roads = lprData.roads as LprRoad[];
 
-/* NT MPLS link summary per installation site, in CAM-ID order.
+/* the 8 installation points of the new LPR-project cameras (51 of the
+   991 total cameras) — identified by matching against lpr.json's roads,
+   the only existing dataset that enumerates exactly these 8 sites */
+const LPR_INSTALL_LOCATIONS = new Set(roads.map(r => r.road));
+
+/* NT MPLS link summary per LPR installation site, in CAM-ID order.
    LPR/Unity 8 are per-camera rates; Total Link = cameras × (LPR + Unity 8). */
 const mplsSites = (() => {
   const sites: { location: string; count: number; lprMbps: number; unityMbps: number; totalMbps: number }[] = [];
   for (const cam of camerasData as Camera[]) {
+    if (!LPR_INSTALL_LOCATIONS.has(cam.location)) continue;
     let site = sites.find(s => s.location === cam.location);
     if (!site) {
       site = { location: cam.location, count: 0, lprMbps: cam.lprMbps, unityMbps: cam.unityMbps, totalMbps: 0 };
@@ -33,8 +40,13 @@ const mplsTotal = {
   count: mplsSites.reduce((s, x) => s + x.count, 0),
   totalMbps: mplsSites.reduce((s, x) => s + x.totalMbps, 0),
 };
-const roads = lprData.roads as LprRoad[];
 const entries = lprData.entries as { id: string; plate: string; road: string; timestamp: string; direction: string; type: string }[];
+
+/* latest LPR record per installation point (entries is already newest-first) */
+const latestByPoint = mplsSites.map(site => ({
+  location: site.location,
+  entry: entries.find(e => e.road === site.location),
+}));
 
 const EVENT_COLORS_MAP: Record<string, string> = {
   traffic: '#F97316', gunshot: '#EF4444', parking: '#92400E', flood: '#3B82F6', crowd: '#EAB308',
@@ -375,7 +387,7 @@ export function ReportsPage() {
             </table>
           </div>
           <p className="px-4 pb-4 pt-2 text-base text-gray-500">
-            อัตรารับส่งข้อมูลต่อกล้อง: LPR 6 Mbps และ Unity 8 จำนวน 6 Mbps — Total Link = จำนวนกล้อง × 12 Mbps
+            แสดงเฉพาะจุดติดตั้งกล้อง LPR โครงการใหม่ 8 จุด (รวม {mplsTotal.count} กล้อง) — อัตรารับส่งข้อมูลต่อกล้อง: LPR 6 Mbps และ Unity 8 จำนวน 6 Mbps — Total Link = จำนวนกล้อง × 12 Mbps
           </p>
         </div>
 
@@ -424,42 +436,48 @@ export function ReportsPage() {
           </div>
         </div>
 
-        {/* Section 3: LPR entries */}
+        {/* Section 3: latest LPR record per installation point */}
         <div className="card overflow-hidden">
           <div className="flex items-center gap-2 p-4 border-b border-gray-100">
             <Car size={22} className="text-navy-700" />
-            <h3 className="font-bold text-navy-700 text-xl">บันทึก LPR ล่าสุด (10 รายการ)</h3>
+            <h3 className="font-bold text-navy-700 text-xl">บันทึก LPR ล่าสุด (ตามจุดติดตั้ง 8 จุด)</h3>
           </div>
           <div className="divide-y divide-gray-100">
-            {entries.map((e, idx) => (
-              <div key={e.id} className={`flex items-center gap-4 px-5 py-3 hover:bg-blue-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'}`}>
+            {latestByPoint.map(({ location, entry }, idx) => (
+              <div key={location} className={`flex items-center gap-4 px-5 py-3 hover:bg-blue-50 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'}`}>
                 {/* License plate badge */}
                 <div className="flex-shrink-0 bg-amber-400 border-2 border-amber-600 rounded-lg px-2 py-0.5 min-w-[90px] text-center shadow-sm">
-                  <span className="font-extrabold text-base text-gray-900 font-mono tracking-widest">{e.plate}</span>
+                  <span className="font-extrabold text-base text-gray-900 font-mono tracking-widest">{entry?.plate ?? '—'}</span>
                 </div>
-                {/* Road */}
+                {/* Installation point */}
                 <div className="flex-1 min-w-0 flex items-center gap-1.5">
                   <MapPin size={20} className="text-navy-500 flex-shrink-0" />
-                  <span className="font-medium text-navy-700 text-2xl truncate">{e.road}</span>
+                  <span className="font-medium text-navy-700 text-2xl truncate">{location}</span>
                 </div>
-                {/* Timestamp */}
-                <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <Clock size={18} className="text-gray-400" />
-                  <span className="text-lg text-gray-900 whitespace-nowrap">{e.timestamp}</span>
-                </div>
-                {/* Direction */}
-                <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-bold text-base flex-shrink-0 ${
-                  e.direction === 'ขาเข้า' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-orange-100 text-orange-700 border border-orange-300'
-                }`}>
-                  {e.direction === 'ขาเข้า' ? <ArrowDownLeft size={14} /> : <ArrowUpRight size={14} />}
-                  {e.direction}
-                </div>
-                {/* Vehicle type */}
-                <div className="flex-shrink-0">
-                  <span className={`inline-flex items-center text-lg font-bold px-3 py-1.5 rounded-full ${VEHICLE_TYPE_STYLES[e.type] ?? 'bg-gray-100 text-gray-600 border border-gray-300'}`}>
-                    {e.type}
-                  </span>
-                </div>
+                {entry ? (
+                  <>
+                    {/* Timestamp */}
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
+                      <Clock size={18} className="text-gray-400" />
+                      <span className="text-lg text-gray-900 whitespace-nowrap">{entry.timestamp}</span>
+                    </div>
+                    {/* Direction */}
+                    <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full font-bold text-base flex-shrink-0 ${
+                      entry.direction === 'ขาเข้า' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-orange-100 text-orange-700 border border-orange-300'
+                    }`}>
+                      {entry.direction === 'ขาเข้า' ? <ArrowDownLeft size={14} /> : <ArrowUpRight size={14} />}
+                      {entry.direction}
+                    </div>
+                    {/* Vehicle type */}
+                    <div className="flex-shrink-0">
+                      <span className={`inline-flex items-center text-lg font-bold px-3 py-1.5 rounded-full ${VEHICLE_TYPE_STYLES[entry.type] ?? 'bg-gray-100 text-gray-600 border border-gray-300'}`}>
+                        {entry.type}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="text-lg text-gray-400 flex-shrink-0">ยังไม่มีข้อมูลบันทึก</span>
+                )}
               </div>
             ))}
           </div>
