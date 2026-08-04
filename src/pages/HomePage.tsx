@@ -15,7 +15,7 @@ import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { MapFabMenu } from '../components/MapFabMenu';
 import { LprBadge } from '../components/LprBadge';
 import camerasData from '../data/cameras.json';
-import type { Camera, CameraStatus, CameraType } from '../types';
+import type { Camera, CameraStatus } from '../types';
 import { STATUS_COLORS, STATUS_LABELS } from '../types';
 import { cameraImage, copyCameraShareLink, districtOf, overlayClock } from '../utils/cameraDisplay';
 import { formatLastUpdate } from '../utils/formatDate';
@@ -30,8 +30,6 @@ const STATUS_SORT_ORDER: CameraStatus[] = ['Online', 'Maintenance', 'Unknown', '
 const STATUS_COUNTS: Record<CameraStatus, number> = { Online: 0, Offline: 0, Maintenance: 0, Unknown: 0 };
 publicCameras.forEach(c => { STATUS_COUNTS[c.status]++; });
 
-const ORG_OPTIONS = [...new Set(publicCameras.map(c => c.organization))].sort((a, b) => a.localeCompare(b, 'th'));
-const DISTRICT_OPTIONS = [...new Set(publicCameras.map(c => districtOf(c.location)))].sort((a, b) => a.localeCompare(b, 'th'));
 const LOCATION_SUGGESTIONS = [...new Set(publicCameras.map(c => c.location))].sort((a, b) => a.localeCompare(b, 'th'));
 
 type SortMode = 'near' | 'name' | 'status';
@@ -247,10 +245,6 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
 
 export function HomePage() {
   const [search, setSearch] = useState('');
-  const [typeFilter, setTypeFilter] = useState<'all' | CameraType>('all');
-  const [statusFilter, setStatusFilter] = useState<'all' | CameraStatus>('all');
-  const [orgFilter, setOrgFilter] = useState<'all' | string>('all');
-  const [districtFilter, setDistrictFilter] = useState<'all' | string>('all');
   const [sortMode, setSortMode] = useState<SortMode>('status');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [legendVisible, setLegendVisible] = useState(true);
@@ -339,11 +333,6 @@ export function HomePage() {
     );
   };
 
-  const handleSortChange = (mode: SortMode) => {
-    setSortMode(mode);
-    if (mode === 'near' && !userPos) requestLocation();
-  };
-
   const handleLocateMe = () => {
     requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
   };
@@ -368,12 +357,8 @@ export function HomePage() {
   }, [search]);
 
   const filtered = useMemo(() => publicCameras.filter(c =>
-    (search === '' || c.id.toLowerCase().includes(search.toLowerCase()) || c.location.includes(search)) &&
-    (typeFilter === 'all' || c.type === typeFilter) &&
-    (statusFilter === 'all' || c.status === statusFilter) &&
-    (orgFilter === 'all' || c.organization === orgFilter) &&
-    (districtFilter === 'all' || districtOf(c.location) === districtFilter)
-  ), [search, typeFilter, statusFilter, orgFilter, districtFilter]);
+    search === '' || c.id.toLowerCase().includes(search.toLowerCase()) || c.location.includes(search)
+  ), [search]);
 
   const sorted = useMemo(() => {
     const list = [...filtered];
@@ -478,55 +463,13 @@ export function HomePage() {
             )}
           </div>
 
-          {/* secondary filters */}
-          <div className="card p-3 flex flex-wrap gap-3 items-end">
-            <div>
-              <label htmlFor="home-type" className="label">ประเภทกล้อง</label>
-              <select id="home-type" value={typeFilter} onChange={e => setTypeFilter(e.target.value as 'all' | CameraType)} className="input-field w-auto">
-                <option value="all">ทั้งหมด</option>
-                <option value="Fixed">Fixed</option>
-                <option value="PTZ">PTZ</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="home-status" className="label">สถานะ</label>
-              <select id="home-status" value={statusFilter} onChange={e => setStatusFilter(e.target.value as 'all' | CameraStatus)} className="input-field w-auto">
-                <option value="all">ทั้งหมด</option>
-                {(['Online', 'Offline', 'Maintenance', 'Unknown'] as CameraStatus[]).map(s => (
-                  <option key={s} value={s}>{STATUS_LABELS[s]}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="home-org" className="label">หน่วยงาน</label>
-              <select id="home-org" value={orgFilter} onChange={e => setOrgFilter(e.target.value)} className="input-field w-auto">
-                <option value="all">ทั้งหมด</option>
-                {ORG_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="home-district" className="label">อำเภอ</label>
-              <select id="home-district" value={districtFilter} onChange={e => setDistrictFilter(e.target.value)} className="input-field w-auto">
-                <option value="all">ทั้งหมด</option>
-                {DISTRICT_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="home-sort" className="label">เรียงตาม</label>
-              <select id="home-sort" value={sortMode} onChange={e => handleSortChange(e.target.value as SortMode)} className="input-field w-auto">
-                <option value="status">สถานะ</option>
-                <option value="name">ชื่อ ก-ฮ</option>
-                <option value="near">ใกล้ฉัน</option>
-              </select>
-            </div>
-          </div>
           {geoError && (
-            <p className="text-lg text-red-600 flex items-center gap-1.5 -mt-3">
+            <p className="text-lg text-red-600 flex items-center gap-1.5">
               <Navigation size={16} /> ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
             </p>
           )}
           {!geoError && sortMode === 'near' && nearbyCount != null && (
-            <p className="text-lg text-navy-700 flex items-center gap-1.5 -mt-3">
+            <p className="text-lg text-navy-700 flex items-center gap-1.5">
               <MapPin size={16} /> พบกล้อง {nearbyCount} ตัวในระยะ 5 กม. จากตำแหน่งของคุณ
             </p>
           )}
