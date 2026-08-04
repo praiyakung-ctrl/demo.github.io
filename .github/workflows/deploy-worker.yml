@@ -24,11 +24,11 @@ jobs:
       # Requires a CLOUDFLARE_API_TOKEN repo secret (Cloudflare dashboard →
       # My Profile → API Tokens → "Edit Cloudflare Workers" template) and
       # BREVO_API_KEY set once via `wrangler secret put` (not managed here).
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: worker
-          # without this, the action defaults to an old pinned wrangler
-          # (3.90.0) instead of the ^4.0.0 in worker/package.json, which
-          # conflicts with @cloudflare/workers-types@^5.x and fails npm install
-          wranglerVersion: '4'
+      #
+      # cloudflare/wrangler-action installs its own separate copy of wrangler,
+      # which repeatedly conflicted with @cloudflare/workers-types (ERESOLVE)
+      # regardless of pinned version — use the wrangler already installed by
+      # `npm install` above instead (the exact one deployed manually before).
+      - run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
