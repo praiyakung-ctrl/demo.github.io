@@ -447,7 +447,7 @@ export function ReportIncidentPage() {
                 <button
                   onClick={() => setTypeStepOpen(true)}
                   title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
-                  className="flex items-center gap-2.5 whitespace-nowrap bg-white hover:bg-gray-50 border border-gray-200 shadow-lg rounded-xl px-3 py-1.5 text-left transition-colors"
+                  className="flex items-center gap-2.5 whitespace-nowrap bg-white hover:bg-blue-50 border border-gray-200 shadow-lg rounded-xl px-3 py-1.5 text-left transition-colors"
                 >
                   <PinIcon color="#DC2626" size={22} className="flex-shrink-0" />
                   <span className="min-w-0">
