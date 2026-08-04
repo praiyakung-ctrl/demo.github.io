@@ -29,3 +29,11 @@ export function addRequest(req: CitizenRequest): void {
 export function updateRequest(id: string, patch: Partial<CitizenRequest>): void {
   saveRequests(savedRequests().map(r => (r.id === id ? { ...r, ...patch } : r)));
 }
+
+/* Case ID format: REQ-YYMMDD-NNNN (Christian-era date + daily running number) */
+export function generateReqNo(): string {
+  const now = new Date();
+  const datePart = `${String(now.getFullYear() % 100).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+  const todayCount = savedRequests().filter(r => r.reqNo.startsWith(`REQ-${datePart}-`)).length;
+  return `REQ-${datePart}-${String(todayCount + 1).padStart(4, '0')}`;
+}

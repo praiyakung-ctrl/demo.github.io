@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { addRequest, savedRequests, updateRequest } from './requestStorage';
+import { addRequest, generateReqNo, savedRequests, updateRequest } from './requestStorage';
 import type { CitizenRequest } from '../types';
 
 const request = (over: Partial<CitizenRequest> = {}): CitizenRequest => ({
@@ -52,5 +52,21 @@ describe('requestStorage', () => {
     expect(all.find(r => r.id === 'req-1')?.status).toBe('ปฏิเสธ');
     expect(all.find(r => r.id === 'req-1')?.rejectionReason).toBe('ไม่มีกล้องครอบคลุม');
     expect(all.find(r => r.id === 'req-2')?.status).toBe('ใหม่');
+  });
+
+  it('generateReqNo produces REQ-YYMMDD-NNNN with today\'s date and a running number', () => {
+    const now = new Date();
+    const datePart = `${String(now.getFullYear() % 100).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+
+    const first = generateReqNo();
+    expect(first).toBe(`REQ-${datePart}-0001`);
+
+    addRequest(request({ id: 'req-today-1', reqNo: first }));
+    const second = generateReqNo();
+    expect(second).toBe(`REQ-${datePart}-0002`);
+
+    addRequest(request({ id: 'req-today-2', reqNo: second }));
+    const third = generateReqNo();
+    expect(third).toBe(`REQ-${datePart}-0003`);
   });
 });

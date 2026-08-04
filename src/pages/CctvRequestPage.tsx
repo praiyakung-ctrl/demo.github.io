@@ -20,7 +20,7 @@ import type { Camera, CitizenRequest } from '../types';
 import { STATUS_COLORS } from '../types';
 import { formatThaiDate } from '../utils/formatDate';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
-import { addRequest } from '../utils/requestStorage';
+import { addRequest, generateReqNo } from '../utils/requestStorage';
 
 const publicCameras = (camerasData as Camera[]).filter(c => c.isPublic);
 
@@ -784,8 +784,7 @@ export function CctvRequestPage() {
   const [reqNo, setReqNo] = useState('');
 
   const submit = () => {
-    const yearBE = new Date().getFullYear() + 543;
-    const newReqNo = `REQ-${yearBE}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+    const newReqNo = generateReqNo();
     const now = new Date().toISOString();
     const req: CitizenRequest = {
       id: `req-${Date.now()}`,
