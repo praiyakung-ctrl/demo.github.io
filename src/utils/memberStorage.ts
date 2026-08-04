@@ -109,7 +109,7 @@ const DAY_MS = 86_400_000;
    (mix of ThaID citizens and Google-verified foreign nationals) the first
    time the page loads, so the approve/reject workflow can be demonstrated. */
 export function ensureDemoPendingMembers(): void {
-  if (findMemberById('demo-pending-1')) return;
+  if (savedMembers().length > 0) return;
 
   const thaidApplicants = [
     { name: 'มานพ ใจดี', nationalId: '3100100000101' },
