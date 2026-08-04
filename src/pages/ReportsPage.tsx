@@ -271,7 +271,27 @@ export function ReportsPage() {
             <ExportButtons disabled={exporting} onPdf={() => handleExport('CCTV Events', 'PDF')} onExcel={() => handleExport('CCTV Events', 'Excel')} />
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Bar chart */}
+          <div
+            className="p-4"
+            role="img"
+            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านล่าง คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน"
+          >
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis dataKey="month" tick={{ fontSize: 16 }} />
+                <YAxis tick={{ fontSize: 15 }} />
+                <Tooltip content={<ChartTooltip />} />
+                <Legend content={<ChartLegend />} />
+                {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                  <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
+                ))}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="overflow-x-auto border-t border-gray-100">
             <table className="w-full text-xl">
               <thead className="bg-gray-50">
                 <tr>
@@ -319,26 +339,6 @@ export function ReportsPage() {
                 )}
               </tbody>
             </table>
-          </div>
-
-          {/* Bar chart */}
-          <div
-            className="p-4 border-t border-gray-100"
-            role="img"
-            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านบน คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน"
-          >
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="month" tick={{ fontSize: 16 }} />
-                <YAxis tick={{ fontSize: 15 }} />
-                <Tooltip content={<ChartTooltip />} />
-                <Legend content={<ChartLegend />} />
-                {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                  <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
-                ))}
-              </BarChart>
-            </ResponsiveContainer>
           </div>
         </div>
 
