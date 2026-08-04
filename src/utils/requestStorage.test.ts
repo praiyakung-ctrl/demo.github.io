@@ -70,6 +70,18 @@ describe('requestStorage', () => {
     expect(third).toBe(`REQ-${datePart}-0003`);
   });
 
+  it('generateReqNo keeps the running number continuous across days within the same month', () => {
+    const now = new Date();
+    const yymm = `${String(now.getFullYear() % 100).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}`;
+    const todayDatePart = `${yymm}${String(now.getDate()).padStart(2, '0')}`;
+
+    // an earlier request from a different day in the same month
+    addRequest(request({ id: 'req-earlier-day', reqNo: `REQ-${yymm}01-0001` }));
+
+    const next = generateReqNo();
+    expect(next).toBe(`REQ-${todayDatePart}-0002`);
+  });
+
   it('generateDownloadToken produces unique-looking tokens', () => {
     const a = generateDownloadToken();
     const b = generateDownloadToken();
