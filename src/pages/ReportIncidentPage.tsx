@@ -13,6 +13,7 @@ import { LiveCameraModal } from '../components/LiveCameraModal';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { MapFabMenu } from '../components/MapFabMenu';
+import { LprBadge } from '../components/LprBadge';
 import { Modal } from '../components/Modal';
 import { PinIcon } from '../components/PinIcon';
 import { useAuth } from '../context/AuthContext';
@@ -545,7 +546,10 @@ export function ReportIncidentPage() {
                   <Marker key={cam.id} position={[cam.lat, cam.lng]} icon={pinIcon(STATUS_COLORS[cam.status])}>
                     <Popup minWidth={200}>
                       <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                        <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
+                        <div className="flex items-center gap-1.5">
+                          <p className="font-extrabold text-navy-700 text-xl leading-tight">{cam.id}</p>
+                          {cam.isLpr && <LprBadge />}
+                        </div>
                         <p className="text-lg text-gray-800">{cam.location}</p>
                         <p className="mt-1 text-base font-bold flex items-center gap-1.5" style={{ color: STATUS_COLORS[cam.status] }}>
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[cam.status] }} />

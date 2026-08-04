@@ -14,6 +14,7 @@ import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { MapFabMenu } from '../components/MapFabMenu';
+import { LprBadge } from '../components/LprBadge';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import { ORG_INFO } from '../data/orgInfo';
@@ -357,7 +358,10 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
                 >
                   <Popup minWidth={200}>
                     <div style={{ fontFamily: "'TH Sarabun New', sans-serif" }}>
-                      <p className="font-extrabold text-navy-700 text-lg">{cam.id}</p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-extrabold text-navy-700 text-lg">{cam.id}</p>
+                        {cam.isLpr && <LprBadge />}
+                      </div>
                       <p className="text-base text-gray-700">{cam.location}</p>
                     </div>
                   </Popup>

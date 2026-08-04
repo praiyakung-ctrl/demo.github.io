@@ -37,6 +37,8 @@ export interface Camera {
   unityMbps: number;
   /* shown on the public home page (no login required) when true; omitted/false stays internal-only */
   isPublic?: boolean;
+  /* true for the 51 cameras in the LPR (license-plate recognition) project across 8 installation points — shown as an "LPR" badge in camera detail views */
+  isLpr?: boolean;
   /* device info shown on the Live Viewer detail panel */
   brand?: string;
   model?: string;

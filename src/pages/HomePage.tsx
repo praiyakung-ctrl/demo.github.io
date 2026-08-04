@@ -13,6 +13,7 @@ import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { MapFabMenu } from '../components/MapFabMenu';
+import { LprBadge } from '../components/LprBadge';
 import camerasData from '../data/cameras.json';
 import type { Camera, CameraStatus, CameraType } from '../types';
 import { STATUS_COLORS, STATUS_LABELS } from '../types';
@@ -155,7 +156,10 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
     <div className="space-y-4">
       <div className="card p-0 overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-          <h3 className="text-2xl font-bold text-navy-700 truncate">{cam.id}</h3>
+          <div className="flex items-center gap-2 min-w-0">
+            <h3 className="text-2xl font-bold text-navy-700 truncate">{cam.id}</h3>
+            {cam.isLpr && <LprBadge className="flex-shrink-0" />}
+          </div>
           {online && (
             <span className="flex items-center gap-1.5 text-base font-bold text-green-600 flex-shrink-0">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> LIVE
@@ -602,7 +606,10 @@ export function HomePage() {
                         <div className="flex items-center gap-2 mb-2">
                           <CameraIcon size={20} style={{ color: markerColor(cam) }} />
                           <div>
-                            <p className="font-extrabold text-navy-700 text-lg leading-tight">{cam.id}</p>
+                            <div className="flex items-center gap-1.5">
+                              <p className="font-extrabold text-navy-700 text-lg leading-tight">{cam.id}</p>
+                              {cam.isLpr && <LprBadge />}
+                            </div>
                             <div className="flex items-center gap-1 text-gray-400 text-sm">
                               <Compass size={12} /> {cam.type} · {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}
                             </div>

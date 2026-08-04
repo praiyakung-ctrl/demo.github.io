@@ -4,6 +4,7 @@ import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { Layout } from '../components/Layout';
 import { StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
+import { LprBadge } from '../components/LprBadge';
 import camerasData from '../data/cameras.json';
 import type { Camera } from '../types';
 import { useAuth } from '../context/AuthContext';
@@ -17,7 +18,7 @@ const EMPTY: Omit<Camera, 'id'> = {
   name: '', location: '', lat: 13.36, lng: 100.98,
   type: 'Fixed', organization: '', rtspUrl: '', status: 'Online',
   lastUpdate: new Date().toISOString(), currentEvent: 'normal',
-  lprMbps: 6, unityMbps: 6, isPublic: false,
+  lprMbps: 6, unityMbps: 6, isPublic: false, isLpr: false,
 };
 
 export function AdminCamerasPage() {
@@ -147,6 +148,7 @@ export function AdminCamerasPage() {
                           {cam.isPublic && (
                             <span className="text-xs font-bold px-1.5 py-0.5 rounded bg-green-100 text-green-700 border border-green-300">สาธารณะ</span>
                           )}
+                          {cam.isLpr && <LprBadge />}
                         </div>
                         <div className="flex items-center gap-1 mt-0.5">
                           <MapPin size={16} className="text-blue-500 flex-shrink-0" />
@@ -306,6 +308,18 @@ export function AdminCamerasPage() {
                 />
                 <label htmlFor="cam-public" className="text-sm font-bold text-navy-700">
                   เปิดเผยต่อสาธารณะ (แสดงในหน้าแรกสำหรับประชาชนทั่วไป โดยไม่ต้องเข้าสู่ระบบ)
+                </label>
+              </div>
+              <div className="col-span-2 flex items-center gap-2">
+                <input
+                  id="cam-lpr"
+                  type="checkbox"
+                  checked={form.isLpr ?? false}
+                  onChange={e => set('isLpr', e.target.checked)}
+                  className="w-4 h-4 rounded accent-[#1b3a6b]"
+                />
+                <label htmlFor="cam-lpr" className="text-sm font-bold text-navy-700 flex items-center gap-1.5">
+                  กล้อง LPR (โครงการอ่านป้ายทะเบียน) <LprBadge />
                 </label>
               </div>
             </div>

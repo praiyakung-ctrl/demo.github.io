@@ -3,8 +3,8 @@
     "id": "CAM-001",
     "name": "CAM-001",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3516,
-    "lng": 100.9822,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-001",
@@ -18,14 +18,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-002",
     "name": "CAM-002",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3524,
-    "lng": 100.983,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-002",
@@ -38,14 +39,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-003",
     "name": "CAM-003",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3508,
-    "lng": 100.9815,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-003",
@@ -58,14 +60,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-004",
     "name": "CAM-004",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3531,
-    "lng": 100.9818,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-004",
@@ -79,14 +82,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ไม่มีสัญญาณ"
+    "signalQuality": "ไม่มีสัญญาณ",
+    "isLpr": true
   },
   {
     "id": "CAM-005",
     "name": "CAM-005",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3501,
-    "lng": 100.9827,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-005",
@@ -99,14 +103,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-006",
     "name": "CAM-006",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3522,
-    "lng": 100.981,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-006",
@@ -119,14 +124,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-007",
     "name": "CAM-007",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.351,
-    "lng": 100.9834,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-007",
@@ -139,14 +145,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-008",
     "name": "CAM-008",
     "location": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี",
-    "lat": 13.3528,
-    "lng": 100.9837,
+    "lat": 13.442472,
+    "lng": 101.000083,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-008",
@@ -159,14 +166,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-009",
     "name": "CAM-009",
     "location": "บริเวณสะพานลอยหน้าวัดเนินสุธาวาส",
-    "lat": 13.3565,
-    "lng": 100.988,
+    "lat": 13.358417,
+    "lng": 100.987028,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-009",
@@ -180,14 +188,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-010",
     "name": "CAM-010",
     "location": "บริเวณสะพานลอยหน้าวัดเนินสุธาวาส",
-    "lat": 13.3572,
-    "lng": 100.9887,
+    "lat": 13.358417,
+    "lng": 100.987028,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-010",
@@ -200,14 +209,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-011",
     "name": "CAM-011",
     "location": "บริเวณสะพานลอยหน้าวัดเนินสุธาวาส",
-    "lat": 13.3558,
-    "lng": 100.9873,
+    "lat": 13.358417,
+    "lng": 100.987028,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-011",
@@ -220,14 +230,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-012",
     "name": "CAM-012",
     "location": "บริเวณสะพานลอยหน้าวัดเนินสุธาวาส",
-    "lat": 13.357,
-    "lng": 100.9868,
+    "lat": 13.358417,
+    "lng": 100.987028,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-012",
@@ -241,14 +252,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ไม่มีสัญญาณ"
+    "signalQuality": "ไม่มีสัญญาณ",
+    "isLpr": true
   },
   {
     "id": "CAM-013",
     "name": "CAM-013",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.296,
-    "lng": 100.928,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-013",
@@ -262,14 +274,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-014",
     "name": "CAM-014",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.2968,
-    "lng": 100.9288,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-014",
@@ -282,14 +295,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-015",
     "name": "CAM-015",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.2952,
-    "lng": 100.9273,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-015",
@@ -302,14 +316,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-016",
     "name": "CAM-016",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.2974,
-    "lng": 100.9276,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-016",
@@ -323,14 +338,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-017",
     "name": "CAM-017",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.2946,
-    "lng": 100.9285,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-017",
@@ -343,14 +359,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-018",
     "name": "CAM-018",
     "location": "บริเวณใต้สะพานข้ามฟากถนนข้าวหลาม",
-    "lat": 13.2965,
-    "lng": 100.9295,
+    "lat": 13.293861,
+    "lng": 100.944111,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-018",
@@ -363,14 +380,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-019",
     "name": "CAM-019",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.174,
-    "lng": 100.931,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-019",
@@ -384,14 +402,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-020",
     "name": "CAM-020",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.1748,
-    "lng": 100.9318,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-020",
@@ -404,14 +423,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-021",
     "name": "CAM-021",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.1732,
-    "lng": 100.9303,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-021",
@@ -424,14 +444,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-022",
     "name": "CAM-022",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.1754,
-    "lng": 100.9306,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-022",
@@ -445,14 +466,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-023",
     "name": "CAM-023",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.1726,
-    "lng": 100.9315,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-023",
@@ -465,14 +487,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-024",
     "name": "CAM-024",
     "location": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา",
-    "lat": 13.1745,
-    "lng": 100.9298,
+    "lat": 13.164472,
+    "lng": 100.93075,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-024",
@@ -485,14 +508,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-025",
     "name": "CAM-025",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.987,
-    "lng": 100.918,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-025",
@@ -506,14 +530,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-026",
     "name": "CAM-026",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9878,
-    "lng": 100.9188,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-026",
@@ -526,14 +551,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-027",
     "name": "CAM-027",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9862,
-    "lng": 100.9173,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-027",
@@ -546,14 +572,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-028",
     "name": "CAM-028",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9884,
-    "lng": 100.9176,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-028",
@@ -566,14 +593,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-029",
     "name": "CAM-029",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9856,
-    "lng": 100.9185,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-029",
@@ -587,14 +615,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ไม่มีสัญญาณ"
+    "signalQuality": "ไม่มีสัญญาณ",
+    "isLpr": true
   },
   {
     "id": "CAM-030",
     "name": "CAM-030",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9875,
-    "lng": 100.9195,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-030",
@@ -607,14 +636,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-031",
     "name": "CAM-031",
     "location": "บริเวณใต้สะพานลอยหน้าวัดกระทิงลาย",
-    "lat": 12.9866,
-    "lng": 100.919,
+    "lat": 12.995417,
+    "lng": 100.927556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-031",
@@ -627,14 +657,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-032",
     "name": "CAM-032",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.946,
-    "lng": 100.901,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-032",
@@ -648,14 +679,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-033",
     "name": "CAM-033",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9468,
-    "lng": 100.9018,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-033",
@@ -668,14 +700,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-034",
     "name": "CAM-034",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9452,
-    "lng": 100.9003,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-034",
@@ -688,14 +721,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-035",
     "name": "CAM-035",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9474,
-    "lng": 100.9006,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-035",
@@ -708,14 +742,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-036",
     "name": "CAM-036",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9446,
-    "lng": 100.9015,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-036",
@@ -729,14 +764,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-037",
     "name": "CAM-037",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9465,
-    "lng": 100.9025,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-037",
@@ -749,14 +785,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-038",
     "name": "CAM-038",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9456,
-    "lng": 100.902,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-038",
@@ -769,14 +806,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-039",
     "name": "CAM-039",
     "location": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์",
-    "lat": 12.9472,
-    "lng": 100.9014,
+    "lat": 12.937639,
+    "lng": 100.902278,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-039",
@@ -789,14 +827,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-040",
     "name": "CAM-040",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.928,
-    "lng": 100.897,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-040",
@@ -810,14 +849,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-041",
     "name": "CAM-041",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.9288,
-    "lng": 100.8978,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-041",
@@ -830,14 +870,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-042",
     "name": "CAM-042",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.9272,
-    "lng": 100.8963,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-042",
@@ -851,14 +892,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ไม่มีสัญญาณ"
+    "signalQuality": "ไม่มีสัญญาณ",
+    "isLpr": true
   },
   {
     "id": "CAM-043",
     "name": "CAM-043",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.9294,
-    "lng": 100.8966,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-043",
@@ -871,14 +913,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-044",
     "name": "CAM-044",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.9266,
-    "lng": 100.8975,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-044",
@@ -891,14 +934,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-045",
     "name": "CAM-045",
     "location": "บริเวณใต้สะพานลอยหน้าโรงเรียนเมืองพัทยา 7",
-    "lat": 12.9285,
-    "lng": 100.8985,
+    "lat": 12.888722,
+    "lng": 100.897556,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-045",
@@ -911,14 +955,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-046",
     "name": "CAM-046",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.686,
-    "lng": 100.98,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "PTZ",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-046",
@@ -932,14 +977,15 @@
     "model": "DS-2DE4A425IW-DE",
     "resolution": "2560 x 1440 (QHD)",
     "angle": 120,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-047",
     "name": "CAM-047",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.6868,
-    "lng": 100.9808,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-047",
@@ -952,14 +998,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-048",
     "name": "CAM-048",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.6852,
-    "lng": 100.9793,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-048",
@@ -972,14 +1019,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-049",
     "name": "CAM-049",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.6874,
-    "lng": 100.9796,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-049",
@@ -993,14 +1041,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-050",
     "name": "CAM-050",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.6846,
-    "lng": 100.9805,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-050",
@@ -1013,14 +1062,15 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดี"
+    "signalQuality": "ดี",
+    "isLpr": true
   },
   {
     "id": "CAM-051",
     "name": "CAM-051",
     "location": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์",
-    "lat": 12.6865,
-    "lng": 100.9815,
+    "lat": 12.69125,
+    "lng": 100.981389,
     "type": "Fixed",
     "organization": "อบจ.ชลบุรี",
     "rtspUrl": "rtsp://mock-server/cam-051",
@@ -1033,7 +1083,8 @@
     "model": "DS-2CD2386G2-ISU/SL",
     "resolution": "1920 x 1080 (Full HD)",
     "angle": 90,
-    "signalQuality": "ดีเยี่ยม"
+    "signalQuality": "ดีเยี่ยม",
+    "isLpr": true
   },
   {
     "id": "CAM-052",

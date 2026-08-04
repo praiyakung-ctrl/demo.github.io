@@ -5,6 +5,7 @@ import { EVENT_COLORS, EVENT_LABELS, STATUS_COLORS, STATUS_LABELS } from '../typ
 import { formatLastUpdate } from '../utils/formatDate';
 import { useDialog } from '../hooks/useDialog';
 import { cameraImage, districtOf, overlayClock } from '../utils/cameraDisplay';
+import { LprBadge } from './LprBadge';
 
 export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; onClose: () => void }) {
   const [now, setNow] = useState(new Date());
@@ -66,6 +67,7 @@ export function LiveCameraModal({ camera, onClose }: { camera: Camera | null; on
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
           <h3 className="text-2xl font-extrabold text-gray-900 truncate">{camera.id} : {camera.location}</h3>
+          {camera.isLpr && <LprBadge className="flex-shrink-0" />}
           <span className="flex items-center gap-2 text-lg font-bold flex-shrink-0" style={{ color: statusColor }}>
             <span className={`w-3 h-3 rounded-full ${online ? 'animate-pulse' : ''}`} style={{ backgroundColor: statusColor }} />
             สถานะ : {statusLabel}

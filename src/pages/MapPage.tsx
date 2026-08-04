@@ -7,6 +7,7 @@ import { LiveCameraModal } from '../components/LiveCameraModal';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
+import { LprBadge } from '../components/LprBadge';
 import { findPendingReport, pendingReports, saveReport } from '../utils/cameraReports';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
@@ -308,7 +309,10 @@ export function MapPage() {
                         <CameraIcon size={22} style={{ color: getMarkerColor(cam) }} />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-extrabold text-navy-700 text-2xl leading-tight">{cam.id}</p>
+                        <div className="flex items-center gap-1.5">
+                          <p className="font-extrabold text-navy-700 text-2xl leading-tight">{cam.id}</p>
+                          {cam.isLpr && <LprBadge />}
+                        </div>
                         <div className="flex items-center gap-1 text-gray-400 text-sm">
                           <Compass size={13} />
                           <span>{cam.type} · {cam.lat.toFixed(4)}, {cam.lng.toFixed(4)}</span>
