@@ -6,6 +6,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import { Layout } from '../components/Layout';
+import { useAuth } from '../context/AuthContext';
 import lprData from '../data/lpr.json';
 import camerasData from '../data/cameras.json';
 import type { Camera, MonthlyEventData, LprRoad } from '../types';
@@ -113,6 +114,7 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
 
 export function ReportsPage() {
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
   const [selectedMonth, setSelectedMonth] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
 
@@ -369,7 +371,16 @@ export function ReportsPage() {
                   <tr key={site.location} className="border-t border-gray-50 hover:bg-gray-50">
                     <td className="px-4 py-2.5 text-center text-gray-700">{i + 1}</td>
                     <td className="px-4 py-2.5 font-medium text-gray-900">{site.location}</td>
-                    <td className="px-4 py-2.5 text-right text-gray-700">{site.count}</td>
+                    <td className="px-4 py-2.5 text-right text-gray-700">
+                      {isAdmin ? (
+                        <Link
+                          to={`/admin/cameras?search=${encodeURIComponent(site.location)}`}
+                          className="text-navy-600 hover:text-navy-800 underline font-medium"
+                        >
+                          {site.count}
+                        </Link>
+                      ) : site.count}
+                    </td>
                     <td className="px-4 py-2.5 text-right text-gray-700">{site.lprMbps}</td>
                     <td className="px-4 py-2.5 text-right text-gray-700">{site.unityMbps}</td>
                     <td className="px-4 py-2.5 text-right font-bold text-gray-900">{site.totalMbps}</td>

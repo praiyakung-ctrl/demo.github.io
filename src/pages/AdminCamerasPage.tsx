@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Plus, Pencil, Trash2, Search, Camera as CameraIcon, MapPin, Settings, Wifi, Save, XCircle, Building2, Video } from 'lucide-react';
 import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { Layout } from '../components/Layout';
@@ -24,7 +25,8 @@ const EMPTY: Omit<Camera, 'id'> = {
 export function AdminCamerasPage() {
   const { can, user: currentUser } = useAuth();
   const [cameras, setCameras] = useState<Camera[]>(INITIAL);
-  const [search, setSearch] = useState('');
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get('search') ?? '');
   const [modalOpen, setModalOpen] = useState(false);
   const [editCam, setEditCam] = useState<Camera | null>(null);
   const [form, setForm] = useState<Omit<Camera, 'id'>>(EMPTY);
