@@ -152,6 +152,8 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
 
   return (
     <div className="space-y-4">
+      <CameraStatusSummaryCard />
+
       <div className="card p-0 overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
@@ -218,8 +220,6 @@ function SelectedCameraPanel({ cam, onExpand }: { cam: Camera; onExpand: () => v
           </a>
         </div>
       </div>
-
-      <CameraStatusSummaryCard />
 
       <div className="card p-0 overflow-hidden">
         <h3 className="text-xl font-bold text-navy-700 px-4 py-3 border-b border-gray-100">กล้องใกล้เคียง</h3>
