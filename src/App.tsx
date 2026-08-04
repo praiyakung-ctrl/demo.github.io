@@ -32,6 +32,7 @@ const VideoAccessPage = lazy(() => import('./pages/VideoAccessPage').then(m => (
 const SetPasswordPage = lazy(() => import('./pages/SetPasswordPage').then(m => ({ default: m.SetPasswordPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const PoliceUsageReportPage = lazy(() => import('./pages/PoliceUsageReportPage').then(m => ({ default: m.PoliceUsageReportPage })));
+const DailyEventsReportPage = lazy(() => import('./pages/DailyEventsReportPage').then(m => ({ default: m.DailyEventsReportPage })));
 const ComparisonReportPage = lazy(() => import('./pages/ComparisonReportPage').then(m => ({ default: m.ComparisonReportPage })));
 const AdminAuditLogPage = lazy(() => import('./pages/AdminAuditLogPage').then(m => ({ default: m.AdminAuditLogPage })));
 const AdminApiPage = lazy(() => import('./pages/AdminApiPage').then(m => ({ default: m.AdminApiPage })));
@@ -118,6 +119,11 @@ function AppRoutes() {
       <Route path="/reports/police-usage" element={
         <RequireAuth roles={['admin', 'operator', 'executive']}>
           <PoliceUsageReportPage />
+        </RequireAuth>
+      } />
+      <Route path="/reports/daily-events" element={
+        <RequireAuth roles={['admin', 'operator', 'executive']}>
+          <DailyEventsReportPage />
         </RequireAuth>
       } />
       <Route path="/reports/comparison" element={

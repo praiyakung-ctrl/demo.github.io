@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Camera, AlertTriangle, Users, Car, TrendingUp, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell, Shield } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -102,8 +102,8 @@ function SummaryCard({ icon: Icon, label, value, sub, gradient, iconBg }: {
 }
 
 /* Card section header: icon in a navy square on a light-blue strip */
-function SectionHeader({ icon: Icon, title, action }: {
-  icon: React.ElementType; title: string; action?: React.ReactNode;
+function SectionHeader({ icon: Icon, title, subtitle, action }: {
+  icon: React.ElementType; title: string; subtitle?: string; action?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 -mx-4 -mt-4 mb-3 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100 rounded-t-xl">
@@ -111,7 +111,10 @@ function SectionHeader({ icon: Icon, title, action }: {
         <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
           <Icon size={20} className="text-white" />
         </div>
-        <h3 className="font-extrabold text-navy-700 text-2xl">{title}</h3>
+        <div>
+          <h3 className="font-extrabold text-navy-700 text-2xl">{title}</h3>
+          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+        </div>
       </div>
       {action}
     </div>
@@ -120,6 +123,7 @@ function SectionHeader({ icon: Icon, title, action }: {
 
 export function DashboardPage() {
   useAuth();
+  const navigate = useNavigate();
   const [filterMonth, setFilterMonth] = useState('all');
 
   const onlineCount = cameras.filter(c => c.status === 'Online').length;
@@ -138,13 +142,29 @@ export function DashboardPage() {
 
   const todayLpr = daily[daily.length - 1]?.count ?? 0;
 
+  const sumByCategory = (key: 'traffic' | 'gunshot' | 'parking' | 'flood' | 'crowd') =>
+    monthly.reduce((s, r) => s + r[key], 0);
+
   const pieData = [
-    { key: 'traffic', name: 'รถติด',    value: 380, color: EVENT_COLORS_MAP.traffic },
-    { key: 'parking', name: 'จอดผิด',   value: 580, color: EVENT_COLORS_MAP.parking },
-    { key: 'gunshot', name: 'เสียงปืน', value: 65,  color: EVENT_COLORS_MAP.gunshot },
-    { key: 'flood',   name: 'น้ำท่วม',  value: 177, color: EVENT_COLORS_MAP.flood   },
-    { key: 'crowd',   name: 'ชุมนุม',   value: 121, color: EVENT_COLORS_MAP.crowd   },
+    { key: 'traffic', name: 'รถติด',    value: sumByCategory('traffic'), color: EVENT_COLORS_MAP.traffic },
+    { key: 'parking', name: 'จอดผิด',   value: sumByCategory('parking'), color: EVENT_COLORS_MAP.parking },
+    { key: 'gunshot', name: 'เสียงปืน', value: sumByCategory('gunshot'), color: EVENT_COLORS_MAP.gunshot },
+    { key: 'flood',   name: 'น้ำท่วม',  value: sumByCategory('flood'),   color: EVENT_COLORS_MAP.flood   },
+    { key: 'crowd',   name: 'ชุมนุม',   value: sumByCategory('crowd'),   color: EVENT_COLORS_MAP.crowd   },
   ];
+
+  const PERIOD_LABEL = `${monthly[0]?.month}–${monthly[monthly.length - 1]?.month} 2568`;
+
+  const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
+    if (!bar.payload) return;
+    const index = monthly.findIndex(m => m.month === bar.payload!.month);
+    if (index >= 0) navigate(`/reports/daily-events?month=${index + 1}`);
+  };
+
+  const goToDailyEventsForCategory = (slice: { payload?: { key: string } }) => {
+    if (!slice.payload) return;
+    navigate(`/reports/daily-events?category=${slice.payload.key}`);
+  };
 
   const latestEvents = [...events]
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
@@ -328,10 +348,11 @@ export function DashboardPage() {
           <div ref={monthlyChartRef} className="card p-4 lg:col-span-3">
             <SectionHeader
               icon={BarChart3}
-              title="เหตุการณ์ CCTV รายเดือน (ม.ค.–มิ.ย. 2568)"
+              title={`เหตุการณ์ CCTV รายเดือน (${PERIOD_LABEL})`}
+              subtitle="คลิกที่แท่งของเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน"
               action={<ExportButtons disabled={exporting} onPdf={() => exportChart(monthlyChartRef, monthlyRows, 'เหตุการณ์รายเดือน', 'pdf')} onExcel={() => exportChart(monthlyChartRef, monthlyRows, 'เหตุการณ์รายเดือน', 'excel')} />}
             />
-            <div role="img" aria-label="กราฟแท่งเหตุการณ์ CCTV รายเดือน แยกตามประเภท ข้อมูลเดียวกับตารางสรุปเหตุการณ์รายเดือนด้านล่าง">
+            <div role="img" aria-label="กราฟแท่งเหตุการณ์ CCTV รายเดือน แยกตามประเภท ข้อมูลเดียวกับตารางสรุปเหตุการณ์รายเดือนด้านล่าง คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={monthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -339,11 +360,11 @@ export function DashboardPage() {
                 <YAxis tick={{ fontSize: 17 }} />
                 <Tooltip content={<ChartTooltip />} />
                 <Legend content={<ChartLegend />} />
-                <Bar dataKey="traffic" name="รถติด" stackId="a" fill={EVENT_COLORS_MAP.traffic} />
-                <Bar dataKey="gunshot" name="เสียงปืน" stackId="a" fill={EVENT_COLORS_MAP.gunshot} />
-                <Bar dataKey="parking" name="จอดผิด" stackId="a" fill={EVENT_COLORS_MAP.parking} />
-                <Bar dataKey="flood" name="น้ำท่วม" stackId="a" fill={EVENT_COLORS_MAP.flood} />
-                <Bar dataKey="crowd" name="ชุมนุม" stackId="a" fill={EVENT_COLORS_MAP.crowd} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="traffic" name="รถติด" stackId="a" fill={EVENT_COLORS_MAP.traffic} cursor="pointer" onClick={goToDailyEventsForBar} />
+                <Bar dataKey="gunshot" name="เสียงปืน" stackId="a" fill={EVENT_COLORS_MAP.gunshot} cursor="pointer" onClick={goToDailyEventsForBar} />
+                <Bar dataKey="parking" name="จอดผิด" stackId="a" fill={EVENT_COLORS_MAP.parking} cursor="pointer" onClick={goToDailyEventsForBar} />
+                <Bar dataKey="flood" name="น้ำท่วม" stackId="a" fill={EVENT_COLORS_MAP.flood} cursor="pointer" onClick={goToDailyEventsForBar} />
+                <Bar dataKey="crowd" name="ชุมนุม" stackId="a" fill={EVENT_COLORS_MAP.crowd} radius={[2, 2, 0, 0]} cursor="pointer" onClick={goToDailyEventsForBar} />
               </BarChart>
             </ResponsiveContainer>
             </div>
@@ -353,12 +374,17 @@ export function DashboardPage() {
             <SectionHeader
               icon={PieChartIcon}
               title="สัดส่วนเหตุการณ์ทั้งหมด"
+              subtitle={`ข้อมูลช่วง ${PERIOD_LABEL} — คลิกเพื่อดูแนวโน้มรายเดือนและ drill down เป็นรายวัน`}
               action={<ExportButtons disabled={exporting} onPdf={() => exportChart(pieChartRef, pieRows, 'สัดส่วนเหตุการณ์', 'pdf')} onExcel={() => exportChart(pieChartRef, pieRows, 'สัดส่วนเหตุการณ์', 'excel')} />}
             />
-            <div role="img" aria-label={`กราฟวงกลมสัดส่วนเหตุการณ์ทั้งหมด: ${pieData.map(d => `${d.name} ${d.value} ครั้ง`).join(', ')}`}>
+            <div role="img" aria-label={`กราฟวงกลมสัดส่วนเหตุการณ์ทั้งหมด ช่วง ${PERIOD_LABEL}: ${pieData.map(d => `${d.name} ${d.value} ครั้ง`).join(', ')} คลิกแต่ละส่วนเพื่อดูรายละเอียด`}>
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
-                <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} dataKey="value" labelLine={false} label={CustomPieLabel}>
+                <Pie
+                  data={pieData} cx="50%" cy="50%" outerRadius={80} dataKey="value" labelLine={false} label={CustomPieLabel}
+                  cursor="pointer"
+                  onClick={goToDailyEventsForCategory}
+                >
                   {pieData.map((entry, index) => (
                     <Cell key={index} fill={entry.color} />
                   ))}
