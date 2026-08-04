@@ -36,3 +36,15 @@ export function sendSubmittedEmail(to: string, name: string): Promise<boolean> {
 export function sendOtpEmail(to: string, code: string): Promise<boolean> {
   return send({ type: 'otp', to, code });
 }
+
+export function sendCctvApprovalPendingEmail(to: string, name: string, reqNo: string, level: 1 | 2 | 3): Promise<boolean> {
+  return send({ type: 'cctv-approval-pending', to, name, reqNo, level });
+}
+
+export function sendCctvRequestApprovedEmail(to: string, name: string, reqNo: string): Promise<boolean> {
+  return send({ type: 'cctv-request-approved', to, name, reqNo });
+}
+
+export function sendCctvRequestRejectedEmail(to: string, name: string, reason: string): Promise<boolean> {
+  return send({ type: 'cctv-request-rejected', to, name, reason });
+}

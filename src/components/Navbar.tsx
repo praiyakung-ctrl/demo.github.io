@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, UserCheck, Waves, Wrench, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, ClipboardCheck, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, UserCheck, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
@@ -13,6 +13,7 @@ import { pendingMembers } from '../utils/memberStorage';
 import { savedNotificationSettings } from '../utils/notificationSettings';
 import { savedRequests } from '../utils/requestStorage';
 import { savedIncidentPoints } from '../utils/incidentPoints';
+import { currentApprovalLevelOf, isApproverAtLevel } from '../utils/cctvApprovers';
 
 const allEvents = eventsData as CctvEvent[];
 
@@ -78,6 +79,13 @@ export function Navbar() {
   const repairReports = isAdmin ? pendingReports() : [];
   // admins also see new member registrations awaiting review
   const pendingMemberApplications = isAdmin ? pendingMembers() : [];
+  // staff/admin/executive see CCTV requests currently waiting on their own approval level
+  const myApprovalQueue = (!isCitizen && !isFieldReporter && user)
+    ? savedRequests().filter(r => {
+        const level = currentApprovalLevelOf(r.status);
+        return level !== null && (isAdmin || isApproverAtLevel(user.id, level));
+      })
+    : [];
   // citizens and field reporters are notified about their own CCTV request status, not CCTV events
   // (read fresh — statuses change as staff review requests)
   const myRequests = (isCitizen || isFieldReporter) ? savedRequests().filter(r => r.email === user?.email) : [];
@@ -89,7 +97,7 @@ export function Navbar() {
     ? activeRequests.length
     : isFieldReporter
       ? activeRequests.length + activeIncidentPoints.length
-      : unackEvents.length + repairReports.length + pendingMemberApplications.length;
+      : unackEvents.length + repairReports.length + pendingMemberApplications.length + myApprovalQueue.length;
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -343,6 +351,29 @@ export function Navbar() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-900">{m.name} — {m.memberType}</p>
                         <p className="text-xs text-gray-500 mt-0.5">{timeAgo(m.registeredAt)}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* CCTV requests waiting on this user's approval level */}
+              {myApprovalQueue.length > 0 && (
+                <div className="border-b border-cyan-100">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-cyan-50">
+                    <ClipboardCheck size={14} className="text-cyan-600" />
+                    <span className="text-xs font-bold text-cyan-700">คำขอ CCTV รออนุมัติของท่าน ({myApprovalQueue.length})</span>
+                  </div>
+                  {myApprovalQueue.slice(0, 5).map(r => (
+                    <button
+                      key={r.id}
+                      onClick={() => { setShowNotif(false); navigate('/portal'); }}
+                      className="w-full text-left flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-cyan-50/60 transition-colors"
+                    >
+                      <ClipboardCheck size={18} className="mt-0.5 flex-shrink-0 text-cyan-500" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-900">{r.reqNo} — {r.citizenName}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{r.status} · {timeAgo(r.submittedAt)}</p>
                       </div>
                     </button>
                   ))}

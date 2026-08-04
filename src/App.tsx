@@ -27,6 +27,7 @@ const AdminMenusPage = lazy(() => import('./pages/AdminMenusPage').then(m => ({ 
 const ReportIncidentPage = lazy(() => import('./pages/ReportIncidentPage').then(m => ({ default: m.ReportIncidentPage })));
 const AdminIncidentsPage = lazy(() => import('./pages/AdminIncidentsPage').then(m => ({ default: m.AdminIncidentsPage })));
 const AdminMemberReviewPage = lazy(() => import('./pages/AdminMemberReviewPage').then(m => ({ default: m.AdminMemberReviewPage })));
+const AdminCctvApproversPage = lazy(() => import('./pages/AdminCctvApproversPage').then(m => ({ default: m.AdminCctvApproversPage })));
 const SetPasswordPage = lazy(() => import('./pages/SetPasswordPage').then(m => ({ default: m.SetPasswordPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const PoliceUsageReportPage = lazy(() => import('./pages/PoliceUsageReportPage').then(m => ({ default: m.PoliceUsageReportPage })));
@@ -145,6 +146,11 @@ function AppRoutes() {
       <Route path="/admin/member-review" element={
         <RequireAuth roles={['admin']}>
           <AdminMemberReviewPage />
+        </RequireAuth>
+      } />
+      <Route path="/admin/cctv-approvers" element={
+        <RequireAuth roles={['admin']}>
+          <AdminCctvApproversPage />
         </RequireAuth>
       } />
       <Route path="/set-password" element={

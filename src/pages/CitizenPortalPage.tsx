@@ -14,21 +14,43 @@ import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
-import type { Camera, CitizenRequest, RequestStatus, TimelineEntry } from '../types';
+import type { ApprovalLevel, Camera, CitizenRequest, RequestApproval, RequestStatus, TimelineEntry } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { savedRequests, updateRequest } from '../utils/requestStorage';
 import { logAudit } from '../utils/auditLog';
 import { nearestCameras } from '../utils/geo';
 import { pinIcon } from '../utils/mapPin';
 import { savedSystemSettings } from '../utils/systemSettings';
+import { APPROVAL_LEVEL_LABEL, NEXT_APPROVAL_STATUS, approverNamesAtLevel, currentApprovalLevelOf, isApproverAtLevel } from '../utils/cctvApprovers';
+import { sendCctvApprovalPendingEmail, sendCctvRequestApprovedEmail, sendCctvRequestRejectedEmail } from '../utils/emailApi';
 
 const allCameras = camerasData as Camera[];
 
 const STATUS_STEPS = ['รับคำขอ', 'ตรวจสอบข้อมูล', 'พิจารณาอนุมัติ', 'จัดเตรียมข้อมูล', 'ส่งข้อมูล'];
 
+const ALL_STATUSES: RequestStatus[] = [
+  'ใหม่', 'รอดำเนินการ', 'รอหัวหน้างานอนุมัติ', 'รอผู้บริหารอนุมัติ', 'อนุมัติ', 'รอภาพ', 'ส่งแล้ว', 'ได้รับแล้ว', 'ปฏิเสธ',
+];
+
 function markStep(timeline: TimelineEntry[], step: string): TimelineEntry[] {
   const now = new Date().toISOString();
   return timeline.map(t => (t.step === step ? { ...t, completed: true, timestamp: now } : t));
+}
+
+function ApprovalHistory({ approvals }: { approvals?: RequestApproval[] }) {
+  if (!approvals || approvals.length === 0) return null;
+  return (
+    <div className="space-y-1.5">
+      {approvals.map((a, i) => (
+        <div key={i} className={`flex items-center gap-2 text-lg ${a.decision === 'approved' ? 'text-green-700' : 'text-red-700'}`}>
+          <span className="font-bold">ระดับ {a.level} ({APPROVAL_LEVEL_LABEL[a.level]}):</span>
+          <span>{a.decision === 'approved' ? 'อนุมัติ' : 'ปฏิเสธ'} โดย {a.approverName}</span>
+          <span className="text-gray-400">· {formatThaiDateTime(a.decidedAt)}</span>
+          {a.comment && <span className="text-gray-500">— {a.comment}</span>}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 /* ---------- Citizen view (new theme, matches CctvRequestPage) ---------- */
@@ -196,6 +218,17 @@ function RequestDetail({ req, onBack, onRefresh }: { req: CitizenRequest; onBack
           })}
         </div>
       </section>
+
+      {req.approvals && req.approvals.length > 0 && (
+        <section className="border border-gray-200 rounded-xl overflow-hidden">
+          <div className="bg-gray-50 px-4 py-2.5 border-b border-gray-200">
+            <h3 className="text-2xl font-bold text-navy-700 flex items-center gap-2"><User size={22} /> ผู้อนุมัติแต่ละระดับ</h3>
+          </div>
+          <div className="px-4 py-3">
+            <ApprovalHistory approvals={req.approvals} />
+          </div>
+        </section>
+      )}
     </div>
   );
 }
@@ -382,6 +415,10 @@ function StaffView() {
 
   const refresh = () => setRequests(savedRequests());
   const selected = selectedId ? requests.find(r => r.id === selectedId) ?? null : null;
+  const selectedLevel = selected ? currentApprovalLevelOf(selected.status) : null;
+  const canActOnSelectedLevel = selectedLevel !== null && Boolean(
+    user && (user.role === 'admin' || isApproverAtLevel(user.id, selectedLevel))
+  );
 
   const filtered = requests.filter(r => {
     const matchSearch = r.reqNo.includes(search) || r.citizenName.includes(search);
@@ -402,9 +439,40 @@ function StaffView() {
     mutate(id, patch, `เปลี่ยนสถานะคำขอ ${req?.reqNo ?? id} เป็น ${newStatus}`);
   };
 
+  /* "ตรวจสอบ" claims a brand-new request into level-1's queue and notifies level-1 approvers */
+  const handleClaim = (req: CitizenRequest) => {
+    updateStatus(req.id, 'รอดำเนินการ', 'ตรวจสอบข้อมูล');
+    approverNamesAtLevel(1).forEach(a => sendCctvApprovalPendingEmail(a.email, a.name, req.reqNo, 1));
+  };
+
+  const handleApproveLevel = (req: CitizenRequest, level: ApprovalLevel) => {
+    if (!user) return;
+    const approval: RequestApproval = {
+      level, approverId: user.id, approverName: user.name, decision: 'approved', decidedAt: new Date().toISOString(),
+    };
+    const nextStatus = NEXT_APPROVAL_STATUS[level];
+    const patch: Partial<CitizenRequest> = { status: nextStatus, approvals: [...(req.approvals ?? []), approval] };
+    if (level === 3) patch.timeline = markStep(req.timeline, 'พิจารณาอนุมัติ');
+    mutate(req.id, patch, `อนุมัติคำขอ ${req.reqNo} ระดับ ${level} (${APPROVAL_LEVEL_LABEL[level]}) โดย ${user.name}`);
+
+    if (level < 3) {
+      const nextLevel = (level + 1) as ApprovalLevel;
+      approverNamesAtLevel(nextLevel).forEach(a => sendCctvApprovalPendingEmail(a.email, a.name, req.reqNo, nextLevel));
+    } else {
+      sendCctvRequestApprovedEmail(req.email, req.citizenName, req.reqNo);
+    }
+  };
+
   const confirmReject = (reason: string) => {
-    if (!selected || !reason) return;
-    mutate(selected.id, { status: 'ปฏิเสธ', rejectionReason: reason }, `ปฏิเสธคำขอ ${selected.reqNo}: ${reason}`);
+    if (!selected || !reason || !user) return;
+    const level = currentApprovalLevelOf(selected.status);
+    const approvals = level
+      ? [...(selected.approvals ?? []), {
+          level, approverId: user.id, approverName: user.name, decision: 'rejected' as const, comment: reason, decidedAt: new Date().toISOString(),
+        }]
+      : selected.approvals;
+    mutate(selected.id, { status: 'ปฏิเสธ', rejectionReason: reason, approvals }, `ปฏิเสธคำขอ ${selected.reqNo}${level ? ` ที่ระดับ ${level} (${APPROVAL_LEVEL_LABEL[level]})` : ''}: ${reason}`);
+    sendCctvRequestRejectedEmail(selected.email, selected.citizenName, reason);
     setRejectOpen(false);
   };
 
@@ -439,7 +507,7 @@ function StaffView() {
           </div>
           <select aria-label="กรองตามสถานะ" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="w-full text-2xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500">
             <option value="all">ทุกสถานะ</option>
-            {['ใหม่', 'รอดำเนินการ', 'รอภาพ', 'อนุมัติ', 'ส่งแล้ว', 'ได้รับแล้ว', 'ปฏิเสธ'].map(s => <option key={s}>{s}</option>)}
+            {ALL_STATUSES.map(s => <option key={s}>{s}</option>)}
           </select>
         </div>
         <div className="flex-1 overflow-y-auto">
@@ -533,17 +601,30 @@ function StaffView() {
                   </div>
                 );
               })}
+              {selected.approvals && selected.approvals.length > 0 && (
+                <div className="pt-2 mt-2 border-t border-gray-100">
+                  <ApprovalHistory approvals={selected.approvals} />
+                </div>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-2">
               {selected.status === 'ใหม่' && (
-                <button onClick={() => updateStatus(selected.id, 'รอดำเนินการ', 'ตรวจสอบข้อมูล')} className="btn-primary">ตรวจสอบ</button>
+                <button onClick={() => handleClaim(selected)} className="btn-primary">ตรวจสอบ</button>
               )}
-              {selected.status === 'รอดำเนินการ' && (
-                <>
-                  <button onClick={() => updateStatus(selected.id, 'อนุมัติ', 'พิจารณาอนุมัติ')} className="btn-primary">อนุมัติ</button>
-                  <button onClick={() => setRejectOpen(true)} className="btn-danger">ปฏิเสธ</button>
-                </>
+              {selectedLevel !== null && (
+                canActOnSelectedLevel ? (
+                  <>
+                    <button onClick={() => handleApproveLevel(selected, selectedLevel)} className="btn-primary">
+                      อนุมัติ (ระดับ {selectedLevel} — {APPROVAL_LEVEL_LABEL[selectedLevel]})
+                    </button>
+                    <button onClick={() => setRejectOpen(true)} className="btn-danger">ปฏิเสธ</button>
+                  </>
+                ) : (
+                  <p className="text-lg text-gray-500 italic flex items-center">
+                    รอผู้อนุมัติระดับ {selectedLevel} ({APPROVAL_LEVEL_LABEL[selectedLevel]}) ดำเนินการ
+                  </p>
+                )
               )}
               {selected.status === 'อนุมัติ' && (
                 <button onClick={() => updateStatus(selected.id, 'รอภาพ', 'จัดเตรียมข้อมูล')} className="btn-primary">เตรียมภาพ</button>

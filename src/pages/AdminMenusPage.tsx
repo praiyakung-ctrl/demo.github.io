@@ -16,6 +16,7 @@ const MENU_PATHS: Record<string, string> = {
   adminAuditLog: '/admin/audit-log', adminApi: '/admin/api', adminNotifications: '/admin/notifications', adminSettings: '/admin/settings',
   adminIncidents: '/admin/incidents',
   adminMemberReview: '/admin/member-review',
+  adminCctvApprovers: '/admin/cctv-approvers',
 };
 
 export function AdminMenusPage() {

@@ -32,6 +32,8 @@ const STATUS_STYLES: Record<string, string> = {
   'ใหม่':         'bg-emerald-100 text-emerald-800 border-emerald-300',
   'รอดำเนินการ': 'bg-amber-100 text-amber-800 border-amber-300',
   'รอตรวจสอบ':   'bg-amber-100 text-amber-800 border-amber-300',
+  'รอหัวหน้างานอนุมัติ': 'bg-orange-100 text-orange-800 border-orange-300',
+  'รอผู้บริหารอนุมัติ':  'bg-purple-100 text-purple-800 border-purple-300',
   'รอภาพ':        'bg-blue-100 text-blue-800 border-blue-300',
   'อนุมัติ':      'bg-indigo-100 text-indigo-800 border-indigo-300',
   'ส่งแล้ว':      'bg-slate-200 text-slate-700 border-slate-300',

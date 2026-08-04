@@ -2,7 +2,23 @@ export type EventType = 'traffic' | 'gunshot' | 'parking' | 'flood' | 'crowd' | 
 export type CameraStatus = 'Online' | 'Offline' | 'Maintenance' | 'Unknown';
 export type CameraType = 'Fixed' | 'PTZ';
 export type UserRole = 'admin' | 'operator' | 'executive' | 'citizen' | 'police' | 'localOfficer';
-export type RequestStatus = 'ใหม่' | 'รอดำเนินการ' | 'รอภาพ' | 'อนุมัติ' | 'ส่งแล้ว' | 'ได้รับแล้ว' | 'ปฏิเสธ';
+export type RequestStatus =
+  | 'ใหม่' | 'รอดำเนินการ' | 'รอหัวหน้างานอนุมัติ' | 'รอผู้บริหารอนุมัติ'
+  | 'อนุมัติ' | 'รอภาพ' | 'ส่งแล้ว' | 'ได้รับแล้ว' | 'ปฏิเสธ';
+
+/* 3-level sequential approval chain for CCTV footage requests:
+   1 = เจ้าหน้าที่ผู้รับเรื่อง (outsourced staff, checks documents), 2 = หัวหน้างาน, 3 = ผู้อำนวยการ/ผู้บริหาร */
+export type ApprovalLevel = 1 | 2 | 3;
+
+export interface RequestApproval {
+  level: ApprovalLevel;
+  approverId: string;
+  approverName: string;
+  decision: 'approved' | 'rejected';
+  /* required when decision === 'rejected' */
+  comment?: string;
+  decidedAt: string;
+}
 
 export interface Camera {
   id: string;
@@ -94,6 +110,8 @@ export interface CitizenRequest {
   /* ISO date; citizen can download the video until this expires */
   videoExpiresAt?: string;
   timeline: TimelineEntry[];
+  /* history of the 3-level approval chain, one entry per level acted on so far */
+  approvals?: RequestApproval[];
 }
 
 export interface TimelineEntry {
@@ -247,7 +265,7 @@ export interface User {
 export type MenuKey =
   | 'map' | 'dashboard' | 'portal' | 'reports' | 'comparisonReport'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
-  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents' | 'adminMemberReview';
+  | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents' | 'adminMemberReview' | 'adminCctvApprovers';
 
 export type PermissionAction = 'view' | 'create' | 'edit' | 'delete';
 
@@ -277,6 +295,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'adminSettings', label: 'ตั้งค่าระบบ' },
   { key: 'adminIncidents', label: 'ตรวจสอบจุดแจ้งเหตุ' },
   { key: 'adminMemberReview', label: 'ตรวจสอบสมาชิกใหม่' },
+  { key: 'adminCctvApprovers', label: 'ตั้งค่าผู้อนุมัติคำขอ CCTV' },
 ];
 
 /* Per-menu presentation settings managed on /admin/menus */

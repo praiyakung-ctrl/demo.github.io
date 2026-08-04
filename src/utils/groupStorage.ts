@@ -17,7 +17,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW, comparisonReport: ALL,
       adminCameras: ALL, adminUsers: ALL, adminRepairs: ALL, adminGroups: ALL, adminMenus: ALL,
       adminAuditLog: ALL, adminApi: ALL, adminNotifications: ALL, adminSettings: ALL, adminIncidents: ALL,
-      adminMemberReview: ALL,
+      adminMemberReview: ALL, adminCctvApprovers: ALL,
     },
   },
   {
@@ -30,7 +30,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
       adminIncidents: ['view', 'edit'],
-      adminMemberReview: NONE,
+      adminMemberReview: NONE, adminCctvApprovers: NONE,
     },
   },
   {
@@ -42,7 +42,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW, comparisonReport: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
-      adminMemberReview: NONE,
+      adminMemberReview: NONE, adminCctvApprovers: NONE,
     },
   },
   {
@@ -54,7 +54,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: NONE, dashboard: NONE, portal: ALL, reports: NONE, comparisonReport: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
-      adminMemberReview: NONE,
+      adminMemberReview: NONE, adminCctvApprovers: NONE,
     },
   },
   {
@@ -66,7 +66,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
-      adminMemberReview: NONE,
+      adminMemberReview: NONE, adminCctvApprovers: NONE,
     },
   },
   {
@@ -78,7 +78,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
       map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
-      adminMemberReview: NONE,
+      adminMemberReview: NONE, adminCctvApprovers: NONE,
     },
   },
 ];

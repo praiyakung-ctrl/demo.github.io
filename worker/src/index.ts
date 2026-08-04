@@ -17,10 +17,14 @@ type EmailRequest =
   | { type: 'member-approved'; to: string; name: string }
   | { type: 'member-rejected'; to: string; name: string; reason: string }
   | { type: 'member-submitted'; to: string; name: string }
-  | { type: 'otp'; to: string; code: string };
+  | { type: 'otp'; to: string; code: string }
+  | { type: 'cctv-approval-pending'; to: string; name: string; reqNo: string; level: 1 | 2 | 3 }
+  | { type: 'cctv-request-approved'; to: string; name: string; reqNo: string }
+  | { type: 'cctv-request-rejected'; to: string; name: string; reason: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const OTP_RE = /^[0-9]{6}$/;
+const APPROVAL_LEVEL_LABEL: Record<1 | 2 | 3, string> = { 1: 'เจ้าหน้าที่ผู้รับเรื่อง', 2: 'หัวหน้างาน', 3: 'ผู้บริหาร' };
 
 function corsHeaders(origin: string): Record<string, string> {
   return {
@@ -86,6 +90,39 @@ function buildEmail(req: EmailRequest, env: Env): { subject: string; html: strin
           <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
         `.trim(),
       };
+    case 'cctv-approval-pending':
+      return {
+        subject: `มีคำขอดูกล้อง CCTV รอการอนุมัติของท่าน (${req.reqNo})`,
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>คำขอดูกล้อง CCTV เลขที่ <strong>${escapeHtml(req.reqNo)}</strong> ได้ผ่านการพิจารณาระดับก่อนหน้ามาแล้ว และมาถึงคิวที่ท่านต้องพิจารณาอนุมัติในฐานะ${escapeHtml(APPROVAL_LEVEL_LABEL[req.level])} (ระดับ ${req.level})</p>
+          <p>กรุณาเข้าสู่ระบบเพื่อพิจารณาอนุมัติหรือปฏิเสธคำขอนี้</p>
+          <p style="text-align:center;margin:24px 0;">
+            <a href="${env.APP_LOGIN_URL}" style="background:#1b3a6b;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">คลิกที่นี่เพื่อเข้าสู่ระบบ</a>
+          </p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
+    case 'cctv-request-approved':
+      return {
+        subject: `คำขอดูกล้อง CCTV ของท่านได้รับการอนุมัติแล้ว (${req.reqNo})`,
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>คำขอดูกล้อง CCTV เลขที่ <strong>${escapeHtml(req.reqNo)}</strong> ของท่านได้รับการอนุมัติจากผู้อนุมัติครบทั้ง 3 ระดับเรียบร้อยแล้ว</p>
+          <p>เจ้าหน้าที่จะจัดเตรียมข้อมูลภาพและแจ้งท่านอีกครั้งเมื่อพร้อมให้ดาวน์โหลด</p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
+    case 'cctv-request-rejected':
+      return {
+        subject: `คำขอดูกล้อง CCTV ของท่านถูกปฏิเสธ`,
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>คำขอดูกล้อง CCTV ของท่านไม่ได้รับการอนุมัติ ด้วยเหตุผลดังนี้:</p>
+          <p style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">${escapeHtml(req.reason)}</p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
   }
 }
 
@@ -102,6 +139,9 @@ function isValidRequest(body: unknown): body is EmailRequest {
   if (b.type === 'member-approved') return true;
   if (b.type === 'member-rejected') return typeof b.reason === 'string' && Boolean(b.reason.trim());
   if (b.type === 'member-submitted') return true;
+  if (b.type === 'cctv-approval-pending') return typeof b.reqNo === 'string' && Boolean(b.reqNo.trim()) && (b.level === 1 || b.level === 2 || b.level === 3);
+  if (b.type === 'cctv-request-approved') return typeof b.reqNo === 'string' && Boolean(b.reqNo.trim());
+  if (b.type === 'cctv-request-rejected') return typeof b.reason === 'string' && Boolean(b.reason.trim());
   return false;
 }
 

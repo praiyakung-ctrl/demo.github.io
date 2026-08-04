@@ -126,7 +126,9 @@ export function DashboardPage() {
   const offlineCount = cameras.filter(c => c.status === 'Offline').length;
   const notReadyCount = cameras.filter(c => c.status === 'Maintenance' || c.status === 'Unknown').length;
   const todayEvents = events.filter(e => e.timestamp.startsWith('2026-05-20'));
-  const pendingRequests = requests.filter(r => ['ใหม่', 'รอดำเนินการ'].includes(r.status));
+  const pendingRequests = requests.filter(r =>
+    ['ใหม่', 'รอดำเนินการ', 'รอหัวหน้างานอนุมัติ', 'รอผู้บริหารอนุมัติ'].includes(r.status)
+  );
   const policeUsageTotal = policeUsageByStation(savedRequests(), savedUsers(), 'all', 'all')
     .reduce((sum, r) => sum + r.count, 0);
 
