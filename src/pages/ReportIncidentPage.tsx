@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
 import {
-  AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin, Plus,
+  AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin,
   RotateCcw, ShieldAlert, Upload, Video, VideoOff, Wifi, Wrench, X,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
@@ -446,9 +446,15 @@ export function ReportIncidentPage() {
                 <button
                   onClick={() => setTypeStepOpen(true)}
                   title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
-                  className={`btn-primary flex items-center justify-center gap-1.5 whitespace-nowrap text-sm px-2 py-1 ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
+                  className="flex items-center gap-2.5 whitespace-nowrap bg-navy-700 hover:bg-navy-600 border border-navy-800 rounded-xl px-3 py-1.5 text-left transition-colors"
                 >
-                  <Plus size={13} /> ปักหมุด
+                  <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <MapPin size={18} className="text-red-600" fill="currentColor" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-white leading-tight">แจ้งจุดเสี่ยงภัย</span>
+                    <span className="block text-xs text-blue-100 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
+                  </span>
                 </button>
               ) : (
                 <div className="flex-1 flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
