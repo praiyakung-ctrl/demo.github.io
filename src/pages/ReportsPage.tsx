@@ -276,7 +276,14 @@ export function ReportsPage() {
                 {filteredMonthly.map(row => {
                   const total = EVENT_TYPES.reduce((sum, t) => sum + (row[t] ?? 0), 0);
                   return (
-                    <tr key={row.month} className="border-t border-gray-50 hover:bg-gray-50">
+                    <tr
+                      key={row.month}
+                      className="border-t border-gray-50 hover:bg-gray-50 cursor-pointer"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => goToDailyEventsForBar({ payload: row })}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToDailyEventsForBar({ payload: row }); } }}
+                    >
                       <td className="px-4 py-2.5 font-medium text-gray-900">{row.month} 2568</td>
                       {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
                         <td key={t} className="px-4 py-2.5 text-right text-gray-700">{row[t]}</td>

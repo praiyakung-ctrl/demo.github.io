@@ -471,7 +471,14 @@ export function DashboardPage() {
                 </thead>
                 <tbody>
                   {monthly.map(row => (
-                    <tr key={row.month} className="border-b border-gray-50 hover:bg-gray-50">
+                    <tr
+                      key={row.month}
+                      className="border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => goToDailyEventsForBar({ payload: row })}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToDailyEventsForBar({ payload: row }); } }}
+                    >
                       <td className="py-2 font-medium text-gray-900">{row.month}</td>
                       <td className="py-2 text-right text-gray-700">{row.traffic}</td>
                       <td className="py-2 text-right text-gray-700">{row.gunshot}</td>
