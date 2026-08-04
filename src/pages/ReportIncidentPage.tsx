@@ -55,6 +55,21 @@ const TYPE_LABEL: Record<IncidentPointType, string> = {
   proposed: 'จุดขอติดตั้งใหม่',
 };
 
+interface ReportTypeOption {
+  label: string;
+  type: IncidentPointType;
+  category: string;
+}
+
+const REPORT_TYPE_OPTIONS: ReportTypeOption[] = [
+  { label: 'จุดเสี่ยงอาชญากรรม', type: 'risk', category: 'อาชญากรรม' },
+  { label: 'จุดอุบัติเหตุ', type: 'risk', category: 'อุบัติเหตุทางถนน' },
+  { label: 'จุดน้ำท่วม', type: 'risk', category: 'จุดเสี่ยงน้ำท่วม' },
+  { label: 'ไฟฟ้าดับ / แสงสว่างไม่เพียงพอ', type: 'risk', category: 'ไฟฟ้าดับ / แสงสว่างไม่เพียงพอ' },
+  { label: 'ชุมชน / สิ่งก่อสร้างอันตราย', type: 'risk', category: 'ชุมชน / สิ่งก่อสร้างอันตราย' },
+  { label: 'ขอเสนอจุดติดตั้งกล้องใหม่', type: 'proposed', category: '' },
+];
+
 /* Hands the Leaflet map instance up to the page (via useMap(), only available
    inside <MapContainer>) so the overlay buttons outside it can call flyTo(). */
 function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void }) {
@@ -84,15 +99,70 @@ const EMPTY_DRAFT: DraftForm = {
   locationLabel: '', category: '', frequency: '', description: '', installReason: '', photo: '',
 };
 
-function IncidentFormModal({ isOpen, onClose, type, lat, lng, onSubmit }: {
+function ReportTypeModal({ isOpen, onClose, onNext }: {
+  isOpen: boolean;
+  onClose: () => void;
+  onNext: (option: ReportTypeOption) => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const handleNext = () => {
+    const option = REPORT_TYPE_OPTIONS.find(o => o.label === selected);
+    if (!option) return;
+    onNext(option);
+    setSelected(null);
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={() => { setSelected(null); onClose(); }}
+      title="แจ้งจุดเสี่ยงภัย"
+      icon={<MapPin size={20} className="text-white" />}
+      size="sm"
+    >
+      <div className="space-y-4">
+        <p className="text-lg text-gray-500">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</p>
+        <div className="space-y-1">
+          {REPORT_TYPE_OPTIONS.map(option => (
+            <label
+              key={option.label}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-transparent hover:bg-gray-50 cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="report-type"
+                value={option.label}
+                checked={selected === option.label}
+                onChange={() => setSelected(option.label)}
+                className="w-4 h-4 accent-[#1b3a6b] flex-shrink-0"
+              />
+              <span className="text-lg text-gray-800">{option.label}</span>
+            </label>
+          ))}
+        </div>
+        <button
+          onClick={handleNext}
+          disabled={!selected}
+          className="btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          ถัดไป
+        </button>
+      </div>
+    </Modal>
+  );
+}
+
+function IncidentFormModal({ isOpen, onClose, type, lat, lng, initialCategory, onSubmit }: {
   isOpen: boolean;
   onClose: () => void;
   type: IncidentPointType;
   lat: number | null;
   lng: number | null;
+  initialCategory?: string;
   onSubmit: (form: DraftForm) => void;
 }) {
-  const [form, setForm] = useState<DraftForm>(EMPTY_DRAFT);
+  const [form, setForm] = useState<DraftForm>(() => ({ ...EMPTY_DRAFT, category: initialCategory ?? '' }));
   const set = (patch: Partial<DraftForm>) => setForm(f => ({ ...f, ...patch }));
 
   const handlePhoto = (file: File | undefined) => {
@@ -186,6 +256,9 @@ export function ReportIncidentPage() {
   const [addMode, setAddMode] = useState(false);
   const [draftLatLng, setDraftLatLng] = useState<{ lat: number; lng: number } | null>(null);
   const [formOpen, setFormOpen] = useState(false);
+  const [typeStepOpen, setTypeStepOpen] = useState(false);
+  const [selectedReportType, setSelectedReportType] = useState<ReportTypeOption | null>(null);
+  const [formKey, setFormKey] = useState(0);
   const [showCameras, setShowCameras] = useState(true);
   const [showRisk, setShowRisk] = useState(true);
   const [showProposed, setShowProposed] = useState(true);
@@ -291,21 +364,23 @@ export function ReportIncidentPage() {
 
   const handlePick = (lat: number, lng: number) => {
     setDraftLatLng({ lat, lng });
+    setFormKey(k => k + 1);
     setFormOpen(true);
   };
 
   const handleSubmitForm = (form: { locationLabel: string; category: string; frequency: string; description: string; installReason: string; photo: string }) => {
-    if (!myType || !draftLatLng || !user) return;
+    const reportType = selectedReportType?.type ?? myType;
+    if (!reportType || !draftLatLng || !user) return;
     const point: IncidentPoint = {
       id: `IP-${Date.now()}`,
-      type: myType,
+      type: reportType,
       lat: draftLatLng.lat,
       lng: draftLatLng.lng,
       locationLabel: form.locationLabel,
       category: form.category,
       frequency: form.frequency,
       description: form.description,
-      installReason: myType === 'proposed' ? form.installReason : undefined,
+      installReason: reportType === 'proposed' ? form.installReason : undefined,
       photo: form.photo || undefined,
       submittedBy: user.name,
       submittedByUserId: user.id,
@@ -313,11 +388,12 @@ export function ReportIncidentPage() {
       status: 'pending',
     };
     addIncidentPoint(point);
-    logAudit(user, 'create', 'แจ้งเหตุ', `แจ้ง${TYPE_LABEL[myType]}: ${form.locationLabel}`);
+    logAudit(user, 'create', 'แจ้งเหตุ', `แจ้ง${TYPE_LABEL[reportType]}: ${form.locationLabel}`);
     refresh();
     setFormOpen(false);
     setAddMode(false);
     setDraftLatLng(null);
+    setSelectedReportType(null);
   };
 
   const handleExport = () => {
@@ -368,7 +444,7 @@ export function ReportIncidentPage() {
             {myType && (
               !addMode ? (
                 <button
-                  onClick={() => setAddMode(true)}
+                  onClick={() => setTypeStepOpen(true)}
                   title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
                   className={`btn-primary flex items-center justify-center gap-1.5 whitespace-nowrap text-sm px-2 py-1 ${myType === 'risk' ? 'bg-red-600 border-red-700 hover:bg-red-700' : 'bg-yellow-500 border-yellow-600 hover:bg-yellow-600'}`}
                 >
@@ -378,7 +454,7 @@ export function ReportIncidentPage() {
                 <div className="flex-1 flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
                   <MapPin size={22} className="text-navy-700 flex-shrink-0" />
                   <p className="text-lg text-navy-700 flex-1">คลิกบนแผนที่เพื่อปักหมุดตำแหน่ง</p>
-                  <button onClick={() => setAddMode(false)} className="text-gray-500 hover:text-red-500"><X size={20} /></button>
+                  <button onClick={() => { setAddMode(false); setSelectedReportType(null); }} className="text-gray-500 hover:text-red-500"><X size={20} /></button>
                 </div>
               )
             )}
@@ -646,12 +722,20 @@ export function ReportIncidentPage() {
 
       <LiveCameraModal camera={viewingCam} onClose={() => setViewingCam(null)} />
 
+      <ReportTypeModal
+        isOpen={typeStepOpen}
+        onClose={() => setTypeStepOpen(false)}
+        onNext={option => { setSelectedReportType(option); setTypeStepOpen(false); setAddMode(true); }}
+      />
+
       <IncidentFormModal
+        key={formKey}
         isOpen={formOpen}
-        onClose={() => { setFormOpen(false); setDraftLatLng(null); }}
-        type={myType ?? 'risk'}
+        onClose={() => { setFormOpen(false); setDraftLatLng(null); setSelectedReportType(null); }}
+        type={selectedReportType?.type ?? myType ?? 'risk'}
         lat={draftLatLng?.lat ?? null}
         lng={draftLatLng?.lng ?? null}
+        initialCategory={selectedReportType?.category}
         onSubmit={handleSubmitForm}
       />
     </div>

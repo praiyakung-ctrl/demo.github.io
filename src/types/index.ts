@@ -132,6 +132,7 @@ export const INCIDENT_STATUS_LABEL: Record<IncidentPointStatus, string> = {
 
 export const INCIDENT_CATEGORY_OPTIONS = [
   'อุบัติเหตุทางถนน', 'อาชญากรรม', 'จุดเสี่ยงน้ำท่วม', 'จุดเสี่ยงไฟไหม้', 'อื่นๆ',
+  'ไฟฟ้าดับ / แสงสว่างไม่เพียงพอ', 'ชุมชน / สิ่งก่อสร้างอันตราย',
 ] as const;
 
 export const INCIDENT_FREQUENCY_OPTIONS = [
