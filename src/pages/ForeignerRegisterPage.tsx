@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2, ChevronLeft, ShieldCheck, Upload, UserPlus } from 'lucide-react';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
+import { EmailOtpPanel } from '../components/EmailOtpPanel';
 import type { GoogleProfile } from '../utils/googleAuth';
 import { findMemberByEmail, saveMember } from '../utils/memberStorage';
+import { sendSubmittedEmail } from '../utils/emailApi';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
 import type { CitizenMember, MemberType } from '../types';
 import { ORG_INFO } from '../data/orgInfo';
@@ -26,6 +28,7 @@ const OTHER = 'อื่นๆ';
 
 const COLLECTED_DATA = [
   'ชื่อ-นามสกุล และอีเมล จากบัญชี Google',
+  'รหัสยืนยันตัวตน (OTP) ที่ส่งไปยังอีเมลจริงของท่านเพื่อยืนยันความเป็นเจ้าของ',
   'เลขที่หนังสือเดินทาง (พาสปอร์ต) และสัญชาติ',
   'ภาพสแกนหนังสือเดินทาง',
   'ที่อยู่ จังหวัด รหัสไปรษณีย์ และเบอร์โทรศัพท์ที่ท่านกรอกเพิ่มเติม',
@@ -58,6 +61,7 @@ export function ForeignerRegisterPage() {
   const [submitting, setSubmitting] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [google, setGoogle] = useState<GoogleProfile | null>(null);
+  const [otpVerifiedEmail, setOtpVerifiedEmail] = useState<string | null>(null);
   const [passportScan, setPassportScan] = useState('');
   const [form, setForm] = useState<ProfileForm>({
     name: '', email: '', passportNumber: '', nationality: '',
@@ -69,15 +73,24 @@ export function ForeignerRegisterPage() {
   const set = (patch: Partial<ProfileForm>) => setForm(f => ({ ...f, ...patch }));
 
   const handleGoogleVerified = (profile: GoogleProfile) => {
-    const existing = findMemberByEmail(profile.email);
+    // Google sign-in here is a mock (see googleAuth.ts) — the address it
+    // returns isn't necessarily a real inbox the applicant controls, so the
+    // "already registered" check and form.email are deferred to
+    // handleEmailVerified() once the applicant proves ownership via OTP.
+    setGoogle(profile);
+    set({ name: profile.name });
+  };
+
+  const handleEmailVerified = (email: string) => {
+    const existing = findMemberByEmail(email);
     // a rejected applicant may resubmit with corrected info/documents;
     // pending/approved members are already registered
     if (existing && existing.status !== 'rejected') {
       setAlreadyRegistered(true);
       return;
     }
-    setGoogle(profile);
-    set({ name: profile.name, email: profile.email });
+    setOtpVerifiedEmail(email);
+    set({ email });
   };
 
   const handlePassportScan = (file: File | undefined) => {
@@ -87,11 +100,11 @@ export function ForeignerRegisterPage() {
     reader.readAsDataURL(file);
   };
 
-  const canContinue = Boolean(google) && Boolean(passportScan);
+  const canContinue = Boolean(google) && Boolean(otpVerifiedEmail) && Boolean(passportScan);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!google || !passportScan || !form.memberType) return;
+    if (!google || !otpVerifiedEmail || !passportScan || !form.memberType) return;
     setSubmitting(true);
     await new Promise(r => setTimeout(r, 600));
     const member: CitizenMember = {
@@ -115,6 +128,7 @@ export function ForeignerRegisterPage() {
       status: 'pending',
     };
     saveMember(member);
+    sendSubmittedEmail(member.email, member.name);
     setSubmitting(false);
     setStep(3);
   };
@@ -154,6 +168,16 @@ export function ForeignerRegisterPage() {
                 </div>
 
                 <GoogleLoginPanel showDemoShortcut onVerified={handleGoogleVerified} />
+
+                {google && (
+                  otpVerifiedEmail ? (
+                    <p className="flex items-center gap-2 text-lg font-semibold text-green-700 bg-green-50 border border-green-100 rounded-xl px-4 py-3 mt-4">
+                      <CheckCircle2 size={20} aria-hidden="true" /> ยืนยันอีเมล {otpVerifiedEmail} เรียบร้อยแล้ว
+                    </p>
+                  ) : (
+                    <EmailOtpPanel initialEmail={google.email} onVerified={handleEmailVerified} />
+                  )
+                )}
 
                 <div className="mt-4">
                   <label htmlFor="passport-scan-input" className="label">แนบสแกนหนังสือเดินทาง (พาสปอร์ต)<Req /></label>
@@ -207,8 +231,8 @@ export function ForeignerRegisterPage() {
                     <p className="text-lg font-semibold text-gray-700">ยืนยันตัวตนผ่าน Google แล้ว</p>
                   </div>
                   <div>
-                    <label htmlFor="reg-email-ro" className="label">อีเมล (จาก Google)</label>
-                    <input id="reg-email-ro" type="text" value={google.email} readOnly className="input-field bg-gray-100 text-gray-500" />
+                    <label htmlFor="reg-email-ro" className="label">อีเมล (ยืนยันด้วย OTP แล้ว)</label>
+                    <input id="reg-email-ro" type="text" value={form.email} readOnly className="input-field bg-gray-100 text-gray-500" />
                   </div>
                   <div className="flex items-center gap-3">
                     <img src={passportScan} alt="สแกนหนังสือเดินทาง" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />

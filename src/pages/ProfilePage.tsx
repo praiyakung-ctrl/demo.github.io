@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import { savedUsers, saveUsers } from '../utils/userStorage';
 import { findMemberById, saveMember } from '../utils/memberStorage';
 import { logAudit } from '../utils/auditLog';
-import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS, ROLE_LABELS } from '../types';
+import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS, memberRoleLabel } from '../types';
 import type { CitizenMember, MemberType, User } from '../types';
 
 const THAI_PROVINCES = [
@@ -120,7 +120,7 @@ function ProfileCardShell({ user, children }: { user: User; children: ReactNode 
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-2">
           <h2 className="text-2xl font-bold text-gray-900">ข้อมูลส่วนตัว</h2>
-          <RoleBadge role={user.role} />
+          <RoleBadge role={user.role} label={memberRoleLabel(user)} />
         </div>
         <button type="button" onClick={() => setPwOpen(true)} className="btn-secondary text-lg flex items-center gap-2">
           <KeyRound size={16} /> เปลี่ยนรหัสผ่าน
@@ -198,7 +198,7 @@ function StaffProfileForm({ user }: { user: User }) {
           </div>
           <div>
             <label htmlFor="p-role" className="label">บทบาท</label>
-            <input id="p-role" type="text" value={ROLE_LABELS[record.role]} readOnly className="input-field bg-gray-100 text-gray-500" />
+            <input id="p-role" type="text" value={memberRoleLabel(record)} readOnly className="input-field bg-gray-100 text-gray-500" />
           </div>
         </div>
 

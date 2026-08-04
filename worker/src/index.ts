@@ -15,9 +15,12 @@ export interface Env {
 
 type EmailRequest =
   | { type: 'member-approved'; to: string; name: string }
-  | { type: 'member-rejected'; to: string; name: string; reason: string };
+  | { type: 'member-rejected'; to: string; name: string; reason: string }
+  | { type: 'member-submitted'; to: string; name: string }
+  | { type: 'otp'; to: string; code: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const OTP_RE = /^[0-9]{6}$/;
 
 function corsHeaders(origin: string): Record<string, string> {
   return {
@@ -36,30 +39,54 @@ function json(body: unknown, status: number, origin: string): Response {
 }
 
 function buildEmail(req: EmailRequest, env: Env): { subject: string; html: string } {
-  if (req.type === 'member-approved') {
-    return {
-      subject: 'บัญชีสมาชิกของท่านได้รับการอนุมัติแล้ว',
-      html: `
-        <p>เรียน คุณ${escapeHtml(req.name)}</p>
-        <p>ใบสมัครสมาชิกของท่านได้รับการตรวจสอบและอนุมัติเรียบร้อยแล้ว ท่านสามารถเข้าสู่ระบบเพื่อใช้งานได้ทันที</p>
-        <p>ในการเข้าสู่ระบบครั้งแรก ระบบจะให้ท่านตั้งรหัสผ่านสำหรับใช้งานครั้งต่อไป</p>
-        <p style="text-align:center;margin:24px 0;">
-          <a href="${env.APP_LOGIN_URL}" style="background:#1b3a6b;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">คลิกที่นี่เพื่อเข้าสู่ระบบ</a>
-        </p>
-        <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
-      `.trim(),
-    };
+  switch (req.type) {
+    case 'member-approved':
+      return {
+        subject: 'บัญชีสมาชิกของท่านได้รับการอนุมัติแล้ว',
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>ใบสมัครสมาชิกของท่านได้รับการตรวจสอบและอนุมัติเรียบร้อยแล้ว ท่านสามารถเข้าสู่ระบบเพื่อใช้งานได้ทันที</p>
+          <p>ในการเข้าสู่ระบบครั้งแรก ระบบจะให้ท่านตั้งรหัสผ่านสำหรับใช้งานครั้งต่อไป</p>
+          <p style="text-align:center;margin:24px 0;">
+            <a href="${env.APP_LOGIN_URL}" style="background:#1b3a6b;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">คลิกที่นี่เพื่อเข้าสู่ระบบ</a>
+          </p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
+    case 'member-rejected':
+      return {
+        subject: 'ใบสมัครสมาชิกของท่านต้องแก้ไขเพิ่มเติม',
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>ใบสมัครสมาชิกของท่านยังไม่สามารถอนุมัติได้ในขณะนี้ ด้วยเหตุผลดังนี้:</p>
+          <p style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">${escapeHtml(req.reason)}</p>
+          <p>กรุณาสมัครสมาชิกใหม่อีกครั้งพร้อมแนบเอกสารที่ถูกต้องครบถ้วน</p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
+    case 'member-submitted':
+      return {
+        subject: 'ได้รับใบสมัครสมาชิกของท่านแล้ว',
+        html: `
+          <p>เรียน คุณ${escapeHtml(req.name)}</p>
+          <p>ระบบได้รับใบสมัครสมาชิกของท่านเรียบร้อยแล้ว ขณะนี้อยู่ระหว่างการตรวจสอบข้อมูลและเอกสารโดยเจ้าหน้าที่</p>
+          <p>เมื่อผลการตรวจสอบเสร็จสิ้น ระบบจะแจ้งผลไปยังอีเมลนี้อีกครั้ง</p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
+    case 'otp':
+      return {
+        subject: 'รหัสยืนยันอีเมลของท่าน',
+        html: `
+          <p>รหัสยืนยันสำหรับการสมัครสมาชิกของท่านคือ</p>
+          <p style="text-align:center;margin:24px 0;">
+            <span style="display:inline-block;font-size:32px;font-weight:bold;letter-spacing:8px;color:#1b3a6b;background:#eff6ff;padding:12px 24px;border-radius:8px;">${escapeHtml(req.code)}</span>
+          </p>
+          <p>กรุณากรอกรหัสนี้ในหน้าสมัครสมาชิกเพื่อยืนยันความเป็นเจ้าของอีเมล หากท่านไม่ได้เป็นผู้ดำเนินการนี้ กรุณาเพิกเฉยต่ออีเมลฉบับนี้</p>
+          <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
+        `.trim(),
+      };
   }
-  return {
-    subject: 'ใบสมัครสมาชิกของท่านต้องแก้ไขเพิ่มเติม',
-    html: `
-      <p>เรียน คุณ${escapeHtml(req.name)}</p>
-      <p>ใบสมัครสมาชิกของท่านยังไม่สามารถอนุมัติได้ในขณะนี้ ด้วยเหตุผลดังนี้:</p>
-      <p style="padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">${escapeHtml(req.reason)}</p>
-      <p>กรุณาสมัครสมาชิกใหม่อีกครั้งพร้อมแนบเอกสารที่ถูกต้องครบถ้วน</p>
-      <p>ขอบคุณที่ใช้บริการ<br/>องค์การบริหารส่วนจังหวัดชลบุรี</p>
-    `.trim(),
-  };
 }
 
 function escapeHtml(s: string): string {
@@ -70,9 +97,11 @@ function isValidRequest(body: unknown): body is EmailRequest {
   if (!body || typeof body !== 'object') return false;
   const b = body as Record<string, unknown>;
   if (typeof b.to !== 'string' || !EMAIL_RE.test(b.to)) return false;
+  if (b.type === 'otp') return typeof b.code === 'string' && OTP_RE.test(b.code);
   if (typeof b.name !== 'string' || !b.name.trim()) return false;
   if (b.type === 'member-approved') return true;
   if (b.type === 'member-rejected') return typeof b.reason === 'string' && Boolean(b.reason.trim());
+  if (b.type === 'member-submitted') return true;
   return false;
 }
 
@@ -106,6 +135,7 @@ export default {
     }
 
     const { subject, html } = buildEmail(body, env);
+    const recipientName = body.type === 'otp' ? undefined : body.name;
 
     const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
@@ -116,7 +146,7 @@ export default {
       },
       body: JSON.stringify({
         sender: { email: env.BREVO_SENDER_EMAIL, name: env.BREVO_SENDER_NAME },
-        to: [{ email: body.to, name: body.name }],
+        to: [{ email: body.to, name: recipientName }],
         subject,
         htmlContent: html,
       }),

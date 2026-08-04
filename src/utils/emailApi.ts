@@ -28,3 +28,11 @@ export function sendApprovalEmail(to: string, name: string): Promise<boolean> {
 export function sendRejectionEmail(to: string, name: string, reason: string): Promise<boolean> {
   return send({ type: 'member-rejected', to, name, reason });
 }
+
+export function sendSubmittedEmail(to: string, name: string): Promise<boolean> {
+  return send({ type: 'member-submitted', to, name });
+}
+
+export function sendOtpEmail(to: string, code: string): Promise<boolean> {
+  return send({ type: 'otp', to, code });
+}

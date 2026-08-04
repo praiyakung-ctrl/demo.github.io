@@ -352,3 +352,10 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   police: 'ตำรวจ',
   localOfficer: 'เจ้าหน้าที่ท้องถิ่น',
 };
+
+/* citizen members who registered as foreign nationals (passport + Google
+   OAuth, see ForeignerRegisterPage) keep role 'citizen' for permissions
+   purposes, but should display as "ชาวต่างชาติ" rather than "ประชาชน" */
+export function memberRoleLabel(u: { role: UserRole; passportNumber?: string }): string {
+  return u.role === 'citizen' && u.passportNumber ? 'ชาวต่างชาติ' : ROLE_LABELS[u.role];
+}

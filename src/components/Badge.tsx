@@ -52,6 +52,9 @@ export function StatusBadge({ status }: StatusBadgeProps) {
 
 interface RoleBadgeProps {
   role: string;
+  /* overrides the displayed text (color still keyed off `role`) — used for
+     foreign-national members who keep role 'citizen' but display differently */
+  label?: string;
 }
 
 const ROLE_LABELS: Record<string, string> = {
@@ -72,10 +75,10 @@ const ROLE_STYLES: Record<string, string> = {
   localOfficer: 'bg-yellow-100 text-yellow-700',
 };
 
-export function RoleBadge({ role }: RoleBadgeProps) {
+export function RoleBadge({ role, label }: RoleBadgeProps) {
   return (
     <span className={`inline-flex items-center rounded-full text-sm font-medium px-2.5 py-1 ${ROLE_STYLES[role] ?? 'bg-gray-100 text-gray-600'}`}>
-      {ROLE_LABELS[role] ?? role}
+      {label ?? ROLE_LABELS[role] ?? role}
     </span>
   );
 }

@@ -5,6 +5,7 @@ import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { ThaIdLoginPanel } from '../components/ThaIdLoginPanel';
 import type { ThaIdProfile } from '../utils/thaId';
 import { findMemberByNationalId, saveMember } from '../utils/memberStorage';
+import { sendSubmittedEmail } from '../utils/emailApi';
 import { checkEmailDomain } from '../utils/emailDomain';
 import type { DomainCheckResult } from '../utils/emailDomain';
 import { MEMBER_PURPOSE_OPTIONS, MEMBER_TYPE_OPTIONS } from '../types';
@@ -108,6 +109,7 @@ export function RegisterPage() {
       status: 'pending',
     };
     saveMember(member);
+    sendSubmittedEmail(member.email, member.name);
     setSubmitting(false);
     setStep(3);
   };

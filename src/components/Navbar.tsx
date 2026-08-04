@@ -4,7 +4,7 @@ import { Bell, LogOut, ChevronDown, CircleUser, UserCog, AlertTriangle, CheckCir
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
-import { ROLE_LABELS, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS, INCIDENT_STATUS_LABEL } from '../types';
+import { ROLE_LABELS, memberRoleLabel, EVENT_LABELS, EVENT_COLORS, EVENT_TEXT_COLORS, INCIDENT_STATUS_LABEL } from '../types';
 import eventsData from '../data/events.json';
 import type { CctvEvent, CitizenRequest } from '../types';
 import { timeAgo } from '../utils/formatDate';
@@ -399,7 +399,7 @@ export function Navbar() {
             <CircleUser size={36} className="text-white flex-shrink-0" />
             <div className="text-left hidden sm:block">
               <p className="text-lg font-bold text-white leading-tight">{user?.name}</p>
-              <p className="text-sm text-white">{ROLE_LABELS[user?.role ?? 'operator']}</p>
+              <p className="text-sm text-white">{user ? memberRoleLabel(user) : ROLE_LABELS.operator}</p>
             </div>
             <ChevronDown size={18} className="text-navy-300" />
           </button>
