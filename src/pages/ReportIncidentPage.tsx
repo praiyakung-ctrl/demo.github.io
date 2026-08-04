@@ -446,14 +446,12 @@ export function ReportIncidentPage() {
                 <button
                   onClick={() => setTypeStepOpen(true)}
                   title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
-                  className="flex items-center gap-2.5 whitespace-nowrap bg-navy-700 hover:bg-navy-600 border border-navy-800 rounded-xl px-3 py-1.5 text-left transition-colors"
+                  className="flex items-center gap-2.5 whitespace-nowrap bg-white hover:bg-gray-50 border border-gray-200 shadow-lg rounded-xl px-3 py-1.5 text-left transition-colors"
                 >
-                  <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                    <MapPin size={18} className="text-red-600" fill="currentColor" />
-                  </span>
+                  <MapPin size={22} className="text-red-600 flex-shrink-0" fill="currentColor" />
                   <span className="min-w-0">
-                    <span className="block text-base font-bold text-white leading-tight">แจ้งจุดเสี่ยงภัย</span>
-                    <span className="block text-xs text-blue-100 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
+                    <span className="block text-base font-bold text-navy-700 leading-tight">แจ้งจุดเสี่ยงภัย</span>
+                    <span className="block text-xs text-gray-500 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
                   </span>
                 </button>
               ) : (
