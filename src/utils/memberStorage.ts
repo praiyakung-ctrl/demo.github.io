@@ -34,6 +34,19 @@ export function findMemberByEmail(email: string): CitizenMember | null {
   return savedMembers().find(m => m.authType === 'google' && m.email === email) ?? null;
 }
 
+/* pending/rejected applicants have already registered — the generic
+   "please register" message would wrongly tell them to sign up again */
+export function memberLoginErrorMessage(member: CitizenMember | null, notFoundMessage: string): string {
+  if (!member) return notFoundMessage;
+  if (member.status === 'pending') return 'ใบสมัครของท่านอยู่ระหว่างการตรวจสอบโดยเจ้าหน้าที่ กรุณารอผลการอนุมัติ';
+  if (member.status === 'rejected') {
+    return member.rejectionReason
+      ? `ใบสมัครของท่านถูกปฏิเสธ เหตุผล: ${member.rejectionReason}`
+      : 'ใบสมัครของท่านถูกปฏิเสธ กรุณาติดต่อเจ้าหน้าที่เพื่อสอบถามรายละเอียด';
+  }
+  return notFoundMessage;
+}
+
 export function saveMember(member: CitizenMember): void {
   const others = savedMembers().filter(m =>
     member.authType === 'google' ? m.email !== member.email : m.nationalId !== member.nationalId

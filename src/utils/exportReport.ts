@@ -1,5 +1,5 @@
 /* Report export helpers. Libraries are imported dynamically so jspdf /
-   html2canvas / xlsx / exceljs stay out of the page chunk until a button is clicked.
+   html2canvas / exceljs stay out of the page chunk until a button is clicked.
 
    PDF is image-based (html2canvas capture) because jsPDF ships no Thai font —
    capturing the rendered DOM preserves TH Sarabun exactly as on screen. */
@@ -130,15 +130,29 @@ export async function exportRowsToExcel(
   sheetName: string,
   filename: string
 ): Promise<void> {
-  const XLSX = await import('xlsx');
-  const ws = XLSX.utils.aoa_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, sheetName);
-  XLSX.writeFile(wb, filename);
+  const ExcelJS = await import('exceljs');
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet(sheetName);
+  ws.addRows(rows);
+  ws.getRow(1).font = { bold: true };
+  // size columns to the widest cell so Thai text is not cut off
+  ws.columns.forEach((col, i) => {
+    col.width = Math.max(12, ...rows.map(r => String(r[i] ?? '').length + 4));
+  });
+
+  const buffer = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
-/* Data rows plus the chart embedded as a PNG image in a single .xlsx (exceljs;
-   the plain xlsx lib cannot embed images) */
+/* Data rows plus the chart embedded as a PNG image in a single .xlsx */
 export async function exportChartWithTableToExcel(
   chartEl: HTMLElement,
   rows: Rows,

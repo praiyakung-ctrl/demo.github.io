@@ -7,6 +7,7 @@ import { GoogleLoginPanel } from '../components/GoogleLoginPanel';
 import { AccessibilityToolbar } from '../components/AccessibilityToolbar';
 import { PdpaConsentBanner } from '../components/PdpaConsentBanner';
 import { hasPdpaConsent, savePdpaConsent } from '../utils/pdpaConsent';
+import { findMemberByNationalId, findMemberByEmail, memberLoginErrorMessage } from '../utils/memberStorage';
 import type { ThaIdProfile } from '../utils/thaId';
 import type { GoogleProfile } from '../utils/googleAuth';
 
@@ -28,7 +29,8 @@ export function LoginPage() {
   const handleVerified = (profile: ThaIdProfile) => {
     const ok = loginWithThaId(profile);
     if (!ok) {
-      setError('ไม่พบบัญชีที่ผูกกับ ThaID นี้ กรุณาสมัครสมาชิกก่อนเข้าใช้งาน');
+      const member = findMemberByNationalId(profile.nationalId);
+      setError(memberLoginErrorMessage(member, 'ไม่พบบัญชีที่ผูกกับ ThaID นี้ กรุณาสมัครสมาชิกก่อนเข้าใช้งาน'));
       setAttempt(a => a + 1); // remounts the panel so it can scan again
     }
   };
@@ -36,7 +38,8 @@ export function LoginPage() {
   const handleGoogleVerified = (profile: GoogleProfile) => {
     const ok = loginWithGoogle(profile);
     if (!ok) {
-      setError('ไม่พบบัญชีที่ผูกกับ Google นี้ กรุณาสมัครสมาชิกสำหรับชาวต่างชาติก่อนเข้าใช้งาน');
+      const member = findMemberByEmail(profile.email);
+      setError(memberLoginErrorMessage(member, 'ไม่พบบัญชีที่ผูกกับ Google นี้ กรุณาสมัครสมาชิกสำหรับชาวต่างชาติก่อนเข้าใช้งาน'));
       setAttempt(a => a + 1); // remounts the panel so it can connect again
     }
   };
