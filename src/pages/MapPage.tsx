@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw, Locate } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
@@ -125,7 +125,7 @@ export function MapPage() {
   };
   const ackDialogRef = useDialog(ackEvent !== null, () => setAckEvent(null));
 
-  /* shared geolocation getter — used by the FAB's "ค้นหากล้องใกล้ฉัน" button */
+  /* shared geolocation getter — used by the FAB's "ตำแหน่งของฉัน" / "ค้นหากล้องใกล้ฉัน" buttons */
   const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
     if (!navigator.geolocation) { setGeoError(true); return; }
     navigator.geolocation.getCurrentPosition(
@@ -139,8 +139,12 @@ export function MapPage() {
     );
   };
 
-  const handleSearchNearby = () => {
+  const handleLocateMe = () => {
     requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
+  };
+
+  const handleSearchNearby = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 13, { duration: 0.8 }));
   };
 
   const handleResetView = () => {
@@ -433,6 +437,12 @@ export function MapPage() {
                 ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
               </p>
             )}
+            <button
+              onClick={handleLocateMe}
+              className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+            >
+              <Locate size={16} className="flex-shrink-0" /> ตำแหน่งของฉัน
+            </button>
             <button
               onClick={handleSearchNearby}
               className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
