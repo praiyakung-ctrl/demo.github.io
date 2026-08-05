@@ -87,7 +87,7 @@ export function CctvEventsReportPage() {
   const pageRows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const exportRows: (string | number)[][] = [
-    ['ตำแหน่งที่ติดตั้ง', 'สถานที่ติดตั้ง', 'กล้อง ID', 'ชื่อกล้อง', 'ชื่อเหตุการณ์', 'วันที่', 'เวลา', 'สถานะ'],
+    ['ตำแหน่งที่ติดตั้ง', 'สถานที่ติดตั้ง', 'รหัสกล้อง', 'ชื่อกล้อง', 'ชื่อเหตุการณ์', 'วันที่', 'เวลา', 'สถานะ'],
     ...filtered.map(r => [
       r.installPosition, r.installSite, r.cameraId, r.cameraName, EVENT_LABELS[r.eventType],
       formatThaiDate(r.timestamp), formatTime(r.timestamp), r.isAcknowledged ? 'รับทราบแล้ว' : 'ยังไม่รับทราบ',
@@ -190,7 +190,7 @@ export function CctvEventsReportPage() {
               <table className="w-full text-xl">
                 <thead>
                   <tr className="bg-blue-200">
-                    {['ตำแหน่งที่ติดตั้ง', 'สถานที่ติดตั้ง', 'กล้อง ID', 'ชื่อกล้อง', 'ชื่อเหตุการณ์', 'วันที่', 'เวลา', 'สถานะ'].map(h => (
+                    {['ตำแหน่งที่ติดตั้ง', 'สถานที่ติดตั้ง', 'รหัสกล้อง', 'ชื่อกล้อง', 'ชื่อเหตุการณ์', 'วันที่', 'เวลา', 'สถานะ'].map(h => (
                       <th key={h} scope="col" className="text-left text-xl font-bold text-navy-700 px-4 py-3">{h}</th>
                     ))}
                   </tr>
@@ -200,7 +200,7 @@ export function CctvEventsReportPage() {
                     <tr key={r.id} className={`border-b border-blue-100 hover:bg-blue-100 transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-blue-50'}`}>
                       <td className="px-4 py-2.5 text-gray-700">{r.installPosition}</td>
                       <td className="px-4 py-2.5 text-gray-700">{r.installSite}</td>
-                      <td className="px-4 py-2.5 font-mono font-bold text-navy-700">{r.cameraId}</td>
+                      <td className="px-4 py-2.5 text-gray-700">{r.cameraId}</td>
                       <td className="px-4 py-2.5 text-gray-700">{r.cameraName}</td>
                       <td className="px-4 py-2.5">
                         <span
