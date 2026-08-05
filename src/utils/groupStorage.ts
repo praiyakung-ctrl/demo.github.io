@@ -14,7 +14,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'เข้าถึงและจัดการได้ทุกเมนู',
     isSystem: true,
     permissions: {
-      map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW, comparisonReport: ALL,
+      map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW, comparisonReport: ALL, lprSearch: ALL,
       adminCameras: ALL, adminUsers: ALL, adminRepairs: ALL, adminGroups: ALL, adminMenus: ALL,
       adminAuditLog: ALL, adminApi: ALL, adminNotifications: ALL, adminSettings: ALL, adminIncidents: ALL,
       adminMemberReview: ALL, adminCctvApprovers: ALL,
@@ -26,7 +26,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'ใช้งานแผนที่ แดชบอร์ด รายงาน และจัดการข้อมูลกล้อง',
     isSystem: true,
     permissions: {
-      map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW, comparisonReport: ALL,
+      map: ALL, dashboard: VIEW, portal: ALL, reports: VIEW, comparisonReport: ALL, lprSearch: ALL,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE,
       adminIncidents: ['view', 'edit'],
@@ -39,7 +39,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'ดูข้อมูลภาพรวมและรายงาน (อ่านอย่างเดียว)',
     isSystem: true,
     permissions: {
-      map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW, comparisonReport: VIEW,
+      map: VIEW, dashboard: VIEW, portal: VIEW, reports: VIEW, comparisonReport: VIEW, lprSearch: VIEW,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
       adminMemberReview: NONE, adminCctvApprovers: NONE,
@@ -51,7 +51,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'ยื่นและติดตามคำขอข้อมูลภาพจากกล้อง CCTV',
     isSystem: true,
     permissions: {
-      map: NONE, dashboard: NONE, portal: ALL, reports: NONE, comparisonReport: NONE,
+      map: NONE, dashboard: NONE, portal: ALL, reports: NONE, comparisonReport: NONE, lprSearch: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
       adminMemberReview: NONE, adminCctvApprovers: NONE,
@@ -63,7 +63,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'ปักหมุดจุดเสี่ยงภัยผ่านหน้าแจ้งเหตุ',
     isSystem: true,
     permissions: {
-      map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE,
+      map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE, lprSearch: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
       adminMemberReview: NONE, adminCctvApprovers: NONE,
@@ -75,7 +75,7 @@ export const DEFAULT_GROUPS: UserGroup[] = [
     description: 'ปักหมุดจุดขอติดตั้งกล้องใหม่ผ่านหน้าแจ้งเหตุ',
     isSystem: true,
     permissions: {
-      map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE,
+      map: NONE, dashboard: NONE, portal: VIEW, reports: NONE, comparisonReport: NONE, lprSearch: NONE,
       adminCameras: NONE, adminUsers: NONE, adminRepairs: NONE, adminGroups: NONE, adminMenus: NONE,
       adminAuditLog: NONE, adminApi: NONE, adminNotifications: NONE, adminSettings: NONE, adminIncidents: NONE,
       adminMemberReview: NONE, adminCctvApprovers: NONE,

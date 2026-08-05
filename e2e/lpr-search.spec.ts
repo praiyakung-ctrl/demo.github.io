@@ -9,12 +9,13 @@ test.describe('LprSearchPage', () => {
 
   test('reachable from /reports and searches a plate with multiple hits', async ({ page }) => {
     await page.goto('reports');
-    await page.getByRole('link', { name: 'ค้นหาป้ายทะเบียน LPR' }).click();
+    const main = page.getByRole('main');
+    await main.getByRole('link', { name: 'ค้นหาป้ายทะเบียน LPR' }).click();
     await page.waitForURL('**/reports/lpr');
-    await expect(page.getByRole('heading', { name: 'ค้นหาป้ายทะเบียน LPR' })).toBeVisible();
+    await expect(main.getByRole('heading', { name: 'ค้นหาป้ายทะเบียน LPR' })).toBeVisible();
 
-    await page.getByLabel('ค้นหาป้ายทะเบียน').fill('ปถ 0134');
-    await expect(page.getByRole('heading', { name: 'ผลการค้นหา : ปถ 0134' })).toBeVisible();
+    await main.getByLabel('ค้นหาป้ายทะเบียน').fill('ปถ 0134');
+    await expect(main.getByRole('heading', { name: 'ผลการค้นหา : ปถ 0134' })).toBeVisible();
 
     const badgeText = await page.locator('span.bg-navy-700').first().textContent();
     const count = Number(badgeText?.match(/\d+/)?.[0]);
