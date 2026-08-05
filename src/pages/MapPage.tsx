@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap } from 'leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw, Locate } from 'lucide-react';
+import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw, Locate, Eye, EyeOff } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
@@ -82,6 +82,7 @@ export function MapPage() {
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
+  const [legendVisible, setLegendVisible] = useState(false);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [reportCam, setReportCam] = useState<Camera | null>(null);
   const [reportNote, setReportNote] = useState('');
@@ -459,14 +460,35 @@ export function MapPage() {
           </MapFabMenu>
 
           {/* Legend */}
-          <div className="absolute bottom-6 left-2 bg-white rounded-lg shadow-lg p-2 z-[400] text-xs">
-            <p className="font-semibold text-gray-700 mb-1">สัญลักษณ์</p>
-            {Object.entries({ normal: 'ปกติ', traffic: 'รถติด', gunshot: 'เสียงปืน', parking: 'จอดผิด', flood: 'น้ำท่วม', crowd: 'ชุมนุม', offline: 'ออฟไลน์' }).map(([k, label]) => (
-              <div key={k} className="flex items-center gap-1.5 mb-0.5">
-                <span dangerouslySetInnerHTML={{ __html: pinSvg(MARKER_COLORS[k], 11, 15) }} />
-                <span className="text-gray-600">{label}</span>
+          <div className="absolute bottom-6 left-2 z-[400] pointer-events-none">
+            {legendVisible ? (
+              <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-semibold text-gray-700">
+                <span className="text-gray-500">สัญลักษณ์:</span>
+                {Object.entries({ normal: 'ปกติ', traffic: 'รถติด', gunshot: 'เสียงปืน', parking: 'จอดผิด', flood: 'น้ำท่วม', crowd: 'ชุมนุม', offline: 'ออฟไลน์' }).map(([k, label]) => (
+                  <span key={k} className="flex items-center gap-1.5">
+                    <span dangerouslySetInnerHTML={{ __html: pinSvg(MARKER_COLORS[k], 11, 15) }} />
+                    <span className="text-gray-600">{label}</span>
+                  </span>
+                ))}
+                <button
+                  onClick={() => setLegendVisible(false)}
+                  aria-label="ซ่อนสัญลักษณ์"
+                  title="ซ่อนสัญลักษณ์"
+                  className="pointer-events-auto text-gray-400 hover:text-gray-600 flex-shrink-0"
+                >
+                  <EyeOff size={16} />
+                </button>
               </div>
-            ))}
+            ) : (
+              <button
+                onClick={() => setLegendVisible(true)}
+                aria-label="แสดงสัญลักษณ์"
+                title="แสดงสัญลักษณ์"
+                className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-sm hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg border border-gray-200 transition-colors"
+              >
+                <Eye size={16} /> สัญลักษณ์
+              </button>
+            )}
           </div>
           </div>
         </div>
