@@ -7,6 +7,7 @@ import {
 } from 'recharts';
 import type { PieLabelRenderProps } from 'recharts';
 import { Layout } from '../components/Layout';
+import { Modal } from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
 import lprData from '../data/lpr.json';
 import eventsData from '../data/events.json';
@@ -14,10 +15,11 @@ import camerasData from '../data/cameras.json';
 import requestsData from '../data/requests.json';
 import type { CctvEvent, MonthlyEventData, LprRoad, CitizenRequest, Camera as CameraType } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
-import { formatThaiDateTime } from '../utils/formatDate';
+import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { savedUsers } from '../utils/userStorage';
 import { savedRequests } from '../utils/requestStorage';
 import { policeUsageByStation } from '../utils/policeUsageStats';
+import { dailyJitterSeries } from '../utils/eventDrilldown';
 import { ExportButtons } from '../components/ExportButtons';
 import {
   exportChartWithTableToExcel, exportChartWithTableToPdf,
@@ -154,6 +156,8 @@ export function DashboardPage() {
   ];
 
   const PERIOD_LABEL = `${monthly[0]?.month}–${monthly[monthly.length - 1]?.month} 2568`;
+  const LATEST_DAY_LABEL = formatThaiDate(daily[0].date);
+  const TREND_PERIOD_LABEL = `${formatThaiDate(daily[daily.length - 1].date)} – ${formatThaiDate(daily[0].date)}`;
 
   const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
     if (!bar.payload) return;
@@ -177,6 +181,7 @@ export function DashboardPage() {
   const trendChartRef = useRef<HTMLDivElement>(null);
   const summaryTableRef = useRef<HTMLDivElement>(null);
   const [exporting, setExporting] = useState(false);
+  const [selectedRoad, setSelectedRoad] = useState<LprRoad | null>(null);
 
   const monthlyRows: (string | number)[][] = [
     ['เดือน', 'รถติด', 'เสียงปืน', 'จอดผิด', 'น้ำท่วม', 'ชุมนุม', 'รวม'],
@@ -413,16 +418,21 @@ export function DashboardPage() {
             <SectionHeader
               icon={Route}
               title="LPR แยกตามจุดติดตั้ง (คัน/วัน)"
+              subtitle={`ข้อมูล ณ วันที่ ${LATEST_DAY_LABEL} — คลิกที่แท่งเพื่อดูแนวโน้มย้อนหลัง 7 วันของจุดนั้น`}
               action={<ExportButtons disabled={exporting} onPdf={() => exportChart(lprChartRef, lprRows, 'LPR-จุดติดตั้ง', 'pdf')} onExcel={() => exportChart(lprChartRef, lprRows, 'LPR จุดติดตั้ง', 'excel')} />}
             />
-            <div role="img" aria-label={`กราฟแท่งแนวนอน LPR แยกตามจุดติดตั้ง: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
+            <div role="img" aria-label={`กราฟแท่งแนวนอน LPR แยกตามจุดติดตั้ง ณ วันที่ ${LATEST_DAY_LABEL}: ${roads.slice(0, 3).map(r => `${r.road} ${r.count.toLocaleString()} คันต่อวัน`).join(', ')} และอื่น ๆ`}>
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={roads} layout="vertical" margin={{ top: 0, right: 30, left: 10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" horizontal={false} />
                 <XAxis type="number" tick={{ fontSize: 16 }} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
                 <YAxis type="category" dataKey="road" tick={{ fontSize: 16 }} width={140} />
                 <Tooltip formatter={(v) => [`${Number(v).toLocaleString()} คัน`]} />
-                <Bar dataKey="count" fill="#2563EB" radius={[0, 3, 3, 0]} />
+                <Bar
+                  dataKey="count" fill="#2563EB" radius={[0, 3, 3, 0]}
+                  cursor="pointer"
+                  onClick={(bar: { payload?: LprRoad }) => bar.payload && setSelectedRoad(bar.payload)}
+                />
               </BarChart>
             </ResponsiveContainer>
             </div>
@@ -432,6 +442,7 @@ export function DashboardPage() {
             <SectionHeader
               icon={TrendingUp}
               title="แนวโน้มเหตุการณ์ 7 วันล่าสุด"
+              subtitle={`ข้อมูลรายวัน ${TREND_PERIOD_LABEL}`}
               action={<ExportButtons disabled={exporting} onPdf={() => exportChart(trendChartRef, dailyRows, 'แนวโน้ม-7-วัน', 'pdf')} onExcel={() => exportChart(trendChartRef, dailyRows, 'แนวโน้ม 7 วัน', 'excel')} />}
             />
             <div role="img" aria-label={`กราฟเส้นแนวโน้ม 7 วันล่าสุด: ${daily.map(d => `${d.date} ${d.count.toLocaleString()}`).join(', ')}`}>
@@ -522,6 +533,37 @@ export function DashboardPage() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={selectedRoad !== null}
+        onClose={() => setSelectedRoad(null)}
+        title={selectedRoad?.road ?? ''}
+        icon={<Route size={20} className="text-white" />}
+        size="lg"
+      >
+        {selectedRoad && (() => {
+          const series = dailyJitterSeries(selectedRoad.count, daily.map(d => d.date), roads.indexOf(selectedRoad) + 1);
+          return (
+            <div className="space-y-3">
+              <p className="text-lg text-gray-500">
+                ข้อมูลรายวัน {TREND_PERIOD_LABEL} — เฉลี่ย {selectedRoad.count.toLocaleString()} คัน/วัน
+                {' '}({selectedRoad.trend >= 0 ? '+' : ''}{selectedRoad.trend}% เทียบช่วงก่อนหน้า)
+              </p>
+              <div role="img" aria-label={`กราฟเส้นแนวโน้มรายวันของ ${selectedRoad.road}: ${series.map(s => `${s.date} ${s.count.toLocaleString()} คัน`).join(', ')}`}>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={series} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis dataKey="date" tick={{ fontSize: 14 }} />
+                    <YAxis tick={{ fontSize: 14 }} />
+                    <Tooltip formatter={(v) => [`${Number(v).toLocaleString()} คัน`]} />
+                    <Line type="monotone" dataKey="count" name="จำนวนรถ" stroke="#2563EB" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          );
+        })()}
+      </Modal>
     </Layout>
   );
 }

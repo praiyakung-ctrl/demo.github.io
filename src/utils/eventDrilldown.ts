@@ -64,6 +64,14 @@ export function distributeTotalAcrossDays(total: number, monthIndex: number, yea
   return values.map((count, i) => ({ day: i + 1, count }));
 }
 
+/* No real per-road daily dataset exists (only a single current "count" per
+   road) — this fabricates a plausible, stable ±18% daily fluctuation around
+   that value, seeded so it's identical on every render instead of re-randomizing. */
+export function dailyJitterSeries(base: number, dates: string[], seed: number): { date: string; count: number }[] {
+  const rng = mulberry32(seed);
+  return dates.map(date => ({ date, count: Math.round(base * (0.82 + rng() * 0.36)) }));
+}
+
 /* No per-day incident dataset exists in this demo (only pre-aggregated
    monthly totals) — this fabricates a plausible, stable daily split of each
    month's totals per category, seeded by month index so it is identical on
