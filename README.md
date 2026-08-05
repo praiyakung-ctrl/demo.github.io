@@ -8,9 +8,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=github)](https://smartcctv.pages.dev/)
+[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=github)](https://praiyakung-ctrl.github.io/demo.github.io/)
 
-🔗 **Live Demo:** <https://smartcctv.pages.dev/>
+🔗 **Live Demo:** <https://praiyakung-ctrl.github.io/demo.github.io/>
 📐 **เอกสารสถาปัตยกรรมระบบ:** [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ---

@@ -18,11 +18,13 @@ import type { Camera, CctvEvent, EventType } from '../types';
 import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS, STATUS_COLORS, STATUS_LABELS } from '../types';
 import { formatLastUpdate, formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
 import { pinIcon, pinSvg, userLocationIcon } from '../utils/mapPin';
+import { computeDisplayPositions } from '../utils/markerJitter';
 import { useDialog } from '../hooks/useDialog';
 
 const cameras = camerasData as Camera[];
 const initialEvents = eventsData as CctvEvent[];
 const MAP_CENTER: [number, number] = [13.22, 101.02];
+const displayPositions = computeDisplayPositions(cameras);
 
 /* Hands the Leaflet map instance up to the page (via useMap(), only available
    inside <MapContainer>) so the FAB buttons outside it can call flyTo(). */
@@ -174,7 +176,8 @@ export function MapPage() {
   const focusCamera = (cam: Camera) => {
     setSelectedCam(cam);
     if (!leafletMap) return;
-    leafletMap.flyTo([cam.lat, cam.lng], 16, { duration: 0.8 });
+    const pos = displayPositions.get(cam.id) ?? [cam.lat, cam.lng];
+    leafletMap.flyTo(pos, 18, { duration: 0.8 });
     leafletMap.once('moveend', () => {
       setTimeout(() => markerRefs.current.get(cam.id)?.openPopup(), 50);
     });
@@ -367,7 +370,7 @@ export function MapPage() {
               <Marker
                 key={cam.id}
                 ref={m => { if (m) markerRefs.current.set(cam.id, m); else markerRefs.current.delete(cam.id); }}
-                position={[cam.lat, cam.lng]}
+                position={displayPositions.get(cam.id) ?? [cam.lat, cam.lng]}
                 icon={pinIcon(getMarkerColor(cam))}
                 title={`${cam.id} ${cam.location}`}
                 alt={`กล้อง ${cam.id} ${cam.location}`}
