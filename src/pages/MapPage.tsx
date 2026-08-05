@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap, Marker as LeafletMarker } from 'leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw, Locate, Eye, EyeOff } from 'lucide-react';
@@ -197,7 +197,7 @@ export function MapPage() {
 
   const unackEvents = events.filter(e => !e.isAcknowledged);
 
-  const handleAcknowledge = useCallback(() => {
+  const handleAcknowledge = () => {
     if (!ackEvent) return;
     setEvents(prev => prev.map(e =>
       e.id === ackEvent.id
@@ -206,7 +206,7 @@ export function MapPage() {
     ));
     setAckEvent(null);
     setActionNote('');
-  }, [ackEvent, actionNote]);
+  };
 
   return (
     <Layout>

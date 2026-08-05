@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CalendarDays, Car, Crosshair, ParkingSquare, Waves, Users } from 'lucide-react';
 import {
@@ -104,10 +104,7 @@ export function DailyEventsReportPage() {
   const monthRow = monthly[monthIndex];
   const activeCategories = EVENT_CATEGORY_KEYS.filter(k => selectedCategories.has(k));
 
-  const dailyRows = useMemo(
-    () => (monthRow ? dailyBreakdownForMonth(monthIndex, monthRow, YEAR_BE) : []),
-    [monthIndex, monthRow]
-  );
+  const dailyRows = monthRow ? dailyBreakdownForMonth(monthIndex, monthRow, YEAR_BE) : [];
 
   const totalByCategory = (key: EventCategoryKey) => dailyRows.reduce((s, r) => s + r[key], 0);
   const grandTotal = activeCategories.reduce((s, k) => s + totalByCategory(k), 0);
