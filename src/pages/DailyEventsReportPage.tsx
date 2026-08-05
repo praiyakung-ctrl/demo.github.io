@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CalendarDays, Car, Crosshair, ParkingSquare, Waves, Users } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -10,11 +10,17 @@ import lprData from '../data/lpr.json';
 import type { MonthlyEventData } from '../types';
 import { EVENT_LABELS, EVENT_COLORS } from '../types';
 import { dailyBreakdownForMonth, EVENT_CATEGORY_KEYS } from '../utils/eventDrilldown';
-import type { EventCategoryKey } from '../utils/eventDrilldown';
+import type { DailyEventRow, EventCategoryKey } from '../utils/eventDrilldown';
 import { exportChartWithTableToExcel, exportChartWithTableToPdf, todayStamp } from '../utils/exportReport';
 
 const monthly = lprData.monthly as MonthlyEventData[];
 const YEAR_BE = 2568;
+
+function isoDate(monthIndex: number, day: number): string {
+  const d = new Date(YEAR_BE - 543, monthIndex, day);
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
 
 const EVENT_TYPE_ICONS: Record<EventCategoryKey, React.ElementType> = {
   traffic: Car,
@@ -63,6 +69,7 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
 }
 
 export function DailyEventsReportPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const initialMonth = (() => {
@@ -80,6 +87,10 @@ export function DailyEventsReportPage() {
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(initialCategories);
   const [exporting, setExporting] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+
+  const handleDrilldown = (day: number, key: EventCategoryKey) => {
+    navigate(`/reports/events?day=${isoDate(monthIndex, day)}&eventType=${key}`);
+  };
 
   const toggleCategory = (key: string) => {
     setSelectedCategories(prev => {
@@ -214,7 +225,15 @@ export function DailyEventsReportPage() {
                   <Tooltip content={<ChartTooltip />} />
                   <Legend content={<ChartLegend />} />
                   {activeCategories.map(key => (
-                    <Bar key={key} dataKey={key} name={EVENT_LABELS[key]} stackId="a" fill={EVENT_COLORS[key]} />
+                    <Bar
+                      key={key}
+                      dataKey={key}
+                      name={EVENT_LABELS[key]}
+                      stackId="a"
+                      fill={EVENT_COLORS[key]}
+                      cursor="pointer"
+                      onClick={(item: { payload?: DailyEventRow }) => { if (item.payload && item.payload[key] > 0) handleDrilldown(item.payload.day, key); }}
+                    />
                   ))}
                 </BarChart>
               </ResponsiveContainer>
@@ -241,7 +260,17 @@ export function DailyEventsReportPage() {
                     <tr key={row.day} className="border-t border-gray-50 hover:bg-gray-50">
                       <td className="px-4 py-2.5 font-medium text-gray-900">{row.day}</td>
                       {activeCategories.map(key => (
-                        <td key={key} className="px-4 py-2.5 text-right text-gray-700">{row[key]}</td>
+                        <td key={key} className="px-4 py-2.5 text-right text-gray-700">
+                          {row[key] > 0 ? (
+                            <button
+                              onClick={() => handleDrilldown(row.day, key)}
+                              className="hover:underline hover:text-navy-700 font-medium"
+                              title={`ดูรายการ${EVENT_LABELS[key]}วันที่ ${row.day}`}
+                            >
+                              {row[key]}
+                            </button>
+                          ) : row[key]}
+                        </td>
                       ))}
                       <td className="px-4 py-2.5 text-right font-bold text-gray-900">{total}</td>
                     </tr>

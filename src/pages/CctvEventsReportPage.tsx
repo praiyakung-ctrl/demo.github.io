@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AlertTriangle, CheckCircle, Search } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
@@ -10,6 +11,7 @@ import { EVENT_COLORS, EVENT_LABELS } from '../types';
 import { formatThaiDate, formatTime } from '../utils/formatDate';
 import { districtOf, stationOf, STATION_FILTER_OPTIONS } from '../utils/cameraDisplay';
 import { exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
+import { EVENT_CATEGORY_KEYS } from '../utils/eventDrilldown';
 
 const PAGE_SIZE = 10;
 
@@ -53,10 +55,18 @@ function monthLabel(month: string): string {
 }
 
 export function CctvEventsReportPage() {
+  const [searchParams] = useSearchParams();
+  const initialDay = searchParams.get('day') ?? '';
+  const initialType = (() => {
+    const fromQuery = searchParams.get('eventType');
+    return fromQuery && (EVENT_CATEGORY_KEYS as readonly string[]).includes(fromQuery) ? fromQuery as EventType : 'all';
+  })();
+
   const [search, setSearch] = useState('');
   const [monthFilter, setMonthFilter] = useState('all');
-  const [dayFilter, setDayFilter] = useState('');
+  const [dayFilter, setDayFilter] = useState(initialDay);
   const [stationFilter, setStationFilter] = useState('all');
+  const [typeFilter, setTypeFilter] = useState<EventType | 'all'>(initialType);
   const [page, setPage] = useState(1);
   const [exporting, setExporting] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -65,10 +75,11 @@ export function CctvEventsReportPage() {
     const q = search.toLowerCase();
     const matchSearch = !q || r.cameraId.toLowerCase().includes(q) || r.installPosition.toLowerCase().includes(q);
     const matchStation = stationFilter === 'all' || r.station === stationFilter;
+    const matchType = typeFilter === 'all' || r.eventType === typeFilter;
     const day = r.timestamp.slice(0, 10);
     const matchDay = !dayFilter || day === dayFilter;
     const matchMonth = monthFilter === 'all' || day.slice(0, 7) === monthFilter;
-    return matchSearch && matchStation && matchDay && matchMonth;
+    return matchSearch && matchStation && matchType && matchDay && matchMonth;
   });
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -157,6 +168,15 @@ export function CctvEventsReportPage() {
               >
                 <option value="all">ทุก สภ.</option>
                 {STATION_FILTER_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <select
+                aria-label="กรองตามประเภทเหตุการณ์"
+                value={typeFilter}
+                onChange={e => { setTypeFilter(e.target.value as EventType | 'all'); setPage(1); }}
+                className="input-field w-auto py-2 text-base"
+              >
+                <option value="all">ทุกประเภทเหตุการณ์</option>
+                {EVENT_CATEGORY_KEYS.map(k => <option key={k} value={k}>{EVENT_LABELS[k]}</option>)}
               </select>
               <span className="text-base text-navy-700 font-bold flex-shrink-0">
                 พบ {filtered.length} / {allRows.length} รายการ
