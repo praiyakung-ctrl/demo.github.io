@@ -256,7 +256,10 @@ export function MapPage() {
             {filteredCameras.map(cam => (
               <button
                 key={cam.id}
-                onClick={() => setSelectedCam(cam)}
+                onClick={() => {
+                  setSelectedCam(cam);
+                  leafletMap?.flyTo([cam.lat, cam.lng], 16, { duration: 0.8 });
+                }}
                 className={`w-full text-left px-3 py-2.5 rounded-lg transition-colors ${
                   selectedCam?.id === cam.id ? 'border-2 border-navy-700 bg-blue-100' : 'hover:bg-blue-100 border-2 border-transparent'
                 }`}
