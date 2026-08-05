@@ -1,11 +1,13 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { MapContainer, Marker, Popup } from 'react-leaflet';
-import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass } from 'lucide-react';
+import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
+import type { Map as LeafletMap } from 'leaflet';
+import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
 import { LiveCameraModal } from '../components/LiveCameraModal';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
+import { MapFabMenu } from '../components/MapFabMenu';
 import { Modal } from '../components/Modal';
 import { LprBadge } from '../components/LprBadge';
 import { findPendingReport, pendingReports, saveReport } from '../utils/cameraReports';
@@ -15,11 +17,20 @@ import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
 import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS, STATUS_COLORS } from '../types';
 import { formatLastUpdate, formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
-import { pinIcon, pinSvg } from '../utils/mapPin';
+import { pinIcon, pinSvg, userLocationIcon } from '../utils/mapPin';
 import { useDialog } from '../hooks/useDialog';
 
 const cameras = camerasData as Camera[];
 const initialEvents = eventsData as CctvEvent[];
+const MAP_CENTER: [number, number] = [13.22, 101.02];
+
+/* Hands the Leaflet map instance up to the page (via useMap(), only available
+   inside <MapContainer>) so the FAB buttons outside it can call flyTo(). */
+function MapInstanceCapture({ onReady }: { onReady: (map: LeafletMap) => void }) {
+  const map = useMap();
+  useEffect(() => { onReady(map); }, [map, onReady]);
+  return null;
+}
 
 const MARKER_COLORS: Record<string, string> = {
   traffic: '#F97316',
@@ -68,6 +79,9 @@ export function MapPage() {
   const [selectedCam, setSelectedCam] = useState<Camera | null>(null);
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [satellite, setSatellite] = useState(false);
+  const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoError, setGeoError] = useState(false);
   const [ackEvent, setAckEvent] = useState<CctvEvent | null>(null);
   const [reportCam, setReportCam] = useState<Camera | null>(null);
   const [reportNote, setReportNote] = useState('');
@@ -110,6 +124,28 @@ export function MapPage() {
     });
   };
   const ackDialogRef = useDialog(ackEvent !== null, () => setAckEvent(null));
+
+  /* shared geolocation getter — used by the FAB's "ค้นหากล้องใกล้ฉัน" button */
+  const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
+    if (!navigator.geolocation) { setGeoError(true); return; }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPos(next);
+        setGeoError(false);
+        onSuccess?.(next);
+      },
+      () => setGeoError(true)
+    );
+  };
+
+  const handleSearchNearby = () => {
+    requestLocation(pos => leafletMap?.flyTo([pos.lat, pos.lng], 15, { duration: 0.8 }));
+  };
+
+  const handleResetView = () => {
+    leafletMap?.flyTo(MAP_CENTER, 11, { duration: 0.8 });
+  };
 
   const toggleEventFilter = (type: EventType) => {
     setEventFilters(prev => {
@@ -286,12 +322,14 @@ export function MapPage() {
 
           <div className="flex-1 relative min-w-0">
           <MapContainer
-            center={[13.22, 101.02]}
+            center={MAP_CENTER}
             zoom={11}
             className="w-full h-full"
             zoomControl={true}
           >
+            <MapInstanceCapture onReady={setLeafletMap} />
             <BaseTileLayer satellite={satellite} />
+            {userPos && <Marker position={[userPos.lat, userPos.lng]} icon={userLocationIcon()} />}
             <CameraClusterMarkers cameras={cameras} renderMarker={cam => (
               <Marker
                 key={cam.id}
@@ -389,7 +427,26 @@ export function MapPage() {
               </Marker>
             )} />
           </MapContainer>
-          <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} />
+          <MapFabMenu>
+            {geoError && (
+              <p className="max-w-[220px] text-right bg-white text-red-600 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg border border-gray-200">
+                ไม่สามารถเข้าถึงตำแหน่งของคุณได้ กรุณาอนุญาตการเข้าถึงตำแหน่งในเบราว์เซอร์
+              </p>
+            )}
+            <button
+              onClick={handleSearchNearby}
+              className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+            >
+              <Search size={16} className="flex-shrink-0" /> ค้นหากล้องใกล้ฉัน
+            </button>
+            <button
+              onClick={handleResetView}
+              className="flex items-center gap-2 bg-white hover:bg-navy-50 text-navy-700 text-sm font-bold px-3 py-2 rounded-lg shadow-lg border border-gray-200 transition-colors"
+            >
+              <RotateCcw size={16} className="flex-shrink-0" /> รีเซ็ตมุมมองแผนที่
+            </button>
+            <SatelliteToggleButton satellite={satellite} onToggle={() => setSatellite(s => !s)} className="" />
+          </MapFabMenu>
 
           {/* Legend */}
           <div className="absolute bottom-6 left-2 bg-white rounded-lg shadow-lg p-2 z-[400] text-xs">
