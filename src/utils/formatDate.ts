@@ -43,6 +43,15 @@ export function formatLastUpdate(lastUpdate: string): string {
   return formatThaiDateTimeSec(lastUpdate);
 }
 
+/* inverse of formatThaiDateTime() — lpr.json entries store timestamps pre-formatted
+   as "DD/MM/BBBB HH:MM น." instead of raw ISO, so filtering by date/time needs this */
+export function parseLprTimestamp(thaiTimestamp: string): Date {
+  const [datePart, timePart] = thaiTimestamp.replace(' น.', '').split(' ');
+  const [day, month, yearBE] = datePart.split('/').map(Number);
+  const [hour, minute] = timePart.split(':').map(Number);
+  return new Date(yearBE - 543, month - 1, day, hour, minute);
+}
+
 export function timeAgo(isoString: string): string {
   const now = new Date();
   const past = new Date(isoString);

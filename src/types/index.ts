@@ -84,6 +84,8 @@ export interface LprEntry {
   cameraId: string;
   timestamp: string;
   confidence: number;
+  direction: 'ขาเข้า' | 'ขาออก';
+  type: string;
 }
 
 export interface CitizenRequest {

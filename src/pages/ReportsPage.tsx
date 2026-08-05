@@ -452,6 +452,9 @@ export function ReportsPage() {
           <div className="flex items-center gap-2 p-4 border-b border-gray-100">
             <Car size={22} className="text-navy-700" />
             <h3 className="font-bold text-navy-700 text-xl">บันทึก LPR ล่าสุด (ตามจุดติดตั้ง 8 จุด)</h3>
+            <Link to="/reports/lpr" className="ml-auto bg-navy-700 text-white font-bold text-base px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors whitespace-nowrap">
+              ค้นหาป้ายทะเบียน LPR
+            </Link>
           </div>
           <div className="divide-y divide-gray-100">
             {latestByPoint.map(({ location, entry }, idx) => (
