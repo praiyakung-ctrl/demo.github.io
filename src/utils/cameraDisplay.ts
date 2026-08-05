@@ -45,6 +45,25 @@ export function districtOf(location: string): string {
   return hit ? hit[1] : 'จังหวัดชลบุรี';
 }
 
+const DISTRICT_TO_STATION: Record<string, string> = {
+  'เมืองชลบุรี': 'สภ.เมืองชลบุรี',
+  'บางละมุง': 'สภ.บางละมุง',
+  'ศรีราชา': 'สภ.ศรีราชา',
+  'พนัสนิคม': 'สภ.พนัสนิคม',
+  'บ้านบึง': 'สภ.บ้านบึง',
+  'สัตหีบ': 'สภ.สัตหีบ',
+};
+const OTHER_STATION = 'อื่นๆ/ไม่ระบุ สภ.';
+
+/* ระบบไม่มีข้อมูลผูกกล้อง/เหตุการณ์เข้ากับสภ.จริง — แมปจากอำเภอ (districtOf) ไปยัง
+   6 สภ. ที่ชื่อตรงกับอำเภอนั้นเป๊ะ ส่วนอำเภออื่นจัดเป็น "อื่นๆ/ไม่ระบุ สภ." */
+export function stationOf(location: string): string {
+  const amphoe = districtOf(location).split(' / ')[1];
+  return (amphoe && DISTRICT_TO_STATION[amphoe]) ?? OTHER_STATION;
+}
+
+export const STATION_FILTER_OPTIONS = [...new Set(Object.values(DISTRICT_TO_STATION)), OTHER_STATION];
+
 export function overlayClock(d: Date): string {
   const p = (n: number) => String(n).padStart(2, '0');
   return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;

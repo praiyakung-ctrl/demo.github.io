@@ -306,7 +306,7 @@ export function DashboardPage() {
             icon={AlertTriangle}
             label="เหตุการณ์วันนี้"
             value={todayEvents.length}
-            to="/map"
+            to="/reports/events"
             gradient="bg-gradient-to-br from-orange-400 to-red-600"
             iconBg="bg-white/20"
             sub={
