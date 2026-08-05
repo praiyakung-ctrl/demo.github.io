@@ -13,9 +13,9 @@ const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: st
   map:          { to: '/map',            icon: Map,             iconColor: 'text-cyan-500',   section: 'main' },
   dashboard:    { to: '/dashboard',      icon: LayoutDashboard, iconColor: 'text-blue-600',   section: 'main' },
   portal:       { to: '/portal',         icon: FileText,        iconColor: 'text-green-600',  section: 'main' },
+  lprSearch:    { to: '/reports/lpr',    icon: ScanLine,        iconColor: 'text-fuchsia-500', section: 'main' },
   reports:      { to: '/reports',        icon: BarChart3,       iconColor: 'text-amber-500',  section: 'main' },
   comparisonReport: { to: '/reports/comparison', icon: GitCompare, iconColor: 'text-rose-500', section: 'main' },
-  lprSearch:    { to: '/reports/lpr',    icon: ScanLine,        iconColor: 'text-fuchsia-500', section: 'main' },
   adminCameras: { to: '/admin/cameras',  icon: Camera,          iconColor: 'text-pink-500',   section: 'admin' },
   adminUsers:   { to: '/admin/users',    icon: Users,           iconColor: 'text-purple-500', section: 'admin' },
   adminRepairs: { to: '/admin/repairs',  icon: Wrench,          iconColor: 'text-orange-500', section: 'admin' },
@@ -123,6 +123,7 @@ export function Sidebar() {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  end
                   title={collapsed ? item.label : undefined}
                   aria-label={item.label}
                   className={({ isActive }) =>
