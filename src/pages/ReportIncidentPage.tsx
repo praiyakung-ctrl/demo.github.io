@@ -3,7 +3,7 @@ import { MapContainer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet
 import type { Map as LeafletMap } from 'leaflet';
 import {
   AlertTriangle, Camera as CameraIcon, Eye, EyeOff, FileSpreadsheet, Locate, MapPin,
-  RotateCcw, ShieldAlert, Upload, Video, VideoOff, Wifi, Wrench, X,
+  RotateCcw, Search, ShieldAlert, Upload, Video, VideoOff, Wifi, Wrench, X,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
@@ -32,26 +32,14 @@ import { Link } from 'react-router-dom';
 const MAP_CENTER: [number, number] = [13.36, 100.98];
 const POINT_COLORS = { risk: '#EF4444', proposed: '#EAB308' } as const;
 
-function StatCard({ icon: Icon, label, value, color, unit = 'จุด' }: { icon: typeof ShieldAlert; label: string; value: number; color: string; unit?: string }) {
-  return (
-    <div className="card flex items-center gap-3 py-4">
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}22`, color }}>
-        <Icon size={24} />
-      </div>
-      <div>
-        <p className="text-lg text-gray-500 leading-tight">{label}</p>
-        <p className="text-3xl font-extrabold leading-tight" style={{ color }}>{value} {unit}</p>
-      </div>
-    </div>
-  );
-}
-
 const allCameras = camerasData as Camera[];
 
 const CAMERA_STATUS_COUNTS: Record<CameraStatus, number> = { Online: 0, Offline: 0, Maintenance: 0, Unknown: 0 };
 allCameras.forEach(c => { CAMERA_STATUS_COUNTS[c.status]++; });
 
 const CAMERA_DISTRICT_OPTIONS = [...new Set(allCameras.map(c => districtOf(c.location)))].sort((a, b) => a.localeCompare(b, 'th'));
+
+const LOCATION_SUGGESTIONS = [...new Set(allCameras.map(c => c.location))].sort((a, b) => a.localeCompare(b, 'th'));
 
 const TYPE_LABEL: Record<IncidentPointType, string> = {
   risk: 'จุดเสี่ยงภัย',
@@ -267,7 +255,7 @@ export function ReportIncidentPage() {
   const [showProposed, setShowProposed] = useState(true);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [legendVisible, setLegendVisible] = useState(true);
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
@@ -278,10 +266,12 @@ export function ReportIncidentPage() {
   const [cameraSearch, setCameraSearch] = useState('');
   const [cameraStatusFilter, setCameraStatusFilter] = useState<CameraStatus | 'all'>('all');
   const [cameraDistrictFilter, setCameraDistrictFilter] = useState('all');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
 
   /* keeps the map's bottom edge aligned with whichever side column is taller —
      the left sidebar or the right filter/list column — both are content-driven */
@@ -314,6 +304,18 @@ export function ReportIncidentPage() {
     observer.observe(mapWrapperRef.current);
     return () => observer.disconnect();
   }, [leafletMap]);
+
+  /* closes the search-suggestions dropdown on outside click — composedPath() so
+     clicking a suggestion doesn't self-close before its own onClick runs */
+  useEffect(() => {
+    if (!showSuggestions) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (searchWrapRef.current && e.composedPath().includes(searchWrapRef.current)) return;
+      setShowSuggestions(false);
+    };
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
+  }, [showSuggestions]);
 
   /* shared geolocation getter — used by both the "ตำแหน่งของฉัน" button and its marker */
   const requestLocation = (onSuccess?: (pos: { lat: number; lng: number }) => void) => {
@@ -348,6 +350,18 @@ export function ReportIncidentPage() {
       (cameraDistrictFilter === 'all' || districtOf(cam.location) === cameraDistrictFilter)
     );
   }, [cameraSearch, cameraStatusFilter, cameraDistrictFilter]);
+
+  const placeSuggestions = useMemo(() => {
+    const q = cameraSearch.trim().toLowerCase();
+    if (!q) return [];
+    return LOCATION_SUGGESTIONS.filter(loc => loc.toLowerCase().includes(q)).slice(0, 5);
+  }, [cameraSearch]);
+
+  const cameraSuggestions = useMemo(() => {
+    const q = cameraSearch.trim().toLowerCase();
+    if (!q) return [];
+    return allCameras.filter(c => c.id.toLowerCase().includes(q) || c.location.toLowerCase().includes(q)).slice(0, 5);
+  }, [cameraSearch]);
 
   const riskCount = points.filter(p => p.type === 'risk').length;
   const proposedCount = points.filter(p => p.type === 'proposed').length;
@@ -433,37 +447,62 @@ export function ReportIncidentPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <StatCard icon={Video} label="กล้องทั้งหมด" value={allCameras.length} color="#1B3A6B" unit="ตัว" />
-            <StatCard icon={Wifi} label="ออนไลน์" value={CAMERA_STATUS_COUNTS.Online} color={STATUS_COLORS.Online} unit="ตัว" />
-            <StatCard icon={VideoOff} label="ออฟไลน์" value={CAMERA_STATUS_COUNTS.Offline} color={STATUS_COLORS.Offline} unit="ตัว" />
-            <StatCard icon={Wrench} label="อยู่ระหว่างบำรุงรักษา" value={CAMERA_STATUS_COUNTS.Maintenance} color={STATUS_COLORS.Maintenance} unit="ตัว" />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch">
-            <div className="flex-1"><StatCard icon={AlertTriangle} label="จุดเสี่ยงภัยทั้งหมด" value={riskCount} color="#DC2626" /></div>
-            <div className="flex-1"><StatCard icon={ShieldAlert} label="จุดขอติดตั้งใหม่ทั้งหมด" value={proposedCount} color="#CA8A04" /></div>
-
-            {myType && (
-              !addMode ? (
-                <button
-                  onClick={() => setTypeStepOpen(true)}
-                  title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
-                  className="flex items-center gap-2.5 whitespace-nowrap bg-white hover:bg-blue-50 border border-gray-200 shadow-lg rounded-xl px-3 py-1.5 text-left transition-colors"
-                >
-                  <PinIcon color="#DC2626" size={22} className="flex-shrink-0" />
-                  <span className="min-w-0">
-                    <span className="block text-base font-bold text-navy-700 leading-tight">แจ้งจุดเสี่ยงภัย</span>
-                    <span className="block text-xs text-gray-500 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
-                  </span>
-                </button>
-              ) : (
-                <div className="flex-1 flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3">
-                  <MapPin size={22} className="text-navy-700 flex-shrink-0" />
-                  <p className="text-lg text-navy-700 flex-1">คลิกบนแผนที่เพื่อปักหมุดตำแหน่ง</p>
-                  <button onClick={() => { setAddMode(false); setSelectedReportType(null); }} className="text-gray-500 hover:text-red-500"><X size={20} /></button>
+          <div ref={searchWrapRef} className="relative">
+            <div className="card p-2 flex items-center gap-2">
+              <Search size={20} className="ml-2 text-gray-400 flex-shrink-0" />
+              <input
+                id="report-incident-search"
+                value={cameraSearch}
+                onChange={e => { setCameraSearch(e.target.value); setShowSuggestions(true); }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="ค้นหาสถานที่ ถนน หมู่บ้าน หรือกล้อง"
+                autoComplete="off"
+                aria-label="ค้นหาสถานที่ ถนน หมู่บ้าน หรือกล้อง"
+                className="flex-1 min-w-0 border-0 focus:ring-0 text-xl py-2 bg-transparent"
+              />
+            </div>
+            {showSuggestions && cameraSearch.trim() !== '' && (
+              <div className="absolute z-[600] top-full left-0 right-0 mt-1 card p-0 overflow-hidden shadow-2xl grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                <div className="max-h-72 overflow-y-auto">
+                  <p className="px-4 py-2 text-base font-bold text-gray-500 bg-gray-50 sticky top-0">แนะนำสถานที่</p>
+                  {placeSuggestions.length === 0 ? (
+                    <p className="px-4 py-4 text-lg text-gray-400">ไม่พบผลลัพธ์</p>
+                  ) : placeSuggestions.map(loc => (
+                    <button
+                      key={loc}
+                      onClick={() => { setCameraSearch(loc); setShowSuggestions(false); }}
+                      className="w-full text-left px-4 py-2.5 hover:bg-navy-50 flex items-center gap-2"
+                    >
+                      <MapPin size={16} className="text-navy-500 flex-shrink-0" />
+                      <span className="text-lg text-gray-800 truncate">{loc}</span>
+                    </button>
+                  ))}
                 </div>
-              )
+                <div className="max-h-72 overflow-y-auto">
+                  <p className="px-4 py-2 text-base font-bold text-gray-500 bg-gray-50 sticky top-0">กล้อง CCTV</p>
+                  {cameraSuggestions.length === 0 ? (
+                    <p className="px-4 py-4 text-lg text-gray-400">ไม่พบผลลัพธ์</p>
+                  ) : cameraSuggestions.map(cam => (
+                    <button
+                      key={cam.id}
+                      onClick={() => {
+                        leafletMap?.flyTo([cam.lat, cam.lng], 15, { duration: 0.8 });
+                        setCameraSearch('');
+                        setShowSuggestions(false);
+                      }}
+                      className="w-full text-left px-4 py-2.5 hover:bg-navy-50 flex items-center gap-2"
+                    >
+                      <CameraIcon size={16} className="flex-shrink-0" style={{ color: STATUS_COLORS[cam.status] }} />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-lg font-bold text-navy-700 truncate">{cam.id} <span className="font-normal text-gray-600">{cam.location}</span></span>
+                      </span>
+                      <span className="text-sm font-bold flex-shrink-0" style={{ color: STATUS_COLORS[cam.status] }}>
+                        {cam.status === 'Online' ? 'ออนไลน์' : STATUS_LABELS[cam.status]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
           {geoError && (
@@ -646,15 +685,62 @@ export function ReportIncidentPage() {
         </main>
 
         <aside ref={rightPanelRef} className="space-y-4">
+          <div className="card p-3 space-y-3">
+            <div className="grid grid-cols-4 gap-2 text-center">
+              <div>
+                <p className="text-xl font-extrabold text-navy-700 leading-tight">{allCameras.length}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><Video size={12} /> ทั้งหมด</p>
+              </div>
+              <div>
+                <p className="text-xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Online }}>{CAMERA_STATUS_COUNTS.Online}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><Wifi size={12} /> ออนไลน์</p>
+              </div>
+              <div>
+                <p className="text-xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Offline }}>{CAMERA_STATUS_COUNTS.Offline}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><VideoOff size={12} /> ออฟไลน์</p>
+              </div>
+              <div>
+                <p className="text-xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Maintenance }}>{CAMERA_STATUS_COUNTS.Maintenance}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><Wrench size={12} /> ซ่อมบำรุง</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-3 border-t border-gray-100 text-center">
+              <div>
+                <p className="text-xl font-extrabold leading-tight text-red-600">{riskCount}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><AlertTriangle size={12} /> จุดเสี่ยงภัย</p>
+              </div>
+              <div>
+                <p className="text-xl font-extrabold leading-tight text-yellow-600">{proposedCount}</p>
+                <p className="text-xs text-gray-500 flex items-center justify-center gap-1"><ShieldAlert size={12} /> จุดขอติดตั้งใหม่</p>
+              </div>
+            </div>
+
+            {myType && (
+              !addMode ? (
+                <button
+                  onClick={() => setTypeStepOpen(true)}
+                  title="แจ้งจุดเสี่ยงหรือเสนอจุดติดตั้งกล้องใหม่"
+                  className="w-full flex items-center gap-2.5 bg-navy-50 hover:bg-blue-100 border border-navy-100 rounded-lg px-3 py-2 pt-3 border-t border-t-gray-100"
+                >
+                  <PinIcon color="#DC2626" size={20} className="flex-shrink-0" />
+                  <span className="min-w-0 text-left">
+                    <span className="block text-base font-bold text-navy-700 leading-tight">แจ้งจุดเสี่ยงภัย</span>
+                    <span className="block text-xs text-gray-500 leading-tight">รายงานจุดเสี่ยงหรือเสนอจุดติดตั้งใหม่</span>
+                  </span>
+                </button>
+              ) : (
+                <div className="flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
+                  <MapPin size={18} className="text-navy-700 flex-shrink-0" />
+                  <p className="text-sm text-navy-700 flex-1">คลิกบนแผนที่เพื่อปักหมุดตำแหน่ง</p>
+                  <button onClick={() => { setAddMode(false); setSelectedReportType(null); }} className="text-gray-500 hover:text-red-500"><X size={16} /></button>
+                </div>
+              )
+            )}
+          </div>
+
           <div className="card">
             <h3 className="text-2xl font-bold text-navy-700 mb-3">ตัวกรองข้อมูล</h3>
-            <p className="label mb-2">ค้นหากล้อง CCTV</p>
-            <input
-              value={cameraSearch}
-              onChange={e => setCameraSearch(e.target.value)}
-              placeholder="ค้นหารหัสกล้อง/สถานที่..."
-              className="input-field mb-2"
-            />
             <div className="grid grid-cols-2 gap-2 mb-4">
               <select value={cameraStatusFilter} onChange={e => setCameraStatusFilter(e.target.value as CameraStatus | 'all')} className="input-field text-sm">
                 <option value="all">สถานะ: ทั้งหมด</option>
