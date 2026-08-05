@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Plus, Pencil, Trash2, Search, Camera as CameraIcon, MapPin, Settings, Wifi, Save, XCircle, Building2, Video } from 'lucide-react';
-import { EVENT_COLORS, EVENT_LABELS } from '../types';
+import { EVENT_COLORS, EVENT_LABELS, STATUS_LABELS } from '../types';
 import { Layout } from '../components/Layout';
 import { StatusBadge } from '../components/Badge';
 import { Modal, ConfirmDialog } from '../components/Modal';
 import { LprBadge } from '../components/LprBadge';
 import camerasData from '../data/cameras.json';
-import type { Camera } from '../types';
+import type { Camera, CameraStatus } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { Pagination } from '../components/Pagination';
 import { logAudit } from '../utils/auditLog';
@@ -27,6 +27,7 @@ export function AdminCamerasPage() {
   const [cameras, setCameras] = useState<Camera[]>(INITIAL);
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get('search') ?? '');
+  const [statusFilter, setStatusFilter] = useState<CameraStatus | 'all'>('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [editCam, setEditCam] = useState<Camera | null>(null);
   const [form, setForm] = useState<Omit<Camera, 'id'>>(EMPTY);
@@ -34,9 +35,10 @@ export function AdminCamerasPage() {
   const [page, setPage] = useState(1);
 
   const filtered = cameras.filter(c =>
-    c.id.toLowerCase().includes(search.toLowerCase()) ||
-    c.name.toLowerCase().includes(search.toLowerCase()) ||
-    c.location.toLowerCase().includes(search.toLowerCase())
+    (c.id.toLowerCase().includes(search.toLowerCase()) ||
+      c.name.toLowerCase().includes(search.toLowerCase()) ||
+      c.location.toLowerCase().includes(search.toLowerCase())) &&
+    (statusFilter === 'all' || c.status === statusFilter)
   );
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -120,6 +122,18 @@ export function AdminCamerasPage() {
                   className="w-full pl-9 pr-3 py-2 text-xl border-2 border-gray-200 rounded-xl focus:outline-none focus:border-navy-400 bg-white"
                 />
               </div>
+              <select
+                value={statusFilter}
+                onChange={e => { setStatusFilter(e.target.value as CameraStatus | 'all'); setPage(1); }}
+                aria-label="กรองตามสถานะ"
+                className="text-xl border-2 border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:border-navy-400 bg-white flex-shrink-0"
+              >
+                <option value="all">สถานะ: ทั้งหมด</option>
+                <option value="Online">{STATUS_LABELS.Online}</option>
+                <option value="Offline">{STATUS_LABELS.Offline}</option>
+                <option value="Maintenance">{STATUS_LABELS.Maintenance}</option>
+                <option value="Unknown">{STATUS_LABELS.Unknown}</option>
+              </select>
               <span className="text-xl text-navy-700 font-bold flex-shrink-0">
                 พบ {filtered.length} / {cameras.length} รายการ
               </span>

@@ -85,12 +85,15 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
   );
 }
 
-function SummaryCard({ icon: Icon, label, value, sub, gradient, iconBg }: {
+function SummaryCard({ icon: Icon, label, value, sub, gradient, iconBg, to }: {
   icon: React.ElementType; label: string; value: string | number; sub?: React.ReactNode;
-  gradient: string; iconBg: string;
+  gradient: string; iconBg: string; to: string;
 }) {
   return (
-    <div className={`group rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300`}>
+    <Link
+      to={to}
+      className={`group rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300`}
+    >
       <div className="flex items-center justify-between">
         <p className="text-xl font-extrabold text-white leading-tight">{label}</p>
         <div className={`w-13 h-13 rounded-xl flex items-center justify-center ${iconBg} group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300`}>
@@ -99,7 +102,7 @@ function SummaryCard({ icon: Icon, label, value, sub, gradient, iconBg }: {
       </div>
       <p className="text-6xl font-extrabold text-white leading-none">{value}</p>
       {sub && <div className="text-lg font-semibold text-white">{sub}</div>}
-    </div>
+    </Link>
   );
 }
 
@@ -286,6 +289,7 @@ export function DashboardPage() {
             icon={Camera}
             label="กล้องทั้งหมด"
             value={cameras.length}
+            to="/admin/cameras"
             gradient="bg-gradient-to-br from-blue-500 to-blue-700"
             iconBg="bg-white/20"
             sub={<>
@@ -300,6 +304,7 @@ export function DashboardPage() {
             icon={AlertTriangle}
             label="เหตุการณ์วันนี้"
             value={todayEvents.length}
+            to="/map"
             gradient="bg-gradient-to-br from-orange-400 to-red-600"
             iconBg="bg-white/20"
             sub={
@@ -320,6 +325,7 @@ export function DashboardPage() {
             icon={Users}
             label="คำขอรอดำเนินการ"
             value={pendingRequests.length}
+            to="/portal"
             gradient="bg-gradient-to-br from-amber-600 to-orange-800"
             iconBg="bg-white/20"
             sub={<span className="font-semibold text-white">รอตรวจสอบ</span>}
@@ -328,6 +334,7 @@ export function DashboardPage() {
             icon={Car}
             label="LPR อ่านทะเบียนวันนี้"
             value={todayLpr.toLocaleString()}
+            to="/reports"
             gradient="bg-gradient-to-br from-emerald-500 to-green-700"
             iconBg="bg-white/20"
             sub={<span className="flex items-center gap-1 font-semibold text-white"><TrendingUp size={13} /> +5.2% จากเมื่อวาน</span>}
