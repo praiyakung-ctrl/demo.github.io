@@ -1,6 +1,6 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
-import type { Map as LeafletMap } from 'leaflet';
+import type { Map as LeafletMap, Marker as LeafletMarker } from 'leaflet';
 import { Search, Video, AlertTriangle, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Camera as CameraIcon, Car, Crosshair, ParkingSquare, VideoOff, Waves, Wrench, Users, MapPin, Building2, Compass, RotateCcw, Locate, Eye, EyeOff } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { CameraClusterMarkers } from '../components/CameraClusterMarkers';
@@ -80,6 +80,7 @@ export function MapPage() {
   const [liveCam, setLiveCam] = useState<Camera | null>(null);
   const [satellite, setSatellite] = useState(false);
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
+  const markerRefs = useRef<Map<string, LeafletMarker>>(new Map());
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
   const [legendVisible, setLegendVisible] = useState(false);
@@ -150,6 +151,18 @@ export function MapPage() {
 
   const handleResetView = () => {
     leafletMap?.flyTo(MAP_CENTER, 11, { duration: 0.8 });
+  };
+
+  /* recenter on the chosen camera and open its own popup — the marker may
+     currently be collapsed into a cluster badge, so wait for the fly-to to
+     land (which also crosses the cluster zoom threshold) before opening it */
+  const focusCamera = (cam: Camera) => {
+    setSelectedCam(cam);
+    if (!leafletMap) return;
+    leafletMap.flyTo([cam.lat, cam.lng], 16, { duration: 0.8 });
+    leafletMap.once('moveend', () => {
+      setTimeout(() => markerRefs.current.get(cam.id)?.openPopup(), 50);
+    });
   };
 
   const toggleEventFilter = (type: EventType) => {
@@ -256,10 +269,7 @@ export function MapPage() {
             {filteredCameras.map(cam => (
               <button
                 key={cam.id}
-                onClick={() => {
-                  setSelectedCam(cam);
-                  leafletMap?.flyTo([cam.lat, cam.lng], 16, { duration: 0.8 });
-                }}
+                onClick={() => focusCamera(cam)}
                 className={`w-full text-left px-3 py-2.5 rounded-lg transition-colors ${
                   selectedCam?.id === cam.id ? 'border-2 border-navy-700 bg-blue-100' : 'hover:bg-blue-100 border-2 border-transparent'
                 }`}
@@ -341,6 +351,7 @@ export function MapPage() {
             <CameraClusterMarkers cameras={cameras} renderMarker={cam => (
               <Marker
                 key={cam.id}
+                ref={m => { if (m) markerRefs.current.set(cam.id, m); else markerRefs.current.delete(cam.id); }}
                 position={[cam.lat, cam.lng]}
                 icon={pinIcon(getMarkerColor(cam))}
                 title={`${cam.id} ${cam.location}`}
