@@ -225,7 +225,7 @@ export function LprSearchPage() {
                       </td>
                       <td className="px-4 py-2.5">
                         <img
-                          src={carPhotoSrc(pageOffset + idx)}
+                          src={r.photo ? `${import.meta.env.BASE_URL}${r.photo}` : carPhotoSrc(pageOffset + idx)}
                           alt={`ภาพรถทะเบียน ${r.plate}`}
                           className="w-16 h-10 object-cover rounded-lg border border-gray-200"
                         />

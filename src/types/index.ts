@@ -86,6 +86,7 @@ export interface LprEntry {
   confidence: number;
   direction: 'ขาเข้า' | 'ขาออก';
   type: string;
+  photo?: string; // only sample records with a real photo — others fall back to a generic placeholder
 }
 
 export interface CitizenRequest {

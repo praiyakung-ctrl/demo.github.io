@@ -128,8 +128,8 @@
     }
   ],
   "entries": [
-    { "id": "LPR-165", "plate": "นศ 7999", "road": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา", "cameraId": "CAM-019", "timestamp": "30/06/2569 07:41 น.", "confidence": 92.9, "direction": "ขาออก", "type": "รถบรรทุก" },
-    { "id": "LPR-167", "plate": "ษษ 1465", "road": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา", "cameraId": "CAM-020", "timestamp": "29/06/2569 14:20 น.", "confidence": 91.2, "direction": "ขาเข้า", "type": "รถยนต์" },
+    { "id": "LPR-165", "plate": "กข 456", "road": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา", "cameraId": "CAM-019", "timestamp": "30/06/2569 07:41 น.", "confidence": 92.9, "direction": "ขาออก", "type": "รถกระบะ", "photo": "LPR-Car-456-chon.png" },
+    { "id": "LPR-167", "plate": "ขข 1234", "road": "บริเวณใต้สะพานลอยไฟแดงเก่าเมืองศรีราชา", "cameraId": "CAM-020", "timestamp": "29/06/2569 14:20 น.", "confidence": 91.2, "direction": "ขาเข้า", "type": "รถยนต์", "photo": "LPR-Car-123.png" },
     { "id": "LPR-166", "plate": "จข 5055", "road": "บริเวณสะพานลอยขาเข้าและขาออกชลบุรี", "cameraId": "CAM-003", "timestamp": "29/06/2569 13:51 น.", "confidence": 91.4, "direction": "ขาเข้า", "type": "รถบรรทุก" },
     { "id": "LPR-144", "plate": "พม 3413", "road": "บริเวณหน้าโรงพยาบาลสมเด็จพระนางเจ้าสิริกิติ์", "cameraId": "CAM-051", "timestamp": "27/06/2569 11:52 น.", "confidence": 98.2, "direction": "ขาเข้า", "type": "รถยนต์" },
     { "id": "LPR-163", "plate": "ปถ 0134", "road": "บริเวณใต้สะพานลอยหน้ามูลนิธิคุณพ่อเรย์", "cameraId": "CAM-034", "timestamp": "27/06/2569 10:57 น.", "confidence": 95.1, "direction": "ขาออก", "type": "รถยนต์" },
