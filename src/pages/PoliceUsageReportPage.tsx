@@ -10,6 +10,7 @@ import { POLICE_STATION_OPTIONS, POLICE_AREA_GROUPS } from '../types';
 import {
   availableMonths, availablePurposes, policeUsageByStation, prevMonthKey, formatHoursMinutes,
 } from '../utils/policeUsageStats';
+import type { PoliceUsageRow } from '../utils/policeUsageStats';
 
 function monthLabel(month: string): string {
   const [y, m] = month.split('-').map(Number);
@@ -17,11 +18,16 @@ function monthLabel(month: string): string {
   return d.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' });
 }
 
-function SummaryCard({ icon: Icon, label, value, trendPct, gradient }: {
+function SummaryCard({ icon: Icon, label, value, trendPct, gradient, active, onClick }: {
   icon: React.ElementType; label: string; value: string; trendPct: number | null; gradient: string;
+  active: boolean; onClick: () => void;
 }) {
   return (
-    <div className={`group rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300`}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group text-left rounded-2xl shadow-md p-5 flex flex-col gap-3 ${gradient} hover:shadow-xl transition-shadow duration-300 ${active ? 'ring-4 ring-white/70' : ''}`}
+    >
       <div className="flex items-center justify-between">
         <p className="text-lg font-extrabold text-white leading-tight">{label}</p>
         <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/20 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">
@@ -35,7 +41,7 @@ function SummaryCard({ icon: Icon, label, value, trendPct, gradient }: {
           {trendPct >= 0 ? '+' : ''}{trendPct.toFixed(1)}% จากเดือนก่อนหน้า
         </p>
       )}
-    </div>
+    </button>
   );
 }
 
@@ -51,6 +57,14 @@ export function PoliceUsageReportPage() {
   const [purpose, setPurpose] = useState('all');
   const [exporting, setExporting] = useState(false);
   const reportRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLDivElement>(null);
+  type SortKey = 'count' | 'officers' | 'totalMinutes' | 'avgMinutes' | 'downloads';
+  const [sortKey, setSortKey] = useState<SortKey>('count');
+
+  const focusMetric = (key: SortKey) => {
+    setSortKey(key);
+    tableRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const clearFilters = () => {
     setMonth(months[0] ?? 'all');
@@ -62,6 +76,9 @@ export function PoliceUsageReportPage() {
   let rows = policeUsageByStation(requests, users, month, purpose);
   if (station !== 'all') rows = rows.filter(r => r.station === station);
   if (area !== 'all') rows = rows.filter(r => r.area === area);
+
+  const avgOf = (r: PoliceUsageRow) => (r.count > 0 ? r.totalMinutes / r.count : 0);
+  rows = [...rows].sort((a, b) => sortKey === 'avgMinutes' ? avgOf(b) - avgOf(a) : b[sortKey] - a[sortKey]);
 
   const totalCount = rows.reduce((s, r) => s + r.count, 0);
   const totalOfficers = rows.reduce((s, r) => s + r.officers, 0);
@@ -162,15 +179,15 @@ export function PoliceUsageReportPage() {
 
           {/* KPI cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
-            <SummaryCard icon={Activity} label="จำนวนการเข้าใช้งานทั้งหมด" value={`${totalCount.toLocaleString()} ครั้ง`} trendPct={overallTrend} gradient="bg-gradient-to-br from-blue-500 to-blue-700" />
-            <SummaryCard icon={Users} label="จำนวนเจ้าหน้าที่ที่เข้าใช้งาน" value={`${totalOfficers.toLocaleString()} คน`} trendPct={null} gradient="bg-gradient-to-br from-cyan-500 to-cyan-700" />
-            <SummaryCard icon={Clock} label="ระยะเวลาการใช้งานรวม" value={`${formatHoursMinutes(totalMinutes)} ชม.`} trendPct={null} gradient="bg-gradient-to-br from-violet-500 to-purple-700" />
-            <SummaryCard icon={Clock} label="เฉลี่ยต่อการเข้าใช้งาน" value={`${formatHoursMinutes(avgMinutes)} ชม./ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-amber-500 to-orange-700" />
-            <SummaryCard icon={Download} label="จำนวนการดาวน์โหลด" value={`${totalDownloads.toLocaleString()} ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-emerald-500 to-green-700" />
+            <SummaryCard icon={Activity} label="จำนวนการเข้าใช้งานทั้งหมด" value={`${totalCount.toLocaleString()} ครั้ง`} trendPct={overallTrend} gradient="bg-gradient-to-br from-blue-500 to-blue-700" active={sortKey === 'count'} onClick={() => focusMetric('count')} />
+            <SummaryCard icon={Users} label="จำนวนเจ้าหน้าที่ที่เข้าใช้งาน" value={`${totalOfficers.toLocaleString()} คน`} trendPct={null} gradient="bg-gradient-to-br from-cyan-500 to-cyan-700" active={sortKey === 'officers'} onClick={() => focusMetric('officers')} />
+            <SummaryCard icon={Clock} label="ระยะเวลาการใช้งานรวม" value={`${formatHoursMinutes(totalMinutes)} ชม.`} trendPct={null} gradient="bg-gradient-to-br from-violet-500 to-purple-700" active={sortKey === 'totalMinutes'} onClick={() => focusMetric('totalMinutes')} />
+            <SummaryCard icon={Clock} label="เฉลี่ยต่อการเข้าใช้งาน" value={`${formatHoursMinutes(avgMinutes)} ชม./ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-amber-500 to-orange-700" active={sortKey === 'avgMinutes'} onClick={() => focusMetric('avgMinutes')} />
+            <SummaryCard icon={Download} label="จำนวนการดาวน์โหลด" value={`${totalDownloads.toLocaleString()} ครั้ง`} trendPct={null} gradient="bg-gradient-to-br from-emerald-500 to-green-700" active={sortKey === 'downloads'} onClick={() => focusMetric('downloads')} />
           </div>
 
           {/* Ranked table */}
-          <div className="card overflow-hidden p-0">
+          <div ref={tableRef} className="card overflow-hidden p-0">
             <div className="flex items-center gap-2.5 px-4 py-2.5 bg-blue-50 border-b-2 border-blue-100">
               <div className="w-9 h-9 bg-navy-700 rounded-lg flex items-center justify-center flex-shrink-0">
                 <HardDrive size={20} className="text-white" />
@@ -183,11 +200,11 @@ export function PoliceUsageReportPage() {
                   <tr>
                     <th scope="col" className="text-left text-base font-semibold text-gray-600 px-4 py-2.5">ลำดับ</th>
                     <th scope="col" className="text-left text-base font-semibold text-gray-600 px-4 py-2.5">สถานีตำรวจ (สภ.)</th>
-                    <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">จำนวนการเข้าใช้งาน (ครั้ง)</th>
-                    <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">ระยะเวลารวม (ชม.)</th>
-                    <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">เฉลี่ยต่อการเข้าใช้งาน (ชม.)</th>
-                    <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">จำนวนเจ้าหน้าที่ (คน)</th>
-                    <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">จำนวนการดาวน์โหลด (ครั้ง)</th>
+                    <th scope="col" className={`text-right text-base font-semibold px-4 py-2.5 ${sortKey === 'count' ? 'bg-blue-100 text-navy-700' : 'text-gray-600'}`}>จำนวนการเข้าใช้งาน (ครั้ง)</th>
+                    <th scope="col" className={`text-right text-base font-semibold px-4 py-2.5 ${sortKey === 'totalMinutes' ? 'bg-blue-100 text-navy-700' : 'text-gray-600'}`}>ระยะเวลารวม (ชม.)</th>
+                    <th scope="col" className={`text-right text-base font-semibold px-4 py-2.5 ${sortKey === 'avgMinutes' ? 'bg-blue-100 text-navy-700' : 'text-gray-600'}`}>เฉลี่ยต่อการเข้าใช้งาน (ชม.)</th>
+                    <th scope="col" className={`text-right text-base font-semibold px-4 py-2.5 ${sortKey === 'officers' ? 'bg-blue-100 text-navy-700' : 'text-gray-600'}`}>จำนวนเจ้าหน้าที่ (คน)</th>
+                    <th scope="col" className={`text-right text-base font-semibold px-4 py-2.5 ${sortKey === 'downloads' ? 'bg-blue-100 text-navy-700' : 'text-gray-600'}`}>จำนวนการดาวน์โหลด (ครั้ง)</th>
                     <th scope="col" className="text-right text-base font-semibold text-gray-600 px-4 py-2.5">แนวโน้ม</th>
                   </tr>
                 </thead>
