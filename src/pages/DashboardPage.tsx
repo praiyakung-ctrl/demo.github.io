@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Camera, AlertTriangle, Users, Car, TrendingUp, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell, Shield } from 'lucide-react';
+import { Camera, AlertTriangle, Users, Car, TrendingUp, TrendingDown, CheckCircle, Crosshair, ParkingSquare, Waves, BarChart3, PieChart as PieChartIcon, Route, Table2, Bell, Shield } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line,
@@ -12,8 +12,7 @@ import { useAuth } from '../context/AuthContext';
 import lprData from '../data/lpr.json';
 import eventsData from '../data/events.json';
 import camerasData from '../data/cameras.json';
-import requestsData from '../data/requests.json';
-import type { CctvEvent, MonthlyEventData, LprRoad, CitizenRequest, Camera as CameraType } from '../types';
+import type { CctvEvent, MonthlyEventData, LprRoad, Camera as CameraType } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { formatThaiDate, formatThaiDateTime } from '../utils/formatDate';
 import { savedUsers } from '../utils/userStorage';
@@ -28,7 +27,6 @@ import {
 
 const events = eventsData as CctvEvent[];
 const cameras = camerasData as CameraType[];
-const requests = requestsData as CitizenRequest[];
 
 const EVENT_TYPE_ICONS = {
   normal:  CheckCircle,
@@ -131,21 +129,25 @@ export function DashboardPage() {
   const navigate = useNavigate();
   const [filterMonth, setFilterMonth] = useState('all');
 
+  const requests = savedRequests();
+
   const onlineCount = cameras.filter(c => c.status === 'Online').length;
   const offlineCount = cameras.filter(c => c.status === 'Offline').length;
   const notReadyCount = cameras.filter(c => c.status === 'Maintenance' || c.status === 'Unknown').length;
-  const todayEvents = events.filter(e => e.timestamp.startsWith('2026-05-20'));
+  const todayEvents = events.filter(e => !e.isAcknowledged);
   const pendingRequests = requests.filter(r =>
     ['ใหม่', 'รอดำเนินการ', 'รอหัวหน้างานอนุมัติ', 'รอผู้บริหารอนุมัติ'].includes(r.status)
   );
-  const policeUsageTotal = policeUsageByStation(savedRequests(), savedUsers(), 'all', 'all')
+  const policeUsageTotal = policeUsageByStation(requests, savedUsers(), 'all', 'all')
     .reduce((sum, r) => sum + r.count, 0);
 
   const monthly = lprData.monthly as MonthlyEventData[];
   const roads = lprData.roads as LprRoad[];
   const daily = lprData.daily as { date: string; count: number }[];
 
-  const todayLpr = daily[daily.length - 1]?.count ?? 0;
+  const todayLpr = daily[0]?.count ?? 0;
+  const yesterdayLpr = daily[1]?.count ?? 0;
+  const lprTrendPct = yesterdayLpr > 0 ? ((todayLpr - yesterdayLpr) / yesterdayLpr) * 100 : null;
 
   const sumByCategory = (key: 'traffic' | 'gunshot' | 'parking' | 'flood' | 'crowd') =>
     monthly.reduce((s, r) => s + r[key], 0);
@@ -337,7 +339,12 @@ export function DashboardPage() {
             to="/reports"
             gradient="bg-gradient-to-br from-emerald-500 to-green-700"
             iconBg="bg-white/20"
-            sub={<span className="flex items-center gap-1 font-semibold text-white"><TrendingUp size={13} /> +5.2% จากเมื่อวาน</span>}
+            sub={lprTrendPct !== null && (
+              <span className="flex items-center gap-1 font-semibold text-white">
+                {lprTrendPct >= 0 ? <TrendingUp size={13} /> : <TrendingDown size={13} />}
+                {lprTrendPct >= 0 ? '+' : ''}{lprTrendPct.toFixed(1)}% จากเมื่อวาน
+              </span>
+            )}
           />
         </div>
 
