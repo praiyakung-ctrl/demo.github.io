@@ -6,21 +6,15 @@ import {
 } from 'recharts';
 import { Layout } from '../components/Layout';
 import { ExportButtons } from '../components/ExportButtons';
-import lprData from '../data/lpr.json';
-import type { MonthlyEventData } from '../types';
+import eventsData from '../data/events.json';
+import type { CctvEvent } from '../types';
 import { EVENT_LABELS, EVENT_COLORS } from '../types';
-import { dailyBreakdownForMonth, EVENT_CATEGORY_KEYS } from '../utils/eventDrilldown';
+import { dailyBreakdownFromEvents, EVENT_CATEGORY_KEYS, monthLabel } from '../utils/eventDrilldown';
 import type { DailyEventRow, EventCategoryKey } from '../utils/eventDrilldown';
 import { exportChartWithTableToExcel, exportChartWithTableToPdf, todayStamp } from '../utils/exportReport';
 
-const monthly = lprData.monthly as MonthlyEventData[];
-const YEAR_BE = 2568;
-
-function isoDate(monthIndex: number, day: number): string {
-  const d = new Date(YEAR_BE - 543, monthIndex, day);
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
-}
+const events = eventsData as CctvEvent[];
+const MONTH_KEYS = [...new Set(events.map(e => e.timestamp.slice(0, 7)))].sort();
 
 const EVENT_TYPE_ICONS: Record<EventCategoryKey, React.ElementType> = {
   traffic: Car,
@@ -74,7 +68,7 @@ export function DailyEventsReportPage() {
 
   const initialMonth = (() => {
     const fromQuery = Number(searchParams.get('month'));
-    return fromQuery >= 1 && fromQuery <= monthly.length ? fromQuery : 1;
+    return fromQuery >= 1 && fromQuery <= MONTH_KEYS.length ? fromQuery : 1;
   })();
   const initialCategories = (() => {
     const fromQuery = searchParams.get('category');
@@ -88,8 +82,10 @@ export function DailyEventsReportPage() {
   const [exporting, setExporting] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
 
+  const monthKey = MONTH_KEYS[month - 1];
+
   const handleDrilldown = (day: number, key: EventCategoryKey) => {
-    navigate(`/reports/events?day=${isoDate(monthIndex, day)}&eventType=${key}`);
+    navigate(`/reports/events?day=${monthKey}-${String(day).padStart(2, '0')}&eventType=${key}`);
   };
 
   const toggleCategory = (key: string) => {
@@ -100,11 +96,9 @@ export function DailyEventsReportPage() {
     });
   };
 
-  const monthIndex = month - 1;
-  const monthRow = monthly[monthIndex];
   const activeCategories = EVENT_CATEGORY_KEYS.filter(k => selectedCategories.has(k));
 
-  const dailyRows = monthRow ? dailyBreakdownForMonth(monthIndex, monthRow, YEAR_BE) : [];
+  const dailyRows = monthKey ? dailyBreakdownFromEvents(events, monthKey) : [];
 
   const totalByCategory = (key: EventCategoryKey) => dailyRows.reduce((s, r) => s + r[key], 0);
   const grandTotal = activeCategories.reduce((s, k) => s + totalByCategory(k), 0);
@@ -120,12 +114,12 @@ export function DailyEventsReportPage() {
 
   const handleExport = async (format: 'pdf' | 'excel') => {
     const el = chartRef.current;
-    if (!el || exporting || !monthRow) return;
+    if (!el || exporting || !monthKey) return;
     setExporting(true);
     try {
-      const filename = `เหตุการณ์รายวัน-${monthRow.month}-${todayStamp()}`;
+      const filename = `เหตุการณ์รายวัน-${monthKey}-${todayStamp()}`;
       if (format === 'excel') {
-        await exportChartWithTableToExcel(el, exportRows, `${monthRow.month} ${YEAR_BE}`, `${filename}.xlsx`);
+        await exportChartWithTableToExcel(el, exportRows, monthLabel(monthKey), `${filename}.xlsx`);
       } else {
         await exportChartWithTableToPdf(el, exportRows, `${filename}.pdf`);
       }
@@ -145,11 +139,11 @@ export function DailyEventsReportPage() {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">เหตุการณ์ CCTV รายวัน</h1>
               <p className="text-lg text-gray-500">
-                {monthRow ? `ข้อมูลรายวันของ ${monthRow.month} ${YEAR_BE}` : 'ไม่พบข้อมูลของเดือนที่เลือก'}
+                {monthKey ? `ข้อมูลรายวันของ ${monthLabel(monthKey)}` : 'ไม่พบข้อมูลของเดือนที่เลือก'}
               </p>
             </div>
           </div>
-          <ExportButtons disabled={exporting || !monthRow} onPdf={() => handleExport('pdf')} onExcel={() => handleExport('excel')} />
+          <ExportButtons disabled={exporting || !monthKey} onPdf={() => handleExport('pdf')} onExcel={() => handleExport('excel')} />
         </div>
 
         {/* Filters */}
@@ -163,7 +157,7 @@ export function DailyEventsReportPage() {
                 onChange={e => setMonth(Number(e.target.value))}
                 className="input-field w-auto"
               >
-                {monthly.map((m, i) => <option key={m.month} value={i + 1}>{m.month} {YEAR_BE}</option>)}
+                {MONTH_KEYS.map((k, i) => <option key={k} value={i + 1}>{monthLabel(k)}</option>)}
               </select>
             </div>
             <div className="flex items-center gap-2 flex-wrap flex-1">
@@ -208,12 +202,12 @@ export function DailyEventsReportPage() {
               <CalendarDays size={20} className="text-white" />
             </div>
             <h3 className="font-extrabold text-navy-700 text-2xl">
-              เหตุการณ์รายวัน — {monthRow ? `${monthRow.month} ${YEAR_BE}` : '-'}
+              เหตุการณ์รายวัน — {monthKey ? monthLabel(monthKey) : '-'}
             </h3>
           </div>
 
-          {monthRow && (
-            <div role="img" aria-label={`กราฟแท่งเหตุการณ์ CCTV รายวันของเดือน ${monthRow.month} ${YEAR_BE} แยกตามประเภท`} className="p-4">
+          {monthKey && (
+            <div role="img" aria-label={`กราฟแท่งเหตุการณ์ CCTV รายวันของเดือน ${monthLabel(monthKey)} แยกตามประเภท`} className="p-4">
               <ResponsiveContainer width="100%" height={260}>
                 <BarChart data={dailyRows} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

@@ -1,4 +1,4 @@
-import type { MonthlyEventData } from '../types';
+import type { CctvEvent } from '../types';
 
 export const EVENT_CATEGORY_KEYS = ['traffic', 'gunshot', 'parking', 'flood', 'crowd'] as const;
 export type EventCategoryKey = (typeof EVENT_CATEGORY_KEYS)[number];
@@ -72,25 +72,23 @@ export function dailyJitterSeries(base: number, dates: string[], seed: number): 
   return dates.map(date => ({ date, count: Math.round(base * (0.82 + rng() * 0.36)) }));
 }
 
-/* No per-day incident dataset exists in this demo (only pre-aggregated
-   monthly totals) — this fabricates a plausible, stable daily split of each
-   month's totals per category, seeded by month index so it is identical on
-   every render instead of re-randomizing each time. */
-export function dailyBreakdownForMonth(monthIndex: number, monthRow: MonthlyEventData, yearBE: number): DailyEventRow[] {
-  const count = daysInMonth(monthIndex, yearBE);
-  const perCategory: Record<EventCategoryKey, number[]> = {
-    traffic: distribute(monthRow.traffic, count, mulberry32(monthIndex * 100 + 1)),
-    gunshot: distribute(monthRow.gunshot, count, mulberry32(monthIndex * 100 + 2)),
-    parking: distribute(monthRow.parking, count, mulberry32(monthIndex * 100 + 3)),
-    flood: distribute(monthRow.flood, count, mulberry32(monthIndex * 100 + 4)),
-    crowd: distribute(monthRow.crowd, count, mulberry32(monthIndex * 100 + 5)),
-  };
-  return Array.from({ length: count }, (_, i) => ({
-    day: i + 1,
-    traffic: perCategory.traffic[i],
-    gunshot: perCategory.gunshot[i],
-    parking: perCategory.parking[i],
-    flood: perCategory.flood[i],
-    crowd: perCategory.crowd[i],
+/* Real per-day breakdown, aggregated directly from events.json — this is the
+   single source of truth shared with CctvEventsReportPage's drilldown, so the
+   two pages can never disagree on how many events happened on a given day. */
+export function dailyBreakdownFromEvents(events: CctvEvent[], monthKey: string): DailyEventRow[] {
+  const [year, month] = monthKey.split('-').map(Number);
+  const count = new Date(year, month, 0).getDate();
+  const rows: DailyEventRow[] = Array.from({ length: count }, (_, i) => ({
+    day: i + 1, traffic: 0, gunshot: 0, parking: 0, flood: 0, crowd: 0,
   }));
+  for (const ev of events) {
+    if (!ev.timestamp.startsWith(monthKey) || ev.eventType === 'normal') continue;
+    rows[Number(ev.timestamp.slice(8, 10)) - 1][ev.eventType] += 1;
+  }
+  return rows;
+}
+
+export function monthLabel(monthKey: string): string {
+  const [y, m] = monthKey.split('-').map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString('th-TH', { month: 'long', year: 'numeric' });
 }

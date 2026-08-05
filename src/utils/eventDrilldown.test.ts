@@ -1,10 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { dailyBreakdownForMonth, daysInMonth, distributeTotalAcrossDays, EVENT_CATEGORY_KEYS } from './eventDrilldown';
-import type { MonthlyEventData } from '../types';
+import { dailyBreakdownFromEvents, daysInMonth, distributeTotalAcrossDays, EVENT_CATEGORY_KEYS, monthLabel } from './eventDrilldown';
+import type { CctvEvent } from '../types';
 
-const monthRow: MonthlyEventData = {
-  month: 'ก.พ.', traffic: 140, gunshot: 10, parking: 90, flood: 30, crowd: 18, other: 15,
-};
+function event(day: number, eventType: CctvEvent['eventType'], timestamp?: string): CctvEvent {
+  return {
+    id: `EVT-TEST-${day}-${eventType}`,
+    cameraId: 'CAM-001',
+    cameraName: 'test',
+    eventType,
+    timestamp: timestamp ?? `2026-02-${String(day).padStart(2, '0')}T08:00:00`,
+    source: 'api',
+    isAcknowledged: true,
+  };
+}
 
 describe('daysInMonth', () => {
   it('returns 28 days for February in a non-leap Christian-era year (BE 2568 = CE 2025)', () => {
@@ -16,31 +24,45 @@ describe('daysInMonth', () => {
   });
 });
 
-describe('dailyBreakdownForMonth', () => {
+describe('dailyBreakdownFromEvents', () => {
+  const events: CctvEvent[] = [
+    event(3, 'traffic'),
+    event(3, 'traffic'),
+    event(3, 'gunshot'),
+    event(14, 'flood'),
+    event(1, 'traffic', '2026-01-01T08:00:00'), // different month, must be excluded
+    event(5, 'normal'), // not a drilldown category, must be excluded
+  ];
+
   it('produces one row per day of the month', () => {
-    const rows = dailyBreakdownForMonth(1, monthRow, 2568);
+    const rows = dailyBreakdownFromEvents(events, '2026-02');
     expect(rows).toHaveLength(28);
     expect(rows[0].day).toBe(1);
     expect(rows[27].day).toBe(28);
   });
 
-  it('sums back to exactly the monthly total for every category', () => {
-    const rows = dailyBreakdownForMonth(1, monthRow, 2568);
-    for (const key of EVENT_CATEGORY_KEYS) {
-      const sum = rows.reduce((s, r) => s + r[key], 0);
-      expect(sum).toBe(monthRow[key]);
-    }
+  it('counts real events on the correct day and category', () => {
+    const rows = dailyBreakdownFromEvents(events, '2026-02');
+    expect(rows[2].traffic).toBe(2);
+    expect(rows[2].gunshot).toBe(1);
+    expect(rows[13].flood).toBe(1);
   });
 
-  it('is deterministic — same inputs always produce the same output', () => {
-    const first = dailyBreakdownForMonth(1, monthRow, 2568);
-    const second = dailyBreakdownForMonth(1, monthRow, 2568);
-    expect(second).toEqual(first);
+  it('excludes events from other months and the "normal" category', () => {
+    const rows = dailyBreakdownFromEvents(events, '2026-02');
+    const total = rows.reduce((s, r) => s + r.traffic + r.gunshot + r.parking + r.flood + r.crowd, 0);
+    expect(total).toBe(4); // 2 traffic + 1 gunshot + 1 flood on day 3/14; excludes the Jan traffic + Feb "normal" events
   });
 
-  it('handles a zero-count category without producing negative or NaN values', () => {
-    const rows = dailyBreakdownForMonth(0, { ...monthRow, gunshot: 0 }, 2568);
-    expect(rows.every(r => r.gunshot === 0)).toBe(true);
+  it('returns all-zero rows for a month with no matching events', () => {
+    const rows = dailyBreakdownFromEvents(events, '2026-03');
+    expect(rows.every(r => EVENT_CATEGORY_KEYS.every(k => r[k] === 0))).toBe(true);
+  });
+});
+
+describe('monthLabel', () => {
+  it('formats a YYYY-MM key as a Thai month + Buddhist-era year', () => {
+    expect(monthLabel('2026-02')).toContain('2569');
   });
 });
 
