@@ -247,7 +247,7 @@ export function HomePage() {
   const [search, setSearch] = useState('');
   const [sortMode, setSortMode] = useState<SortMode>('status');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-  const [legendVisible, setLegendVisible] = useState(true);
+  const [legendVisible, setLegendVisible] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(
     publicCameras.find(c => c.status === 'Online')?.id ?? publicCameras[0]?.id ?? null
   );

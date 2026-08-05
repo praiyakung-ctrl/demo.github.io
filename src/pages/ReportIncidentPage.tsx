@@ -256,7 +256,7 @@ export function ReportIncidentPage() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-  const [legendVisible, setLegendVisible] = useState(true);
+  const [legendVisible, setLegendVisible] = useState(false);
   const [leafletMap, setLeafletMap] = useState<LeafletMap | null>(null);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [geoError, setGeoError] = useState(false);
