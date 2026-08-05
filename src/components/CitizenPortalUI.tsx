@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Building2, ChevronLeft, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video } from 'lucide-react';
+import { BookOpen, Building2, ChevronLeft, ChevronRight, FileSearch, HelpCircle, Home, Phone, ShieldAlert, Video, Camera as CameraIcon } from 'lucide-react';
 import { ORG_INFO } from '../data/orgInfo';
 import { useAuth } from '../context/AuthContext';
 
@@ -99,7 +99,18 @@ export function ServiceSidebar({ active, children, collapsible = false, collapse
         </nav>
       </div>
 
-      {!collapsed && children}
+      {collapsed && children != null ? (
+        <button
+          onClick={toggleCollapsed}
+          title="รายการกล้องทั้งหมด"
+          aria-label="รายการกล้องทั้งหมด"
+          className="w-full card p-0 flex items-center justify-center py-3 text-navy-700 hover:bg-gray-50 transition-colors"
+        >
+          <CameraIcon size={24} />
+        </button>
+      ) : (
+        !collapsed && children
+      )}
 
       <div className="card">
         {!collapsed && (
@@ -109,7 +120,11 @@ export function ServiceSidebar({ active, children, collapsible = false, collapse
           </>
         )}
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-navy-50 text-navy-700 flex items-center justify-center flex-shrink-0">
+          <div
+            className="w-12 h-12 rounded-full bg-navy-50 text-navy-700 flex items-center justify-center flex-shrink-0"
+            title="ติดต่อเจ้าหน้าที่"
+            aria-label="ติดต่อเจ้าหน้าที่"
+          >
             <Phone size={24} />
           </div>
           {!collapsed && (
