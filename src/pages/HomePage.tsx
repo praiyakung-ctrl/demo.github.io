@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
-import type { Map as LeafletMap } from 'leaflet';
+import type { Map as LeafletMap, Marker as LeafletMarker } from 'leaflet';
 import {
   Camera as CameraIcon, Compass, Eye, EyeOff, Locate, Maximize,
   MapPin, Navigation, Navigation2, RotateCcw, Search, Share2, Video, VideoOff, Wifi, Wrench,
@@ -21,9 +21,11 @@ import { cameraImage, copyCameraShareLink, districtOf, overlayClock } from '../u
 import { formatLastUpdate } from '../utils/formatDate';
 import { nearestCameras } from '../utils/geo';
 import { pinIcon, userLocationIcon } from '../utils/mapPin';
+import { computeDisplayPositions } from '../utils/markerJitter';
 
 const publicCameras = (camerasData as Camera[]).filter(c => c.isPublic);
 const MAP_CENTER: [number, number] = [13.22, 101.02];
+const displayPositions = computeDisplayPositions(publicCameras);
 
 const STATUS_SORT_ORDER: CameraStatus[] = ['Online', 'Maintenance', 'Unknown', 'Offline'];
 
@@ -259,6 +261,7 @@ export function HomePage() {
   const [satellite, setSatellite] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const markerRefs = useRef<Map<string, LeafletMarker>>(new Map());
   const asideRef = useRef<HTMLElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
@@ -383,7 +386,12 @@ export function HomePage() {
   const handleSelectCamera = (id: string) => {
     setSelectedId(id);
     const cam = sorted.find(c => c.id === id) ?? publicCameras.find(c => c.id === id);
-    if (cam) leafletMap?.flyTo([cam.lat, cam.lng], 15, { duration: 0.8 });
+    if (!cam || !leafletMap) return;
+    const pos = displayPositions.get(cam.id) ?? [cam.lat, cam.lng];
+    leafletMap.flyTo(pos, 18, { duration: 0.8 });
+    leafletMap.once('moveend', () => {
+      setTimeout(() => markerRefs.current.get(cam.id)?.openPopup(), 50);
+    });
   };
 
   const handleResetView = () => {
@@ -537,7 +545,8 @@ export function HomePage() {
                 <CameraClusterMarkers cameras={filtered} renderMarker={cam => (
                   <Marker
                     key={cam.id}
-                    position={[cam.lat, cam.lng]}
+                    ref={m => { if (m) markerRefs.current.set(cam.id, m); else markerRefs.current.delete(cam.id); }}
+                    position={displayPositions.get(cam.id) ?? [cam.lat, cam.lng]}
                     icon={pinIcon(markerColor(cam))}
                     title={`${cam.id} ${cam.location}`}
                     alt={`กล้อง ${cam.id} ${cam.location}`}
