@@ -15,7 +15,7 @@ import { useAuth } from '../context/AuthContext';
 import camerasData from '../data/cameras.json';
 import eventsData from '../data/events.json';
 import type { Camera, CctvEvent, EventType } from '../types';
-import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS, STATUS_COLORS } from '../types';
+import { EVENT_COLORS, EVENT_LABELS, EVENT_TEXT_COLORS, STATUS_COLORS, STATUS_LABELS } from '../types';
 import { formatLastUpdate, formatThaiDateTime, formatThaiDateTimeSec, timeAgo } from '../utils/formatDate';
 import { pinIcon, pinSvg, userLocationIcon } from '../utils/mapPin';
 import { useDialog } from '../hooks/useDialog';
@@ -41,6 +41,21 @@ const MARKER_COLORS: Record<string, string> = {
   normal: '#22C55E',
   offline: '#9CA3AF',
 };
+
+/* every color getMarkerColor() can produce — event colors for Online cameras,
+   plus every non-Online CameraStatus color (not just Offline, which used to be
+   the only one shown even though Maintenance/Unknown markers exist on the map too) */
+const LEGEND_ITEMS: { color: string; label: string }[] = [
+  { color: MARKER_COLORS.normal, label: 'ปกติ' },
+  { color: MARKER_COLORS.traffic, label: 'รถติด' },
+  { color: MARKER_COLORS.gunshot, label: 'เสียงปืน' },
+  { color: MARKER_COLORS.parking, label: 'จอดผิด' },
+  { color: MARKER_COLORS.flood, label: 'น้ำท่วม' },
+  { color: MARKER_COLORS.crowd, label: 'ชุมนุม' },
+  { color: STATUS_COLORS.Offline, label: STATUS_LABELS.Offline },
+  { color: STATUS_COLORS.Maintenance, label: STATUS_LABELS.Maintenance },
+  { color: STATUS_COLORS.Unknown, label: STATUS_LABELS.Unknown },
+];
 
 const EVENT_TYPE_ICONS = {
   normal:  CheckCircle,
@@ -478,10 +493,10 @@ export function MapPage() {
             {legendVisible ? (
               <div className="pointer-events-auto bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-semibold text-gray-700">
                 <span className="text-gray-500">สัญลักษณ์:</span>
-                {Object.entries({ normal: 'ปกติ', traffic: 'รถติด', gunshot: 'เสียงปืน', parking: 'จอดผิด', flood: 'น้ำท่วม', crowd: 'ชุมนุม', offline: 'ออฟไลน์' }).map(([k, label]) => (
-                  <span key={k} className="flex items-center gap-1.5">
-                    <span dangerouslySetInnerHTML={{ __html: pinSvg(MARKER_COLORS[k], 11, 15) }} />
-                    <span className="text-gray-600">{label}</span>
+                {LEGEND_ITEMS.map(item => (
+                  <span key={item.label} className="flex items-center gap-1.5">
+                    <span dangerouslySetInnerHTML={{ __html: pinSvg(item.color, 11, 15) }} />
+                    <span className="text-gray-600">{item.label}</span>
                   </span>
                 ))}
                 <button
