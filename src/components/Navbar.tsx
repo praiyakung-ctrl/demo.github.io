@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, ChevronDown, CircleUser, ClipboardCheck, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, ParkingSquare, ShieldAlert, UserCheck, Waves, Wrench, Users } from 'lucide-react';
+import { Bell, LogOut, ChevronDown, CircleUser, ClipboardCheck, UserCog, AlertTriangle, CheckCircle, Car, Crosshair, FileSearch, Menu, ParkingSquare, ShieldAlert, UserCheck, Waves, Wrench, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StatusBadge } from './Badge';
 import { AccessibilityToolbar } from './AccessibilityToolbar';
@@ -31,7 +31,7 @@ const EVENT_TYPE_ICONS = {
   crowd:   Users,
 } as const;
 
-export function Navbar() {
+export function Navbar({ onMenuClick }: { onMenuClick?: () => void } = {}) {
   const { user, logout, isCitizen, isAdmin, isPolice, isLocalOfficer } = useAuth();
   const navigate = useNavigate();
   const [time, setTime] = useState(new Date());
@@ -113,6 +113,15 @@ export function Navbar() {
     <header className="relative h-20 bg-navy-700 flex items-center px-4 gap-3 z-[1000] shadow-lg">
       {/* Logo + Title */}
       <div className="flex items-center gap-3 min-w-0 flex-1">
+        {onMenuClick && (
+          <button
+            onClick={onMenuClick}
+            aria-label="เปิดเมนู"
+            className="md:hidden flex-shrink-0 p-2 -ml-1 rounded-lg text-white hover:bg-navy-600 transition-colors"
+          >
+            <Menu size={26} />
+          </button>
+        )}
         <img
           src={`${import.meta.env.BASE_URL}logo.svg`}
           alt="อบจ.ชลบุรี"
@@ -298,8 +307,8 @@ export function Navbar() {
           )}
 
           {showNotif && !isCitizen && !isFieldReporter && (
-            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl w-80 z-[1100] overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 bg-orange-50 border-b border-orange-100">
+            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl w-80 max-w-[calc(100vw-2rem)] z-[1100] overflow-hidden flex flex-col max-h-[70vh]">
+              <div className="flex items-center justify-between px-4 py-3 bg-orange-50 border-b border-orange-100 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <Bell size={16} className="text-orange-500" />
                   <span className="text-sm font-bold text-gray-900">การแจ้งเตือน</span>
@@ -308,6 +317,11 @@ export function Navbar() {
                   {unackCount} รายการ
                 </span>
               </div>
+
+              {/* all sections scroll together within one clamped body — previously each
+                  section grew unbounded, so on mobile the dropdown could exceed the
+                  viewport height entirely (only the last section had its own scroll clamp) */}
+              <div className="overflow-y-auto">
 
               {/* Cameras reported for inspection (admin only) */}
               {repairReports.length > 0 && (
@@ -380,7 +394,7 @@ export function Navbar() {
                 </div>
               )}
 
-              <div className="max-h-72 overflow-y-auto">
+              <div>
                 {unackEvents.length === 0 ? (
                   <div className="flex flex-col items-center py-8 text-gray-400">
                     <CheckCircle size={32} className="text-green-400 mb-2" />
@@ -413,6 +427,7 @@ export function Navbar() {
                   และอีก {unackEvents.length - 10} รายการ
                 </div>
               )}
+              </div>
             </div>
           )}
         </div>

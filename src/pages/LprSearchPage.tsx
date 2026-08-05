@@ -154,7 +154,7 @@ export function LprSearchPage() {
                 <option value="all">ทุก สภ.</option>
                 {STATION_FILTER_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 <label htmlFor="lpr-date-from" className="text-sm text-gray-600 flex-shrink-0">วันที่</label>
                 <input
                   id="lpr-date-from"
@@ -173,7 +173,7 @@ export function LprSearchPage() {
                   className="input-field w-auto py-2 text-base"
                 />
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
                 <label htmlFor="lpr-time-from" className="text-sm text-gray-600 flex-shrink-0">เวลา</label>
                 <input
                   id="lpr-time-from"

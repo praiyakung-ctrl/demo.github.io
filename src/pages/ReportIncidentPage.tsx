@@ -771,7 +771,7 @@ export function ReportIncidentPage() {
               </label>
             </div>
             <p className="label mb-2">ช่วงวันที่</p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="input-field text-sm" />
               <span className="text-gray-400">-</span>
               <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="input-field text-sm" />

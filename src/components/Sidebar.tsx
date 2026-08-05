@@ -36,10 +36,12 @@ const SECTION_META: Record<Section, { title: string; icon: typeof Map }> = {
   backend: { title: 'System Config', icon: SlidersHorizontal },
 };
 
-export function Sidebar() {
+export function Sidebar({ mobileOpen = false, onMobileClose }: { mobileOpen?: boolean; onMobileClose?: () => void } = {}) {
   const { can } = useAuth();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(true);
+  // the mobile drawer always shows full labels regardless of the desktop collapse toggle
+  const expanded = !collapsed || mobileOpen;
 
   // start with only the group of the current page expanded
   const [openSections, setOpenSections] = useState<Record<Section, boolean>>(() => {
@@ -75,13 +77,25 @@ export function Sidebar() {
   );
 
   return (
-    <aside
-      className="flex flex-col flex-shrink-0 min-h-0 bg-gray-100 border-r border-gray-200 transition-all duration-300"
-      style={{ width: collapsed ? '64px' : '240px' }}
-    >
+    <>
+      {/* mobile-only backdrop — tapping outside the drawer closes it */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/40 z-[1400]"
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={`flex flex-col flex-shrink-0 min-h-0 bg-gray-100 border-r border-gray-200 transition-all duration-300
+          max-md:fixed max-md:top-20 max-md:bottom-0 max-md:left-0 max-md:z-[1500] max-md:w-64 max-md:shadow-2xl
+          ${mobileOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'}
+          ${collapsed ? 'md:w-16' : 'md:w-60'}`}
+      >
       <nav aria-label="เมนูหลัก" className="flex-1 px-2 space-y-1 overflow-y-auto overflow-x-hidden pt-3 pb-2">
-        {/* sidebar collapse toggle — collapsed mode has no room for it inside headers */}
-        {collapsed && <div className="flex justify-center pb-1">{collapseButton}</div>}
+        {/* sidebar collapse toggle — collapsed mode has no room for it inside headers; hidden
+            on mobile since the drawer is always shown expanded and closes via the backdrop/hamburger instead */}
+        {collapsed && <div className="hidden md:flex justify-center pb-1">{collapseButton}</div>}
 
         {sections.map(section => {
           const items = visibleItems.filter(i => i.section === section);
@@ -96,13 +110,13 @@ export function Sidebar() {
                   onClick={() => toggleSection(section)}
                   aria-expanded={open}
                   aria-label={`${open ? 'ซ่อน' : 'แสดง'}เมนู ${meta.title}`}
-                  title={collapsed ? meta.title : undefined}
+                  title={!expanded ? meta.title : undefined}
                   className={`flex-1 flex items-center rounded-lg hover:bg-gray-200 transition-colors ${
-                    collapsed ? 'justify-center p-1.5' : 'gap-2 px-2 py-1.5'
+                    !expanded ? 'justify-center p-1.5' : 'gap-2 px-2 py-1.5'
                   }`}
                 >
-                  <meta.icon size={collapsed ? 18 : 16} className="text-navy-500 flex-shrink-0" />
-                  {!collapsed && (
+                  <meta.icon size={!expanded ? 18 : 16} className="text-navy-500 flex-shrink-0" />
+                  {expanded && (
                     <>
                       <span className="text-base font-extrabold text-navy-700 uppercase tracking-widest whitespace-nowrap">
                         {meta.title}
@@ -124,16 +138,17 @@ export function Sidebar() {
                   key={item.to}
                   to={item.to}
                   end
-                  title={collapsed ? item.label : undefined}
+                  title={!expanded ? item.label : undefined}
                   aria-label={item.label}
+                  onClick={onMobileClose}
                   className={({ isActive }) =>
                     isActive
-                      ? activeClass(collapsed ? 'justify-center' : '')
-                      : inactiveClass(collapsed ? 'justify-center' : '')
+                      ? activeClass(!expanded ? 'justify-center' : '')
+                      : inactiveClass(!expanded ? 'justify-center' : '')
                   }
                 >
                   <item.icon size={20} className={`flex-shrink-0 ${item.iconColor}`} />
-                  {!collapsed && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
+                  {expanded && <span className="text-lg font-bold text-navy-700 whitespace-nowrap">{item.label}</span>}
                 </NavLink>
               ))}
             </div>
@@ -141,11 +156,12 @@ export function Sidebar() {
         })}
       </nav>
 
-      {!collapsed && (
+      {expanded && (
         <div className="px-3 py-3 border-t border-gray-200">
           <p className="text-xs text-navy-400 text-center">อบจ.ชลบุรี © 2568</p>
         </div>
       )}
     </aside>
+    </>
   );
 }
