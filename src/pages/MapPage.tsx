@@ -109,7 +109,7 @@ export function MapPage() {
   const [actionNote, setActionNote] = useState('');
   const [leftPanelVisible, setLeftPanelVisible] = useState(false);
   // desktop opens the live panel by default; on mobile keep the map unobstructed
-  const [rightPanelVisible, setRightPanelVisible] = useState(() => !window.matchMedia(MOBILE_QUERY).matches);
+  const [rightPanelVisible, setRightPanelVisible] = useState(false);
 
   // on mobile the panels overlay the map, so only one may be open at a time
   const toggleLeftPanel = () => {
