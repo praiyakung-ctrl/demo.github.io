@@ -215,7 +215,7 @@ export function LprSearchPage() {
                         <span className="font-mono font-bold text-navy-700 border-2 border-navy-200 rounded-lg px-3 py-1 bg-blue-50">{r.plate}</span>
                       </td>
                       <td className="px-4 py-2.5 text-gray-700">{r.type}</td>
-                      <td className="px-4 py-2.5 font-mono font-bold text-navy-700">{r.cameraId}</td>
+                      <td className="px-4 py-2.5 text-gray-700">{r.cameraId}</td>
                       <td className="px-4 py-2.5 text-gray-700">{r.road}</td>
                       <td className="px-4 py-2.5">
                         <div className="inline-flex flex-col items-center justify-center border-2 border-gray-800 rounded px-2 py-1 bg-white min-w-[90px]">
