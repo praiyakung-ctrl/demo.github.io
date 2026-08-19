@@ -1,14 +1,17 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, Marker } from 'react-leaflet';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import {
   AlertTriangle, ChevronLeft, Clock, Download, FileText, Hash, Inbox, Mail, MapPin,
   Plus, Search, Target, User, Activity, Camera as CameraIcon,
+  CheckCircle, AlertCircle, XCircle, Filter, Paperclip, BarChart3,
 } from 'lucide-react';
 import { Layout, SkipLink } from '../components/Layout';
 import { Navbar } from '../components/Navbar';
 import { CitizenFooter, CitizenHero, ServiceMenuChips, ServiceSidebar } from '../components/CitizenPortalUI';
 import { StatusBadge } from '../components/Badge';
+import { Pagination } from '../components/Pagination';
 import { BaseTileLayer } from '../components/BaseTileLayer';
 import { SatelliteToggleButton } from '../components/SatelliteToggleButton';
 import { Modal } from '../components/Modal';
@@ -29,6 +32,42 @@ const STATUS_STEPS = ['รับคำขอ', 'ตรวจสอบข้อ�
 
 const ALL_STATUSES: RequestStatus[] = [
   'ใหม่', 'รอดำเนินการ', 'รอหัวหน้างานอนุมัติ', 'รอผู้บริหารอนุมัติ', 'อนุมัติ', 'รอภาพ', 'ส่งแล้ว', 'ได้รับแล้ว', 'ปฏิเสธ',
+];
+
+const MONTHS_TH = [
+  'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+  'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
+];
+
+const PAGE_SIZE = 10;
+
+type StatGroup = 'ใหม่' | 'รอดำเนินการ' | 'อนุมัติแล้ว' | 'ปฏิเสธ';
+
+const STATUS_GROUP: Record<RequestStatus, StatGroup> = {
+  'ใหม่': 'ใหม่',
+  'รอดำเนินการ': 'รอดำเนินการ',
+  'รอหัวหน้างานอนุมัติ': 'รอดำเนินการ',
+  'รอผู้บริหารอนุมัติ': 'รอดำเนินการ',
+  'รอภาพ': 'รอดำเนินการ',
+  'อนุมัติ': 'อนุมัติแล้ว',
+  'ส่งแล้ว': 'อนุมัติแล้ว',
+  'ได้รับแล้ว': 'อนุมัติแล้ว',
+  'ปฏิเสธ': 'ปฏิเสธ',
+};
+
+const STAT_GROUPS: StatGroup[] = ['อนุมัติแล้ว', 'รอดำเนินการ', 'ใหม่', 'ปฏิเสธ'];
+
+const STAT_GROUP_COLORS: Record<StatGroup, string> = {
+  'อนุมัติแล้ว': '#22C55E',
+  'รอดำเนินการ': '#3B82F6',
+  'ใหม่': '#94A3B8',
+  'ปฏิเสธ': '#EF4444',
+};
+
+const DOC_SLOT_LABELS: { key: 'idCard' | 'policeReport' | 'other'; label: string }[] = [
+  { key: 'idCard', label: 'สำเนาบัตรประจำตัวประชาชน' },
+  { key: 'policeReport', label: 'ใบแจ้งความ / บันทึกประจำวัน' },
+  { key: 'other', label: 'เอกสารประกอบอื่นๆ' },
 ];
 
 function markStep(timeline: TimelineEntry[], step: string): TimelineEntry[] {
@@ -437,8 +476,8 @@ function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (au
   };
 
   return (
-    <div className="card p-4 mb-4">
-      <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><MapPin size={22} /> มอบหมายกล้อง CCTV</h3>
+    <div className="border border-gray-200 rounded-xl p-4">
+      <h3 className="font-bold text-navy-700 mb-3 text-2xl flex items-center gap-2"><MapPin size={20} /> มอบหมายกล้อง CCTV</h3>
       <p className="text-xl text-navy-700 mb-3">
         ละจิจูด {req.incidentLat.toFixed(4)}, ลองจิจูด {req.incidentLng.toFixed(4)}
       </p>
@@ -483,12 +522,135 @@ function CameraAssignPanel({ req, onSaved }: { req: CitizenRequest; onSaved: (au
   );
 }
 
+/* ---------- Staff right sidebar: progress timeline + stats ---------- */
+
+function ProgressTimeline({ req }: { req: CitizenRequest }) {
+  const completedCount = req.timeline?.filter(t => t.completed).length ?? 0;
+  return (
+    <div className="card p-4">
+      <h3 className="font-bold text-navy-700 mb-3 text-2xl flex items-center gap-2"><Activity size={20} /> ความคืบหน้า</h3>
+      <div>
+        {STATUS_STEPS.map((stepLabel, i) => {
+          const tl = req.timeline?.find(t => t.step === stepLabel);
+          const isDone = tl?.completed;
+          const isCurrent = !isDone && i === completedCount;
+          return (
+            <div key={stepLabel} className="flex items-stretch gap-3">
+              <div className="flex flex-col items-center">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0 ${
+                  isDone ? 'bg-green-500 text-white' : isCurrent ? 'bg-navy-700 text-white' : 'bg-gray-100 text-gray-400'
+                }`}>
+                  {isDone ? '✓' : i + 1}
+                </div>
+                {i < STATUS_STEPS.length - 1 && <div className="w-0.5 flex-1 min-h-[18px] bg-gray-200 my-0.5" />}
+              </div>
+              <div className="pt-0.5 pb-3 min-w-0">
+                <p className={`text-lg font-bold leading-tight ${isDone ? 'text-green-700' : isCurrent ? 'text-navy-700' : 'text-gray-400'}`}>
+                  {stepLabel}
+                </p>
+                {tl?.timestamp && <p className="text-base text-gray-500">{formatThaiDateTime(tl.timestamp)}</p>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {req.approvals && req.approvals.length > 0 && (
+        <div className="pt-2 mt-1 border-t border-gray-100">
+          <ApprovalHistory approvals={req.approvals} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+const STATS_PERIODS = ['เดือนนี้', 'ทั้งหมด'] as const;
+
+function RequestStatsPanel({ requests }: { requests: CitizenRequest[] }) {
+  const [period, setPeriod] = useState<typeof STATS_PERIODS[number]>('ทั้งหมด');
+  const now = new Date();
+  const scoped = period === 'เดือนนี้'
+    ? requests.filter(r => {
+        const d = new Date(r.submittedAt);
+        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      })
+    : requests;
+
+  const counts: Record<StatGroup, number> = { 'ใหม่': 0, 'รอดำเนินการ': 0, 'อนุมัติแล้ว': 0, 'ปฏิเสธ': 0 };
+  scoped.forEach(r => { counts[STATUS_GROUP[r.status]]++; });
+  const total = scoped.length;
+  const data = STAT_GROUPS.map(key => ({ key, count: counts[key], pct: total > 0 ? (counts[key] / total) * 100 : 0 }));
+
+  const tiles: { label: string; count: number; icon: typeof FileText; cls: string }[] = [
+    { label: 'ทั้งหมด', count: total, icon: FileText, cls: 'text-navy-700 bg-navy-50' },
+    { label: 'อนุมัติแล้ว', count: counts['อนุมัติแล้ว'], icon: CheckCircle, cls: 'text-green-700 bg-green-50' },
+    { label: 'รอตรวจสอบ', count: counts['รอดำเนินการ'], icon: AlertCircle, cls: 'text-blue-700 bg-blue-50' },
+    { label: 'ปฏิเสธ', count: counts['ปฏิเสธ'], icon: XCircle, cls: 'text-red-700 bg-red-50' },
+  ];
+
+  return (
+    <div className="card p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-bold text-navy-700 text-2xl flex items-center gap-2"><BarChart3 size={20} /> สถิติคำขอ</h3>
+        <select
+          aria-label="ช่วงเวลาสถิติคำขอ"
+          value={period}
+          onChange={e => setPeriod(e.target.value as typeof STATS_PERIODS[number])}
+          className="text-base border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-navy-500"
+        >
+          {STATS_PERIODS.map(p => <option key={p}>{p}</option>)}
+        </select>
+      </div>
+
+      <div className="flex items-center gap-3 mb-4">
+        <div className="relative w-[132px] h-[132px] flex-shrink-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie data={data} dataKey="count" nameKey="key" innerRadius={42} outerRadius={62} strokeWidth={0}>
+                {data.map(d => <Cell key={d.key} fill={STAT_GROUP_COLORS[d.key]} />)}
+              </Pie>
+              <Tooltip formatter={(v) => [`${Number(v)} คำขอ`]} />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <span className="text-sm text-gray-400">ทั้งหมด</span>
+            <span className="text-2xl font-bold text-navy-700">{total}</span>
+            <span className="text-sm text-gray-400">คำขอ</span>
+          </div>
+        </div>
+        <div className="flex-1 space-y-1.5 min-w-0">
+          {data.map(d => (
+            <div key={d.key} className="flex items-center justify-between text-base gap-2">
+              <span className="flex items-center gap-1.5 text-gray-700 truncate">
+                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: STAT_GROUP_COLORS[d.key] }} />
+                {d.key}
+              </span>
+              <span className="font-bold text-gray-800 flex-shrink-0">{d.count} ({d.pct.toFixed(1)}%)</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2.5">
+        {tiles.map(t => (
+          <div key={t.label} className={`rounded-xl border border-gray-100 p-3 ${t.cls}`}>
+            <div className="flex items-center gap-2 mb-1"><t.icon size={18} /><span className="text-base font-bold">{t.label}</span></div>
+            <p className="text-2xl font-bold">{t.count} <span className="text-base font-normal">คำขอ</span></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function StaffView() {
   const { user } = useAuth();
   const [requests, setRequests] = useState<CitizenRequest[]>(() => savedRequests());
   const [selectedId, setSelectedId] = useState<string | null>(() => savedRequests()[0]?.id ?? null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [monthFilter, setMonthFilter] = useState('all');
+  const [yearFilter, setYearFilter] = useState('all');
+  const [page, setPage] = useState(1);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [videoModalKey, setVideoModalKey] = useState(0);
@@ -500,11 +662,19 @@ function StaffView() {
     user && (user.role === 'admin' || isApproverAtLevel(user.id, selectedLevel))
   );
 
+  const years = [...new Set(requests.map(r => new Date(r.submittedAt).getFullYear()))].sort((a, b) => b - a);
+
   const filtered = requests.filter(r => {
+    const submitted = new Date(r.submittedAt);
     const matchSearch = r.reqNo.includes(search) || r.citizenName.includes(search);
     const matchStatus = statusFilter === 'all' || r.status === statusFilter;
-    return matchSearch && matchStatus;
+    const matchMonth = monthFilter === 'all' || submitted.getMonth() + 1 === Number(monthFilter);
+    const matchYear = yearFilter === 'all' || submitted.getFullYear() === Number(yearFilter);
+    return matchSearch && matchStatus && matchMonth && matchYear;
   });
+  const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const applyFilter = (setter: (v: string) => void) => (value: string) => { setter(value); setPage(1); };
 
   const mutate = (id: string, patch: Partial<CitizenRequest>, auditDetail: string) => {
     updateRequest(id, patch);
@@ -579,26 +749,54 @@ function StaffView() {
   return (
     <div className="flex h-full min-h-0">
       {/* Inbox list */}
-      <div className="w-96 border-r border-gray-200 flex flex-col bg-white">
-        <div className="p-3 border-b border-gray-100">
-          <h2 className="font-bold text-navy-700 mb-2 text-3xl flex items-center gap-2"><Inbox size={24} /> คำขอประชาชน ({filtered.length})</h2>
-          <div className="relative mb-2">
+      <div className="w-96 flex-shrink-0 border-r border-gray-200 flex flex-col bg-white">
+        <div className="p-3 border-b border-gray-100 space-y-2">
+          <h2 className="font-bold text-navy-700 mb-1 text-3xl flex items-center gap-2"><Inbox size={24} /> คำขอประชาชน ({filtered.length})</h2>
+          <div className="relative">
             <Search size={20} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder="ค้นหา..."
+              onChange={e => applyFilter(setSearch)(e.target.value)}
+              placeholder="ค้นหาเลขที่คำขอ, ชื่อผู้ขอ, สถานที่..."
               aria-label="ค้นหาคำขอด้วยเลขที่คำขอหรือชื่อ"
               className="w-full pl-9 pr-3 py-2 text-2xl border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-navy-500"
             />
           </div>
-          <select aria-label="กรองตามสถานะ" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="w-full text-2xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500">
-            <option value="all">ทุกสถานะ</option>
-            {ALL_STATUSES.map(s => <option key={s}>{s}</option>)}
-          </select>
+          <div className="flex gap-2">
+            <select
+              aria-label="กรองตามเดือน"
+              value={monthFilter}
+              onChange={e => applyFilter(setMonthFilter)(e.target.value)}
+              className="flex-1 min-w-0 text-xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500"
+            >
+              <option value="all">เดือน</option>
+              {MONTHS_TH.map((m, i) => <option key={i} value={String(i + 1)}>{m}</option>)}
+            </select>
+            <select
+              aria-label="กรองตามปี"
+              value={yearFilter}
+              onChange={e => applyFilter(setYearFilter)(e.target.value)}
+              className="w-28 flex-shrink-0 text-xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500"
+            >
+              <option value="all">ปี</option>
+              {years.map(y => <option key={y} value={y}>{y + 543}</option>)}
+            </select>
+          </div>
+          <div className="relative">
+            <Filter size={18} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+            <select
+              aria-label="กรองตามสถานะ"
+              value={statusFilter}
+              onChange={e => applyFilter(setStatusFilter)(e.target.value)}
+              className="w-full pl-9 text-xl border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-navy-500"
+            >
+              <option value="all">สถานะทั้งหมด</option>
+              {ALL_STATUSES.map(s => <option key={s}>{s}</option>)}
+            </select>
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto">
-          {filtered.map(req => (
+          {paged.map(req => (
             <button
               key={req.id}
               onClick={() => setSelectedId(req.id)}
@@ -613,87 +811,91 @@ function StaffView() {
               <p className="text-xl text-navy-700 mt-0.5">{formatThaiDate(req.submittedAt)}</p>
             </button>
           ))}
+          {filtered.length === 0 && (
+            <div className="text-center py-10 text-gray-400">
+              <Inbox size={40} className="mx-auto mb-2 opacity-40" />
+              <p className="text-xl">ไม่พบคำขอตามเงื่อนไข</p>
+            </div>
+          )}
         </div>
+        <Pagination total={filtered.length} page={page} pageSize={PAGE_SIZE} onPageChange={setPage} />
       </div>
 
       {/* Detail */}
       {selected ? (
-        <div className="flex-1 overflow-y-auto p-5">
-          <div className="max-w-2xl">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h2 className="text-3xl font-bold text-navy-700 flex items-center gap-2"><Hash size={26} /> {selected.reqNo}</h2>
-                <p className="text-xl text-navy-700">ยื่นเมื่อ {formatThaiDateTime(selected.submittedAt)}</p>
+        <div className="flex-1 min-w-0 overflow-y-auto p-5">
+          <div className="max-w-3xl space-y-4">
+            <div className="card p-4">
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="font-bold text-navy-700 text-2xl flex items-center gap-2"><FileText size={20} /> รายละเอียดคำขอ</h3>
+                <StatusBadge status={selected.status} />
               </div>
-              <StatusBadge status={selected.status} />
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-xl">
+                <div>
+                  <p className="text-navy-700 font-bold mb-0.5">สถานที่เกิดเหตุ</p>
+                  <p className="text-gray-800 font-medium">{selected.incidentLocation}</p>
+                </div>
+                <div>
+                  <p className="text-navy-700 font-bold mb-0.5">ผู้ยื่น</p>
+                  <p className="text-gray-800 font-medium">{selected.citizenName}</p>
+                </div>
+                <div>
+                  <p className="text-navy-700 font-bold mb-0.5">ช่วงเวลา</p>
+                  <p className="text-gray-800 font-medium">{selected.startDatetime} ถึง {selected.endDatetime}</p>
+                </div>
+                <div>
+                  <p className="text-navy-700 font-bold mb-0.5">เบอร์โทรศัพท์</p>
+                  <p className="text-gray-800 font-medium">{selected.phone}</p>
+                </div>
+                <div>
+                  <p className="text-navy-700 font-bold mb-0.5">วัตถุประสงค์</p>
+                  <p className="text-gray-800 font-medium">{selected.purpose}</p>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-navy-700 font-bold mb-0.5">อีเมล</p>
+                  <p className="text-gray-800 font-medium truncate">{selected.email}</p>
+                </div>
+                <div className="col-span-2">
+                  <p className="text-navy-700 font-bold mb-0.5">รายละเอียด</p>
+                  <p className="text-gray-800 font-medium">{selected.description || '-'}</p>
+                </div>
+              </div>
+              <p className="text-lg text-gray-400 mt-3 pt-3 border-t border-gray-50">
+                เลขที่คำขอ {selected.reqNo} · สร้างเมื่อ {formatThaiDateTime(selected.submittedAt)}
+              </p>
             </div>
 
-            <div className="card p-4 mb-4">
-              <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><User size={22} /> ข้อมูลผู้ขอ</h3>
-              <div className="grid grid-cols-2 gap-3 text-2xl">
-                {[
-                  ['ชื่อ-นามสกุล', selected.citizenName],
-                  ['เลขบัตรประชาชน', selected.idCard],
-                  ['โทรศัพท์', selected.phone],
-                  ['อีเมล', selected.email],
-                ].map(([k, v]) => (
-                  <div key={k}>
-                    <p className="text-xl text-navy-700 font-bold">{k}</p>
-                    <p className="font-medium text-navy-700">{v}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="card p-4 mb-4">
-              <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><FileText size={22} /> รายละเอียดคำขอ</h3>
-              <div className="space-y-2 text-2xl">
-                {[
-                  ['สถานที่เกิดเหตุ', selected.incidentLocation],
-                  ['ช่วงเวลา', `${selected.startDatetime} ถึง ${selected.endDatetime}`],
-                  ['วัตถุประสงค์', selected.purpose],
-                  ['รายละเอียด', selected.description],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex gap-3 py-1.5 border-b border-gray-50">
-                    <span className="text-navy-700 w-32 flex-shrink-0 font-bold">{k}:</span>
-                    <span className="text-gray-800 font-medium">{v}</span>
-                  </div>
-                ))}
+            <div className="card p-4">
+              <h3 className="font-bold text-navy-700 mb-3 text-2xl flex items-center gap-2">
+                <Paperclip size={20} />
+                เอกสารแนบ ({DOC_SLOT_LABELS.filter(s => selected.documents?.[s.key]).length} รายการ)
+              </h3>
+              <div className="grid grid-cols-3 gap-3">
+                {DOC_SLOT_LABELS.map(slot => {
+                  const fileName = selected.documents?.[slot.key];
+                  return (
+                    <div key={slot.key} className="border border-gray-200 rounded-xl overflow-hidden">
+                      <div className="h-24 bg-gray-50 flex items-center justify-center">
+                        <FileText size={30} className={fileName ? 'text-navy-500' : 'text-gray-300'} />
+                      </div>
+                      <div className="px-2 py-1.5 border-t border-gray-100">
+                        <p className="text-lg font-bold text-gray-700 truncate">{slot.label}</p>
+                        <p className="text-base text-gray-400 truncate">{fileName ?? 'ไม่มีเอกสาร'}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             {selected.status === 'ปฏิเสธ' ? (
-              <div className="card p-4 mb-4 bg-red-50 border-red-200">
-                <h3 className="font-bold text-red-800 mb-2 text-3xl flex items-center gap-2"><AlertTriangle size={22} /> ปฏิเสธคำขอ</h3>
-                <p className="text-2xl text-red-700">{selected.rejectionReason}</p>
+              <div className="card p-4 bg-red-50 border-red-200">
+                <h3 className="font-bold text-red-800 mb-2 text-2xl flex items-center gap-2"><AlertTriangle size={20} /> ปฏิเสธคำขอ</h3>
+                <p className="text-xl text-red-700">{selected.rejectionReason}</p>
               </div>
             ) : (
               <CameraAssignPanel key={selected.id} req={selected} onSaved={detail => { logAudit(user, 'edit', 'portal', detail); refresh(); }} />
             )}
-
-            <div className="card p-4 mb-4">
-              <h3 className="font-bold text-navy-700 mb-3 text-3xl flex items-center gap-2"><Activity size={22} /> ความคืบหน้า</h3>
-              {STATUS_STEPS.map((stepLabel, i) => {
-                const tl = selected.timeline?.find(t => t.step === stepLabel);
-                const completedCount = selected.timeline?.filter(t => t.completed).length ?? 0;
-                const isDone = tl?.completed;
-                const isCurrent = !isDone && i === completedCount;
-                return (
-                  <div key={stepLabel} className="flex items-center gap-3 mb-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xl font-bold ${isDone ? 'bg-green-500 text-white' : isCurrent ? 'bg-navy-700 text-white' : 'bg-gray-100 text-gray-400'}`}>
-                      {isDone ? '✓' : i + 1}
-                    </div>
-                    <span className={`text-2xl flex-1 font-bold ${isDone ? 'text-green-700' : isCurrent ? 'text-navy-700' : 'text-gray-400'}`}>{stepLabel}</span>
-                    {tl?.timestamp && <span className="text-xl text-navy-700">{formatThaiDate(tl.timestamp)}</span>}
-                  </div>
-                );
-              })}
-              {selected.approvals && selected.approvals.length > 0 && (
-                <div className="pt-2 mt-2 border-t border-gray-100">
-                  <ApprovalHistory approvals={selected.approvals} />
-                </div>
-              )}
-            </div>
 
             <div className="flex flex-wrap gap-2">
               {selected.status === 'ใหม่' && (
@@ -735,6 +937,19 @@ function StaffView() {
           </div>
         </div>
       )}
+
+      {/* Progress + stats sidebar */}
+      <div className="w-[360px] flex-shrink-0 border-l border-gray-200 bg-[#F0F2F5] overflow-y-auto p-4 space-y-4">
+        {selected ? (
+          <ProgressTimeline req={selected} />
+        ) : (
+          <div className="card p-8 text-center text-gray-400">
+            <Activity size={40} className="mx-auto mb-2 opacity-30" />
+            <p className="text-lg">เลือกคำขอเพื่อดูความคืบหน้า</p>
+          </div>
+        )}
+        <RequestStatsPanel requests={requests} />
+      </div>
 
       <RejectModal isOpen={rejectOpen} onClose={() => setRejectOpen(false)} onConfirm={confirmReject} />
       {selected && user && (

@@ -38,7 +38,11 @@
         "step": "ส่งข้อมูล",
         "completed": false
       }
-    ]
+    ],
+    "documents": {
+      "idCard": "idcard_somchai.jpg",
+      "policeReport": "banthuek_prajam_wan.pdf"
+    }
   },
   {
     "id": "2",
@@ -82,7 +86,10 @@
         "step": "ส่งข้อมูล",
         "completed": false
       }
-    ]
+    ],
+    "documents": {
+      "idCard": "idcard_nipa.jpg"
+    }
   },
   {
     "id": "3",
@@ -127,7 +134,11 @@
         "step": "ส่งข้อมูล",
         "completed": false
       }
-    ]
+    ],
+    "documents": {
+      "idCard": "idcard_prasong.jpg",
+      "other": "ekasan_praken.pdf"
+    }
   },
   {
     "id": "4",

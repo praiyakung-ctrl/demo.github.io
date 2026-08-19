@@ -815,6 +815,7 @@ export function CctvRequestPage() {
         { step: 'จัดเตรียมข้อมูล', completed: false },
         { step: 'ส่งข้อมูล', completed: false },
       ],
+      documents: docs,
     };
     addRequest(req);
     setReqNo(newReqNo);

@@ -118,6 +118,8 @@ export interface CitizenRequest {
   timeline: TimelineEntry[];
   /* history of the 3-level approval chain, one entry per level acted on so far */
   approvals?: RequestApproval[];
+  /* file names attached during the wizard's upload step (mock — no real upload) */
+  documents?: Partial<Record<'idCard' | 'policeReport' | 'other', string>>;
 }
 
 export interface TimelineEntry {
