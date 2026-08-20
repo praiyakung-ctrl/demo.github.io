@@ -747,9 +747,9 @@ function StaffView() {
   };
 
   return (
-    <div className="flex h-full min-h-0">
-      {/* Inbox list */}
-      <div className="w-96 flex-shrink-0 border-r border-gray-200 flex flex-col bg-white">
+    <div className="flex flex-col xl:flex-row h-full min-h-0">
+      {/* Inbox list — shown alone below xl until a request is picked, then swaps to the detail pane */}
+      <div className={`${selected ? 'hidden' : 'flex'} xl:flex w-full xl:w-96 xl:flex-shrink-0 border-b xl:border-b-0 xl:border-r border-gray-200 flex-col bg-white`}>
         <div className="p-3 border-b border-gray-100 space-y-2">
           <h2 className="font-bold text-navy-700 mb-1 text-3xl flex items-center gap-2"><Inbox size={24} /> คำขอประชาชน ({filtered.length})</h2>
           <div className="relative">
@@ -795,7 +795,7 @@ function StaffView() {
             </select>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 xl:overflow-y-auto">
           {paged.map(req => (
             <button
               key={req.id}
@@ -821,9 +821,16 @@ function StaffView() {
         <Pagination total={filtered.length} page={page} pageSize={PAGE_SIZE} onPageChange={setPage} />
       </div>
 
-      {/* Detail */}
+      {/* Detail + sidebar — shown together below xl only once a request is picked; always shown side-by-side at xl+ */}
+      <div className={`${selected ? 'flex' : 'hidden'} xl:flex flex-1 min-w-0 flex-col xl:flex-row xl:h-full xl:min-h-0`}>
       {selected ? (
-        <div className="flex-1 min-w-0 overflow-y-auto p-5">
+        <div className="flex-1 min-w-0 xl:overflow-y-auto p-5">
+          <button
+            onClick={() => setSelectedId(null)}
+            className="xl:hidden flex items-center gap-1 text-xl font-bold text-navy-700 hover:text-navy-500 mb-3"
+          >
+            <ChevronLeft size={22} /> กลับไปหน้ารายการ
+          </button>
           <div className="max-w-3xl space-y-4">
             <div className="card p-4">
               <div className="flex items-start justify-between mb-3">
@@ -833,7 +840,7 @@ function StaffView() {
                 </h3>
                 <StatusBadge status={selected.status} />
               </div>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-xl">
                 <div>
                   <p className="text-navy-700 font-bold mb-0.5">สถานที่เกิดเหตุ</p>
                   <p className="text-gray-800 font-medium">{selected.incidentLocation}</p>
@@ -873,7 +880,7 @@ function StaffView() {
                 <Paperclip size={20} />
                 เอกสารแนบ ({DOC_SLOT_LABELS.filter(s => selected.documents?.[s.key]).length} รายการ)
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {DOC_SLOT_LABELS.map(slot => {
                   const fileName = selected.documents?.[slot.key];
                   return (
@@ -942,7 +949,7 @@ function StaffView() {
       )}
 
       {/* Progress + stats sidebar */}
-      <div className="w-[360px] flex-shrink-0 border-l border-gray-200 bg-[#F0F2F5] overflow-y-auto p-4 space-y-4">
+      <div className="w-full xl:w-[360px] xl:flex-shrink-0 border-t xl:border-t-0 xl:border-l border-gray-200 bg-[#F0F2F5] xl:overflow-y-auto p-4 space-y-4">
         {selected ? (
           <ProgressTimeline req={selected} />
         ) : (
@@ -952,6 +959,7 @@ function StaffView() {
           </div>
         )}
         <RequestStatsPanel requests={requests} />
+      </div>
       </div>
 
       <RejectModal isOpen={rejectOpen} onClose={() => setRejectOpen(false)} onConfirm={confirmReject} />
