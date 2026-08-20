@@ -70,6 +70,16 @@ const DOC_SLOT_LABELS: { key: 'idCard' | 'policeReport' | 'other'; label: string
   { key: 'other', label: 'เอกสารประกอบอื่นๆ' },
 ];
 
+/* demo-only preview images for the sample request, keyed by reqNo — real
+   submissions never have actual scanned files, only the mock filename */
+const DOCUMENT_PREVIEW_IMAGES: Record<string, Partial<Record<'idCard' | 'policeReport' | 'other', string>>> = {
+  'REQ-260520-0017': {
+    idCard: `${import.meta.env.BASE_URL}document/ตย.บัตรประชาชน.png`,
+    policeReport: `${import.meta.env.BASE_URL}document/ตย.ใบแจ้งความ.png`,
+    other: `${import.meta.env.BASE_URL}document/ตย.หนังสือมอบอำนาจ.png`,
+  },
+};
+
 function markStep(timeline: TimelineEntry[], step: string): TimelineEntry[] {
   const now = new Date().toISOString();
   return timeline.map(t => (t.step === step ? { ...t, completed: true, timestamp: now } : t));
@@ -654,6 +664,7 @@ function StaffView() {
   const [rejectOpen, setRejectOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [videoModalKey, setVideoModalKey] = useState(0);
+  const [previewDoc, setPreviewDoc] = useState<{ url: string; label: string } | null>(null);
 
   const refresh = () => setRequests(savedRequests());
   const selected = selectedId ? requests.find(r => r.id === selectedId) ?? null : null;
@@ -883,15 +894,33 @@ function StaffView() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {DOC_SLOT_LABELS.map(slot => {
                   const fileName = selected.documents?.[slot.key];
-                  return (
+                  const previewUrl = DOCUMENT_PREVIEW_IMAGES[selected.reqNo]?.[slot.key];
+                  const thumb = (
+                    <div className="h-24 bg-gray-50 flex items-center justify-center overflow-hidden">
+                      {previewUrl
+                        ? <img src={previewUrl} alt={slot.label} className="w-full h-full object-cover" />
+                        : <FileText size={30} className={fileName ? 'text-navy-500' : 'text-gray-300'} />}
+                    </div>
+                  );
+                  const caption = (
+                    <div className="px-2 py-1.5 border-t border-gray-100">
+                      <p className="text-lg font-bold text-gray-700 truncate">{slot.label}</p>
+                      <p className="text-base text-gray-400 truncate">{fileName ?? 'ไม่มีเอกสาร'}</p>
+                    </div>
+                  );
+                  return previewUrl ? (
+                    <button
+                      key={slot.key}
+                      onClick={() => setPreviewDoc({ url: previewUrl, label: slot.label })}
+                      className="border border-gray-200 rounded-xl overflow-hidden text-left hover:border-navy-500 hover:shadow-md transition-all"
+                    >
+                      {thumb}
+                      {caption}
+                    </button>
+                  ) : (
                     <div key={slot.key} className="border border-gray-200 rounded-xl overflow-hidden">
-                      <div className="h-24 bg-gray-50 flex items-center justify-center">
-                        <FileText size={30} className={fileName ? 'text-navy-500' : 'text-gray-300'} />
-                      </div>
-                      <div className="px-2 py-1.5 border-t border-gray-100">
-                        <p className="text-lg font-bold text-gray-700 truncate">{slot.label}</p>
-                        <p className="text-base text-gray-400 truncate">{fileName ?? 'ไม่มีเอกสาร'}</p>
-                      </div>
+                      {thumb}
+                      {caption}
                     </div>
                   );
                 })}
@@ -973,6 +1002,9 @@ function StaffView() {
           onConfirm={confirmVideoLinks}
         />
       )}
+      <Modal isOpen={!!previewDoc} onClose={() => setPreviewDoc(null)} title={previewDoc?.label ?? ''} icon={<Paperclip size={20} className="text-white" />} size="lg">
+        {previewDoc && <img src={previewDoc.url} alt={previewDoc.label} className="w-full rounded-lg" />}
+      </Modal>
     </div>
   );
 }
