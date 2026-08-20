@@ -648,8 +648,8 @@ function StaffView() {
   const [selectedId, setSelectedId] = useState<string | null>(() => savedRequests()[0]?.id ?? null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [monthFilter, setMonthFilter] = useState('all');
-  const [yearFilter, setYearFilter] = useState('all');
+  const [monthFilter, setMonthFilter] = useState(String(new Date().getMonth() + 1));
+  const [yearFilter, setYearFilter] = useState(String(new Date().getFullYear()));
   const [page, setPage] = useState(1);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
