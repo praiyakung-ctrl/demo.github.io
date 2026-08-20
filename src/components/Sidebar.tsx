@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Map, LayoutDashboard, FileText, BarChart3, BellRing, Camera, ClipboardCheck, Users, ChevronDown, ChevronLeft, ChevronRight, GitCompare, ListTree, Plug, ScanLine, ScrollText, Settings, ShieldAlert, ShieldCheck, SlidersHorizontal, UserCheck, Wrench } from 'lucide-react';
+import { Map, LayoutDashboard, FileText, BarChart3, BellRing, Camera, ClipboardCheck, Users, ChevronDown, ChevronLeft, ChevronRight, GitCompare, ListTree, Plug, ScanLine, ScrollText, Settings, Shield, ShieldAlert, ShieldCheck, SlidersHorizontal, UserCheck, Wrench } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { savedMenuSettings } from '../utils/menuStorage';
 import type { MenuKey } from '../types';
@@ -14,6 +14,7 @@ const MENU_CONFIG: Record<MenuKey, { to: string; icon: typeof Map; iconColor: st
   dashboard:    { to: '/dashboard',      icon: LayoutDashboard, iconColor: 'text-blue-600',   section: 'main' },
   portal:       { to: '/portal',         icon: FileText,        iconColor: 'text-green-600',  section: 'main' },
   lprSearch:    { to: '/reports/lpr',    icon: ScanLine,        iconColor: 'text-fuchsia-500', section: 'main' },
+  policeUsage:  { to: '/reports/police-usage', icon: Shield,    iconColor: 'text-blue-500',   section: 'main' },
   reports:      { to: '/reports',        icon: BarChart3,       iconColor: 'text-amber-500',  section: 'main' },
   comparisonReport: { to: '/reports/comparison', icon: GitCompare, iconColor: 'text-rose-500', section: 'main' },
   adminCameras: { to: '/admin/cameras',  icon: Camera,          iconColor: 'text-pink-500',   section: 'admin' },

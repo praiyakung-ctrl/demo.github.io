@@ -19,7 +19,7 @@ const customGroup: UserGroup = {
   description: 'ดูแผนที่และจัดการงานซ่อมกล้อง',
   isSystem: false,
   permissions: {
-    map: ['view'], dashboard: [], portal: [], reports: [], comparisonReport: [], lprSearch: [],
+    map: ['view'], dashboard: [], portal: [], reports: [], comparisonReport: [], lprSearch: [], policeUsage: [],
     adminCameras: [], adminUsers: [], adminRepairs: ['view', 'edit'], adminGroups: [], adminMenus: [],
     adminAuditLog: [], adminApi: [], adminNotifications: [], adminSettings: [], adminIncidents: [],
     adminMemberReview: [], adminCctvApprovers: [],

@@ -281,7 +281,7 @@ export interface User {
 /* ---------- Group-based permissions (RBAC) ---------- */
 
 export type MenuKey =
-  | 'map' | 'dashboard' | 'portal' | 'reports' | 'comparisonReport' | 'lprSearch'
+  | 'map' | 'dashboard' | 'portal' | 'reports' | 'comparisonReport' | 'lprSearch' | 'policeUsage'
   | 'adminCameras' | 'adminUsers' | 'adminRepairs' | 'adminGroups' | 'adminMenus'
   | 'adminAuditLog' | 'adminApi' | 'adminNotifications' | 'adminSettings' | 'adminIncidents' | 'adminMemberReview' | 'adminCctvApprovers';
 
@@ -301,6 +301,7 @@ export const MENU_OPTIONS: { key: MenuKey; label: string }[] = [
   { key: 'dashboard',    label: 'Dashboard' },
   { key: 'portal',       label: 'ยื่นขอกล้อง (พอร์ทัลประชาชน)' },
   { key: 'lprSearch',    label: 'ค้นหาป้ายทะเบียน LPR' },
+  { key: 'policeUsage',  label: 'รายงานสถิติการเข้าใช้งานของตำรวจ' },
   { key: 'reports',      label: 'รายงาน' },
   { key: 'comparisonReport', label: 'รายงานเปรียบเทียบ' },
   { key: 'adminCameras', label: 'จัดการกล้อง' },

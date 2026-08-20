@@ -193,20 +193,6 @@ export function ReportsPage() {
           <p className="text-xl text-gray-900 font-bold">ข้อมูลเหตุการณ์ CCTV และ LPR จังหวัดชลบุรี</p>
         </div>
 
-        {/* Entry point: police usage KPI report */}
-        <div className="card flex flex-wrap items-center justify-between gap-3 bg-navy-700 text-white">
-          <div className="flex items-center gap-3">
-            <Wifi size={28} className="flex-shrink-0" />
-            <div>
-              <h3 className="font-bold text-xl text-white">รายงานสถิติการเข้าใช้งานของตำรวจ (KPI)</h3>
-              <p className="text-lg text-blue-100">สรุปการขอดู Playback CCTV รายเดือน แยกตามสถานีตำรวจ (สภ.)</p>
-            </div>
-          </div>
-          <Link to="/reports/police-usage" className="bg-white text-navy-700 font-bold text-lg px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap">
-            ดูรายงาน
-          </Link>
-        </div>
-
         {/* Filter card */}
         <div className="card p-4">
           <div className="flex flex-wrap items-center gap-4">
