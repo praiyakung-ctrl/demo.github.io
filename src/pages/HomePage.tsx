@@ -119,13 +119,13 @@ function CameraStatusSummaryCard() {
       <div className="flex flex-wrap gap-2">
         {STATUS_TILES.map(({ key, label, icon: Icon, bg, count }) => (
           <div key={key} className="flex-1 min-w-[84px] rounded-xl p-2.5" style={{ backgroundColor: bg }}>
-            <p className="text-xs text-white/90 flex items-center gap-1 whitespace-nowrap mb-1">
+            <p className="text-sm font-bold text-white/90 flex items-center gap-1 whitespace-nowrap mb-1">
               <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 flex-shrink-0">
                 <Icon size={12} className="text-white" />
               </span>
               {label}
             </p>
-            <p className="text-xl font-extrabold text-white leading-tight">{count()}</p>
+            <p className="text-xl font-extrabold text-white leading-tight text-center">{count()}</p>
           </div>
         ))}
       </div>
