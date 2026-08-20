@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { MapContainer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Map as LeafletMap, Marker as LeafletMarker } from 'leaflet';
 import {
-  Camera as CameraIcon, Compass, Eye, EyeOff, Locate, Maximize,
+  Camera as CameraIcon, Compass, Eye, EyeOff, HelpCircle, Locate, Maximize,
   MapPin, Navigation, Navigation2, RotateCcw, Search, Share2, Video, VideoOff, Wifi, Wrench,
 } from 'lucide-react';
 import { SkipLink } from '../components/Layout';
@@ -108,7 +108,7 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
 function CameraStatusSummaryCard() {
   return (
     <div className="card p-3">
-      <div className="grid grid-cols-4 gap-2 text-center">
+      <div className="grid grid-cols-5 gap-2 text-center">
         <div>
           <p className="text-2xl font-extrabold text-navy-700 leading-tight">{publicCameras.length}</p>
           <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><CameraIcon size={12} /> ทั้งหมด</p>
@@ -124,6 +124,10 @@ function CameraStatusSummaryCard() {
         <div>
           <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Maintenance }}>{STATUS_COUNTS.Maintenance}</p>
           <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><Wrench size={12} /> ซ่อมบำรุง</p>
+        </div>
+        <div>
+          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Unknown }}>{STATUS_COUNTS.Unknown}</p>
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><HelpCircle size={12} /> ไม่ทราบ</p>
         </div>
       </div>
     </div>
