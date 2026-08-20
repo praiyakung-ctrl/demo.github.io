@@ -105,30 +105,29 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
   );
 }
 
+const STATUS_TILES = [
+  { key: 'total', label: 'ทั้งหมด', icon: CameraIcon, bg: '#1B3A6B', count: () => publicCameras.length },
+  { key: 'online', label: 'ออนไลน์', icon: Wifi, bg: '#16A34A', count: () => STATUS_COUNTS.Online },
+  { key: 'offline', label: 'ออฟไลน์', icon: VideoOff, bg: '#DC2626', count: () => STATUS_COUNTS.Offline },
+  { key: 'maintenance', label: 'ซ่อมบำรุง', icon: Wrench, bg: '#F59E0B', count: () => STATUS_COUNTS.Maintenance },
+  { key: 'unknown', label: 'ไม่ทราบ', icon: HelpCircle, bg: '#6B7280', count: () => STATUS_COUNTS.Unknown },
+] as const;
+
 function CameraStatusSummaryCard() {
   return (
     <div className="card p-3">
-      <div className="grid grid-cols-5 gap-1 text-center">
-        <div>
-          <p className="text-2xl font-extrabold text-navy-700 leading-tight">{publicCameras.length}</p>
-          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><CameraIcon size={12} /> ทั้งหมด</p>
-        </div>
-        <div>
-          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Online }}>{STATUS_COUNTS.Online}</p>
-          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><Wifi size={12} /> ออนไลน์</p>
-        </div>
-        <div>
-          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Offline }}>{STATUS_COUNTS.Offline}</p>
-          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><VideoOff size={12} /> ออฟไลน์</p>
-        </div>
-        <div>
-          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Maintenance }}>{STATUS_COUNTS.Maintenance}</p>
-          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><Wrench size={12} /> ซ่อมบำรุง</p>
-        </div>
-        <div>
-          <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Unknown }}>{STATUS_COUNTS.Unknown}</p>
-          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><HelpCircle size={12} /> ไม่ทราบ</p>
-        </div>
+      <div className="flex flex-wrap gap-2">
+        {STATUS_TILES.map(({ key, label, icon: Icon, bg, count }) => (
+          <div key={key} className="flex-1 min-w-[84px] rounded-xl p-2.5" style={{ backgroundColor: bg }}>
+            <p className="text-xs text-white/90 flex items-center gap-1 whitespace-nowrap mb-1">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 flex-shrink-0">
+                <Icon size={12} className="text-white" />
+              </span>
+              {label}
+            </p>
+            <p className="text-xl font-extrabold text-white leading-tight">{count()}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
