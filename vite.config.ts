@@ -15,5 +15,14 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     exclude: ['**/node_modules/**', 'e2e/**', 'worker/**'], // e2e/*.spec.ts belongs to Playwright, not Vitest; worker/ is a separate Cloudflare Worker project
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      exclude: [
+        'node_modules/**', 'e2e/**', 'worker/**',
+        'src/main.tsx', 'src/vite-env.d.ts',
+        '**/*.test.{ts,tsx}', '**/*.d.ts', 'src/types/**',
+      ],
+    },
   },
 })
