@@ -106,26 +106,26 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
 }
 
 const STATUS_TILES = [
-  { key: 'total', label: 'ทั้งหมด', icon: CameraIcon, bg: '#1B3A6B', count: () => publicCameras.length },
-  { key: 'online', label: 'ออนไลน์', icon: Wifi, bg: '#16A34A', count: () => STATUS_COUNTS.Online },
-  { key: 'offline', label: 'ออฟไลน์', icon: VideoOff, bg: '#DC2626', count: () => STATUS_COUNTS.Offline },
-  { key: 'maintenance', label: 'ซ่อมบำรุง', icon: Wrench, bg: '#F59E0B', count: () => STATUS_COUNTS.Maintenance },
-  { key: 'unknown', label: 'ไม่ทราบ', icon: HelpCircle, bg: '#6B7280', count: () => STATUS_COUNTS.Unknown },
+  { key: 'total', label: 'ทั้งหมด', icon: CameraIcon, bg: '#1B3A6B', light: false, count: () => publicCameras.length },
+  { key: 'online', label: 'ออนไลน์', icon: Wifi, bg: '#16A34A', light: false, count: () => STATUS_COUNTS.Online },
+  { key: 'offline', label: 'ออฟไลน์', icon: VideoOff, bg: '#E5E7EB', light: true, count: () => STATUS_COUNTS.Offline },
+  { key: 'maintenance', label: 'ซ่อมบำรุง', icon: Wrench, bg: '#F59E0B', light: false, count: () => STATUS_COUNTS.Maintenance },
+  { key: 'unknown', label: 'ไม่ทราบ', icon: HelpCircle, bg: '#6B7280', light: false, count: () => STATUS_COUNTS.Unknown },
 ] as const;
 
 function CameraStatusSummaryCard() {
   return (
     <div className="card p-3">
       <div className="flex flex-wrap gap-2">
-        {STATUS_TILES.map(({ key, label, icon: Icon, bg, count }) => (
+        {STATUS_TILES.map(({ key, label, icon: Icon, bg, light, count }) => (
           <div key={key} className="flex-1 min-w-[84px] rounded-xl p-2.5" style={{ backgroundColor: bg }}>
-            <p className="text-sm font-bold text-white/90 flex items-center gap-1 whitespace-nowrap mb-1">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white/20 flex-shrink-0">
-                <Icon size={12} className="text-white" />
+            <p className={`text-sm font-bold flex items-center gap-1 whitespace-nowrap mb-1 ${light ? 'text-navy-700/80' : 'text-white/90'}`}>
+              <span className={`flex items-center justify-center w-5 h-5 rounded-full flex-shrink-0 ${light ? 'bg-navy-700/10' : 'bg-white/20'}`}>
+                <Icon size={12} className={light ? 'text-navy-700' : 'text-white'} />
               </span>
               {label}
             </p>
-            <p className="text-xl font-extrabold text-white leading-tight text-center">{count()}</p>
+            <p className={`text-xl font-extrabold leading-tight text-center ${light ? 'text-navy-700' : 'text-white'}`}>{count()}</p>
           </div>
         ))}
       </div>
