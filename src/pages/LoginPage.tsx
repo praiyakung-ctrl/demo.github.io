@@ -11,6 +11,8 @@ import { findMemberByNationalId, findMemberByEmail, memberLoginErrorMessage } fr
 import type { ThaIdProfile } from '../utils/thaId';
 import type { GoogleProfile } from '../utils/googleAuth';
 
+const SHOW_FOREIGNER_LOGIN = false;
+
 export function LoginPage() {
   const { loginWithThaId, loginWithGoogle, user } = useAuth();
   const [error, setError] = useState('');
@@ -78,17 +80,19 @@ export function LoginPage() {
           )}
 
           {mode === 'thaid' ? (
-            <div className="mt-3">
-              <p className="text-center text-xl font-bold text-gray-500 mb-2">สำหรับชาวต่างชาติ</p>
-              <button
-                type="button"
-                onClick={() => { setMode('google'); setError(''); }}
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-blue-200 bg-blue-50 text-navy-700 text-xl font-semibold shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
-              >
-                <Mail size={22} aria-hidden="true" />
-                Foreign Nationals log in using Gmail
-              </button>
-            </div>
+            SHOW_FOREIGNER_LOGIN && (
+              <div className="mt-3">
+                <p className="text-center text-xl font-bold text-gray-500 mb-2">สำหรับชาวต่างชาติ</p>
+                <button
+                  type="button"
+                  onClick={() => { setMode('google'); setError(''); }}
+                  className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-blue-200 bg-blue-50 text-navy-700 text-xl font-semibold shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
+                >
+                  <Mail size={22} aria-hidden="true" />
+                  Foreign Nationals log in using Gmail
+                </button>
+              </div>
+            )
           ) : (
             <p className="mt-4 text-center text-lg text-gray-600">
               มีบัตรประชาชนไทย?{' '}
@@ -104,9 +108,11 @@ export function LoginPage() {
               <Link to="/register" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
                 <UserPlus size={18} aria-hidden="true" /> สมัครสมาชิกสำหรับประชาชน
               </Link>
-              <Link to="/register/foreigner" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
-                <Globe size={18} aria-hidden="true" /> Membership registration for foreigners
-              </Link>
+              {SHOW_FOREIGNER_LOGIN && (
+                <Link to="/register/foreigner" className="flex items-center justify-center gap-2 text-lg text-navy-700 hover:text-navy-500 hover:underline font-semibold">
+                  <Globe size={18} aria-hidden="true" /> Membership registration for foreigners
+                </Link>
+              )}
             </div>
           </div>
 
