@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,6 +28,10 @@ jobs:
           # sending (instead of failing) when this is empty.
           VITE_EMAIL_WORKER_URL: ${{ vars.VITE_EMAIL_WORKER_URL }}
       - run: npx playwright install --with-deps chromium
+        env:
+          # apt's needrestart prompt can hang waiting for input on
+          # ubuntu-latest runners — force it to run non-interactively.
+          DEBIAN_FRONTEND: noninteractive
       - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -35,10 +40,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-        
+

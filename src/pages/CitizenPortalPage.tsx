@@ -827,7 +827,10 @@ function StaffView() {
           <div className="max-w-3xl space-y-4">
             <div className="card p-4">
               <div className="flex items-start justify-between mb-3">
-                <h3 className="font-bold text-navy-700 text-2xl flex items-center gap-2"><FileText size={20} /> รายละเอียดคำขอ</h3>
+                <h3 className="font-bold text-navy-700 text-2xl flex items-center gap-2">
+                  <FileText size={20} /> รายละเอียดคำขอ
+                  <span className="text-lg text-gray-400 font-normal ml-1">{selected.reqNo}</span>
+                </h3>
                 <StatusBadge status={selected.status} />
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-xl">
@@ -861,7 +864,7 @@ function StaffView() {
                 </div>
               </div>
               <p className="text-lg text-gray-400 mt-3 pt-3 border-t border-gray-50">
-                เลขที่คำขอ {selected.reqNo} · สร้างเมื่อ {formatThaiDateTime(selected.submittedAt)}
+                สร้างเมื่อ {formatThaiDateTime(selected.submittedAt)}
               </p>
             </div>
 
