@@ -108,26 +108,26 @@ function CameraListCard({ sorted, selectedCam, sortMode, now, onSelect }: {
 function CameraStatusSummaryCard() {
   return (
     <div className="card p-3">
-      <div className="grid grid-cols-5 gap-2 text-center">
+      <div className="grid grid-cols-5 gap-1 text-center">
         <div>
           <p className="text-2xl font-extrabold text-navy-700 leading-tight">{publicCameras.length}</p>
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><CameraIcon size={12} /> ทั้งหมด</p>
+          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><CameraIcon size={12} /> ทั้งหมด</p>
         </div>
         <div>
           <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Online }}>{STATUS_COUNTS.Online}</p>
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><Wifi size={12} /> ออนไลน์</p>
+          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><Wifi size={12} /> ออนไลน์</p>
         </div>
         <div>
           <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Offline }}>{STATUS_COUNTS.Offline}</p>
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><VideoOff size={12} /> ออฟไลน์</p>
+          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><VideoOff size={12} /> ออฟไลน์</p>
         </div>
         <div>
           <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Maintenance }}>{STATUS_COUNTS.Maintenance}</p>
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><Wrench size={12} /> ซ่อมบำรุง</p>
+          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><Wrench size={12} /> ซ่อมบำรุง</p>
         </div>
         <div>
           <p className="text-2xl font-extrabold leading-tight" style={{ color: STATUS_COLORS.Unknown }}>{STATUS_COUNTS.Unknown}</p>
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1"><HelpCircle size={12} /> ไม่ทราบ</p>
+          <p className="text-xs text-gray-500 flex items-center justify-center gap-0.5 whitespace-nowrap"><HelpCircle size={12} /> ไม่ทราบ</p>
         </div>
       </div>
     </div>
