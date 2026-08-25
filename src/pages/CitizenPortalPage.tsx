@@ -4,7 +4,7 @@ import { MapContainer, Marker } from 'react-leaflet';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import {
   AlertTriangle, ChevronLeft, Clock, Download, FileText, Hash, Inbox, Mail, MapPin,
-  Plus, Search, Target, User, Activity, Camera as CameraIcon,
+  Plus, Search, Target, Activity, Camera as CameraIcon,
   CheckCircle, AlertCircle, XCircle, Filter, Paperclip, BarChart3,
 } from 'lucide-react';
 import { Layout, SkipLink } from '../components/Layout';
@@ -277,17 +277,6 @@ function RequestDetail({ req, onBack, onRefresh }: { req: CitizenRequest; onBack
           })}
         </div>
       </section>
-
-      {req.approvals && req.approvals.length > 0 && (
-        <section className="border border-gray-200 rounded-xl overflow-hidden">
-          <div className="bg-gray-50 px-4 py-2.5 border-b border-gray-200">
-            <h3 className="text-2xl font-bold text-navy-700 flex items-center gap-2"><User size={22} /> ผู้อนุมัติแต่ละระดับ</h3>
-          </div>
-          <div className="px-4 py-3">
-            <ApprovalHistory approvals={req.approvals} />
-          </div>
-        </section>
-      )}
     </div>
   );
 }
