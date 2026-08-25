@@ -415,23 +415,27 @@ function Step1Form({ form, setForm, onNext, onCancel }: {
       {/* 1.2 Date & time range */}
       <section>
         <h3 className="text-2xl font-bold text-gray-800 mb-3">1.2 ระบุวันที่และเวลาที่ต้องการ</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto_1fr_1fr] gap-2 items-end">
-          <div>
-            <label htmlFor="req-start-date" className="label">วันที่เริ่มต้น <span className="text-red-500">*</span></label>
-            <input id="req-start-date" type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)} className="input-field" />
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label htmlFor="req-start-date" className="label">วันที่เริ่มต้น <span className="text-red-500">*</span></label>
+              <input id="req-start-date" type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)} className="input-field" />
+            </div>
+            <div>
+              <label htmlFor="req-start-time" className="label">เวลาเริ่มต้น <span className="text-red-500">*</span></label>
+              <input id="req-start-time" type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
+            </div>
           </div>
-          <div>
-            <label htmlFor="req-start-time" className="label">เวลาเริ่มต้น <span className="text-red-500">*</span></label>
-            <input id="req-start-time" type="time" value={form.startTime} onChange={e => set('startTime', e.target.value)} className="input-field" />
-          </div>
-          <span className="hidden sm:block text-xl text-gray-600 text-center px-1 pb-2.5">ถึง</span>
-          <div>
-            <label htmlFor="req-end-date" className="label">วันที่สิ้นสุด <span className="text-red-500">*</span></label>
-            <input id="req-end-date" type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)} className="input-field" />
-          </div>
-          <div>
-            <label htmlFor="req-end-time" className="label">เวลาสิ้นสุด <span className="text-red-500">*</span></label>
-            <input id="req-end-time" type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
+          <div className="text-xl text-gray-600 text-center">ถึง</div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label htmlFor="req-end-date" className="label">วันที่สิ้นสุด <span className="text-red-500">*</span></label>
+              <input id="req-end-date" type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)} className="input-field" />
+            </div>
+            <div>
+              <label htmlFor="req-end-time" className="label">เวลาสิ้นสุด <span className="text-red-500">*</span></label>
+              <input id="req-end-time" type="time" value={form.endTime} onChange={e => set('endTime', e.target.value)} className="input-field" />
+            </div>
           </div>
         </div>
         {errors.datetime && <p role="alert" className="text-lg text-red-600 mt-1">{errors.datetime}</p>}
