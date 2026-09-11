@@ -223,8 +223,8 @@ export function ReportsPage() {
   const rangeLabel = selectedPeriods.length === 0
     ? ''
     : selectedPeriods.length === 1
-      ? `${selectedPeriods[0].month} ${selectedPeriods[0].year}`
-      : `${selectedPeriods[0].month} ${selectedPeriods[0].year} - ${selectedPeriods[selectedPeriods.length - 1].month} ${selectedPeriods[selectedPeriods.length - 1].year}`;
+      ? `${MONTH_FULL_NAMES[selectedPeriods[0].month]} ${selectedPeriods[0].year}`
+      : `${MONTH_FULL_NAMES[selectedPeriods[0].month]} ${selectedPeriods[0].year} - ${MONTH_FULL_NAMES[selectedPeriods[selectedPeriods.length - 1].month]} ${selectedPeriods[selectedPeriods.length - 1].year}`;
 
   const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
     if (!bar.payload) return;
