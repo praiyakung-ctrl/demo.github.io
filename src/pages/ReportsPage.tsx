@@ -12,9 +12,17 @@ import camerasData from '../data/cameras.json';
 import type { Camera, MonthlyEventData, LprRoad } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { exportChartWithTableToExcel, exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
+import { stationOf } from '../utils/cameraDisplay';
 
-const monthly = lprData.monthly as MonthlyEventData[];
 const roads = lprData.roads as LprRoad[];
+
+interface PointMonthRecord {
+  year: string; month: string; point: string;
+  traffic: number; gunshot: number; parking: number; flood: number; crowd: number;
+}
+const monthlyByPoint = lprData.monthlyByPoint as PointMonthRecord[];
+
+interface Period { year: string; month: string; key: string; }
 
 /* the 8 installation points of the new LPR-project cameras (51 of the
    991 total cameras) — identified by matching against lpr.json's roads,
@@ -74,13 +82,37 @@ const EVENT_TYPE_ICONS = {
   flood:   Waves,
   crowd:   Users,
 } as const;
-const MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.'];
+const MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+
+function periodKey(year: string, month: string): string {
+  return `${year}-${String(MONTHS.indexOf(month) + 1).padStart(2, '0')}`;
+}
+
+/* every (ปี, เดือน) ที่มีข้อมูลจริงใน monthlyByPoint เรียงตามลำดับเวลา — ตัวเลือก
+   ปี/เดือน ของ dropdown จาก-ถึง มาจากรายการนี้ทั้งหมด (data-driven ไม่ hardcode ปีปัจจุบัน) */
+const PERIODS: Period[] = (() => {
+  const map = new Map<string, Period>();
+  for (const r of monthlyByPoint) {
+    const key = periodKey(r.year, r.month);
+    if (!map.has(key)) map.set(key, { year: r.year, month: r.month, key });
+  }
+  return [...map.values()].sort((a, b) => a.key.localeCompare(b.key));
+})();
+const YEARS = [...new Set(PERIODS.map(p => p.year))];
+const DEFAULT_PERIOD = PERIODS[PERIODS.length - 1];
+
+function monthsForYear(year: string): string[] {
+  return PERIODS.filter(p => p.year === year).map(p => p.month);
+}
+
+const pointStation = new Map(roads.map(r => [r.road, stationOf(r.road)]));
+const STATION_OPTIONS = [...new Set(roads.map(r => stationOf(r.road)))];
 
 function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number; color: string; dataKey: string; name: string }[]; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-3 min-w-[180px]">
-      <p className="text-base font-bold text-navy-700 mb-2">{label} 2568</p>
+      <p className="text-base font-bold text-navy-700 mb-2">{label}</p>
       {payload.map(entry => {
         const Icon = EVENT_TYPE_ICONS[entry.dataKey as keyof typeof EVENT_TYPE_ICONS];
         return (
@@ -115,7 +147,12 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
 export function ReportsPage() {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
-  const [selectedMonth, setSelectedMonth] = useState('all');
+  const [fromYear, setFromYear] = useState(DEFAULT_PERIOD.year);
+  const [fromMonth, setFromMonth] = useState(DEFAULT_PERIOD.month);
+  const [toYear, setToYear] = useState(DEFAULT_PERIOD.year);
+  const [toMonth, setToMonth] = useState(DEFAULT_PERIOD.month);
+  const [selectedStation, setSelectedStation] = useState('all');
+  const [selectedPoint, setSelectedPoint] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
 
   const toggleType = (type: string) => {
@@ -126,13 +163,55 @@ export function ReportsPage() {
     });
   };
 
-  const filteredMonthly = selectedMonth === 'all'
-    ? monthly
-    : monthly.filter((_r, i) => String(i + 1) === selectedMonth);
+  const handleFromYearChange = (year: string) => {
+    setFromYear(year);
+    const months = monthsForYear(year);
+    if (!months.includes(fromMonth)) setFromMonth(months[0]);
+  };
+  const handleToYearChange = (year: string) => {
+    setToYear(year);
+    const months = monthsForYear(year);
+    if (!months.includes(toMonth)) setToMonth(months[months.length - 1]);
+  };
+
+  const clearFilters = () => {
+    setFromYear(DEFAULT_PERIOD.year);
+    setFromMonth(DEFAULT_PERIOD.month);
+    setToYear(DEFAULT_PERIOD.year);
+    setToMonth(DEFAULT_PERIOD.month);
+    setSelectedStation('all');
+    setSelectedPoint('all');
+    setSelectedTypes(new Set(EVENT_TYPES));
+  };
+
+  const fromKey = periodKey(fromYear, fromMonth);
+  const toKey = periodKey(toYear, toMonth);
+  const [effectiveFrom, effectiveTo] = fromKey <= toKey ? [fromKey, toKey] : [toKey, fromKey];
+  const selectedPeriods = PERIODS.filter(p => p.key >= effectiveFrom && p.key <= effectiveTo);
+
+  const filteredMonthly: MonthlyEventData[] = selectedPeriods.map(period => {
+    const matching = monthlyByPoint.filter(r =>
+      r.year === period.year && r.month === period.month &&
+      (selectedPoint === 'all' || r.point === selectedPoint) &&
+      (selectedStation === 'all' || pointStation.get(r.point) === selectedStation)
+    );
+    const row: MonthlyEventData = { month: `${period.month} ${period.year}`, traffic: 0, gunshot: 0, parking: 0, flood: 0, crowd: 0, other: 0 };
+    for (const m of matching) {
+      for (const t of EVENT_TYPES) row[t] += m[t];
+    }
+    return row;
+  });
+
+  const rangeLabel = selectedPeriods.length === 0
+    ? ''
+    : selectedPeriods.length === 1
+      ? `${selectedPeriods[0].month} ${selectedPeriods[0].year}`
+      : `${selectedPeriods[0].month} ${selectedPeriods[0].year} - ${selectedPeriods[selectedPeriods.length - 1].month} ${selectedPeriods[selectedPeriods.length - 1].year}`;
 
   const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
     if (!bar.payload) return;
-    const index = monthly.findIndex(m => m.month === bar.payload!.month);
+    const monthAbbr = bar.payload.month.split(' ')[0];
+    const index = MONTHS.indexOf(monthAbbr);
     if (index >= 0) navigate(`/reports/daily-events?month=${index + 1}`);
   };
 
@@ -147,7 +226,7 @@ export function ReportsPage() {
     'CCTV Events': [
       ['เดือน', ...activeTypes.map(t => EVENT_LABELS[t]), 'รวมทั้งหมด'],
       ...filteredMonthly.map(row => [
-        `${row.month} 2568`,
+        row.month,
         ...activeTypes.map(t => row[t] ?? 0),
         EVENT_TYPES.reduce((s, t) => s + (row[t] ?? 0), 0),
       ]),
@@ -194,25 +273,92 @@ export function ReportsPage() {
         </div>
 
         {/* Filter card */}
-        <div className="card p-4">
+        <div className="card p-4 space-y-4">
           <div className="flex flex-wrap items-center gap-4">
-            {/* Month */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-lg font-bold text-gray-900 whitespace-nowrap">เดือน:</span>
-              <select
-                aria-label="เลือกเดือน"
-                value={selectedMonth}
-                onChange={e => setSelectedMonth(e.target.value)}
-                className="input-field py-1.5 text-lg w-40"
-              >
-                <option value="all">ทุกเดือน</option>
-                {MONTHS.map((m, i) => <option key={i} value={String(i + 1)}>{m} 2568</option>)}
-              </select>
+            {/* Date range: จาก - ถึง (เดือน + ปี) */}
+            <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
+              <span className="text-lg font-bold text-gray-900 whitespace-nowrap">ช่วงเวลา:</span>
+
+              <div className="flex items-center gap-1.5 bg-gray-50 border-2 border-gray-200 rounded-lg px-2 py-1">
+                <span className="text-base font-semibold text-gray-600 whitespace-nowrap">จาก</span>
+                <select
+                  aria-label="เดือนเริ่มต้น"
+                  value={fromMonth}
+                  onChange={e => setFromMonth(e.target.value)}
+                  className="input-field py-1 text-base w-24"
+                >
+                  {monthsForYear(fromYear).map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
+                <select
+                  aria-label="ปีเริ่มต้น"
+                  value={fromYear}
+                  onChange={e => handleFromYearChange(e.target.value)}
+                  className="input-field py-1 text-base w-24"
+                >
+                  {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
+                </select>
+              </div>
+
+              <span className="text-gray-400 font-bold">–</span>
+
+              <div className="flex items-center gap-1.5 bg-gray-50 border-2 border-gray-200 rounded-lg px-2 py-1">
+                <span className="text-base font-semibold text-gray-600 whitespace-nowrap">ถึง</span>
+                <select
+                  aria-label="เดือนสิ้นสุด"
+                  value={toMonth}
+                  onChange={e => setToMonth(e.target.value)}
+                  className="input-field py-1 text-base w-24"
+                >
+                  {monthsForYear(toYear).map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
+                <select
+                  aria-label="ปีสิ้นสุด"
+                  value={toYear}
+                  onChange={e => handleToYearChange(e.target.value)}
+                  className="input-field py-1 text-base w-24"
+                >
+                  {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
+                </select>
+              </div>
             </div>
 
             {/* Divider */}
-            <div className="w-px h-10 bg-gray-200 flex-shrink-0" />
+            <div className="w-px h-10 bg-gray-200 flex-shrink-0 hidden lg:block" />
 
+            {/* สภ. / จุดติดตั้ง */}
+            <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
+              <span className="text-lg font-bold text-gray-900 whitespace-nowrap">สภ.:</span>
+              <select
+                aria-label="เลือกสภ."
+                value={selectedStation}
+                onChange={e => setSelectedStation(e.target.value)}
+                className="input-field py-1.5 text-lg w-auto max-w-[180px]"
+              >
+                <option value="all">ทุก สภ.</option>
+                {STATION_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+
+              <span className="text-lg font-bold text-gray-900 whitespace-nowrap">จุดติดตั้ง:</span>
+              <select
+                aria-label="เลือกจุดติดตั้ง"
+                value={selectedPoint}
+                onChange={e => setSelectedPoint(e.target.value)}
+                className="input-field py-1.5 text-lg w-auto max-w-[220px]"
+              >
+                <option value="all">ทุกจุดติดตั้ง</option>
+                {roads.map(r => <option key={r.road} value={r.road}>{r.road}</option>)}
+              </select>
+            </div>
+
+            <button onClick={clearFilters} className="btn-secondary py-1.5 px-4 text-base ml-auto flex-shrink-0">
+              ล้างตัวกรอง
+            </button>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gray-200" />
+
+          <div className="flex flex-wrap items-center gap-4">
             {/* Event type filter */}
             <div className="flex items-center gap-2 flex-wrap flex-1">
               <span className="text-lg font-bold text-gray-900 whitespace-nowrap flex-shrink-0">เหตุการณ์:</span>
@@ -254,7 +400,7 @@ export function ReportsPage() {
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <FileText size={24} className="text-navy-700" />
-              <h3 className="font-bold text-gray-900 text-xl">รายงานเหตุการณ์ CCTV รายเดือน (2568)</h3>
+              <h3 className="font-bold text-gray-900 text-xl">รายงานเหตุการณ์ CCTV รายเดือน ({rangeLabel})</h3>
             </div>
             <ExportButtons disabled={exporting} onPdf={() => handleExport('CCTV Events', 'PDF')} onExcel={() => handleExport('CCTV Events', 'Excel')} />
           </div>
@@ -304,7 +450,7 @@ export function ReportsPage() {
                       onClick={() => goToDailyEventsForBar({ payload: row })}
                       onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToDailyEventsForBar({ payload: row }); } }}
                     >
-                      <td className="px-4 py-2.5 font-medium text-gray-900">{row.month} 2568</td>
+                      <td className="px-4 py-2.5 font-medium text-gray-900">{row.month}</td>
                       {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
                         <td key={t} className="px-4 py-2.5 text-right text-gray-700">{row[t]}</td>
                       ))}
