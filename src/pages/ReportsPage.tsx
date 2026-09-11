@@ -339,6 +339,10 @@ export function ReportsPage() {
     setExporting(true);
     try {
       const filename = `รายงาน-${section.replace(/\s+/g, '-')}-${todayStamp()}`;
+      if (section === 'CCTV Events') {
+        // let the chart finish drawing (labels/animation) before html2canvas captures it
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      }
       if (format === 'Excel') {
         // the CCTV Events card contains a chart — embed its image in the Excel file too
         if (section === 'CCTV Events' && eventsRef.current) {
@@ -574,6 +578,7 @@ export function ReportsPage() {
                     data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}
                     label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
                     cursor="pointer"
+                    isAnimationActive={false}
                   >
                     {pieData.map(d => (
                       <Cell key={d.key} fill={d.color} onClick={() => openCategoryDrillDown(d.key)} />
