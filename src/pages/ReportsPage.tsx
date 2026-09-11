@@ -330,6 +330,8 @@ export function ReportsPage() {
       ['', 'รวม', mplsTotal.count, '', '', mplsTotal.totalMbps],
     ],
     'LPR': [
+      ['รายงาน LPR แยกตามจุดติดตั้ง'],
+      [`ช่วงเวลา: ${rangeLabel}`],
       ['อันดับ', 'ถนน', 'จำนวน (คัน/วัน)'],
       ...roads.map((r, i) => [i + 1, r.road, r.count]),
     ],
@@ -349,7 +351,8 @@ export function ReportsPage() {
         if (section === 'CCTV Events' && eventsRef.current) {
           await exportChartWithTableToExcel(eventsRef.current, excelRows[section], section, `${filename}.xlsx`);
         } else {
-          await exportRowsToExcel(excelRows[section], section, `${filename}.xlsx`);
+          const boldRowIndex = section === 'LPR' ? 2 : 0;
+          await exportRowsToExcel(excelRows[section], section, `${filename}.xlsx`, boldRowIndex);
         }
       } else {
         const el = { 'CCTV Events': eventsRef, 'NT MPLS': mplsRef, 'LPR': lprRef }[section]?.current;
@@ -827,7 +830,7 @@ export function ReportsPage() {
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <BarChart2 size={24} className="text-navy-700" />
-              <h3 className="font-bold text-gray-900 text-xl">รายงาน LPR แยกตามจุดติดตั้ง</h3>
+              <h3 className="font-bold text-gray-900 text-xl">รายงาน LPR แยกตามจุดติดตั้ง ({rangeLabel})</h3>
             </div>
             <ExportButtons disabled={exporting} onPdf={() => handleExport('LPR', 'PDF')} onExcel={() => handleExport('LPR', 'Excel')} />
           </div>

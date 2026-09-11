@@ -128,13 +128,14 @@ export async function exportChartWithTableToPdf(
 export async function exportRowsToExcel(
   rows: Rows,
   sheetName: string,
-  filename: string
+  filename: string,
+  boldRowIndex = 0
 ): Promise<void> {
   const ExcelJS = await import('exceljs');
   const wb = new ExcelJS.Workbook();
   const ws = wb.addWorksheet(sheetName);
   ws.addRows(rows);
-  ws.getRow(1).font = { bold: true };
+  ws.getRow(boldRowIndex + 1).font = { bold: true };
   // size columns to the widest cell so Thai text is not cut off
   ws.columns.forEach((col, i) => {
     col.width = Math.max(12, ...rows.map(r => String(r[i] ?? '').length + 4));
