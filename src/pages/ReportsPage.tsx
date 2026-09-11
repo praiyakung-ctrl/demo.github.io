@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   FileText, BarChart2, BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon,
-  Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi,
+  Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi, X,
 } from 'lucide-react';
 import { ExportButtons } from '../components/ExportButtons';
 import {
@@ -79,6 +79,7 @@ const RANK_COLORS = [
 ];
 
 const EVENT_TYPES = ['traffic', 'gunshot', 'parking', 'flood', 'crowd'] as const;
+type EventType = typeof EVENT_TYPES[number];
 
 const EVENT_TYPE_ICONS = {
   traffic: Car,
@@ -97,6 +98,34 @@ const MONTH_FULL_NAMES: Record<string, string> = {
 
 function periodKey(year: string, month: string): string {
   return `${year}-${String(MONTHS.indexOf(month) + 1).padStart(2, '0')}`;
+}
+
+/* พ.ศ. -> ค.ศ. เพื่อใช้คำนวณจำนวนวันจริงของเดือนนั้น (รองรับปีอธิกสุรทิน) */
+function daysInMonth(year: string, month: string): number {
+  const adYear = Number(year) - 543;
+  return new Date(adYear, MONTHS.indexOf(month) + 1, 0).getDate();
+}
+
+/* deterministic pseudo-random 0..1 จาก seed — ใช้กระจายยอดรวมเดือน/ประเภทเป็นรายวัน
+   ตอน render (ไม่ใช่ข้อมูลจริง) โดยให้ผลลัพธ์เดิมทุกครั้งที่ตัวกรองเดิม ไม่ต้อง cache */
+function seededFraction(seed: number): number {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+/* กระจาย `total` เป็น `days` ค่า (น้ำหนักสุ่มแบบ deterministic ต่อวัน) แล้วปัดเศษแบบ
+   largest-remainder ให้ผลรวมกลับเท่ากับ `total` เป๊ะ — เทคนิคเดียวกับสคริปต์ที่ใช้สร้าง
+   monthlyByPoint (ดู src/data/lpr.json) แต่คำนวณ ณ runtime แทน */
+function distributeAcrossDays(total: number, days: number, seedBase: number): number[] {
+  const weights = Array.from({ length: days }, (_, i) => 0.5 + seededFraction(seedBase + i * 7.13));
+  const sumW = weights.reduce((s, w) => s + w, 0);
+  const raw = weights.map(w => (total * w) / sumW);
+  const floors = raw.map(Math.floor);
+  const remainder = total - floors.reduce((s, v) => s + v, 0);
+  const order = raw.map((v, i) => ({ i, frac: v - floors[i] })).sort((a, b) => b.frac - a.frac);
+  const result = [...floors];
+  for (let k = 0; k < remainder; k++) result[order[k].i] += 1;
+  return result;
 }
 
 /* every (ปี, เดือน) ที่มีข้อมูลจริงใน monthlyByPoint เรียงตามลำดับเวลา — ตัวเลือก
@@ -155,7 +184,6 @@ function ChartLegend({ payload }: { payload?: { value: string; color: string; da
 }
 
 export function ReportsPage() {
-  const navigate = useNavigate();
   const { isAdmin } = useAuth();
   const [fromYear, setFromYear] = useState(DEFAULT_PERIOD.year);
   const [fromMonth, setFromMonth] = useState(DEFAULT_PERIOD.month);
@@ -165,6 +193,7 @@ export function ReportsPage() {
   const [selectedPoint, setSelectedPoint] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
   const [chartType, setChartType] = useState<'bar' | 'line' | 'pie'>('pie');
+  const [drillDown, setDrillDown] = useState<{ kind: 'month'; period: Period } | { kind: 'category'; type: EventType } | null>(null);
 
   const toggleType = (type: string) => {
     setSelectedTypes(prev => {
@@ -193,6 +222,7 @@ export function ReportsPage() {
     setSelectedStation('all');
     setSelectedPoint('all');
     setSelectedTypes(new Set(EVENT_TYPES));
+    setDrillDown(null);
   };
 
   const fromKey = periodKey(fromYear, fromMonth);
@@ -226,29 +256,56 @@ export function ReportsPage() {
       ? `${MONTH_FULL_NAMES[selectedPeriods[0].month]} ${selectedPeriods[0].year}`
       : `${MONTH_FULL_NAMES[selectedPeriods[0].month]} ${selectedPeriods[0].year} - ${MONTH_FULL_NAMES[selectedPeriods[selectedPeriods.length - 1].month]} ${selectedPeriods[selectedPeriods.length - 1].year}`;
 
-  const goToDailyEventsForBar = (bar: { payload?: MonthlyEventData }) => {
-    if (!bar.payload) return;
-    const monthAbbr = bar.payload.month.split(' ')[0];
-    const index = MONTHS.indexOf(monthAbbr);
-    if (index >= 0) navigate(`/reports/daily-events?month=${index + 1}`);
-  };
+  const openMonthDrillDown = (period: Period) => setDrillDown({ kind: 'month', period });
+  const openCategoryDrillDown = (type: EventType) => setDrillDown({ kind: 'category', type });
 
   /* recharts' `dot` render prop is called with the merged per-point props
-     (index/cx/cy) — use `index` to look up the matching row in filteredMonthly
+     (index/cx/cy) — use `index` to look up the matching period in selectedPeriods
      rather than relying on an activeDot callback, which only receives the
      activeDot config and not the point's data (same approach as ComparisonReportPage) */
   const dotForType = (color: string) => (dotProps: DotItemDotProps) => {
     const { index, cx, cy } = dotProps;
     if (cx == null || cy == null || index == null) return <></>;
-    const row = filteredMonthly[index];
     return (
       <Dot
         cx={cx} cy={cy} r={3} fill={color}
         style={{ cursor: 'pointer' }}
-        onClick={() => goToDailyEventsForBar({ payload: row })}
+        onClick={() => openMonthDrillDown(selectedPeriods[index])}
       />
     );
   };
+
+  /* ---- Drill-down รายวัน: กระจายยอดรวมเดือนที่กรองไว้แล้ว (filteredMonthly) เป็นรายวัน
+     ณ runtime — ไม่มีข้อมูลรายวันจริงสำหรับช่วงปี/เดือนใหม่ทั้งหมด ผลรวมกลับต้องเท่ากับ
+     ยอดเดือนในตาราง/กราฟด้านบนเป๊ะเสมอ (ดู distributeAcrossDays) */
+  const monthDrillRows: ({ day: number } & Record<string, number>)[] = (() => {
+    if (drillDown?.kind !== 'month') return [];
+    const idx = selectedPeriods.findIndex(p => p.key === drillDown.period.key);
+    if (idx < 0) return [];
+    const row = filteredMonthly[idx];
+    const days = daysInMonth(drillDown.period.year, drillDown.period.month);
+    const perType = EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => ({
+      t,
+      values: distributeAcrossDays(row[t] ?? 0, days, Number(drillDown.period.year) * 1000 + MONTHS.indexOf(drillDown.period.month) * 10 + EVENT_TYPES.indexOf(t)),
+    }));
+    return Array.from({ length: days }, (_, i) => {
+      const dayRow: { day: number } & Record<string, number> = { day: i + 1 };
+      for (const { t, values } of perType) dayRow[t] = values[i];
+      return dayRow;
+    });
+  })();
+
+  const categoryDrillRows: { label: string; value: number }[] = (() => {
+    if (drillDown?.kind !== 'category') return [];
+    const rows: { label: string; value: number }[] = [];
+    selectedPeriods.forEach((period, idx) => {
+      const total = filteredMonthly[idx][drillDown.type] ?? 0;
+      const days = daysInMonth(period.year, period.month);
+      const values = distributeAcrossDays(total, days, Number(period.year) * 1000 + MONTHS.indexOf(period.month) * 10 + EVENT_TYPES.indexOf(drillDown.type));
+      values.forEach((value, i) => rows.push({ label: `${i + 1} ${period.month} ${period.year}`, value }));
+    });
+    return rows;
+  })();
 
   const eventsRef = useRef<HTMLDivElement>(null);
   const mplsRef = useRef<HTMLDivElement>(null);
@@ -483,7 +540,10 @@ export function ReportsPage() {
                   <Tooltip content={<ChartTooltip />} />
                   <Legend content={<ChartLegend />} />
                   {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                    <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
+                    <Bar
+                      key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer"
+                      onClick={(_, index) => openMonthDrillDown(selectedPeriods[index])}
+                    />
                   ))}
                 </BarChart>
               ) : chartType === 'line' ? (
@@ -505,8 +565,11 @@ export function ReportsPage() {
                   <Pie
                     data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}
                     label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
+                    cursor="pointer"
                   >
-                    {pieData.map(d => <Cell key={d.key} fill={d.color} />)}
+                    {pieData.map(d => (
+                      <Cell key={d.key} fill={d.color} onClick={() => openCategoryDrillDown(d.key)} />
+                    ))}
                   </Pie>
                   <Tooltip formatter={v => [`${Number(v).toLocaleString()} ครั้ง`]} />
                 </PieChart>
@@ -515,10 +578,14 @@ export function ReportsPage() {
             {chartType === 'pie' && (
               <div className="flex flex-wrap justify-center gap-4 pt-2">
                 {pieData.map(d => (
-                  <div key={d.key} className="flex items-center gap-1.5">
+                  <button
+                    key={d.key}
+                    onClick={() => openCategoryDrillDown(d.key)}
+                    className="flex items-center gap-1.5 hover:underline"
+                  >
                     <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
                     <span className="text-base font-medium" style={{ color: d.color }}>{d.name}: {d.value.toLocaleString()}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -538,7 +605,7 @@ export function ReportsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredMonthly.map(row => {
+                {filteredMonthly.map((row, index) => {
                   const total = EVENT_TYPES.reduce((sum, t) => sum + (row[t] ?? 0), 0);
                   return (
                     <tr
@@ -546,8 +613,8 @@ export function ReportsPage() {
                       className="border-t border-gray-50 hover:bg-gray-50 cursor-pointer"
                       role="button"
                       tabIndex={0}
-                      onClick={() => goToDailyEventsForBar({ payload: row })}
-                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToDailyEventsForBar({ payload: row }); } }}
+                      onClick={() => openMonthDrillDown(selectedPeriods[index])}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMonthDrillDown(selectedPeriods[index]); } }}
                     >
                       <td className="px-4 py-2.5 font-medium text-gray-900">{row.month}</td>
                       {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
@@ -573,6 +640,82 @@ export function ReportsPage() {
               </tbody>
             </table>
           </div>
+
+          {/* Drill-down รายวัน — กระจายยอดรวมเดือนที่กรองไว้แล้วเป็นรายวัน (ดูหมายเหตุที่ distributeAcrossDays) */}
+          {drillDown?.kind === 'month' && monthDrillRows.length > 0 && (
+            <div className="border-t border-gray-100 p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="font-bold text-navy-700 text-lg flex items-center gap-1.5">
+                  <Clock size={18} />
+                  รายละเอียดรายวัน — {MONTH_FULL_NAMES[drillDown.period.month]} {drillDown.period.year}
+                </h4>
+                <button onClick={() => setDrillDown(null)} aria-label="ปิดรายละเอียดรายวัน" className="text-gray-400 hover:text-gray-700 p-1">
+                  <X size={18} />
+                </button>
+              </div>
+              <ResponsiveContainer width="100%" height={180}>
+                <BarChart data={monthDrillRows} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="day" tick={{ fontSize: 12 }} />
+                  <YAxis tick={{ fontSize: 12 }} />
+                  <Tooltip labelFormatter={d => `วันที่ ${d}`} />
+                  {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                    <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} />
+                  ))}
+                </BarChart>
+              </ResponsiveContainer>
+              <div className="overflow-x-auto max-h-64 overflow-y-auto mt-2 border border-gray-100 rounded-lg">
+                <table className="w-full text-base">
+                  <thead className="bg-gray-50 sticky top-0">
+                    <tr>
+                      <th scope="col" className="text-left font-semibold text-gray-600 px-3 py-1.5">วันที่</th>
+                      {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                        <th key={t} scope="col" className="text-right font-semibold px-3 py-1.5" style={{ color: EVENT_TEXT_COLORS[t] }}>{EVENT_LABELS[t]}</th>
+                      ))}
+                      <th scope="col" className="text-right font-semibold text-gray-600 px-3 py-1.5">รวม</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {monthDrillRows.map(dayRow => {
+                      const dayTotal = EVENT_TYPES.filter(t => selectedTypes.has(t)).reduce((s, t) => s + dayRow[t], 0);
+                      return (
+                        <tr key={dayRow.day} className="border-t border-gray-50">
+                          <td className="px-3 py-1.5 text-gray-900">{dayRow.day}</td>
+                          {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                            <td key={t} className="px-3 py-1.5 text-right text-gray-700">{dayRow[t]}</td>
+                          ))}
+                          <td className="px-3 py-1.5 text-right font-bold text-gray-900">{dayTotal}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {drillDown?.kind === 'category' && categoryDrillRows.length > 0 && (
+            <div className="border-t border-gray-100 p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="font-bold text-navy-700 text-lg flex items-center gap-1.5">
+                  <Clock size={18} />
+                  รายละเอียดรายวัน — {EVENT_LABELS[drillDown.type]}
+                </h4>
+                <button onClick={() => setDrillDown(null)} aria-label="ปิดรายละเอียดรายวัน" className="text-gray-400 hover:text-gray-700 p-1">
+                  <X size={18} />
+                </button>
+              </div>
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={categoryDrillRows} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="label" tick={{ fontSize: 10 }} interval={Math.max(0, Math.floor(categoryDrillRows.length / 8))} />
+                  <YAxis tick={{ fontSize: 12 }} />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="value" name={EVENT_LABELS[drillDown.type]} stroke={EVENT_COLORS_MAP[drillDown.type]} strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
 
         {/* Section: NT MPLS network links */}
