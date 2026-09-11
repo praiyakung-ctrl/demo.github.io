@@ -159,7 +159,7 @@ export function ReportsPage() {
   const [selectedStation, setSelectedStation] = useState('all');
   const [selectedPoint, setSelectedPoint] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
-  const [chartType, setChartType] = useState<'bar' | 'line' | 'pie'>('line');
+  const [chartType, setChartType] = useState<'bar' | 'line' | 'pie'>('pie');
 
   const toggleType = (type: string) => {
     setSelectedTypes(prev => {
@@ -469,7 +469,7 @@ export function ReportsPage() {
                   : 'กราฟวงกลมสัดส่วนจำนวนเหตุการณ์ CCTV รวมตามประเภทเหตุการณ์ในช่วงเวลาที่เลือก'
             }
           >
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={chartType === 'pie' ? 260 : 200}>
               {chartType === 'bar' ? (
                 <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -496,7 +496,7 @@ export function ReportsPage() {
                   ))}
                 </LineChart>
               ) : (
-                <PieChart>
+                <PieChart margin={{ top: 24, right: 24, bottom: 8, left: 24 }}>
                   <Pie
                     data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}
                     label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
