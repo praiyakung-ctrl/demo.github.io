@@ -1,10 +1,15 @@
 import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FileText, BarChart2, Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi } from 'lucide-react';
+import {
+  FileText, BarChart2, BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon,
+  Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi,
+} from 'lucide-react';
 import { ExportButtons } from '../components/ExportButtons';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, Dot,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
+import type { DotItemDotProps } from 'recharts';
 import { Layout } from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import lprData from '../data/lpr.json';
@@ -154,6 +159,7 @@ export function ReportsPage() {
   const [selectedStation, setSelectedStation] = useState('all');
   const [selectedPoint, setSelectedPoint] = useState('all');
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set(EVENT_TYPES));
+  const [chartType, setChartType] = useState<'bar' | 'line' | 'pie'>('line');
 
   const toggleType = (type: string) => {
     setSelectedTypes(prev => {
@@ -202,6 +208,13 @@ export function ReportsPage() {
     return row;
   });
 
+  const pieData = EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => ({
+    key: t,
+    name: EVENT_LABELS[t],
+    value: filteredMonthly.reduce((s, r) => s + (r[t] ?? 0), 0),
+    color: EVENT_COLORS_MAP[t],
+  }));
+
   const rangeLabel = selectedPeriods.length === 0
     ? ''
     : selectedPeriods.length === 1
@@ -213,6 +226,23 @@ export function ReportsPage() {
     const monthAbbr = bar.payload.month.split(' ')[0];
     const index = MONTHS.indexOf(monthAbbr);
     if (index >= 0) navigate(`/reports/daily-events?month=${index + 1}`);
+  };
+
+  /* recharts' `dot` render prop is called with the merged per-point props
+     (index/cx/cy) — use `index` to look up the matching row in filteredMonthly
+     rather than relying on an activeDot callback, which only receives the
+     activeDot config and not the point's data (same approach as ComparisonReportPage) */
+  const dotForType = (color: string) => (dotProps: DotItemDotProps) => {
+    const { index, cx, cy } = dotProps;
+    if (cx == null || cy == null || index == null) return <></>;
+    const row = filteredMonthly[index];
+    return (
+      <Dot
+        cx={cx} cy={cy} r={3} fill={color}
+        style={{ cursor: 'pointer' }}
+        onClick={() => goToDailyEventsForBar({ payload: row })}
+      />
+    );
   };
 
   const eventsRef = useRef<HTMLDivElement>(null);
@@ -405,24 +435,88 @@ export function ReportsPage() {
             <ExportButtons disabled={exporting} onPdf={() => handleExport('CCTV Events', 'PDF')} onExcel={() => handleExport('CCTV Events', 'Excel')} />
           </div>
 
-          {/* Bar chart */}
+          {/* Chart type toggle */}
+          <div className="flex items-center gap-2 px-4 pt-3" data-html2canvas-ignore>
+            {([
+              { type: 'bar' as const, label: 'แท่ง', Icon: BarChart3 },
+              { type: 'line' as const, label: 'เส้น', Icon: LineChartIcon },
+              { type: 'pie' as const, label: 'วงกลม', Icon: PieChartIcon },
+            ]).map(({ type, label, Icon }) => (
+              <button
+                key={type}
+                onClick={() => setChartType(type)}
+                className={`flex items-center gap-1.5 py-1.5 px-3 rounded-lg border-2 font-bold text-sm shadow-sm transition-all ${
+                  chartType === type
+                    ? 'bg-navy-700 text-white border-navy-700'
+                    : 'bg-white text-navy-700 border-navy-300 hover:bg-navy-50'
+                }`}
+              >
+                <Icon size={14} />
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* Chart */}
           <div
             className="p-4"
             role="img"
-            aria-label="กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านล่าง คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน"
+            aria-label={
+              chartType === 'bar'
+                ? 'กราฟแท่งจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านล่าง คลิกแท่งเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน'
+                : chartType === 'line'
+                  ? 'กราฟเส้นจำนวนเหตุการณ์ CCTV รายเดือน แยกตามประเภทเหตุการณ์ ข้อมูลเดียวกับตารางด้านล่าง คลิกจุดบนเส้นเดือนใดเดือนหนึ่งเพื่อดูรายละเอียดรายวัน'
+                  : 'กราฟวงกลมสัดส่วนจำนวนเหตุการณ์ CCTV รวมตามประเภทเหตุการณ์ในช่วงเวลาที่เลือก'
+            }
           >
             <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="month" tick={{ fontSize: 16 }} />
-                <YAxis tick={{ fontSize: 15 }} />
-                <Tooltip content={<ChartTooltip />} />
-                <Legend content={<ChartLegend />} />
-                {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
-                  <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
-                ))}
-              </BarChart>
+              {chartType === 'bar' ? (
+                <BarChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="month" tick={{ fontSize: 16 }} />
+                  <YAxis tick={{ fontSize: 15 }} />
+                  <Tooltip content={<ChartTooltip />} />
+                  <Legend content={<ChartLegend />} />
+                  {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                    <Bar key={t} dataKey={t} name={EVENT_LABELS[t]} stackId="a" fill={EVENT_COLORS_MAP[t]} cursor="pointer" onClick={goToDailyEventsForBar} />
+                  ))}
+                </BarChart>
+              ) : chartType === 'line' ? (
+                <LineChart data={filteredMonthly} margin={{ top: 0, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="month" tick={{ fontSize: 16 }} />
+                  <YAxis tick={{ fontSize: 15 }} />
+                  <Tooltip content={<ChartTooltip />} />
+                  <Legend content={<ChartLegend />} />
+                  {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
+                    <Line
+                      key={t} type="monotone" dataKey={t} name={EVENT_LABELS[t]}
+                      stroke={EVENT_COLORS_MAP[t]} strokeWidth={2} dot={dotForType(EVENT_COLORS_MAP[t])}
+                    />
+                  ))}
+                </LineChart>
+              ) : (
+                <PieChart>
+                  <Pie
+                    data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}
+                    label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
+                  >
+                    {pieData.map(d => <Cell key={d.key} fill={d.color} />)}
+                  </Pie>
+                  <Tooltip formatter={v => [`${Number(v).toLocaleString()} ครั้ง`]} />
+                </PieChart>
+              )}
             </ResponsiveContainer>
+            {chartType === 'pie' && (
+              <div className="flex flex-wrap justify-center gap-4 pt-2">
+                {pieData.map(d => (
+                  <div key={d.key} className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+                    <span className="text-base font-medium" style={{ color: d.color }}>{d.name}: {d.value.toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="overflow-x-auto border-t border-gray-100">
