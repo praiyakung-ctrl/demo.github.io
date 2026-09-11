@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FileText, BarChart2, BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon,
-  Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi, X,
+  Car, Crosshair, ParkingSquare, Waves, Users, MapPin, Clock, ArrowDownLeft, ArrowUpRight, Wifi,
 } from 'lucide-react';
 import { ExportButtons } from '../components/ExportButtons';
 import {
@@ -492,11 +492,19 @@ export function ReportsPage() {
           <div className="flex items-center justify-between p-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <FileText size={24} className="text-navy-700" />
-              <h3 className="font-bold text-gray-900 text-xl">รายงานเหตุการณ์ CCTV รายเดือน ({rangeLabel})</h3>
+              <h3 className="font-bold text-gray-900 text-xl">
+                {drillDown === null
+                  ? `รายงานเหตุการณ์ CCTV รายเดือน (${rangeLabel})`
+                  : drillDown.kind === 'month'
+                    ? `รายละเอียดรายวัน — ${MONTH_FULL_NAMES[drillDown.period.month]} ${drillDown.period.year}`
+                    : `รายละเอียดรายวัน — ${EVENT_LABELS[drillDown.type]} (${rangeLabel})`}
+              </h3>
             </div>
             <ExportButtons disabled={exporting} onPdf={() => handleExport('CCTV Events', 'PDF')} onExcel={() => handleExport('CCTV Events', 'Excel')} />
           </div>
 
+          {!drillDown && (
+          <>
           {/* Chart type toggle */}
           <div className="flex items-center gap-2 px-4 pt-3" data-html2canvas-ignore>
             {([
@@ -640,17 +648,23 @@ export function ReportsPage() {
               </tbody>
             </table>
           </div>
+          </>
+          )}
 
           {/* Drill-down รายวัน — กระจายยอดรวมเดือนที่กรองไว้แล้วเป็นรายวัน (ดูหมายเหตุที่ distributeAcrossDays) */}
           {drillDown?.kind === 'month' && monthDrillRows.length > 0 && (
-            <div className="border-t border-gray-100 p-4">
+            <div className="p-4">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-bold text-navy-700 text-lg flex items-center gap-1.5">
                   <Clock size={18} />
                   รายละเอียดรายวัน — {MONTH_FULL_NAMES[drillDown.period.month]} {drillDown.period.year}
                 </h4>
-                <button onClick={() => setDrillDown(null)} aria-label="ปิดรายละเอียดรายวัน" className="text-gray-400 hover:text-gray-700 p-1">
-                  <X size={18} />
+                <button
+                  onClick={() => setDrillDown(null)}
+                  aria-label="กลับไปมุมมองรายเดือน"
+                  className="text-navy-700 hover:text-navy-900 font-semibold text-sm px-2 py-1 rounded hover:bg-navy-50"
+                >
+                  ← กลับไปรายเดือน
                 </button>
               </div>
               <ResponsiveContainer width="100%" height={180}>
@@ -695,14 +709,18 @@ export function ReportsPage() {
           )}
 
           {drillDown?.kind === 'category' && categoryDrillRows.length > 0 && (
-            <div className="border-t border-gray-100 p-4">
+            <div className="p-4">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-bold text-navy-700 text-lg flex items-center gap-1.5">
                   <Clock size={18} />
                   รายละเอียดรายวัน — {EVENT_LABELS[drillDown.type]}
                 </h4>
-                <button onClick={() => setDrillDown(null)} aria-label="ปิดรายละเอียดรายวัน" className="text-gray-400 hover:text-gray-700 p-1">
-                  <X size={18} />
+                <button
+                  onClick={() => setDrillDown(null)}
+                  aria-label="กลับไปมุมมองรายเดือน"
+                  className="text-navy-700 hover:text-navy-900 font-semibold text-sm px-2 py-1 rounded hover:bg-navy-50"
+                >
+                  ← กลับไปรายเดือน
                 </button>
               </div>
               <ResponsiveContainer width="100%" height={200}>
