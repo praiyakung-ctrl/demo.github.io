@@ -732,6 +732,26 @@ export function ReportsPage() {
                   <Line type="monotone" dataKey="value" name={EVENT_LABELS[drillDown.type]} stroke={EVENT_COLORS_MAP[drillDown.type]} strokeWidth={2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
+              <div className="overflow-x-auto max-h-64 overflow-y-auto mt-2 border border-gray-100 rounded-lg">
+                <table className="w-full text-base">
+                  <thead className="bg-gray-50 sticky top-0">
+                    <tr>
+                      <th scope="col" className="text-left font-semibold text-gray-600 px-3 py-1.5">วันที่</th>
+                      <th scope="col" className="text-right font-semibold px-3 py-1.5" style={{ color: EVENT_TEXT_COLORS[drillDown.type] }}>
+                        {EVENT_LABELS[drillDown.type]}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categoryDrillRows.map((r, i) => (
+                      <tr key={i} className="border-t border-gray-50">
+                        <td className="px-3 py-1.5 text-gray-900">{r.label}</td>
+                        <td className="px-3 py-1.5 text-right font-bold text-gray-700">{r.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
