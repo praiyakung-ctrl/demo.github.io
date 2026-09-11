@@ -14,6 +14,7 @@ import type { EventType } from '../types';
 import { type UsageRecord, filterByPeriod, totalCount } from '../utils/comparisonStats';
 import { distributeTotalAcrossDays } from '../utils/eventDrilldown';
 import { exportChartWithTableToExcel, exportChartWithTableToPdf, todayStamp } from '../utils/exportReport';
+import { formatThaiDateParts } from '../utils/formatDate';
 
 type Topic = 'police' | 'events' | 'lpr';
 
@@ -69,9 +70,11 @@ export function ComparisonDailyReportPage() {
     [total, month, year]
   );
 
+  const formatDrillDate = (day: number) => formatThaiDateParts(year, month - 1, day);
+
   const exportRows: (string | number)[][] = [
     ['วันที่', config.countLabel],
-    ...dailyRows.map(row => [row.day, row.count]),
+    ...dailyRows.map(row => [formatDrillDate(row.day), row.count]),
   ];
 
   const handleExport = async (format: 'pdf' | 'excel') => {
@@ -183,7 +186,7 @@ export function ComparisonDailyReportPage() {
               <tbody>
                 {dailyRows.map(row => (
                   <tr key={row.day} className="border-t border-gray-50 hover:bg-gray-50">
-                    <td className="px-4 py-2.5 font-medium text-gray-900">{row.day}</td>
+                    <td className="px-4 py-2.5 font-medium text-gray-900">{formatDrillDate(row.day)}</td>
                     <td className="px-4 py-2.5 text-right text-gray-700">{row.count}</td>
                   </tr>
                 ))}

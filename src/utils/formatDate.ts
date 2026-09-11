@@ -6,6 +6,16 @@ export function formatThaiDate(isoString: string): string {
   return `${day}/${month}/${year}`;
 }
 
+/* format dd/mm/BBBB from raw ค.ศ. year + 0-based month + day — for tables that only
+   have day-of-month numbers (no ISO timestamp) — avoids new Date(...).toISOString(),
+   which shifts the date back a day in UTC+7 */
+export function formatThaiDateParts(adYear: number, monthIndex0: number, day: number): string {
+  const dd = String(day).padStart(2, '0');
+  const mm = String(monthIndex0 + 1).padStart(2, '0');
+  const yyyy = adYear + 543;
+  return `${dd}/${mm}/${yyyy}`;
+}
+
 export function formatThaiDateTime(isoString: string): string {
   const d = new Date(isoString);
   const day = String(d.getDate()).padStart(2, '0');

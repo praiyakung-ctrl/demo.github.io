@@ -12,6 +12,7 @@ import { EVENT_LABELS, EVENT_COLORS } from '../types';
 import { dailyBreakdownFromEvents, EVENT_CATEGORY_KEYS, monthLabel } from '../utils/eventDrilldown';
 import type { DailyEventRow, EventCategoryKey } from '../utils/eventDrilldown';
 import { exportChartWithTableToExcel, exportChartWithTableToPdf, todayStamp } from '../utils/exportReport';
+import { formatThaiDateParts } from '../utils/formatDate';
 
 const events = eventsData as CctvEvent[];
 const MONTH_KEYS = [...new Set(events.map(e => e.timestamp.slice(0, 7)))].sort();
@@ -83,6 +84,9 @@ export function DailyEventsReportPage() {
   const chartRef = useRef<HTMLDivElement>(null);
 
   const monthKey = MONTH_KEYS[month - 1];
+  const monthAdYear = monthKey ? Number(monthKey.slice(0, 4)) : 0;
+  const monthIndex0 = monthKey ? Number(monthKey.slice(5, 7)) - 1 : 0;
+  const formatDrillDate = (day: number) => formatThaiDateParts(monthAdYear, monthIndex0, day);
 
   const handleDrilldown = (day: number, key: EventCategoryKey) => {
     navigate(`/reports/events?day=${monthKey}-${String(day).padStart(2, '0')}&eventType=${key}`);
@@ -106,7 +110,7 @@ export function DailyEventsReportPage() {
   const exportRows: (string | number)[][] = [
     ['วันที่', ...activeCategories.map(k => EVENT_LABELS[k]), 'รวม'],
     ...dailyRows.map(row => [
-      row.day,
+      formatDrillDate(row.day),
       ...activeCategories.map(k => row[k]),
       activeCategories.reduce((s, k) => s + row[k], 0),
     ]),
@@ -249,7 +253,7 @@ export function DailyEventsReportPage() {
                   const total = activeCategories.reduce((s, k) => s + row[k], 0);
                   return (
                     <tr key={row.day} className="border-t border-gray-50 hover:bg-gray-50">
-                      <td className="px-4 py-2.5 font-medium text-gray-900">{row.day}</td>
+                      <td className="px-4 py-2.5 font-medium text-gray-900">{formatDrillDate(row.day)}</td>
                       {activeCategories.map(key => (
                         <td key={key} className="px-4 py-2.5 text-right text-gray-700">
                           {row[key] > 0 ? (

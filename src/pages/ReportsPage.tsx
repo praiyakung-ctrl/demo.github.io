@@ -18,6 +18,7 @@ import type { Camera, MonthlyEventData, LprRoad } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { exportChartWithTableToExcel, exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
 import { stationOf, STATION_FILTER_OPTIONS } from '../utils/cameraDisplay';
+import { formatThaiDateParts } from '../utils/formatDate';
 
 const roads = lprData.roads as LprRoad[];
 
@@ -302,7 +303,7 @@ export function ReportsPage() {
       const total = filteredMonthly[idx][drillDown.type] ?? 0;
       const days = daysInMonth(period.year, period.month);
       const values = distributeAcrossDays(total, days, Number(period.year) * 1000 + MONTHS.indexOf(period.month) * 10 + EVENT_TYPES.indexOf(drillDown.type));
-      values.forEach((value, i) => rows.push({ label: `${i + 1} ${period.month} ${period.year}`, value }));
+      values.forEach((value, i) => rows.push({ label: formatThaiDateParts(Number(period.year) - 543, MONTHS.indexOf(period.month), i + 1), value }));
     });
     return rows;
   })();
@@ -699,7 +700,9 @@ export function ReportsPage() {
                       const dayTotal = EVENT_TYPES.filter(t => selectedTypes.has(t)).reduce((s, t) => s + dayRow[t], 0);
                       return (
                         <tr key={dayRow.day} className="border-t border-gray-50">
-                          <td className="px-3 py-1.5 text-gray-900">{dayRow.day}</td>
+                          <td className="px-3 py-1.5 text-gray-900">
+                            {formatThaiDateParts(Number(drillDown.period.year) - 543, MONTHS.indexOf(drillDown.period.month), dayRow.day)}
+                          </td>
                           {EVENT_TYPES.filter(t => selectedTypes.has(t)).map(t => (
                             <td key={t} className="px-3 py-1.5 text-right text-gray-700">{dayRow[t]}</td>
                           ))}
