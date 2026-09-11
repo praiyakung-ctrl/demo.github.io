@@ -17,7 +17,7 @@ import camerasData from '../data/cameras.json';
 import type { Camera, MonthlyEventData, LprRoad } from '../types';
 import { EVENT_LABELS, EVENT_TEXT_COLORS } from '../types';
 import { exportChartWithTableToExcel, exportElementToPdf, exportRowsToExcel, todayStamp } from '../utils/exportReport';
-import { stationOf } from '../utils/cameraDisplay';
+import { stationOf, STATION_FILTER_OPTIONS } from '../utils/cameraDisplay';
 
 const roads = lprData.roads as LprRoad[];
 
@@ -89,6 +89,12 @@ const EVENT_TYPE_ICONS = {
 } as const;
 const MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 
+const MONTH_FULL_NAMES: Record<string, string> = {
+  'ม.ค.': 'มกราคม', 'ก.พ.': 'กุมภาพันธ์', 'มี.ค.': 'มีนาคม', 'เม.ย.': 'เมษายน',
+  'พ.ค.': 'พฤษภาคม', 'มิ.ย.': 'มิถุนายน', 'ก.ค.': 'กรกฎาคม', 'ส.ค.': 'สิงหาคม',
+  'ก.ย.': 'กันยายน', 'ต.ค.': 'ตุลาคม', 'พ.ย.': 'พฤศจิกายน', 'ธ.ค.': 'ธันวาคม',
+};
+
 function periodKey(year: string, month: string): string {
   return `${year}-${String(MONTHS.indexOf(month) + 1).padStart(2, '0')}`;
 }
@@ -111,7 +117,6 @@ function monthsForYear(year: string): string[] {
 }
 
 const pointStation = new Map(roads.map(r => [r.road, stationOf(r.road)]));
-const STATION_OPTIONS = [...new Set(roads.map(r => stationOf(r.road)))];
 
 function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number; color: string; dataKey: string; name: string }[]; label?: string }) {
   if (!active || !payload?.length) return null;
@@ -317,7 +322,7 @@ export function ReportsPage() {
                   onChange={e => setFromMonth(e.target.value)}
                   className="input-field py-1 text-base w-24"
                 >
-                  {monthsForYear(fromYear).map(m => <option key={m} value={m}>{m}</option>)}
+                  {monthsForYear(fromYear).map(m => <option key={m} value={m}>{MONTH_FULL_NAMES[m]}</option>)}
                 </select>
                 <select
                   aria-label="ปีเริ่มต้น"
@@ -339,7 +344,7 @@ export function ReportsPage() {
                   onChange={e => setToMonth(e.target.value)}
                   className="input-field py-1 text-base w-24"
                 >
-                  {monthsForYear(toYear).map(m => <option key={m} value={m}>{m}</option>)}
+                  {monthsForYear(toYear).map(m => <option key={m} value={m}>{MONTH_FULL_NAMES[m]}</option>)}
                 </select>
                 <select
                   aria-label="ปีสิ้นสุด"
@@ -365,7 +370,7 @@ export function ReportsPage() {
                 className="input-field py-1.5 text-lg w-auto max-w-[180px]"
               >
                 <option value="all">ทุก สภ.</option>
-                {STATION_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                {STATION_FILTER_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
 
               <span className="text-lg font-bold text-gray-900 whitespace-nowrap">จุดติดตั้ง:</span>
